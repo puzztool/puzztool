@@ -1,5 +1,6 @@
 {
   "name": "braille-js",
+  "homepage": "http://brianbeck.xyz/braille",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

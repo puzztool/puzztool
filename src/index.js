@@ -142,13 +142,15 @@ handleSpace() {
 
 render() {
     return (
-    <div className="braille-stream">
-        <div className="braille-character">
-            <BrailleCharacter
-                cells={this.state.cells}
-                onClick={i => this.handleClick(i)} />
+    <div>
+        <div className="braille-stream">
+            <div className="braille-character">
+                <BrailleCharacter
+                    cells={this.state.cells}
+                    onClick={i => this.handleClick(i)} />
+            </div>
+            <div className="braille-view">{this.state.currentCharacter}</div>
         </div>
-        <div className="braille-view">{this.state.currentCharacter}</div>
         <div className="stream-commands">
             <CommandButton value="Next" onClick={() => this.handleNext()} />
             <CommandButton value="Space" onClick={() => this.handleSpace()} />

@@ -20,21 +20,22 @@ ol, ul {
 .stream-commands {
     margin-top: 10px;
     margin-bottom: 10px;
+    clear: both;
   }
 
 .braille-cell {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 84px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 94px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 94px;
 }
 
 .square:focus {
@@ -52,4 +53,11 @@ ol, ul {
 
 .braille-view {
   margin-left: 20px;
+  font-size: 72px;
+  font-weight: bold;
+}
+
+.command {
+  font-size: 28px;
+  margin: 5px;
 }
