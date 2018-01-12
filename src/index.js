@@ -22,7 +22,7 @@ function ParseBraille(cells, numberMode) {
     let value = 0;
     let setBit = 0b100000;
     for (let i = 0; i < 6; ++i) {
-        if (cells[i] == "O") {
+        if (cells[i] === "O") {
             value = value + setBit;
         }
         setBit = setBit >>> 1;
@@ -103,21 +103,22 @@ constructor(props) {
 }
 
 handleClick(i) {
-    if (this.state.cells[i] && this.state.cells[i] != "") {
-        this.state.cells[i] = "";
+    let cells = this.state.cells;
+    if (cells[i] !== "") {
+        cells[i] = "";
     } else {
-        this.state.cells[i] = "O";
+        cells[i] = "O";
     }
 
     this.setState({
-        cells: this.state.cells,
-        currentCharacter: ParseBraille(this.state.cells, this.state.numberMode)
+        cells: cells,
+        currentCharacter: ParseBraille(cells, this.state.numberMode)
     });
 }
 
 handleNext() {
     let current = this.state.currentCharacter;
-    let number = (current == "#") ? true : this.state.numberMode;
+    let number = (current === "#") ? true : this.state.numberMode;
     this.setState({
         content: this.state.content + current,
         cells: Array(6).fill(""),
