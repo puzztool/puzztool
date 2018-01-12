@@ -1,2 +1,1 @@
-# braille-pad
-A tool to enter braille characters and read them as a stream
+This utility allows you to enter braille characters and read the stream of characters that they represent.
