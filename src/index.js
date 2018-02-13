@@ -128,7 +128,6 @@ class BrailleStream extends React.Component {
 
   handleSpace() {
     this.setState({
-      bits: 0,
       content: this.state.content + " ",
       numberMode: false
     });
