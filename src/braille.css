@@ -18,24 +18,32 @@ ol, ul {
 }
 
 .stream-commands {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    clear: both;
-  }
+  margin-top: 10px;
+  margin-bottom: 10px;
+  clear: both;
+}
+
+.braille-character {
+  border: 1px solid #999;
+}
 
 .braille-cell {
-  background: #fff;
-  border: 1px solid #999;
+  background: transparent;
+  border: none;
   float: left;
-  font-size: 84px;
-  font-weight: bold;
-  line-height: 34px;
+  padding: 0px 2px;
+}
+
+.braille-cell svg {
+  fill: transparent;
   height: 94px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
+  stroke: black;
+  stroke-width: 2px;
   width: 94px;
+}
+
+.braille-cell svg.selected {
+  fill: black;
 }
 
 .square:focus {
