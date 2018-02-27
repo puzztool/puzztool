@@ -1,0 +1,16 @@
+.BrailleStream .BrailleStream-input {
+  display: flex;
+  flex-direction: row;
+}
+
+.BrailleStream .BrailleStream-view {
+  margin-left: 20px;
+  font-size: 72px;
+  font-weight: bold;
+}
+
+.BrailleStream .BrailleStream-commands {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  clear: both;
+}

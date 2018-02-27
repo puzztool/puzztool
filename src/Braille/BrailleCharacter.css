@@ -1,0 +1,9 @@
+.BrailleCharacter {
+  border: 1px solid #999;
+}
+
+.BrailleCharacter .BrailleCharacter-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
