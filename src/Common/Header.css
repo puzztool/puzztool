@@ -1,0 +1,23 @@
+.Header {
+  display: flex;
+  background-color: #ccc;
+}
+
+.Header h1 {
+  margin: 10px 20px;
+}
+
+.Header-backButton {
+  background: transparent;
+  border: none;
+  padding: 5px 10px 0px 10px;
+  margin: 10px 0px 10px 10px;
+}
+
+.Header-backButton:active {
+  background: #888;
+}
+
+.Header-backButton svg {
+  width: 32px;
+}

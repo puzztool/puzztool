@@ -3,14 +3,14 @@ import './CommandButton.css';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>,
-  value: string,
+  children: React.ReactNode,
 };
 
 class CommandButton extends React.Component<Props> {
-  render() {
+  public render() {
     return (
       <button className="CommandButton" onClick={this.props.onClick}>
-        {this.props.value}
+        {this.props.children}
       </button>
     );
   }

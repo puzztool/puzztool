@@ -1,18 +1,23 @@
 .BrailleCell {
   background: transparent;
   border: none;
-  float: left;
   padding: 0px 2px;
 }
 
 .BrailleCell svg {
   fill: transparent;
-  height: 94px;
+  height: 100%;
   stroke: black;
   stroke-width: 2px;
-  width: 94px;
+  width: 100%;
 }
 
-.BrailleCell svg.selected {
+.BrailleCell:active svg,
+.BrailleCell.BrailleCell-selected:active svg {
+  fill: #888;
+  stroke: #888;
+}
+
+.BrailleCell.BrailleCell-selected svg {
   fill: black;
 }

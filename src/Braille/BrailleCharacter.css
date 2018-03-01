@@ -1,9 +1,8 @@
 .BrailleCharacter {
   border: 1px solid #999;
-}
-
-.BrailleCharacter .BrailleCharacter-row:after {
-  clear: both;
-  content: "";
-  display: table;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  height: 240px;
+  width: 160px;
 }
