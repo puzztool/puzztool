@@ -1,18 +1,18 @@
 import * as React from 'react';
 import BrailleCharacter from './BrailleCharacter';
 import CommandButton from '../Common/CommandButton';
-import { Braille } from 'puzzle-lib';
+import { BrailleCharacter as Character, BrailleDot as Dot, BrailleStream as Stream } from 'puzzle-lib';
 import './BrailleStream.css';
 
 type Props = {};
 type State = {
-  character: Braille.Character,
-  stream: Braille.Stream,
+  character: Character,
+  stream: Stream,
 };
 
 class BrailleStream extends React.Component<Props, State> {
-  _stream: Braille.Stream = new Braille.Stream();
-  _character: Braille.Character = new Braille.Character();
+  _stream: Stream = new Stream();
+  _character: Character = new Character();
 
   constructor(props: Props) {
     super(props);
@@ -23,7 +23,7 @@ class BrailleStream extends React.Component<Props, State> {
     };
   }
 
-  handleClick(mask: Braille.Dot) {
+  handleClick(mask: Dot) {
     this._character.toggle(mask);
 
     this.setState({
@@ -32,7 +32,7 @@ class BrailleStream extends React.Component<Props, State> {
   }
 
   handleNext() {
-    if (!this._character.empty()) {
+    if (this._character.valid()) {
       this._stream.append(this._character);
       this._character.clear();
 
