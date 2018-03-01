@@ -1,21 +1,28 @@
 import * as React from 'react';
+import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 import './BrailleCell.css';
 
 type Props = {
-  className: string,
-  onClick: React.MouseEventHandler<HTMLButtonElement>,
+  character: Character,
+  mask: Dot,
+  onClick: (mask: Dot) => void,
 };
 
 class BrailleCell extends React.Component<Props> {
-  render() {
+  public render() {
+    const classNames = `BrailleCell ${this.props.character.get(this.props.mask) ? 'BrailleCell-selected' : ''}`;
     return (
-      <button className="BrailleCell" onClick={this.props.onClick}>
-        <svg className={this.props.className}>
-          <circle cx="50%" cy="50%" r="20%" />
+      <button className={classNames} onClick={() => this.onClick()}>
+        <svg viewBox="0 0 60 60">
+          <circle cx="30" cy="30" r="12" />
           Sorry, your browser does not support inline SVG.
         </svg>
       </button>
     );
+  }
+
+  private onClick() {
+    this.props.onClick(this.props.mask);
   }
 }
 

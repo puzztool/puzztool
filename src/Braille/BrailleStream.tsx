@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BrailleCharacter from './BrailleCharacter';
-import CommandButton from '../Common/CommandButton';
+import CommandButton from 'Common/CommandButton';
 import { BrailleCharacter as Character, BrailleDot as Dot, BrailleStream as Stream } from 'puzzle-lib';
 import './BrailleStream.css';
 
@@ -11,57 +11,19 @@ type State = {
 };
 
 class BrailleStream extends React.Component<Props, State> {
-  _stream: Stream = new Stream();
-  _character: Character = new Character();
+  private stream: Stream = new Stream();
+  private character: Character = new Character();
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      character: this._character,
-      stream: this._stream,
+      character: this.character,
+      stream: this.stream,
     };
   }
 
-  handleClick(mask: Dot) {
-    this._character.toggle(mask);
-
-    this.setState({
-      character: this._character,
-    });
-  }
-
-  handleNext() {
-    if (this._character.valid()) {
-      this._stream.append(this._character);
-      this._character.clear();
-
-      this.setState({
-        character: this._character,
-        stream: this._stream,
-      });
-    }
-  }
-
-  handleReset() {
-    this._character.clear();
-    this._stream.clear();
-
-    this.setState({
-      character: this._character,
-      stream: this._stream,
-    });
-  }
-
-  handleSpace() {
-    this._stream.space();
-
-    this.setState({
-      stream: this._stream,
-    });
-  }
-
-  render() {
+  public render() {
     return (
       <div className="BrailleStream">
         <div className="BrailleStream-input">
@@ -72,13 +34,57 @@ class BrailleStream extends React.Component<Props, State> {
           <div className="BrailleStream-view">{this.state.character.toString() || '?'}</div>
         </div>
         <div className="BrailleStream-commands">
-          <CommandButton value="Next" onClick={() => this.handleNext()} />
-          <CommandButton value="Space" onClick={() => this.handleSpace()} />
-          <CommandButton value="Reset" onClick={() => this.handleReset()} />
+          <CommandButton onClick={() => this.handleNext()}>
+            Next
+          </CommandButton>
+          <CommandButton onClick={() => this.handleSpace()}>
+            Space
+          </CommandButton>
+          <CommandButton onClick={() => this.handleReset()}>
+            Reset
+          </CommandButton>
         </div>
-        <div className="BrailleStream-output">{this.state.stream.toString()}</div>
+        <pre className="BrailleStream-output">{this.state.stream.toString()}</pre>
       </div>
     );
+  }
+
+  private handleClick(mask: Dot) {
+    this.character.toggle(mask);
+
+    this.setState({
+      character: this.character,
+    });
+  }
+
+  private handleNext() {
+    if (this.character.valid()) {
+      this.stream.append(this.character);
+      this.character.clear();
+
+      this.setState({
+        character: this.character,
+        stream: this.stream,
+      });
+    }
+  }
+
+  private handleReset() {
+    this.character.clear();
+    this.stream.clear();
+
+    this.setState({
+      character: this.character,
+      stream: this.stream,
+    });
+  }
+
+  private handleSpace() {
+    this.stream.space();
+
+    this.setState({
+      stream: this.stream,
+    });
   }
 }
 
