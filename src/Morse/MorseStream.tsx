@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CommandButton from 'Common/CommandButton';
+import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import './MorseStream.css';
 
@@ -25,39 +25,27 @@ class MorseStream extends React.Component<Props, State> {
   public render() {
     return (
       <div className="MorseStream">
-        <div className="MorseStream-input">
+        <Well className="MorseStream-input">
           <div className="MorseStream-view">
             {this.state.character.toString() || '?'}
           </div>
-          <pre className="MorseStream-morseView">
+          <div className="MorseStream-morseView">
             {this.renderMorse(this.state.character.toMorseString())}
-          </pre>
-        </div>
-        <div className="MorseStream-commands">
-          <div>
-            <CommandButton onClick={() => this.handleDot()}>
-              {this.renderDot()}
-            </CommandButton>
-            <CommandButton onClick={() => this.handleDash()}>
-              {this.renderDash()}
-            </CommandButton>
-            <CommandButton onClick={() => this.handleBackspace()}>
-              Backspace
-            </CommandButton>
           </div>
-          <div>
-            <CommandButton onClick={() => this.handleNext()}>
-              Next
-            </CommandButton>
-            <CommandButton onClick={() => this.handleSpace()}>
-              Space
-            </CommandButton>
-            <CommandButton onClick={() => this.handleReset()}>
-              Reset
-            </CommandButton>
-          </div>
-        </div>
+        </Well>
         <pre className="MorseStream-output">{this.state.stream.toString()}</pre>
+        <ButtonToolbar className="MorseStream-commands">
+          <ButtonGroup>
+            <Button onClick={() => this.handleDot()}>{this.renderDot()}</Button>
+            <Button onClick={() => this.handleDash()}>{this.renderDash()}</Button>
+            <Button onClick={() => this.handleBackspace()}>Backspace</Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button onClick={() => this.handleNext()}>Next</Button>
+            <Button onClick={() => this.handleSpace()}>Space</Button>
+            <Button onClick={() => this.handleReset()}>Reset</Button>
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     );
   }

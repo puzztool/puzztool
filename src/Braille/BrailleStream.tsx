@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import BrailleCharacter from './BrailleCharacter';
-import CommandButton from 'Common/CommandButton';
 import { BrailleCharacter as Character, BrailleDot as Dot, BrailleStream as Stream } from 'puzzle-lib';
 import './BrailleStream.css';
 
@@ -33,17 +33,13 @@ class BrailleStream extends React.Component<Props, State> {
           />
           <div className="BrailleStream-view">{this.state.character.toString() || '?'}</div>
         </div>
-        <div className="BrailleStream-commands">
-          <CommandButton onClick={() => this.handleNext()}>
-            Next
-          </CommandButton>
-          <CommandButton onClick={() => this.handleSpace()}>
-            Space
-          </CommandButton>
-          <CommandButton onClick={() => this.handleReset()}>
-            Reset
-          </CommandButton>
-        </div>
+        <ButtonToolbar className="BrailleStream-commands">
+          <ButtonGroup>
+            <Button onClick={() => this.handleNext()}>Next</Button>
+            <Button onClick={() => this.handleSpace()}>Space</Button>
+            <Button onClick={() => this.handleReset()}>Reset</Button>
+          </ButtonGroup>
+        </ButtonToolbar>
         <pre className="BrailleStream-output">{this.state.stream.toString()}</pre>
       </div>
     );

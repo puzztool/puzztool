@@ -1,14 +1,17 @@
 {
-  "name": "puzzle-app",
-  "homepage": "http://brianbeck.xyz/braille",
+  "name": "puzzle-web",
+  "homepage": "http://brianbeck.xyz/puzzle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "puzzle-lib": "^0.0.6",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.13.0"
+    "react-scripts-ts": "^2.14.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -18,11 +21,13 @@
   },
   "devDependencies": {
     "@types/history": "^4.6.2",
-    "@types/jest": "^22.1.4",
-    "@types/node": "^9.4.6",
+    "@types/jest": "^22.2.0",
+    "@types/node": "^9.4.7",
     "@types/react": "^16.0.40",
+    "@types/react-bootstrap": "^0.32.6",
     "@types/react-dom": "^16.0.4",
-    "@types/react-router-dom": "^4.2.4",
+    "@types/react-router-bootstrap": "^0.24.4",
+    "@types/react-router-dom": "^4.2.5",
     "typescript": "^2.7.2"
   }
 }
