@@ -1,5 +1,6 @@
 .BrailleCharacter {
   border: 1px solid #999;
+  border-radius: 4px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
