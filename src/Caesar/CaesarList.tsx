@@ -10,7 +10,7 @@ type Props = {
 class CaesarList extends React.Component<Props> {
   public render() {
     return (
-      <pre className="CaesarList-list">
+      <pre className="CaesarList">
         {this.renderListItems()}
       </pre>
     );
