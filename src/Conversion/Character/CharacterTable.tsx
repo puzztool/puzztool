@@ -39,7 +39,7 @@ class CharacterTable extends React.Component<Props> {
           <td>{value.ternary}</td>
           <td>{value.octal}</td>
           <td>{value.decimal}</td>
-          <td>{value.hexadecimal}</td>
+          <td>{value.hexadecimal.toUpperCase()}</td>
         </tr>
       );
     });
