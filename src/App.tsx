@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Braille from 'Views/Braille';
 import Caesar from 'Views/Caesar';
 import Home from 'Views/Home';
 import Morse from 'Views/Morse';
+import CharacterEncodings from 'Views/Reference/CharacterEncodings';
 import './App.css';
 
 class App extends React.Component {
@@ -29,7 +30,14 @@ class App extends React.Component {
                   <NavItem eventKey={2}>Caesar</NavItem>
                 </LinkContainer>
                 <LinkContainer to="/morse">
-                  <NavItem eventKey={2}>Morse</NavItem>
+                  <NavItem eventKey={3}>Morse</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/reference" onClick={(e) => e.preventDefault()}>
+                  <NavDropdown eventKey={4} title="Reference" id="conversion-dropdown">
+                    <LinkContainer to="/reference/characterencodings">
+                      <MenuItem eventKey={4.1}>Character Encodings</MenuItem>
+                    </LinkContainer>
+                  </NavDropdown>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
@@ -39,6 +47,7 @@ class App extends React.Component {
             <Route path="/braille" component={Braille} />
             <Route path="/caesar" component={Caesar} />
             <Route path="/morse" component={Morse} />
+            <Route path="/reference/characterencodings" component={CharacterEncodings} />
           </div>
         </div>
       </Router>
