@@ -25,14 +25,14 @@ class CaesarStream extends React.Component<Props, State> {
       <div className="CaesarStream">
         <FormControl
           className="CaesarStream-input"
-          onKeyUp={(event: React.KeyboardEvent<FormControl>) => this.onKeyUp(event)}
+          onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
         />
         <CaesarList list={this.state.list} />
       </div>
     );
   }
 
-  private onKeyUp(event: React.KeyboardEvent<FormControl>) {
+  private onTextChanged(event: React.SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
     this.setState({
