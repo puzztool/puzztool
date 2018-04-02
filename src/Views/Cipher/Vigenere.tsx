@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import CaesarStream from 'Caesar/CaesarStream';
+import VigenereStream from 'Cipher/Vigenere/VigenereStream';
 import './Caesar.css';
 
 class Morse extends React.Component<RouteComponentProps<void>> {
@@ -8,7 +8,7 @@ class Morse extends React.Component<RouteComponentProps<void>> {
     return (
       <div className="Caesar">
         <div className="Caesar-content">
-          <CaesarStream />
+          <VigenereStream />
         </div>
       </div>
     );

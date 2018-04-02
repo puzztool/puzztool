@@ -1,0 +1,13 @@
+.VigenereStream-input {
+  margin-bottom: 10px;
+}
+
+.VigenereStream-commands .btn-group {
+  margin-bottom: 10px;
+}
+
+.VigenereStream-output {
+  font-size: 16px;
+  min-height: 44px;
+  white-space: pre-wrap;
+}

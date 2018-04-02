@@ -10,7 +10,7 @@ type State = {
 };
 
 class CaesarStream extends React.Component<Props, State> {
-  private _str: CaesarString = new CaesarString('');
+  private _str: CaesarString = new CaesarString();
 
   constructor(props: Props) {
     super(props);
@@ -34,7 +34,7 @@ class CaesarStream extends React.Component<Props, State> {
 
   private onKeyUp(event: React.KeyboardEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
-    this._str.update(element.value);
+    this._str.text = element.value;
     this.setState({
       list: this._str.getRotations(),
     });

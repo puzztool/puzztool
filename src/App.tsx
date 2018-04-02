@@ -3,7 +3,8 @@ import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Braille from 'Views/Braille';
-import Caesar from 'Views/Caesar';
+import Caesar from 'Views/Cipher/Caesar';
+import Vigenere from 'Views/Cipher/Vigenere';
 import Home from 'Views/Home';
 import Morse from 'Views/Morse';
 import CharacterEncodings from 'Views/Reference/CharacterEncodings';
@@ -26,8 +27,15 @@ class App extends React.Component {
                 <LinkContainer to="/braille">
                   <NavItem eventKey={1}>Braille</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/caesar">
-                  <NavItem eventKey={2}>Caesar</NavItem>
+                <LinkContainer to="/cipher" onClick={(e) => e.preventDefault()}>
+                  <NavDropdown eventKey={2} title="Cipher" id="cipher-dropdown">
+                    <LinkContainer to="/cipher/caesar">
+                      <MenuItem eventKey={2.1}>Caesar Cipher</MenuItem>
+                    </LinkContainer>
+                    <LinkContainer to="/cipher/vigenere">
+                      <MenuItem eventKey={2.2}>Vigenere Cipher</MenuItem>
+                    </LinkContainer>
+                  </NavDropdown>
                 </LinkContainer>
                 <LinkContainer to="/morse">
                   <NavItem eventKey={3}>Morse</NavItem>
@@ -45,7 +53,8 @@ class App extends React.Component {
           <div className="App-content">
             <Route exact={true} path="/" component={Home} />
             <Route path="/braille" component={Braille} />
-            <Route path="/caesar" component={Caesar} />
+            <Route path="/cipher/caesar" component={Caesar} />
+            <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/morse" component={Morse} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
           </div>
