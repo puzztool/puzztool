@@ -23,24 +23,24 @@ class VigenereStream extends React.Component<Props, State> {
   }
 
   public render() {
-    /* tslint:disable: no-any */
     return (
       <div className="VigenereStream">
         <FormControl
           className="VigenereStream-input"
           placeholder="Text"
-          onKeyUp={(event: React.KeyboardEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
         />
         <FormControl
           className="VigenereStream-input"
           placeholder="Key"
-          onKeyUp={(event: React.KeyboardEvent<FormControl>) => this.onKeyChanged(event)}
+          onChange={(event: React.FormEvent<FormControl>) => this.onKeyChanged(event)}
         />
         <ButtonToolbar className="VigenereStream-commands">
           <ToggleButtonGroup
             type="radio"
             name="VigenereStream-conversion"
             defaultValue={this._conversion}
+            // tslint:disable-next-line: no-any
             onChange={(value: any) => this.onConversionChanged(value as number)}
           >
             <ToggleButton value={1}>Encrypt</ToggleButton>
@@ -52,7 +52,6 @@ class VigenereStream extends React.Component<Props, State> {
         </pre>
       </div>
     );
-    /* tslint:enable: no-any */
   }
 
   private updateState() {
@@ -61,13 +60,13 @@ class VigenereStream extends React.Component<Props, State> {
     });
   }
 
-  private onTextChanged(event: React.KeyboardEvent<FormControl>) {
+  private onTextChanged(event: React.SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
     this.updateState();
   }
 
-  private onKeyChanged(event: React.KeyboardEvent<FormControl>) {
+  private onKeyChanged(event: React.SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._str.key = element.value;
     this.updateState();
