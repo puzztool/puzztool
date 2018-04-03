@@ -1,23 +1,35 @@
 import * as React from 'react';
-import { FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import CaesarList from './CaesarList';
+import LocalStorage from 'Data/LocalStorage';
 import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.css';
 
 type Props = {};
 type State = {
+  text: string,
   list: Array<string>,
 };
 
+type SavedState = {
+  text: string,
+};
+
 class CaesarStream extends React.Component<Props, State> {
-  private _str: CaesarString = new CaesarString();
+  private readonly _str: CaesarString = new CaesarString();
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      list: this._str.getRotations(),
+      text: '',
+      list: [],
     };
+  }
+
+  public componentDidMount() {
+    this.restoreState();
+    this.updateState();
   }
 
   public render() {
@@ -26,18 +38,51 @@ class CaesarStream extends React.Component<Props, State> {
         <FormControl
           className="CaesarStream-input"
           onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
+          placeholder="Text"
+          value={this.state.text}
         />
+        <ButtonToolbar className="CaesarStream-commands">
+          <ButtonGroup>
+            <Button onClick={(event: React.MouseEvent<Button>) => this.onResetClick(event)}>Reset</Button>
+          </ButtonGroup>
+        </ButtonToolbar>
         <CaesarList list={this.state.list} />
       </div>
     );
   }
 
+  private saveState() {
+    LocalStorage.setObject<SavedState>('CaesarStream', {
+      text: this._str.text,
+    });
+  }
+
+  private restoreState() {
+    const savedState = LocalStorage.getObject<SavedState>('CaesarStream');
+
+    if (savedState !== null) {
+      this._str.text = savedState.text;
+    }
+  }
+
+  private updateState() {
+    this.setState({
+      list: this._str.getRotations(),
+      text: this._str.text,
+    });
+
+    this.saveState();
+  }
+
   private onTextChanged(event: React.SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
-    this.setState({
-      list: this._str.getRotations(),
-    });
+    this.updateState();
+  }
+
+  private onResetClick(event: React.MouseEvent<Button>) {
+    this._str.text = '';
+    this.updateState();
   }
 }
 

@@ -4,10 +4,11 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Braille from 'Views/Braille';
 import Caesar from 'Views/Cipher/Caesar';
-import Vigenere from 'Views/Cipher/Vigenere';
+import CharacterEncodings from 'Views/Reference/CharacterEncodings';
 import Home from 'Views/Home';
 import Morse from 'Views/Morse';
-import CharacterEncodings from 'Views/Reference/CharacterEncodings';
+import Settings from 'Views/Settings';
+import Vigenere from 'Views/Cipher/Vigenere';
 import './App.css';
 
 class App extends React.Component {
@@ -48,6 +49,11 @@ class App extends React.Component {
                   </NavDropdown>
                 </LinkContainer>
               </Nav>
+              <Nav pullRight={true}>
+                <LinkContainer to="/settings">
+                  <NavItem eventKey={5}>Settings</NavItem>
+                </LinkContainer>
+              </Nav>
             </Navbar.Collapse>
           </Navbar>
           <div className="App-content">
@@ -57,6 +63,7 @@ class App extends React.Component {
             <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/morse" component={Morse} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
+            <Route path="/settings" component={Settings} />
           </div>
         </div>
       </Router>

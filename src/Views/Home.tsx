@@ -6,7 +6,7 @@ import './Home.css';
 class Home extends React.Component<RouteComponentProps<void>> {
   public render() {
     return (
-      <div>
+      <div className="Home">
         <div className="Home-content">
           <ul>
             <li><Link to="/braille">Braille</Link></li>

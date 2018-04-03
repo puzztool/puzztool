@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
+import LocalStorage from 'Data/LocalStorage';
 import './MorseStream.css';
 
 type Props = {};
@@ -9,17 +10,27 @@ type State = {
   stream: string
 };
 
+type SavedState = {
+  character: string,
+  stream: string,
+};
+
 class MorseStream extends React.Component<Props, State> {
-  private stream: string = '';
-  private character: Character = new Character();
+  private readonly _character: Character = new Character();
+  private _stream: string = '';
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      character: this.character,
-      stream: this.stream,
+      character: this._character,
+      stream: this._stream,
     };
+  }
+
+  public componentDidMount() {
+    this.restoreState();
+    this.updateState();
   }
 
   public render() {
@@ -30,7 +41,7 @@ class MorseStream extends React.Component<Props, State> {
             {this.state.character.toString() || '?'}
           </div>
           <div className="MorseStream-morseView">
-            {this.renderMorse(this.state.character.toMorseString())}
+            {this.renderMorse(this.state.character.morseString)}
           </div>
         </Well>
         <pre className="MorseStream-output">{this.state.stream.toString()}</pre>
@@ -50,58 +61,69 @@ class MorseStream extends React.Component<Props, State> {
     );
   }
 
-  private handleDot() {
-    this.character.dot();
-
-    this.setState({
-      character: this.character,
+  private saveState() {
+    LocalStorage.setObject<SavedState>('MorseStream', {
+      character: this._character.morseString,
+      stream: this._stream,
     });
+  }
+
+  private restoreState() {
+    const savedState = LocalStorage.getObject<SavedState>('MorseStream');
+
+    if (savedState !== null) {
+      this._character.morseString = savedState.character;
+      this._stream = savedState.stream;
+    }
+  }
+
+  private updateState() {
+    this.setState({
+      character: this._character,
+      stream: this._stream,
+    });
+
+    this.saveState();
+  }
+
+  private handleDot() {
+    this._character.dot();
+
+    this.updateState();
   }
 
   private handleDash() {
-    this.character.dash();
+    this._character.dash();
 
-    this.setState({
-      character: this.character,
-    });
+    this.updateState();
   }
 
   private handleBackspace() {
-    this.character.backspace();
+    this._character.backspace();
 
-    this.setState({
-      character: this.character,
-    });
+    this.updateState();
   }
 
   private handleNext() {
-    if (this.character.valid()) {
-      this.stream += this.character.toString();
-      this.character.clear();
+    if (this._character.valid()) {
+      this._stream += this._character.toString();
+      this._character.clear();
 
-      this.setState({
-        character: this.character,
-        stream: this.stream,
-      });
+      this.updateState();
     }
   }
 
   private handleReset() {
-    this.character.clear();
-    this.stream = '';
+    this._character.clear();
+    this._stream = '';
 
-    this.setState({
-      character: this.character,
-      stream: this.stream,
-    });
+    this.updateState();
   }
 
   private handleSpace() {
-    this.stream += ' ';
+    this._stream += ' ';
 
-    this.setState({
-      stream: this.stream,
-    });
+    this.updateState();
   }
 
   private renderDot() {
