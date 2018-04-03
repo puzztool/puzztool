@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import BrailleCharacter from './BrailleCharacter';
-import { BrailleCharacter as Character, BrailleDot as Dot, BrailleStream as Stream } from 'puzzle-lib';
+import LocalStorage from 'Data/LocalStorage';
+import {
+  BrailleCharacter as Character,
+  BrailleDot as Dot,
+  BrailleEncoding as Encoding,
+  BrailleStream as Stream
+} from 'puzzle-lib';
 import './BrailleStream.css';
 
 type Props = {};
@@ -10,17 +16,27 @@ type State = {
   stream: Stream,
 };
 
+type SavedState = {
+  character: number,
+  stream: Encoding[],
+};
+
 class BrailleStream extends React.Component<Props, State> {
-  private stream: Stream = new Stream();
-  private character: Character = new Character();
+  private readonly _stream: Stream = new Stream();
+  private readonly _character: Character = new Character();
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      character: this.character,
-      stream: this.stream,
+      character: this._character,
+      stream: this._stream,
     };
+  }
+
+  public componentDidMount() {
+    this.restoreState();
+    this.updateState();
   }
 
   public render() {
@@ -45,42 +61,57 @@ class BrailleStream extends React.Component<Props, State> {
     );
   }
 
-  private handleClick(mask: Dot) {
-    this.character.toggle(mask);
-
-    this.setState({
-      character: this.character,
+  private saveState() {
+    LocalStorage.setObject<SavedState>('BrailleStream', {
+      character: this._character.encoding,
+      stream: this._stream.chars,
     });
   }
 
-  private handleNext() {
-    if (this.character.valid()) {
-      this.stream.append(this.character);
-      this.character.clear();
+  private restoreState() {
+    const savedState = LocalStorage.getObject<SavedState>('BrailleStream');
 
-      this.setState({
-        character: this.character,
-        stream: this.stream,
-      });
+    if (savedState !== null) {
+      this._character.encoding = savedState.character;
+      this._stream.chars = savedState.stream;
+    }
+  }
+
+  private updateState() {
+    this.setState({
+      character: this._character,
+      stream: this._stream,
+    });
+
+    this.saveState();
+  }
+
+  private handleClick(mask: Dot) {
+    this._character.toggle(mask);
+
+    this.updateState();
+  }
+
+  private handleNext() {
+    if (this._character.valid()) {
+      this._stream.append(this._character);
+      this._character.clear();
+
+      this.updateState();
     }
   }
 
   private handleReset() {
-    this.character.clear();
-    this.stream.clear();
+    this._character.clear();
+    this._stream.clear();
 
-    this.setState({
-      character: this.character,
-      stream: this.stream,
-    });
+    this.updateState();
   }
 
   private handleSpace() {
-    this.stream.space();
+    this._stream.space();
 
-    this.setState({
-      stream: this.stream,
-    });
+    this.updateState();
   }
 }
 
