@@ -21,6 +21,7 @@ type SavedState = {
 class VigenereStream extends React.Component<Props, State> {
   private readonly _str: VigenereString = new VigenereString();
   private _conversion: number = 2;
+  private _input: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
@@ -36,6 +37,7 @@ class VigenereStream extends React.Component<Props, State> {
   public componentDidMount() {
     this.restoreState();
     this.updateState();
+    this._input.focus();
   }
 
   public render() {
@@ -43,6 +45,7 @@ class VigenereStream extends React.Component<Props, State> {
       <div className="VigenereStream">
         <FormControl
           className="VigenereStream-input"
+          inputRef={(input: HTMLInputElement) => { this._input = input; }}
           onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
@@ -55,11 +58,11 @@ class VigenereStream extends React.Component<Props, State> {
         />
         <ButtonToolbar className="VigenereStream-commands">
           <ToggleButtonGroup
-            value={this.state.conversion}
             name="VigenereStream-conversion"
             // tslint:disable-next-line: no-any
             onChange={(value: any) => this.onConversionChanged(value as number)}
             type="radio"
+            value={this.state.conversion}
           >
             <ToggleButton value={1}>Encrypt</ToggleButton>
             <ToggleButton value={2}>Decrypt</ToggleButton>

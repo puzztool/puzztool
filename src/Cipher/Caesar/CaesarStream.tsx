@@ -17,6 +17,7 @@ type SavedState = {
 
 class CaesarStream extends React.Component<Props, State> {
   private readonly _str: CaesarString = new CaesarString();
+  private _input: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
@@ -30,6 +31,7 @@ class CaesarStream extends React.Component<Props, State> {
   public componentDidMount() {
     this.restoreState();
     this.updateState();
+    this._input.focus();
   }
 
   public render() {
@@ -37,6 +39,7 @@ class CaesarStream extends React.Component<Props, State> {
       <div className="CaesarStream">
         <FormControl
           className="CaesarStream-input"
+          inputRef={(input: HTMLInputElement) => { this._input = input; }}
           onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}

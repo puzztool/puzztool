@@ -56,7 +56,9 @@ class BrailleStream extends React.Component<Props, State> {
             <Button onClick={() => this.handleReset()}>Reset</Button>
           </ButtonGroup>
         </ButtonToolbar>
-        <pre className="BrailleStream-output">{this.state.stream.toString()}</pre>
+        <pre className="BrailleStream-output">
+          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+        </pre>
       </div>
     );
   }
