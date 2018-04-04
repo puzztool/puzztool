@@ -44,7 +44,9 @@ class MorseStream extends React.Component<Props, State> {
             {this.renderMorse(this.state.character.morseString)}
           </div>
         </Well>
-        <pre className="MorseStream-output">{this.state.stream.toString()}</pre>
+        <pre className="MorseStream-output">
+          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+        </pre>
         <ButtonToolbar className="MorseStream-commands">
           <ButtonGroup>
             <Button onClick={() => this.handleDot()}>{this.renderDot()}</Button>
