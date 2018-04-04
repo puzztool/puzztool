@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Link } from 'react-router-dom';
 import './Home.css';
+
+const version = require('version');
 
 class Home extends React.Component<RouteComponentProps<void>> {
   public render() {
     return (
       <div className="Home">
         <div className="Home-content">
-          <ul>
-            <li><Link to="/braille">Braille</Link></li>
-            <li><Link to="/morse">Morse</Link></li>
-          </ul>
+          <h1>Puzzle Tools v{version}</h1>
+          <p>A collection of useful tools for puzzle solving</p>
         </div>
       </div>
     );
