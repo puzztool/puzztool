@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import MorseStream from 'Morse/MorseStream';
 import './Morse.css';
 
-class Morse extends React.Component<RouteComponentProps<void>> {
+class Morse extends React.Component {
   public render() {
     return (
       <div className="Morse">

@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import './Home.css';
 
 const version = require('version');
 
-class Home extends React.Component<RouteComponentProps<void>> {
+class Home extends React.Component {
   public render() {
     return (
       <div className="Home">

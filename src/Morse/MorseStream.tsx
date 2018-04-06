@@ -146,40 +146,14 @@ class MorseStream extends React.Component<Props, State> {
     );
   }
 
-  private renderSpace() {
-    return (
-      <svg className="MorseStream-spaceIcon" viewBox="0 0 30 30">
-        Sorry, your browser does not support inline SVG.
-      </svg>
-    );
-  }
-
   private renderMorse(str: string) {
-    let first = true;
-    const elements: React.ReactNode[] = [];
-
-    for (const ch of str) {
-      if (!first) {
-        elements.push(this.renderSpace());
-      }
-
-      switch (ch) {
-        case '.':
-          elements.push(this.renderDot());
-          break;
-
-        case '-':
-          elements.push(this.renderDash());
-          break;
-
-        default:
-          throw new Error('Invalid morse string');
-      }
-
-      first = false;
-    }
-
-    return elements;
+    return str.split('').map((value: string, index: number) => {
+      return (
+        <span key={index}>
+          {value === '.' ? this.renderDot() : this.renderDash()}
+        </span>
+      );
+    });
   }
 }
 

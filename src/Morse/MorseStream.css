@@ -8,14 +8,16 @@ div.MorseStream-input {
 }
 
 .MorseStream-morseView {
+  line-height: 40px;
+  margin-right: -16px;
   margin-top: 10px;
-  min-height: 23px;
+  min-height: 40px;
 }
 
 .MorseStream-morseView svg.MorseStream-dotIcon,
-.MorseStream-morseView svg.MorseStream-dashIcon,
-.MorseStream-morseView svg.MorseStream-spaceIcon {
+.MorseStream-morseView svg.MorseStream-dashIcon {
   height: 16px;
+  margin-right: 16px;
 }
 
 .MorseStream-commands .btn-group {
@@ -23,8 +25,7 @@ div.MorseStream-input {
 }
 
 .MorseStream-commands svg.MorseStream-dotIcon,
-.MorseStream-commands svg.MorseStream-dashIcon,
-.MorseStream-commands svg.MorseStream-spaceIcon {
+.MorseStream-commands svg.MorseStream-dashIcon {
   height: 12px;
 }
 

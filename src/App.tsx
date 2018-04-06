@@ -2,14 +2,53 @@ import * as React from 'react';
 import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import Braille from 'Views/Braille';
-import Caesar from 'Views/Cipher/Caesar';
-import CharacterEncodings from 'Views/Reference/CharacterEncodings';
-import Home from 'Views/Home';
-import Morse from 'Views/Morse';
-import Settings from 'Views/Settings';
-import Vigenere from 'Views/Cipher/Vigenere';
+import * as Loadable from 'react-loadable';
+import Loading from 'Views/Loading';
 import './App.css';
+
+const defaultTimeout = 10000;
+
+const Braille = Loadable({
+  loader: () => import('Views/Braille'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const Caesar = Loadable({
+  loader: () => import('Views/Cipher/Caesar'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const CharacterEncodings = Loadable({
+  loader: () => import('Views/Reference/CharacterEncodings'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const Home = Loadable({
+  loader: () => import('Views/Home'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const Morse = Loadable({
+  loader: () => import('Views/Morse'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const Settings = Loadable({
+  loader: () => import('Views/Settings'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
+const Vigenere = Loadable({
+  loader: () => import('Views/Cipher/Vigenere'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
 
 class App extends React.Component {
   public render() {

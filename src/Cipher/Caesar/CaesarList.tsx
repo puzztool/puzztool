@@ -17,17 +17,15 @@ class CaesarList extends React.Component<Props> {
   }
 
   private renderListItems() {
-    return this.props.list.map(this.renderListItem.bind(this));
-  }
+    return this.props.list.map((value: string, index: number) => {
+      if (index === 0) {
+        return;
+      }
 
-  private renderListItem(value: string, index: number) {
-    if (index === 0) {
-      return;
-    }
-
-    return (
-      <div>{leftPad(index, 2)}: {value}</div>
-    );
+      return (
+        <div key={index}>{leftPad(index, 2)}: {value}</div>
+      );
+    });
   }
 }
 

@@ -6,10 +6,11 @@
   "dependencies": {
     "ajv": "^6.4.0",
     "bootstrap": "^3.3.7",
-    "puzzle-lib": "0.0.13",
+    "puzzle-lib": "^0.1.0",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
+    "react-loadable": "^5.3.1",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "^2.14.0"
@@ -24,12 +25,12 @@
     "version": "npm run genversion"
   },
   "devDependencies": {
-    "@types/history": "^4.6.2",
     "@types/jest": "^22.2.2",
     "@types/node": "^9.6.2",
-    "@types/react": "^16.3.4",
+    "@types/react": "^16.3.5",
     "@types/react-bootstrap": "^0.32.6",
     "@types/react-dom": "^16.0.4",
+    "@types/react-loadable": "^5.3.4",
     "@types/react-router-bootstrap": "^0.24.4",
     "@types/react-router-dom": "^4.2.6",
     "genversion": "^2.0.1",
