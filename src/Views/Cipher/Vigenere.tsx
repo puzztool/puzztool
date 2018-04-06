@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import VigenereStream from 'Cipher/Vigenere/VigenereStream';
 import './Caesar.css';
 
-class Morse extends React.Component<RouteComponentProps<void>> {
+class Morse extends React.Component {
   public render() {
     return (
       <div className="Caesar">

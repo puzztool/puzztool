@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import { Button } from 'react-bootstrap';
 import LocalStorage from 'Data/LocalStorage';
 import './Settings.css';
 
-class Home extends React.Component<RouteComponentProps<void>> {
+class Home extends React.Component {
   public render() {
     return (
       <div className="Settings">

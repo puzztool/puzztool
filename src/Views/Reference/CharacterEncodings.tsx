@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 import { Tab, Tabs } from 'react-bootstrap';
 import AsciiTable from 'Conversion/Character/AsciiTable';
 import OrdinalTable from 'Conversion/Character/OrdinalTable';
@@ -15,10 +14,10 @@ type SavedState = {
   activeKey: number,
 };
 
-class CharacterEncodings extends React.Component<RouteComponentProps<Props>, State> {
+class CharacterEncodings extends React.Component<Props, State> {
   private _activeKey: number = 1;
 
-  constructor(props: RouteComponentProps<Props>) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -38,6 +37,7 @@ class CharacterEncodings extends React.Component<RouteComponentProps<Props>, Sta
           <Tabs
             activeKey={this.state.activeKey}
             animation={false}
+            id="CharacterEncodings-tabs"
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
           >
