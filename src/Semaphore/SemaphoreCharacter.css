@@ -1,0 +1,47 @@
+.Semaphore {
+  position: relative;
+}
+
+.Semaphore input[type="checkbox"] {
+  position: absolute;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-north {
+  top: 20px;
+  left: 127.5px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-northEast {
+  top: 51px;
+  left: 207px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-east {
+  top: 107px;
+  left: 218px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-southEast {
+  top: 153px;
+  left: 184px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-south {
+  top: 165px;
+  left: 127.5px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-southWest {
+  top: 153px;
+  left: 72px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-west {
+  top: 107px;
+  left: 40px;
+}
+
+.Semaphore input[type="checkbox"].SemaphoreCharacter-northWest {
+  top: 51px;
+  left: 50px;
+}
