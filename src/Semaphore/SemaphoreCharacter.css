@@ -2,46 +2,46 @@
   position: relative;
 }
 
-.Semaphore input[type="checkbox"] {
+.Semaphore .SemaphoreCheckbox {
   position: absolute;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-north {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-north {
   top: 20px;
   left: 127.5px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-northEast {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-northEast {
   top: 51px;
   left: 207px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-east {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-east {
   top: 107px;
   left: 218px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-southEast {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-southEast {
   top: 153px;
   left: 184px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-south {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-south {
   top: 165px;
   left: 127.5px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-southWest {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-southWest {
   top: 153px;
   left: 72px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-west {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-west {
   top: 107px;
   left: 40px;
 }
 
-.Semaphore input[type="checkbox"].SemaphoreCharacter-northWest {
+.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-northWest {
   top: 51px;
   left: 50px;
 }

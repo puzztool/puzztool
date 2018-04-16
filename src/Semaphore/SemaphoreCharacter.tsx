@@ -1,60 +1,37 @@
 import * as React from 'react';
-import { SemaphoreDegrees as Degrees, SemaphoreDirection as Direction } from 'puzzle-lib';
+import SemaphoreCheckbox from './SemaphoreCheckbox';
+import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
 import './SemaphoreCharacter.css';
 
 type Props = {
-  directions?: Direction[],
-  onChange?: (directions: Direction[]) => void,
+  character: Character,
+  onChange: (type: string, direction: Direction) => void,
 };
 
 type State = {
+  character: Character,
   left: number,
   right: number,
-  directions: Direction[],
 };
 
 class SemaphoreCharacter extends React.Component<Props, State> {
-  private _directions: Direction[] = [];
-
   public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const newState: State = {
-      left: -1,
-      right: -1,
-      directions: [],
+    const { left, right } = SemaphoreCharacter.getFlagAngles(nextProps.character);
+
+    return {
+      character: nextProps.character,
+      left: left,
+      right: right,
     };
-
-    if (nextProps.directions !== undefined) {
-      const { left, right } = SemaphoreCharacter.getAnglesFromDirections(nextProps.directions);
-
-      newState.left = left;
-      newState.right = right;
-      newState.directions = nextProps.directions;
-    }
-
-    return newState;
   }
 
-  private static getAnglesFromDirections(directions: Direction[]) {
+  private static getFlagAngles(character: Character) {
     const angles = {
       left: -1,
       right: -1,
     };
 
-    let first;
-    let second;
-
-    if (directions.length > 0) {
-      first = Degrees.ToDegrees(directions[0]);
-    }
-
-    if (directions.length > 1) {
-      second = Degrees.ToDegrees(directions[1]);
-    }
-
-    if (first === undefined) {
-      first = second;
-      second = undefined;
-    }
+    const [ first, second ] = character.getDegrees();
 
     if (first !== undefined) {
       if (second === undefined) {
@@ -64,12 +41,6 @@ class SemaphoreCharacter extends React.Component<Props, State> {
           angles.left = first;
         }
       } else {
-        if (second < first) {
-          const temp = first;
-          first = second;
-          second = temp;
-        }
-
         if ((first === 0  && second <= 180) || (first <= 45 && second < 180) || (second <= 90 || first >= 270)) {
           angles.left = first;
           angles.right = second;
@@ -87,62 +58,62 @@ class SemaphoreCharacter extends React.Component<Props, State> {
     super(props);
 
     this.state = {
+      character: props.character,
       left: -1,
       right: -1,
-      directions: [],
     };
   }
 
   public render() {
     return (
       <div className="SemaphoreCharacter">
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-north"
-          type="checkbox"
-          checked={this.state.directions.indexOf(Direction.North) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.North)}
+          direction={Direction.North}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-northEast"
-          type="checkbox"
-          checked={this.state.directions.indexOf(Direction.NorthEast) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.NorthEast)}
+          direction={Direction.NorthEast}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-east"
-          type="checkbox"
-          checked={this.state.directions.indexOf(Direction.East) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.East)}
+          direction={Direction.East}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-southEast"
-          type="checkbox" 
-          checked={this.state.directions.indexOf(Direction.SouthEast) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.SouthEast)}
+          direction={Direction.SouthEast}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-south"
-          type="checkbox" 
-          checked={this.state.directions.indexOf(Direction.South) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.South)}
+          direction={Direction.South}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-southWest"
-          type="checkbox" 
-          checked={this.state.directions.indexOf(Direction.SouthWest) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.SouthWest)}
+          direction={Direction.SouthWest}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-west"
-          type="checkbox" 
-          checked={this.state.directions.indexOf(Direction.West) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.West)}
+          direction={Direction.West}
+          onChange={this.props.onChange}
         />
-        <input
+        <SemaphoreCheckbox
+          character={this.state.character}
           className="SemaphoreCharacter-northWest"
-          type="checkbox" 
-          checked={this.state.directions.indexOf(Direction.NorthWest) >= 0}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onChecked(event, Direction.NorthWest)}
+          direction={Direction.NorthWest}
+          onChange={this.props.onChange}
         />
         <svg width="240" viewBox="0 0 76 64">
           <defs>
@@ -168,16 +139,6 @@ class SemaphoreCharacter extends React.Component<Props, State> {
         </svg>
       </div>
     );
-  }
-
-  private updateState() {
-    const { left, right } = SemaphoreCharacter.getAnglesFromDirections(this._directions);
-
-    this.setState({
-      left: left,
-      right: right,
-      directions: this._directions,
-    });
   }
 
   private getLeftFlag() {
@@ -220,30 +181,6 @@ class SemaphoreCharacter extends React.Component<Props, State> {
     }
 
     return null;
-  }
-
-  private onChecked(event: React.FormEvent<HTMLInputElement>, direction: Direction) {
-    const element = (event.target as HTMLInputElement);
-    this._directions = this.state.directions;
-
-    if (element.checked) {
-      this._directions.push(direction);
-
-      if (this._directions.length > 2) {
-        this._directions.shift();
-      }
-    } else {
-      const index = this._directions.indexOf(direction);
-      if (index >= 0) {
-        this._directions.splice(index, 1);
-      }
-    }
-
-    this.updateState();
-
-    if (this.props.onChange !== undefined) {
-      this.props.onChange(this._directions);
-    }
   }
 }
 
