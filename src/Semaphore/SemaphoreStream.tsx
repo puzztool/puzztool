@@ -10,8 +10,7 @@ import './SemaphoreStream.css';
 
 type Props = {};
 type State = {
-  character: string,
-  directions: Direction[],
+  character: Character,
   stream: string,
 };
 
@@ -22,15 +21,13 @@ type SavedState = {
 
 class SemaphoreStream extends React.Component<Props, State> {
   private readonly _character: Character = new Character(0, 0);
-  private _directions: Direction[] = [];
   private _stream: string = '';
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      character: '',
-      directions: [],
+      character: this._character,
       stream: '',
     };
   }
@@ -45,10 +42,10 @@ class SemaphoreStream extends React.Component<Props, State> {
       <div className="SemaphoreStream">
         <div className="SemaphoreStream-input">
           <SemaphoreCharacter
-            directions={this.state.directions}
-            onChange={directions => this.handleChange(directions)}
+            character={this.state.character}
+            onChange={(type, direction) => this.handleChange(type, direction)}
           />
-          <div className="SemaphoreStream-view">{this.state.character || '?'}</div>
+          <div className="SemaphoreStream-view">{this.state.character.toString() || '?'}</div>
         </div>
         <ButtonToolbar className="SemaphoreStream-commands">
           <ButtonGroup>
@@ -66,7 +63,7 @@ class SemaphoreStream extends React.Component<Props, State> {
 
   private saveState() {
     LocalStorage.setObject<SavedState>('SemaphoreStream', {
-      directions: this._directions,
+      directions: this._character.directions,
       stream: this._stream,
     });
   }
@@ -75,26 +72,33 @@ class SemaphoreStream extends React.Component<Props, State> {
     const savedState = LocalStorage.getObject<SavedState>('SemaphoreStream');
 
     if (savedState !== null) {
-      this._directions = savedState.directions;
+      this._character.directions = savedState.directions;
       this._stream = savedState.stream;
     }
   }
 
   private updateState() {
-    this._character.setDirections(this._directions[0] || 0, this._directions[1] || 0);
-
     this.setState({
-      character: this._character.toString() || '?',
-      directions: this._directions,
+      character: this._character,
       stream: this._stream,
     });
 
     this.saveState();
   }
 
-  private handleChange(directions: Direction[]) {
-    this._directions = directions;
-    this._character.setDirections(this._directions[0] || 0, this._directions[1] || 0);
+  private handleChange(type: string, direction: Direction) {
+    switch (type) {
+      case 'add':
+        this._character.addDirection(direction);
+        break;
+
+      case 'remove':
+        this._character.removeDirection(direction);
+        break;
+
+      default:
+        throw new Error('Invalid change type');
+    }
 
     this.updateState();
   }
@@ -104,14 +108,12 @@ class SemaphoreStream extends React.Component<Props, State> {
     if (ch.length > 0) {
       this._stream += ch;
       this._character.clear();
-      this._directions.length = 0;
 
       this.updateState();
     }
   }
 
   private handleReset() {
-    this._directions.length = 0;
     this._character.clear();
     this._stream = '';
 
