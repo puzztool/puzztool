@@ -8,6 +8,12 @@ import './App.css';
 
 const defaultTimeout = 10000;
 
+const Autokey = Loadable({
+  loader: () => import('Views/Cipher/Autokey'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Braille = Loadable({
   loader: () => import('Views/Encoding/Braille'),
   loading: Loading,
@@ -72,11 +78,14 @@ class App extends React.Component {
               <Nav>
                 <LinkContainer to="/cipher" onClick={(e) => e.preventDefault()}>
                   <NavDropdown eventKey={1} title="Ciphers" id="cipher-dropdown">
+                  <LinkContainer to="/cipher/autokey">
+                      <MenuItem eventKey={1.1}>Autokey Cipher</MenuItem>
+                    </LinkContainer>
                     <LinkContainer to="/cipher/caesar">
-                      <MenuItem eventKey={1.1}>Caesar Cipher</MenuItem>
+                      <MenuItem eventKey={1.2}>Caesar Cipher</MenuItem>
                     </LinkContainer>
                     <LinkContainer to="/cipher/vigenere">
-                      <MenuItem eventKey={1.2}>Vigenere Cipher</MenuItem>
+                      <MenuItem eventKey={1.3}>Vigenere Cipher</MenuItem>
                     </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
@@ -111,6 +120,7 @@ class App extends React.Component {
           <div className="App-content">
             <Route exact={true} path="/" component={Home} />
             <Route path="/encoding/braille" component={Braille} />
+            <Route path="/cipher/autokey" component={Autokey} />
             <Route path="/cipher/caesar" component={Caesar} />
             <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/encoding/morse" component={Morse} />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import CaesarStream from 'Cipher/Caesar/CaesarStream';
 import './Caesar.css';
 
-class Morse extends React.Component {
+class Caesar extends React.Component {
   public render() {
     return (
       <div className="Caesar">
@@ -14,4 +14,4 @@ class Morse extends React.Component {
   }
 }
 
-export default Morse;
+export default Caesar;
