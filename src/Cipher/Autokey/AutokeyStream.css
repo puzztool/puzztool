@@ -1,0 +1,13 @@
+.AutokeyStream-input {
+  margin-bottom: 10px;
+}
+
+.AutokeyStream-commands .btn-group {
+  margin-bottom: 10px;
+}
+
+.AutokeyStream-output {
+  font-size: 16px;
+  min-height: 44px;
+  white-space: pre-wrap;
+}

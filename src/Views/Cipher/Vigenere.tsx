@@ -2,11 +2,11 @@ import * as React from 'react';
 import VigenereStream from 'Cipher/Vigenere/VigenereStream';
 import './Caesar.css';
 
-class Morse extends React.Component {
+class Vigenere extends React.Component {
   public render() {
     return (
-      <div className="Caesar">
-        <div className="Caesar-content">
+      <div className="Vigenere">
+        <div className="Vigenere-content">
           <VigenereStream />
         </div>
       </div>
@@ -14,4 +14,4 @@ class Morse extends React.Component {
   }
 }
 
-export default Morse;
+export default Vigenere;
