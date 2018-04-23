@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import SemaphoreCharacter from './SemaphoreCharacter';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction
@@ -19,8 +19,8 @@ type SavedState = {
   stream: string,
 };
 
-class SemaphoreStream extends React.Component<Props, State> {
-  private readonly _character: Character = new Character(0, 0);
+class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
+  private readonly _character: Character = new Character();
   private _stream: string = '';
 
   constructor(props: Props) {
@@ -30,11 +30,6 @@ class SemaphoreStream extends React.Component<Props, State> {
       character: this._character,
       stream: '',
     };
-  }
-
-  public componentDidMount() {
-    this.restoreState();
-    this.updateState();
   }
 
   public render() {
@@ -61,29 +56,25 @@ class SemaphoreStream extends React.Component<Props, State> {
     );
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('SemaphoreStream', {
+  protected onSaveState() {
+    return {
       directions: this._character.directions,
       stream: this._stream,
-    });
+    };
   }
 
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('SemaphoreStream');
-
+  protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._character.directions = savedState.directions;
       this._stream = savedState.stream;
     }
   }
 
-  private updateState() {
+  protected onUpdateState() {
     this.setState({
       character: this._character,
       stream: this._stream,
     });
-
-    this.saveState();
   }
 
   private handleChange(type: string, direction: Direction) {

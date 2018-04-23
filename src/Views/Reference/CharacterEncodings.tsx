@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AsciiTable from 'Conversion/Character/AsciiTable';
 import OrdinalTable from 'Conversion/Character/OrdinalTable';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import './CharacterEncodings.css';
 
 type Props = {};
@@ -14,7 +14,7 @@ type SavedState = {
   activeKey: number,
 };
 
-class CharacterEncodings extends React.Component<Props, State> {
+class CharacterEncodings extends LocalStorageComponent<Props, State, SavedState> {
   private _activeKey: number = 1;
 
   constructor(props: Props) {
@@ -23,11 +23,6 @@ class CharacterEncodings extends React.Component<Props, State> {
     this.state = {
       activeKey: this._activeKey,
     };
-  }
-
-  public componentDidMount() {
-    this.restoreState();
-    this.updateState();
   }
 
   public render() {
@@ -53,26 +48,22 @@ class CharacterEncodings extends React.Component<Props, State> {
     );
   }
 
-  private updateState() {
-    this.setState({
+  protected onSaveState() {
+    return {
       activeKey: this._activeKey,
-    });
-
-    this.saveState();
+    };
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('CharacterEncodings', {
-      activeKey: this._activeKey,
-    });
-  }
-
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('CharacterEncodings');
-
+  protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._activeKey = savedState.activeKey;
     }
+  }
+
+  protected onUpdateState() {
+    this.setState({
+      activeKey: this._activeKey,
+    });
   }
 
   private onTabSelect(activeKey: number) {
