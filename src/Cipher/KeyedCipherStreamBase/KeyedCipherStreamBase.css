@@ -1,12 +1,12 @@
-.VigenereStream-input {
+.KeyedCipherStreamBase-input {
   margin-bottom: 10px;
 }
 
-.VigenereStream-commands .btn-group {
+.KeyedCipherStreamBase-commands .btn-group {
   margin-bottom: 10px;
 }
 
-.VigenereStream-output {
+.KeyedCipherStreamBase-output {
   font-size: 16px;
   min-height: 44px;
   white-space: pre-wrap;
