@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import BrailleCharacter from './BrailleCharacter';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import {
   BrailleCharacter as Character,
   BrailleDot as Dot,
@@ -21,7 +21,7 @@ type SavedState = {
   stream: Encoding[],
 };
 
-class BrailleStream extends React.Component<Props, State> {
+class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _stream: Stream = new Stream();
   private readonly _character: Character = new Character();
 
@@ -32,11 +32,6 @@ class BrailleStream extends React.Component<Props, State> {
       character: this._character,
       stream: this._stream,
     };
-  }
-
-  public componentDidMount() {
-    this.restoreState();
-    this.updateState();
   }
 
   public render() {
@@ -63,29 +58,29 @@ class BrailleStream extends React.Component<Props, State> {
     );
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('BrailleStream', {
-      character: this._character.encoding,
-      stream: this._stream.chars,
-    });
+  protected getLocalStorageKey() {
+    return 'BrailleStream';
   }
 
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('BrailleStream');
+  protected onSaveState() {
+    return {
+      character: this._character.encoding,
+      stream: this._stream.chars,
+    };
+  }
 
+  protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._character.encoding = savedState.character;
       this._stream.chars = savedState.stream;
     }
   }
 
-  private updateState() {
+  protected onUpdateState() {
     this.setState({
       character: this._character,
       stream: this._stream,
     });
-
-    this.saveState();
   }
 
   private handleClick(mask: Dot) {

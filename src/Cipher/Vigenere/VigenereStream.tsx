@@ -1,11 +1,16 @@
-import KeyedCipherStreamBase from '../KeyedCipherStreamBase/KeyedCipherStreamBase';
+import {
+  default as KeyedCipherStreamBase,
+  KeyedCipherStreamProps,
+} from '../KeyedCipherStreamBase/KeyedCipherStreamBase';
 import { VigenereString } from 'puzzle-lib';
 
-type Props = {};
-
 class VigenereStream extends KeyedCipherStreamBase {
-  constructor(props: Props) {
+  constructor(props: KeyedCipherStreamProps) {
     super(props, new VigenereString());
+  }
+
+  protected getLocalStorageKey() {
+    return 'VigenereStream';
   }
 }
 
