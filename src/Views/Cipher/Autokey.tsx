@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AutokeyStream from 'Cipher/Autokey/AutokeyStream';
-import './Caesar.css';
+import './Autokey.css';
 
 class Autokey extends React.Component {
   public render() {

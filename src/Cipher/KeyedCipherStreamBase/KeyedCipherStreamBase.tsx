@@ -1,29 +1,31 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import { KeyedCipherStringBase  } from 'puzzle-lib';
 import './KeyedCipherStreamBase.css';
 
-type Props = {};
-type State = {
-  conversion: number,
-  key: string,
-  output: string,
-  text: string,
-};
+export interface KeyedCipherStreamProps {}
 
-type SavedState = {
-  conversion: number,
-  key: string,
-  text: string,
-};
+interface KeyedCipherStreamState {
+  conversion: number;
+  key: string;
+  output: string;
+  text: string;
+}
 
-class KeyedCipherStreamBase extends React.Component<Props, State> {
+interface KeyedCipherStreamSavedState {
+  conversion: number;
+  key: string;
+  text: string;
+}
+
+abstract class KeyedCipherStreamBase
+    extends LocalStorageComponent<KeyedCipherStreamProps, KeyedCipherStreamState, KeyedCipherStreamSavedState> {
   private readonly _cipher: KeyedCipherStringBase;
   private _conversion: number = 2;
   private _input: HTMLInputElement;
 
-  constructor(props: Props, cipher: KeyedCipherStringBase) {
+  constructor(props: KeyedCipherStreamProps, cipher: KeyedCipherStringBase) {
     super(props);
 
     this._cipher = cipher;
@@ -36,8 +38,7 @@ class KeyedCipherStreamBase extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    this.restoreState();
-    this.updateState();
+    super.componentDidMount();
     this._input.focus();
   }
 
@@ -79,17 +80,15 @@ class KeyedCipherStreamBase extends React.Component<Props, State> {
     );
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('KeyedCipherStreamBase', {
+  protected onSaveState() {
+    return {
       conversion: this._conversion,
       key: this._cipher.key,
       text: this._cipher.text,
-    });
+    };
   }
 
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('KeyedCipherStreamBase');
-
+  protected onRestoreState(savedState: KeyedCipherStreamSavedState | null) {
     if (savedState !== null) {
       this._cipher.text = savedState.text;
       this._cipher.key = savedState.key;
@@ -97,15 +96,13 @@ class KeyedCipherStreamBase extends React.Component<Props, State> {
     }
   }
 
-  private updateState() {
+  protected onUpdateState() {
     this.setState({
       conversion: this._conversion,
       key: this._cipher.key,
       output: this._conversion === 1 ? this._cipher.encrypt() : this._cipher.decrypt(),
       text: this._cipher.text,
     });
-
-    this.saveState();
   }
 
   private onTextChanged(event: React.SyntheticEvent<FormControl>) {

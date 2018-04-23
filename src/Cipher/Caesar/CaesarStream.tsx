@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import CaesarList from './CaesarList';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.css';
 
@@ -15,7 +15,7 @@ type SavedState = {
   text: string,
 };
 
-class CaesarStream extends React.Component<Props, State> {
+class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _str: CaesarString = new CaesarString();
   private _input: HTMLInputElement;
 
@@ -29,8 +29,7 @@ class CaesarStream extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    this.restoreState();
-    this.updateState();
+    super.componentDidMount();
     this._input.focus();
   }
 
@@ -54,27 +53,27 @@ class CaesarStream extends React.Component<Props, State> {
     );
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('CaesarStream', {
-      text: this._str.text,
-    });
+  protected getLocalStorageKey() {
+    return 'CaesarStream';
   }
 
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('CaesarStream');
+  protected onSaveState() {
+    return {
+      text: this._str.text,
+    };
+  }
 
+  protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._str.text = savedState.text;
     }
   }
 
-  private updateState() {
+  protected onUpdateState() {
     this.setState({
       list: this._str.getRotations(),
       text: this._str.text,
     });
-
-    this.saveState();
   }
 
   private onTextChanged(event: React.SyntheticEvent<FormControl>) {

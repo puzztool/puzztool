@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorageComponent from 'Data/LocalStorageComponent';
 import './MorseStream.css';
 
 type Props = {};
@@ -15,7 +15,7 @@ type SavedState = {
   stream: string,
 };
 
-class MorseStream extends React.Component<Props, State> {
+class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _character: Character = new Character();
   private _stream: string = '';
 
@@ -26,11 +26,6 @@ class MorseStream extends React.Component<Props, State> {
       character: this._character,
       stream: this._stream,
     };
-  }
-
-  public componentDidMount() {
-    this.restoreState();
-    this.updateState();
   }
 
   public render() {
@@ -63,29 +58,29 @@ class MorseStream extends React.Component<Props, State> {
     );
   }
 
-  private saveState() {
-    LocalStorage.setObject<SavedState>('MorseStream', {
-      character: this._character.morseString,
-      stream: this._stream,
-    });
+  protected getLocalStorageKey() {
+    return 'MorseStream';
   }
 
-  private restoreState() {
-    const savedState = LocalStorage.getObject<SavedState>('MorseStream');
+  protected onSaveState() {
+    return {
+      character: this._character.morseString,
+      stream: this._stream,
+    };
+  }
 
+  protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._character.morseString = savedState.character;
       this._stream = savedState.stream;
     }
   }
 
-  private updateState() {
+  protected onUpdateState() {
     this.setState({
       character: this._character,
       stream: this._stream,
     });
-
-    this.saveState();
   }
 
   private handleDot() {
