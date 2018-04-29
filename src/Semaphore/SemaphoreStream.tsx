@@ -99,9 +99,9 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private handleNext() {
-    const ch = this._character.toString();
-    if (ch.length > 0) {
-      this._stream += ch;
+    const matches = this._character.getExactMatches();
+    if (matches.length > 0) {
+      this._stream += matches[0].toString();
       this._character.clear();
 
       this.updateState();
