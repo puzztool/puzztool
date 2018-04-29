@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SemaphoreStream from 'Semaphore/SemaphoreStream';
+import SemaphoreStream from '../../Semaphore/SemaphoreStream';
 import './Semaphore.css';
 
 class Semaphore extends React.Component {

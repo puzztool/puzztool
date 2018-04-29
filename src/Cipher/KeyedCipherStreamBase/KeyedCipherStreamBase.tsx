@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import LocalStorageComponent from 'Data/LocalStorageComponent';
+import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { KeyedCipherStringBase  } from 'puzzle-lib';
 import './KeyedCipherStreamBase.css';
 

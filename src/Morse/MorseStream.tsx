@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
-import LocalStorageComponent from 'Data/LocalStorageComponent';
+import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './MorseStream.css';
 
 type Props = {};

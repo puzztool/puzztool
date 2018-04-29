@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import CaesarList from './CaesarList';
-import LocalStorageComponent from 'Data/LocalStorageComponent';
+import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.css';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import BrailleStream from 'Braille/BrailleStream';
+import BrailleStream from '../../Braille/BrailleStream';
 import './Braille.css';
 
 class Braille extends React.Component {

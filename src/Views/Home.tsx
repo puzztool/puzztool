@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Home.css';
 
-const version = require('version');
+const version = require('../version');
 
 class Home extends React.Component {
   public render() {
