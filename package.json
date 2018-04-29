@@ -1,7 +1,7 @@
 {
   "name": "puzzle-web",
   "homepage": "http://brianbeck.xyz/puzzle",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "ajv": "^6.4.0",
