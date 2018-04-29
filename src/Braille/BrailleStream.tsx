@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import BrailleCharacter from './BrailleCharacter';
-import LocalStorageComponent from 'Data/LocalStorageComponent';
+import LocalStorageComponent from '../Data/LocalStorageComponent';
 import {
   BrailleCharacter as Character,
   BrailleDot as Dot,

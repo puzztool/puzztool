@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import SemaphoreCharacter from './SemaphoreCharacter';
-import LocalStorageComponent from 'Data/LocalStorageComponent';
+import LocalStorageComponent from '../Data/LocalStorageComponent';
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction

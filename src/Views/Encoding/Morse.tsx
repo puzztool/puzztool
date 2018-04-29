@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MorseStream from 'Morse/MorseStream';
+import MorseStream from '../../Morse/MorseStream';
 import './Morse.css';
 
 class Morse extends React.Component {

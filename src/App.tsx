@@ -3,61 +3,61 @@ import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as Loadable from 'react-loadable';
-import Loading from 'Views/Loading';
+import Loading from './Views/Loading';
 import './App.css';
 
 const defaultTimeout = 10000;
 
 const Autokey = Loadable({
-  loader: () => import('Views/Cipher/Autokey'),
+  loader: () => import('./Views/Cipher/Autokey'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Braille = Loadable({
-  loader: () => import('Views/Encoding/Braille'),
+  loader: () => import('./Views/Encoding/Braille'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Caesar = Loadable({
-  loader: () => import('Views/Cipher/Caesar'),
+  loader: () => import('./Views/Cipher/Caesar'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const CharacterEncodings = Loadable({
-  loader: () => import('Views/Reference/CharacterEncodings'),
+  loader: () => import('./Views/Reference/CharacterEncodings'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Home = Loadable({
-  loader: () => import('Views/Home'),
+  loader: () => import('./Views/Home'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Morse = Loadable({
-  loader: () => import('Views/Encoding/Morse'),
+  loader: () => import('./Views/Encoding/Morse'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Semaphore = Loadable({
-  loader: () => import('Views/Encoding/Semaphore'),
+  loader: () => import('./Views/Encoding/Semaphore'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Settings = Loadable({
-  loader: () => import('Views/Settings'),
+  loader: () => import('./Views/Settings'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
 const Vigenere = Loadable({
-  loader: () => import('Views/Cipher/Vigenere'),
+  loader: () => import('./Views/Cipher/Vigenere'),
   loading: Loading,
   timeout: defaultTimeout,
 });

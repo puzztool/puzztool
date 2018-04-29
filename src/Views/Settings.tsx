@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import LocalStorage from 'Data/LocalStorage';
+import LocalStorage from '../Data/LocalStorage';
 import './Settings.css';
 
 class Home extends React.Component {
