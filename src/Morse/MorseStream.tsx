@@ -22,10 +22,21 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   constructor(props: Props) {
     super(props);
 
+    this.onKeyPress = this.onKeyPress.bind(this);
+
     this.state = {
       character: this._character,
       stream: this._stream,
     };
+  }
+
+  public componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener('keypress', this.onKeyPress);
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('keypress', this.onKeyPress);
   }
 
   public render() {
@@ -50,7 +61,6 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
           </ButtonGroup>
           <ButtonGroup>
             <Button onClick={() => this.handleNext()}>Next</Button>
-            <Button onClick={() => this.handleSpace()}>Space</Button>
             <Button onClick={() => this.handleReset()}>Reset</Button>
           </ButtonGroup>
         </ButtonToolbar>
@@ -83,6 +93,32 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
+  private onKeyPress(ev: KeyboardEvent) {
+    if (ev.defaultPrevented) {
+      return;
+    }
+
+    let handled = false;
+
+    if (ev.keyCode === 8) { // Backspace
+      this.handleBackspace();
+      handled = true;
+    } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
+      this.handleNext();
+      handled = true;
+    } else if (ev.charCode === 45 || ev.charCode === 106) { // '-' or 'J'
+      this.handleDash();
+      handled = true;
+    } else if (ev.charCode === 46 || ev.charCode === 107) { // '.' or 'K'
+      this.handleDot();
+      handled = true;
+    }
+
+    if (handled) {
+      ev.preventDefault();
+    }
+  }
+
   private handleDot() {
     this._character.dot();
 
@@ -96,7 +132,11 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private handleBackspace() {
-    this._character.backspace();
+    if (!this._character.empty()) {
+      this._character.backspace();
+    } else if (this._stream.length > 0) {
+      this._stream = this._stream.substring(0, this._stream.length - 1);
+    }
 
     this.updateState();
   }
@@ -105,20 +145,16 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     if (this._character.valid()) {
       this._stream += this._character.toString();
       this._character.clear();
-
-      this.updateState();
+    } else {
+      this._stream += ' ';
     }
+
+    this.updateState();
   }
 
   private handleReset() {
     this._character.clear();
     this._stream = '';
-
-    this.updateState();
-  }
-
-  private handleSpace() {
-    this._stream += ' ';
 
     this.updateState();
   }
