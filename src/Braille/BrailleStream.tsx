@@ -28,15 +28,29 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
   constructor(props: Props) {
     super(props);
 
+    this.onKeyPress = this.onKeyPress.bind(this);
+
     this.state = {
       character: this._character,
       stream: this._stream,
     };
   }
 
+  public componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener('keypress', this.onKeyPress);
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('keypress', this.onKeyPress);
+  }
+
   public render() {
     return (
       <div className="BrailleStream">
+        <pre className="BrailleStream-output">
+          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+        </pre>
         <div className="BrailleStream-input">
           <BrailleCharacter
             character={this.state.character}
@@ -46,14 +60,11 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
         </div>
         <ButtonToolbar className="BrailleStream-commands">
           <ButtonGroup>
+            <Button onClick={() => this.handleBackspace()}>Backspace</Button>
             <Button onClick={() => this.handleNext()}>Next</Button>
-            <Button onClick={() => this.handleSpace()}>Space</Button>
             <Button onClick={() => this.handleReset()}>Reset</Button>
           </ButtonGroup>
         </ButtonToolbar>
-        <pre className="BrailleStream-output">
-          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
-        </pre>
       </div>
     );
   }
@@ -83,8 +94,36 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
+  private onKeyPress(ev: KeyboardEvent) {
+    if (ev.defaultPrevented) {
+      return;
+    }
+
+    let handled = false;
+
+    if (ev.keyCode === 8) { // Backspace
+      this.handleBackspace();
+      handled = true;
+    } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
+      this.handleNext();
+      handled = true;
+    } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
+      this.handleClick(Math.pow(2, ev.charCode - 49));
+    }
+
+    if (handled) {
+      ev.preventDefault();
+    }
+  }
+
   private handleClick(mask: Dot) {
     this._character.toggle(mask);
+
+    this.updateState();
+  }
+
+  private handleBackspace() {
+    this._stream.backspace();
 
     this.updateState();
   }
@@ -93,20 +132,16 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     if (this._character.valid()) {
       this._stream.append(this._character);
       this._character.clear();
-
-      this.updateState();
+    } else {
+      this._stream.space();
     }
+
+    this.updateState();
   }
 
   private handleReset() {
     this._character.clear();
     this._stream.clear();
-
-    this.updateState();
-  }
-
-  private handleSpace() {
-    this._stream.space();
 
     this.updateState();
   }
