@@ -44,7 +44,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
       <div className="MorseStream">
         <Well className="MorseStream-input">
           <div className="MorseStream-view">
-            {this.state.character.toString() || '?'}
+            {this.state.character.toString() || '¯\\_(ツ)_/¯'}
           </div>
           <div className="MorseStream-morseView">
             {this.renderMorse(this.state.character.morseString)}
