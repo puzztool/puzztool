@@ -1,7 +1,7 @@
 {
   "name": "puzzle-web",
   "homepage": "https://beckbria.github.io/puzzle-web/",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "ajv": "^6.4.0",
