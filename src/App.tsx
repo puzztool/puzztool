@@ -111,7 +111,7 @@ class App extends React.Component {
                 </LinkContainer>
               </Nav>
               <Nav pullRight={true}>
-                <LinkContainer to="/help">
+                <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
                   <NavDropdown eventKey={4} title="Help" id="help-dropdown">
                     <LinkContainer to="/help/settings">
                       <MenuItem eventKey={4.1}>Settings</MenuItem>
