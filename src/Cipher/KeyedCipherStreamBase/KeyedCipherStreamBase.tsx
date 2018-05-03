@@ -70,7 +70,7 @@ abstract class KeyedCipherStreamBase
             <ToggleButton value={2}>Decrypt</ToggleButton>
           </ToggleButtonGroup>
           <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onResetClick(event)}>Reset</Button>
+            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <pre className="KeyedCipherStreamBase-output">
@@ -122,7 +122,7 @@ abstract class KeyedCipherStreamBase
     this.updateState();
   }
 
-  private onResetClick(event: React.MouseEvent<Button>) {
+  private onClearClick(event: React.MouseEvent<Button>) {
     this._cipher.key = '';
     this._cipher.text = '';
     this._conversion = 2;

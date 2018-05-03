@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import SemaphoreCharacter from './SemaphoreCharacter';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
+import SemaphoreCharacter from './SemaphoreCharacter';
 import {
   SemaphoreCharacter as Character,
-  SemaphoreDirection as Direction
+  SemaphoreDirection as Direction,
+  SemaphoreDegrees as Degrees,
 } from 'puzzle-lib';
 import './SemaphoreStream.css';
 
@@ -26,10 +27,21 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
   constructor(props: Props) {
     super(props);
 
+    this.onKeyPress = this.onKeyPress.bind(this);
+
     this.state = {
       character: this._character,
       stream: '',
     };
+  }
+
+  public componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener('keypress', this.onKeyPress);
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('keypress', this.onKeyPress);
   }
 
   public render() {
@@ -38,15 +50,17 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
         <div className="SemaphoreStream-input">
           <SemaphoreCharacter
             character={this.state.character}
-            onChange={(type, direction) => this.handleChange(type, direction)}
+            onChange={(type, direction) => this.onCharacterChange(type, direction)}
           />
           <div className="SemaphoreStream-view">{this.state.character.toString() || '?'}</div>
         </div>
         <ButtonToolbar className="SemaphoreStream-commands">
           <ButtonGroup>
-            <Button onClick={() => this.handleNext()}>Next</Button>
-            <Button onClick={() => this.handleSpace()}>Space</Button>
-            <Button onClick={() => this.handleReset()}>Reset</Button>
+            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+            <Button onClick={() => this.onNextClick()}>Next</Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button onClick={() => this.onClearClick()}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <pre className="SemaphoreStream-output">
@@ -81,7 +95,32 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
-  private handleChange(type: string, direction: Direction) {
+  private onKeyPress(ev: KeyboardEvent) {
+    if (ev.defaultPrevented) {
+      return;
+    }
+
+    let handled = false;
+
+    if (ev.keyCode === 8) { // Backspace
+      this.onBackspaceClick();
+      handled = true;
+    } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
+      this.onNextClick();
+      handled = true;
+    } else if (ev.charCode >= 49 && ev.charCode <= 56) { // '1' through '8'
+      const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
+      this.onCharacterChange(
+        !this._character.hasDirection(direction) ? 'add' : 'remove',
+        direction);
+    }
+
+    if (handled) {
+      ev.preventDefault();
+    }
+  }
+
+  private onCharacterChange(type: string, direction: Direction) {
     switch (type) {
       case 'add':
         this._character.addDirection(direction);
@@ -98,25 +137,27 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private handleNext() {
+  private onNextClick() {
     const matches = this._character.getExactMatches();
     if (matches.length > 0) {
       this._stream += matches[0].toString();
       this._character.clear();
-
-      this.updateState();
+    } else {
+      this._stream += ' ';
     }
+
+    this.updateState();
   }
 
-  private handleReset() {
+  private onClearClick() {
     this._character.clear();
     this._stream = '';
 
     this.updateState();
   }
 
-  private handleSpace() {
-    this._stream += ' ';
+  private onBackspaceClick() {
+    this._stream = this._stream.substring(0, this._stream.length - 1);
 
     this.updateState();
   }

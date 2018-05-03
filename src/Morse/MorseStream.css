@@ -20,13 +20,22 @@ div.MorseStream-input {
   margin-right: 16px;
 }
 
-.MorseStream-commands .btn-group {
+.MorseStream-commands .btn-group,
+.MorseStream-inputCommands .btn-group {
   margin-bottom: 10px;
 }
 
-.MorseStream-commands svg.MorseStream-dotIcon,
-.MorseStream-commands svg.MorseStream-dashIcon {
-  height: 12px;
+.MorseStream-inputCommands .btn {
+  font-size: 40px;
+  height: 72px;
+  min-width: 112px;
+}
+
+.MorseStream-inputCommands svg.MorseStream-dotIcon,
+.MorseStream-inputCommands svg.MorseStream-dashIcon {
+  display: block;
+  height: 24px;
+  margin: 0 auto;
 }
 
 .MorseStream-output {

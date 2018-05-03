@@ -54,15 +54,17 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
         <div className="BrailleStream-input">
           <BrailleCharacter
             character={this.state.character}
-            onClick={i => this.handleClick(i)}
+            onClick={i => this.onCharacterClick(i)}
           />
           <div className="BrailleStream-view">{this.state.character.toString() || '?'}</div>
         </div>
         <ButtonToolbar className="BrailleStream-commands">
           <ButtonGroup>
-            <Button onClick={() => this.handleBackspace()}>Backspace</Button>
-            <Button onClick={() => this.handleNext()}>Next</Button>
-            <Button onClick={() => this.handleReset()}>Reset</Button>
+            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+            <Button onClick={() => this.onNextClick()}>Next</Button>
+          </ButtonGroup>
+          <ButtonGroup>
+            <Button onClick={() => this.onClearClick()}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
       </div>
@@ -102,13 +104,16 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     let handled = false;
 
     if (ev.keyCode === 8) { // Backspace
-      this.handleBackspace();
+      this.onBackspaceClick();
       handled = true;
     } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
-      this.handleNext();
+      this.onNextClick();
       handled = true;
     } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
-      this.handleClick(Math.pow(2, ev.charCode - 49));
+      // The braille dots are bitfields, so calculate the value based on the key
+      // pressed.
+      // TODO: This should probably be in puzzle-lib.
+      this.onCharacterClick(Math.pow(2, ev.charCode - 49));
     }
 
     if (handled) {
@@ -116,19 +121,19 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     }
   }
 
-  private handleClick(mask: Dot) {
+  private onCharacterClick(mask: Dot) {
     this._character.toggle(mask);
 
     this.updateState();
   }
 
-  private handleBackspace() {
+  private onBackspaceClick() {
     this._stream.backspace();
 
     this.updateState();
   }
 
-  private handleNext() {
+  private onNextClick() {
     if (this._character.valid()) {
       this._stream.append(this._character);
       this._character.clear();
@@ -139,7 +144,7 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private handleReset() {
+  private onClearClick() {
     this._character.clear();
     this._stream.clear();
 
