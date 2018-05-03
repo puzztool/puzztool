@@ -3,7 +3,8 @@ body {
 }
 
 .btn {
-  font-size: 16px;
+  font-size: 20px;
+  min-height: 44px;
 }
 
 .navbar-brand {

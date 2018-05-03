@@ -53,15 +53,19 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
         <pre className="MorseStream-output">
           {this.state.stream.toString()}<span className="blinking-cursor">|</span>
         </pre>
+        <ButtonToolbar className="MorseStream-inputCommands">
+          <ButtonGroup>
+            <Button onClick={() => this.onDotClick()}>{this.renderDot()}</Button>
+            <Button onClick={() => this.onDashClick()}>{this.renderDash()}</Button>
+            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+          </ButtonGroup>
+        </ButtonToolbar>
         <ButtonToolbar className="MorseStream-commands">
           <ButtonGroup>
-            <Button onClick={() => this.handleDot()}>{this.renderDot()}</Button>
-            <Button onClick={() => this.handleDash()}>{this.renderDash()}</Button>
-            <Button onClick={() => this.handleBackspace()}>Backspace</Button>
+            <Button onClick={() => this.onNextClick()}>Next</Button>
           </ButtonGroup>
           <ButtonGroup>
-            <Button onClick={() => this.handleNext()}>Next</Button>
-            <Button onClick={() => this.handleReset()}>Reset</Button>
+            <Button onClick={() => this.onClearClick()}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
       </div>
@@ -101,16 +105,16 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     let handled = false;
 
     if (ev.keyCode === 8) { // Backspace
-      this.handleBackspace();
+      this.onBackspaceClick();
       handled = true;
     } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
-      this.handleNext();
+      this.onNextClick();
       handled = true;
     } else if (ev.charCode === 45 || ev.charCode === 106) { // '-' or 'J'
-      this.handleDash();
+      this.onDashClick();
       handled = true;
     } else if (ev.charCode === 46 || ev.charCode === 107) { // '.' or 'K'
-      this.handleDot();
+      this.onDotClick();
       handled = true;
     }
 
@@ -119,19 +123,19 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     }
   }
 
-  private handleDot() {
+  private onDotClick() {
     this._character.dot();
 
     this.updateState();
   }
 
-  private handleDash() {
+  private onDashClick() {
     this._character.dash();
 
     this.updateState();
   }
 
-  private handleBackspace() {
+  private onBackspaceClick() {
     if (!this._character.empty()) {
       this._character.backspace();
     } else if (this._stream.length > 0) {
@@ -141,7 +145,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private handleNext() {
+  private onNextClick() {
     if (this._character.valid()) {
       this._stream += this._character.toString();
       this._character.clear();
@@ -152,7 +156,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private handleReset() {
+  private onClearClick() {
     this._character.clear();
     this._stream = '';
 

@@ -45,7 +45,7 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
         />
         <ButtonToolbar className="CaesarStream-commands">
           <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onResetClick(event)}>Reset</Button>
+            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <CaesarList list={this.state.list} />
@@ -82,7 +82,7 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private onResetClick(event: React.MouseEvent<Button>) {
+  private onClearClick(event: React.MouseEvent<Button>) {
     this._str.text = '';
     this.updateState();
   }
