@@ -1,4 +1,4 @@
-# puzzle-web
+# puzztool
 
 [![Travis](https://img.shields.io/travis/beckbria/puzzle-web.svg)](https://travis-ci.org/beckbria/puzzle-web)
 
