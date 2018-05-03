@@ -1,6 +1,6 @@
 {
   "name": "puzztool",
-  "homepage": "https://puzztool.com/",
+  "homepage": "https://kfarnung.github.io/puzztool/",
   "version": "0.7.0",
   "private": true,
   "dependencies": {
