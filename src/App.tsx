@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
+import { MenuItem, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as Loadable from 'react-loadable';
@@ -103,7 +103,7 @@ class App extends React.Component {
                   </NavDropdown>
                 </LinkContainer>
                 <LinkContainer to="/reference" onClick={(e) => e.preventDefault()}>
-                  <NavDropdown eventKey={3} title="Reference" id="conversion-dropdown">
+                  <NavDropdown eventKey={3} title="Reference" id="reference-dropdown">
                     <LinkContainer to="/reference/characterencodings">
                       <MenuItem eventKey={3.1}>Character Encodings</MenuItem>
                     </LinkContainer>
@@ -111,8 +111,15 @@ class App extends React.Component {
                 </LinkContainer>
               </Nav>
               <Nav pullRight={true}>
-                <LinkContainer to="/settings">
-                  <NavItem eventKey={4}>Settings</NavItem>
+                <LinkContainer to="/help">
+                  <NavDropdown eventKey={4} title="Help" id="help-dropdown">
+                    <LinkContainer to="/help/settings">
+                      <MenuItem eventKey={4.1}>Settings</MenuItem>
+                    </LinkContainer>
+                    <MenuItem href="https://github.com/beckbria/puzztool/issues/new" target="_blank">
+                      Feedback
+                    </MenuItem>
+                  </NavDropdown>
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
@@ -126,7 +133,7 @@ class App extends React.Component {
             <Route path="/encoding/morse" component={Morse} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
             <Route path="/encoding/semaphore" component={Semaphore} />
-            <Route path="/settings" component={Settings} />
+            <Route path="/help/settings" component={Settings} />
           </div>
         </div>
       </Router>
