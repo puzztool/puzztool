@@ -7,7 +7,6 @@ import './AutoConvertStream.css';
 type Props = {};
 type State = {
   text: string,
-  list: Array<string>,
 };
 
 type SavedState = {
@@ -24,7 +23,6 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
 
     this.state = {
       text: '',
-      list: [],
     };
   }
 
@@ -89,12 +87,8 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   }
 
   private updateConverted() {
-    const split = this._str.split(' ');
-    let result = '';
-    for (const letter of split) {
-      result = result + CharacterAutoConvert.convertCharacter(letter);
-    }
-    this._converted = result;
+    this._converted = this._str.split(' ').
+      reduce((result, letter) => result + CharacterAutoConvert.convertCharacter(letter), '');
   }
 }
 
