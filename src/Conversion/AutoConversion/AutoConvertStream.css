@@ -5,3 +5,9 @@
 .AutoConvertStream-commands .btn-group {
   margin-bottom: 10px;
 }
+
+.AutoConvertStream-output {
+  font-size: 16px;
+  min-height: 44px;
+  white-space: pre-wrap;
+}

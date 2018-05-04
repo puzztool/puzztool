@@ -7,6 +7,7 @@ import './AutoConvertStream.css';
 type Props = {};
 type State = {
   text: string,
+  output: string,
 };
 
 type SavedState = {
@@ -14,8 +15,7 @@ type SavedState = {
 };
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
-  private _str: string;
-  private _converted: string;
+  private _text: string = '';
   private _input: HTMLInputElement;
 
   constructor(props: Props) {
@@ -23,6 +23,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
 
     this.state = {
       text: '',
+      output: '',
     };
   }
 
@@ -41,13 +42,14 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
           placeholder="Text"
           value={this.state.text}
         />
-        {this._converted}
         <ButtonToolbar className="AutoConvertStream-commands">
           <ButtonGroup>
             <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
-        
+        <pre className="AutoConvertStream-output">
+          {this.state.output}
+        </pre>
       </div>
     );
   }
@@ -58,37 +60,38 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
 
   protected onSaveState() {
     return {
-      text: this._str,
+      text: this._text,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
-      this._str = savedState.text;
+      this._text = savedState.text;
     }
   }
 
   protected onUpdateState() {
-    this.updateConverted();
     this.setState({
-      text: this._str,
+      text: this._text,
+      output: this.calculateOutput(),
     });
   }
 
   private onTextChanged(event: React.SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
-    this._str = element.value;
+    this._text = element.value;
     this.updateState();
   }
 
   private onClearClick(event: React.MouseEvent<Button>) {
-    this._str = '';
+    this._text = '';
     this.updateState();
   }
 
-  private updateConverted() {
-    this._converted = this._str.split(' ').
-      reduce((result, letter) => result + CharacterAutoConvert.convertCharacter(letter), '');
+  private calculateOutput() {
+    return this._text
+      .split(' ')
+      .reduce((result, letter) => result + CharacterAutoConvert.convertCharacter(letter), '');
   }
 }
 
