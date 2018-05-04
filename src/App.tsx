@@ -67,7 +67,15 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar inverse={true} staticTop={true} fluid={true} collapseOnSelect={true}>
+          <Navbar
+            inverse={true}
+            staticTop={true}
+            fluid={true}
+            collapseOnSelect={true}
+            // Remove focus from the selected element to prevent it from taking
+            // further keyboard input.
+            onSelect={() => (document.activeElement as HTMLElement).blur()}
+          >
             <Navbar.Header>
               <Navbar.Brand>
                 <a href="#/">Puzzle Tools</a>

@@ -28,6 +28,7 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
   constructor(props: Props) {
     super(props);
 
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
 
     this.state = {
@@ -38,10 +39,12 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
 
   public componentDidMount() {
     super.componentDidMount();
+    document.addEventListener('keydown', this.onKeyDown);
     document.addEventListener('keypress', this.onKeyPress);
   }
 
   public componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown);
     document.removeEventListener('keypress', this.onKeyPress);
   }
 
@@ -96,6 +99,25 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
+  private onKeyDown(ev: KeyboardEvent) {
+    if (ev.defaultPrevented) {
+      return;
+    }
+
+    let handled = false;
+
+    // Chrome won't trigger keypress for any keys that can invoke browser
+    // actions.
+    if (ev.keyCode === 8) { // Backspace
+      this.onBackspaceClick();
+      handled = true;
+    }
+
+    if (handled) {
+      ev.preventDefault();
+    }
+  }
+
   private onKeyPress(ev: KeyboardEvent) {
     if (ev.defaultPrevented) {
       return;
@@ -103,10 +125,7 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
 
     let handled = false;
 
-    if (ev.keyCode === 8) { // Backspace
-      this.onBackspaceClick();
-      handled = true;
-    } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
+    if (ev.keyCode === 13) { // Enter
       this.onNextClick();
       handled = true;
     } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
