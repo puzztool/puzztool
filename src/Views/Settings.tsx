@@ -1,14 +1,34 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Panel } from 'react-bootstrap';
 import LocalStorage from '../Data/LocalStorage';
 import './Settings.css';
+
+const version = require('../version');
 
 class Home extends React.Component {
   public render() {
     return (
       <div className="Settings">
         <div className="Settings-content">
-          <Button onClick={() => this.onClearClick()}>Clear saved state</Button>
+          <Panel>
+            <Panel.Heading>Saved state</Panel.Heading>
+            <Panel.Body>
+              <p>
+                The most recent inputs to each tool are stored in the browser's
+                local storage. In the event that state becomes corrupted it can
+                be cleared using the button below.
+              </p>
+              <Button onClick={() => this.onClearClick()}>Clear saved state</Button>
+            </Panel.Body>
+          </Panel>
+          <Panel>
+            <Panel.Heading>About</Panel.Heading>
+            <Panel.Body>
+              <h3>PuzzTool</h3>
+              Version: {version}<br/>
+              <a href="https://github.com/beckbria/puzztool/" target="_blank">Project page</a>
+            </Panel.Body>
+          </Panel>
         </div>
       </div>
     );

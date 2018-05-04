@@ -78,7 +78,7 @@ class App extends React.Component {
           >
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="#/">Puzzle Tools</a>
+                <a href="#/">PuzzTool</a>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
