@@ -27,6 +27,7 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
   constructor(props: Props) {
     super(props);
 
+    this.onKeyDown = this.onKeyDown.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
 
     this.state = {
@@ -95,6 +96,25 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
+  private onKeyDown(ev: KeyboardEvent) {
+    if (ev.defaultPrevented) {
+      return;
+    }
+
+    let handled = false;
+
+    // Chrome won't trigger keypress for any keys that can invoke browser
+    // actions.
+    if (ev.keyCode === 8) { // Backspace
+      this.onBackspaceClick();
+      handled = true;
+    }
+
+    if (handled) {
+      ev.preventDefault();
+    }
+  }
+
   private onKeyPress(ev: KeyboardEvent) {
     if (ev.defaultPrevented) {
       return;
@@ -102,10 +122,7 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
 
     let handled = false;
 
-    if (ev.keyCode === 8) { // Backspace
-      this.onBackspaceClick();
-      handled = true;
-    } else if (ev.keyCode === 13 || ev.charCode === 32) { // Enter or Space
+    if (ev.keyCode === 13) { // Enter
       this.onNextClick();
       handled = true;
     } else if (ev.charCode >= 49 && ev.charCode <= 56) { // '1' through '8'
