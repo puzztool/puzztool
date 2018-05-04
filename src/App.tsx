@@ -50,6 +50,12 @@ const Semaphore = Loadable({
   timeout: defaultTimeout,
 });
 
+const AutoConvert = Loadable({
+  loader: () => import('./Views/Encoding/AutoConvert'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Settings = Loadable({
   loader: () => import('./Views/Settings'),
   loading: Loading,
@@ -108,6 +114,9 @@ class App extends React.Component {
                     <LinkContainer to="/encoding/semaphore">
                       <MenuItem eventKey={2.3}>Semaphore</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/encoding/autoconvert">
+                      <MenuItem eventKey={2.4}>AutoConvert</MenuItem>
+                    </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
                 <LinkContainer to="/reference" onClick={(e) => e.preventDefault()}>
@@ -138,6 +147,7 @@ class App extends React.Component {
             <Route path="/cipher/autokey" component={Autokey} />
             <Route path="/cipher/caesar" component={Caesar} />
             <Route path="/cipher/vigenere" component={Vigenere} />
+            <Route path="/encoding/autoconvert" component={AutoConvert} />
             <Route path="/encoding/morse" component={Morse} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
             <Route path="/encoding/semaphore" component={Semaphore} />
