@@ -1,6 +1,6 @@
 class LocalStorage {
   private static _isSupported?: boolean;
-  private static _prefix: string = 'puzzle-web';
+  private static _prefix: string = 'puzztool';
 
   public static isSupported() {
     if (this._isSupported === undefined) {
