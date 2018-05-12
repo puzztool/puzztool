@@ -1,0 +1,15 @@
+.ResistorInput {
+  padding-left: 10px;
+}
+
+.btn-group-band {
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+}
+
+.ResistorValue {
+  font-size: 16pt;
+  font-weight: bold;
+}
