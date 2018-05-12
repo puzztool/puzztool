@@ -8,6 +8,12 @@ import './App.css';
 
 const defaultTimeout = 10000;
 
+const AutoConvert = Loadable({
+  loader: () => import('./Views/Encoding/AutoConvert'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Autokey = Loadable({
   loader: () => import('./Views/Cipher/Autokey'),
   loading: Loading,
@@ -44,14 +50,14 @@ const Morse = Loadable({
   timeout: defaultTimeout,
 });
 
-const Semaphore = Loadable({
-  loader: () => import('./Views/Encoding/Semaphore'),
+const Resistors = Loadable({
+  loader: () => import('./Views/Reference/Resistors'),
   loading: Loading,
   timeout: defaultTimeout,
 });
 
-const AutoConvert = Loadable({
-  loader: () => import('./Views/Encoding/AutoConvert'),
+const Semaphore = Loadable({
+  loader: () => import('./Views/Encoding/Semaphore'),
   loading: Loading,
   timeout: defaultTimeout,
 });
@@ -124,6 +130,9 @@ class App extends React.Component {
                     <LinkContainer to="/reference/characterencodings">
                       <MenuItem eventKey={3.1}>Character Encodings</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/reference/resistors">
+                      <MenuItem eventKey={3.2}>Resistors</MenuItem>
+                    </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
               </Nav>
@@ -149,9 +158,10 @@ class App extends React.Component {
             <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/encoding/autoconvert" component={AutoConvert} />
             <Route path="/encoding/morse" component={Morse} />
-            <Route path="/reference/characterencodings" component={CharacterEncodings} />
             <Route path="/encoding/semaphore" component={Semaphore} />
             <Route path="/help/settings" component={Settings} />
+            <Route path="/reference/characterencodings" component={CharacterEncodings} />
+            <Route path="/reference/resistors" component={Resistors} />
           </div>
         </div>
       </Router>

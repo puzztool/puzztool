@@ -1,0 +1,8 @@
+.ResistorTable .table-responsive {
+  border-top: none;
+}
+
+.ResistorTable th,
+.ResistorTable td {
+  text-align: center;
+}
