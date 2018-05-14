@@ -1,47 +1,47 @@
-.Semaphore {
+.SemaphoreCharacter {
   position: relative;
 }
 
-.Semaphore .SemaphoreCheckbox {
+.SemaphoreCharacter .SemaphoreCheckbox {
   position: absolute;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-north {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-north {
   top: 20px;
   left: 127.5px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-northEast {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northEast {
   top: 51px;
   left: 207px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-east {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-east {
   top: 107px;
   left: 218px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-southEast {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southEast {
   top: 153px;
   left: 184px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-south {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-south {
   top: 165px;
   left: 127.5px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-southWest {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southWest {
   top: 153px;
   left: 72px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-west {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-west {
   top: 107px;
   left: 40px;
 }
 
-.Semaphore .SemaphoreCheckbox.SemaphoreCharacter-northWest {
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northWest {
   top: 51px;
   left: 50px;
 }
