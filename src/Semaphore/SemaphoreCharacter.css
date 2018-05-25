@@ -8,40 +8,40 @@
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-north {
   top: 20px;
-  left: 127.5px;
+  left: 112.5px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northEast {
   top: 51px;
-  left: 207px;
+  left: 192px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-east {
   top: 107px;
-  left: 218px;
+  left: 203px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southEast {
   top: 153px;
-  left: 184px;
+  left: 169px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-south {
   top: 165px;
-  left: 127.5px;
+  left: 112.5px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southWest {
   top: 153px;
-  left: 72px;
+  left: 57px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-west {
   top: 107px;
-  left: 40px;
+  left: 25px;
 }
 
 .SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northWest {
   top: 51px;
-  left: 50px;
+  left: 35px;
 }
