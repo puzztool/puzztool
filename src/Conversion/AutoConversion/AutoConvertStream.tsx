@@ -53,7 +53,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
         </ButtonToolbar>
         <input 
           type="checkbox"
-          onClick={(event: React.MouseEvent<HTMLInputElement>) => this.toggleHomogenous(event)}
+          onClick={(event: React.MouseEvent<HTMLInputElement>) => this.toggleHomogeneous(event)}
         />
         Entire string is the same encoding
         <pre className="AutoConvertStream-output">
@@ -100,7 +100,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.updateState();
   }
 
-  private toggleHomogenous(event: React.MouseEvent<HTMLInputElement>) {
+  private toggleHomogeneous(event: React.MouseEvent<HTMLInputElement>) {
     this._homogeneous = !this._homogeneous;
     this.updateState();
   }
