@@ -16,11 +16,11 @@ class Resistors extends TabViewBase {
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
           >
-            <Tab eventKey={1} title="Reference">
-              <ResistorTable />
-            </Tab>
-            <Tab eventKey={2} title="Value">
+            <Tab eventKey={1} title="Value">
               <ResistorInput />
+            </Tab>
+            <Tab eventKey={2} title="Reference">
+              <ResistorTable />
             </Tab>
           </Tabs>
         </div>

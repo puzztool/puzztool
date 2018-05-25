@@ -17,11 +17,11 @@ class Semaphore extends TabViewBase {
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
           >
-            <Tab eventKey={1} title="Reference">
-              <SemaphoreTable />
-            </Tab>
-            <Tab eventKey={2} title="Value">
+            <Tab eventKey={1} title="Value">
               <SemaphoreStream />
+            </Tab>
+            <Tab eventKey={2} title="Reference">
+              <SemaphoreTable />
             </Tab>
           </Tabs>
         </div>
