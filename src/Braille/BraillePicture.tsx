@@ -16,7 +16,7 @@ class BraillePicture extends React.Component<Props> {
               <circle r="6" fill="black" cx="0" cy="0" />
             </g>
             <g id="EmptyDot">
-              <circle r="6" fill="transparent" stroke-width="1" stroke="black" cx="0" cy="0" />
+              <circle r="6" fill="transparent" strokeWidth="1" stroke="black" cx="0" cy="0" />
             </g>
           </defs>
           {this.brailleDot(Dot.UpperLeft, 8, 8)}

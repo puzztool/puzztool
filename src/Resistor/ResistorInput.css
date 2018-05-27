@@ -1,15 +1,17 @@
 .ResistorInput {
-  padding-left: 10px;
+  margin: 0px 15px;
 }
 
-.btn-group-band {
-  padding-left: 3px;
-  padding-top: 3px;
-  padding-right: 3px;
-  padding-bottom: 3px;
+.ResistorInput .ResistorDisplay {
+  margin-bottom: 10px;
 }
 
-.ResistorValue {
+.ResistorInput .btn-group {
+  margin-bottom: 10px;
+}
+
+.ResistorInput .ResistorValue {
   font-size: 16pt;
   font-weight: bold;
+  margin-bottom: 10px;
 }

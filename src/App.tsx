@@ -111,17 +111,17 @@ class App extends React.Component {
                 </LinkContainer>
                 <LinkContainer to="/encoding" onClick={(e) => e.preventDefault()}>
                   <NavDropdown eventKey={2} title="Encodings" id="conversion-dropdown">
+                    <LinkContainer to="/encoding/autoconvert">
+                      <MenuItem eventKey={2.1}>AutoConvert</MenuItem>
+                    </LinkContainer>
                     <LinkContainer to="/encoding/braille">
-                      <MenuItem eventKey={2.1}>Braille</MenuItem>
+                      <MenuItem eventKey={2.2}>Braille</MenuItem>
                     </LinkContainer>
                     <LinkContainer to="/encoding/morse">
-                      <MenuItem eventKey={2.2}>Morse</MenuItem>
+                      <MenuItem eventKey={2.3}>Morse</MenuItem>
                     </LinkContainer>
                     <LinkContainer to="/encoding/semaphore">
-                      <MenuItem eventKey={2.3}>Semaphore</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/encoding/autoconvert">
-                      <MenuItem eventKey={2.4}>AutoConvert</MenuItem>
+                      <MenuItem eventKey={2.4}>Semaphore</MenuItem>
                     </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>

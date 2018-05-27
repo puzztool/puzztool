@@ -26,7 +26,7 @@ class BrailleTable extends React.Component {
   private renderRows() {
     const characters = new Character().getPotentialMatches();
     return characters.map((entry) => (
-      <tr key={entry.display}>
+      <tr key={`${entry.encoding}-${entry.display}`}>
         <td>{entry.display}</td>
         <td>
           <BraillePicture 
