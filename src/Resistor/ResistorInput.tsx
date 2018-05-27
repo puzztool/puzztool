@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import { DropdownButton, MenuItem, ButtonGroup } from 'react-bootstrap';
+import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 import './ResistorInput.css';
 
 type Props = {
@@ -61,13 +61,13 @@ class ResistorInput extends React.Component<Props, State> {
         </div>
         <div className="ResistorValue">Value: {this.state.value}</div>
         <div className="ResistorSelectors">
-          <ButtonGroup>
+          <ButtonToolbar>
             {this.valueSelector(0, 'First Band')}
             {this.valueSelector(1, 'Second Band')}
             {this.multiplierSelector(2, 'Third Band')}
             {this.multiplierOrNullSelector(3, 'Fourth Band')}
             {this.toleranceSelector(4, 'Tolerance Band')}
-          </ButtonGroup>
+          </ButtonToolbar>
         </div>
       </div>
     );
@@ -117,21 +117,22 @@ class ResistorInput extends React.Component<Props, State> {
   private colorSelector(index: number, title: String, colors: Color[]) {
     return (
       <DropdownButton
-        bsStyle="band"
         title={title}
         key={index}
         id={`color-select-${index}`}
-        onSelect={
-          // tslint:disable-next-line no-any
-          (eventKey: any, e?: React.SyntheticEvent<{}>) => this.updateColor(index, eventKey)}
+        // tslint:disable-next-line no-any
+        onSelect={(eventKey: any) => this.updateColor(index, eventKey as string)}
       >
-        {colors.map(color => (<MenuItem eventKey={color.name}>{color.name}</MenuItem>))}
+        {colors.map((color: Color, itemIndex: number) => {
+          return (
+            <MenuItem key={`${index}-${itemIndex}`} eventKey={color.name}>{color.name}</MenuItem>
+          );
+        })}
       </DropdownButton>
     );
   }
 
-  // tslint:disable-next-line no-any
-  private updateColor(index: number, eventKey: any) {
+  private updateColor(index: number, eventKey: string) {
     let newBands = this.state.bands;
     newBands[index] = this.colorByName(eventKey);
     this.setState({

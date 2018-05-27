@@ -17,8 +17,8 @@ type SavedState = {
 abstract class TabViewBase extends LocalStorageComponent<TabViewBaseProps, State, SavedState> {
   private _activeKey: number = 1;
 
-  constructor() {
-    super({});
+  constructor(props: TabViewBaseProps) {
+    super(props);
 
     this.state = {
       activeKey: this._activeKey,

@@ -12,11 +12,10 @@ type State = {
 };
 
 class SemaphorePicture extends React.Component<Props, State> {
-  public static getDerivedStateFromProps(nextProps: Props, prevState: State) {
+  public static getDerivedStateFromProps(nextProps: Props, prevState: State): State {
     const { left, right } = SemaphorePicture.getFlagAngles(nextProps.character);
 
     return {
-      character: nextProps.character,
       left: left,
       right: right,
     };
@@ -53,6 +52,11 @@ class SemaphorePicture extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    this.state = {
+      left: -1,
+      right: -1,
+    };
   }
 
   public render() {
