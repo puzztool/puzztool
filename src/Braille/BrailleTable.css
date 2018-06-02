@@ -1,0 +1,13 @@
+.BrailleTable .table-responsive {
+  border-top: none;
+}
+    
+.BrailleTable th {
+  text-align: center;
+}
+
+.BrailleTable td {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}

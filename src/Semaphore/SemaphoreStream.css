@@ -1,3 +1,7 @@
+.SemaphoreStream {
+  margin: 10px 15px 0px;
+}
+
 .SemaphoreStream-input {
   display: flex;
   flex-direction: row;
