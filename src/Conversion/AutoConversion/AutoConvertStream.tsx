@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, FormControl } from 'react-bootstrap';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
 import './AutoConvertStream.css';
@@ -46,19 +46,23 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
           placeholder="Text"
           value={this.state.text}
         />
-        <ButtonToolbar className="AutoConvertStream-commands">
-          <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <input 
-          type="checkbox"
-          onClick={(event: React.MouseEvent<HTMLInputElement>) => this.toggleHomogeneous(event)}
-        />
-        Entire string is the same encoding
         <pre className="AutoConvertStream-output">
           {this.state.output}
         </pre>
+        <ButtonGroup>
+          <Button 
+            onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}
+          >
+            Clear
+          </Button>
+          <Button 
+            onClick={(event: React.MouseEvent<Button>) => this.toggleHomogeneous(event)}
+            active={this.state.homogeneous}
+          >
+            Force Consistent Encoding
+          </Button>
+        </ButtonGroup>
+
       </div>
     );
   }
@@ -100,7 +104,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.updateState();
   }
 
-  private toggleHomogeneous(event: React.MouseEvent<HTMLInputElement>) {
+  private toggleHomogeneous(event: React.MouseEvent<Button>) {
     this._homogeneous = !this._homogeneous;
     this.updateState();
   }
