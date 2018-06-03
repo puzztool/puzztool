@@ -1,22 +1,25 @@
 import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
-import { CharacterAutoConvert } from 'puzzle-lib';
+import { StringAutoConvert } from 'puzzle-lib';
 import './AutoConvertStream.css';
 
 type Props = {};
 type State = {
   text: string,
   output: string,
+  homogeneous: boolean
 };
 
 type SavedState = {
   text: string,
+  homogeneous: boolean,
 };
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
   private _text: string = '';
   private _input: HTMLInputElement;
+  private _homogeneous = false;
 
   constructor(props: Props) {
     super(props);
@@ -24,6 +27,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.state = {
       text: '',
       output: '',
+      homogeneous: false,
     };
   }
 
@@ -42,14 +46,24 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
           placeholder="Text"
           value={this.state.text}
         />
-        <ButtonToolbar className="AutoConvertStream-commands">
-          <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
         <pre className="AutoConvertStream-output">
           {this.state.output}
         </pre>
+        <ButtonToolbar className="AutoConvertStream-commands">
+          <ButtonGroup>
+            <Button 
+              onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}
+            >
+              Clear
+            </Button>
+            <Button 
+              onClick={(event: React.MouseEvent<Button>) => this.toggleHomogeneous(event)}
+              active={this.state.homogeneous}
+            >
+              Force Consistent Encoding
+            </Button>
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     );
   }
@@ -61,12 +75,14 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   protected onSaveState() {
     return {
       text: this._text,
+      homogeneous: this._homogeneous,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._text = savedState.text;
+      this._homogeneous = savedState.homogeneous;
     }
   }
 
@@ -74,6 +90,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.setState({
       text: this._text,
       output: this.calculateOutput(),
+      homogeneous: this._homogeneous,
     });
   }
 
@@ -88,10 +105,13 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.updateState();
   }
 
+  private toggleHomogeneous(event: React.MouseEvent<Button>) {
+    this._homogeneous = !this._homogeneous;
+    this.updateState();
+  }
+
   private calculateOutput() {
-    return this._text
-      .split(' ')
-      .reduce((result, letter) => result + CharacterAutoConvert.convertCharacter(letter), '');
+    return StringAutoConvert.convertString(this._text, this._homogeneous);
   }
 }
 
