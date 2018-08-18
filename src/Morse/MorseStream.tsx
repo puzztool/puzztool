@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
+import MorsePicture from './MorsePicture';
 import './MorseStream.css';
 
 type Props = {};
@@ -50,7 +51,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
             {this.state.character.toString() || '¯\\_(ツ)_/¯'}
           </div>
           <div className="MorseStream-morseView">
-            {this.renderMorse(this.state.character.morseString)}
+            <MorsePicture morseString={this.state.character.morseString} />
           </div>
         </Well>
         <pre className="MorseStream-output">
@@ -58,8 +59,8 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
         </pre>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
-            <Button onClick={() => this.onDotClick()}>{this.renderDot()}</Button>
-            <Button onClick={() => this.onDashClick()}>{this.renderDash()}</Button>
+            <Button onClick={() => this.onDotClick()}>{MorsePicture.renderDot()}</Button>
+            <Button onClick={() => this.onDashClick()}>{MorsePicture.renderDash()}</Button>
             <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
           </ButtonGroup>
         </ButtonToolbar>
@@ -180,34 +181,6 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this._stream = '';
 
     this.updateState();
-  }
-
-  private renderDot() {
-    return (
-      <svg className="MorseStream-dotIcon" viewBox="0 0 30 30">
-        <circle cx="15" cy="15" r="15" />
-        Sorry, your browser does not support inline SVG.
-      </svg>
-    );
-  }
-
-  private renderDash() {
-    return (
-      <svg className="MorseStream-dashIcon" viewBox="0 0 90 30">
-        <rect width="90" height="30" />
-        Sorry, your browser does not support inline SVG.
-      </svg>
-    );
-  }
-
-  private renderMorse(str: string) {
-    return str.split('').map((value: string, index: number) => {
-      return (
-        <span key={index}>
-          {value === '.' ? this.renderDot() : this.renderDash()}
-        </span>
-      );
-    });
   }
 }
 

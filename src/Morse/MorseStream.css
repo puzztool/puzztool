@@ -14,8 +14,8 @@ div.MorseStream-input {
   min-height: 40px;
 }
 
-.MorseStream-morseView svg.MorseStream-dotIcon,
-.MorseStream-morseView svg.MorseStream-dashIcon {
+.MorseStream-morseView svg.MorsePicture-dotIcon,
+.MorseStream-morseView svg.MorsePicture-dashIcon {
   height: 16px;
   margin-right: 16px;
 }
@@ -31,8 +31,8 @@ div.MorseStream-input {
   min-width: 112px;
 }
 
-.MorseStream-inputCommands svg.MorseStream-dotIcon,
-.MorseStream-inputCommands svg.MorseStream-dashIcon {
+.MorseStream-inputCommands svg.MorsePicture-dotIcon,
+.MorseStream-inputCommands svg.MorsePicture-dashIcon {
   display: block;
   height: 24px;
   margin: 0 auto;

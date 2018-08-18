@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
+import MorsePicture from './MorsePicture';
 import './MorseTable.css';
 
 class MorseTable extends React.Component {
@@ -27,7 +28,11 @@ class MorseTable extends React.Component {
     return characters.map((entry) => (
       <tr key={entry.display}>
         <td>{entry.display}</td>
-        <td>{Character.toMorseString(entry.encoding)}</td>
+        <td>
+          <div className="MorseTable-morseView">
+            <MorsePicture morseString={Character.toMorseString(entry.encoding)} />
+          </div>
+        </td>
       </tr>
     ));
   }
