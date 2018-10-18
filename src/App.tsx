@@ -50,6 +50,12 @@ const Morse = Loadable({
   timeout: defaultTimeout,
 });
 
+const NatoAlphabet = Loadable({
+  loader: () => import('./Views/Reference/Nato'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Resistors = Loadable({
   loader: () => import('./Views/Reference/Resistors'),
   loading: Loading,
@@ -130,8 +136,11 @@ class App extends React.Component {
                     <LinkContainer to="/reference/characterencodings">
                       <MenuItem eventKey={3.1}>Character Encodings</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/reference/nato">
+                      <MenuItem eventKey={3.2}>NATO Alphabet</MenuItem>
+                    </LinkContainer>
                     <LinkContainer to="/reference/resistors">
-                      <MenuItem eventKey={3.2}>Resistors</MenuItem>
+                      <MenuItem eventKey={3.3}>Resistors</MenuItem>
                     </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
@@ -161,6 +170,7 @@ class App extends React.Component {
             <Route path="/encoding/semaphore" component={Semaphore} />
             <Route path="/help/settings" component={Settings} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
+            <Route path="/reference/nato" component={NatoAlphabet} />
             <Route path="/reference/resistors" component={Resistors} />
           </div>
         </div>

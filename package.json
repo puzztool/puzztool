@@ -6,7 +6,7 @@
   "dependencies": {
     "ajv": "^6.5.4",
     "bootstrap": "^3.3.7",
-    "puzzle-lib": "^0.4.2",
+    "puzzle-lib": "^0.5.0",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",
