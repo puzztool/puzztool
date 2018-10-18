@@ -15,4 +15,3 @@ class Nato extends React.Component {
   }
   
 export default Nato;
-  
