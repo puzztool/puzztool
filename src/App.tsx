@@ -56,6 +56,13 @@ const NatoAlphabet = Loadable({
   timeout: defaultTimeout,
 });
 
+
+const PigpenReference = Loadable({
+  loader: () => import('./Views/Reference/PigpenReference'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Resistors = Loadable({
   loader: () => import('./Views/Reference/Resistors'),
   loading: Loading,
@@ -129,6 +136,9 @@ class App extends React.Component {
                     <LinkContainer to="/encoding/semaphore">
                       <MenuItem eventKey={2.4}>Semaphore</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/encoding/pigpen">
+                      <MenuItem eventKey={2.5}>Pigpen</MenuItem>
+                    </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
                 <LinkContainer to="/reference" onClick={(e) => e.preventDefault()}>
@@ -167,6 +177,7 @@ class App extends React.Component {
             <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/encoding/autoconvert" component={AutoConvert} />
             <Route path="/encoding/morse" component={Morse} />
+            <Route path="/encoding/pigpen" component={PigpenReference} />
             <Route path="/encoding/semaphore" component={Semaphore} />
             <Route path="/help/settings" component={Settings} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
