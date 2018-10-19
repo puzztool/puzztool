@@ -1,0 +1,12 @@
+.PigpenReference-container {
+    display: grid;
+    height: 100%;
+    padding: 0px 0px 20px;
+    margin: 0;
+  }
+
+.PigpenReference {
+    max-width: 100%;
+    max-height: 80vh;
+    margin: auto;
+}
