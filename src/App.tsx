@@ -56,6 +56,12 @@ const NatoAlphabet = Loadable({
   timeout: defaultTimeout,
 });
 
+const NavalFlags = Loadable({
+  loader: () => import('./Views/Reference/NavalFlagTable'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const Resistors = Loadable({
   loader: () => import('./Views/Reference/Resistors'),
   loading: Loading,
@@ -139,8 +145,11 @@ class App extends React.Component {
                     <LinkContainer to="/reference/nato">
                       <MenuItem eventKey={3.2}>NATO Alphabet</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/reference/navalflags">
+                      <MenuItem eventKey={3.3}>Naval Flags</MenuItem>
+                    </LinkContainer>   
                     <LinkContainer to="/reference/resistors">
-                      <MenuItem eventKey={3.3}>Resistors</MenuItem>
+                      <MenuItem eventKey={3.4}>Resistors</MenuItem>
                     </LinkContainer>
                   </NavDropdown>
                 </LinkContainer>
@@ -171,6 +180,7 @@ class App extends React.Component {
             <Route path="/help/settings" component={Settings} />
             <Route path="/reference/characterencodings" component={CharacterEncodings} />
             <Route path="/reference/nato" component={NatoAlphabet} />
+            <Route path="/reference/navalflags" component={NavalFlags} />
             <Route path="/reference/resistors" component={Resistors} />
           </div>
         </div>
