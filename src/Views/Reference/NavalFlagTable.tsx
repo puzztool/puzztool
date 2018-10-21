@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { NavalFlags, NavalFlagImage } from 'puzzle-lib';
+import { NavalFlags, CharacterImage } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
+import './NavalFlagTable.css';
 
 class NavalFlagTable extends React.Component {
   public render() {
@@ -23,12 +24,12 @@ class NavalFlagTable extends React.Component {
     );
   }
 
-  private renderRows(data: NavalFlagImage[]) {
-    return data.map((value: NavalFlagImage) => {
+  private renderRows(data: CharacterImage[]) {
+    return data.map((value: CharacterImage) => {
       return (
         <tr key={value.character}>
-          <td>{value.character}</td>
-          <td dangerouslySetInnerHTML={{__html: value.image(100)}} />
+          <td className="flagCharacter">{value.character}</td>
+          <td dangerouslySetInnerHTML={{__html: value.image.render(100)}} />
         </tr>
       );
     });
