@@ -1,6 +1,6 @@
 # puzztool
 
-[![Travis](https://img.shields.io/travis/beckbria/puzztool.svg)](https://travis-ci.org/beckbria/puzztool)
+[![Travis](https://travis-ci.org/beckbria/puzztool.svg?branch=master)](https://travis-ci.org/beckbria/puzztool)
 
 This is the UI for a tool to help with encodings and ciphers used in puzzle competitions such as [Puzzle Hunt](https://en.wikipedia.org/wiki/Microsoft_Puzzle_Hunt), [Mystery Hunt](http://www.mit.edu/~puzzle/), [Puzzled Pint](http://www.puzzledpint.com/), and many others.
 
