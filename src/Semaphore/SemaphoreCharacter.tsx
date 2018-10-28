@@ -19,49 +19,49 @@ class SemaphoreCharacter extends React.Component<Props> {
       <div className="SemaphoreCharacter">
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-north"
+          className="SemaphoreCheckbox-north"
           direction={Direction.North}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-northEast"
+          className="SemaphoreCheckbox-northEast"
           direction={Direction.NorthEast}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-east"
+          className="SemaphoreCheckbox-east"
           direction={Direction.East}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-southEast"
+          className="SemaphoreCheckbox-southEast"
           direction={Direction.SouthEast}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-south"
+          className="SemaphoreCheckbox-south"
           direction={Direction.South}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-southWest"
+          className="SemaphoreCheckbox-southWest"
           direction={Direction.SouthWest}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-west"
+          className="SemaphoreCheckbox-west"
           direction={Direction.West}
           onChange={this.props.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
-          className="SemaphoreCharacter-northWest"
+          className="SemaphoreCheckbox-northWest"
           direction={Direction.NorthWest}
           onChange={this.props.onChange}
         />

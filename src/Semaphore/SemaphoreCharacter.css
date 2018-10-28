@@ -2,46 +2,50 @@
   position: relative;
 }
 
+.SemaphoreCharacter svg {
+  margin-right: 3px;
+}
+
 .SemaphoreCharacter .SemaphoreCheckbox {
   position: absolute;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-north {
-  top: 20px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-north {
+  top: 16px;
   left: 112.5px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northEast {
-  top: 51px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-northEast {
+  top: 47px;
   left: 192px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-east {
-  top: 107px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-east {
+  top: 103px;
   left: 203px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southEast {
-  top: 153px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-southEast {
+  top: 149px;
   left: 169px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-south {
-  top: 165px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-south {
+  top: 161px;
   left: 112.5px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-southWest {
-  top: 153px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-southWest {
+  top: 149px;
   left: 57px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-west {
-  top: 107px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-west {
+  top: 103px;
   left: 25px;
 }
 
-.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCharacter-northWest {
-  top: 51px;
+.SemaphoreCharacter .SemaphoreCheckbox.SemaphoreCheckbox-northWest {
+  top: 47px;
   left: 35px;
 }

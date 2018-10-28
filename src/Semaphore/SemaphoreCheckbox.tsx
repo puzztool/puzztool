@@ -24,13 +24,24 @@ class SemaphoreCheckbox extends React.Component<Props, State> {
 
   public render() {
     return (
-      <input
-        className={`SemaphoreCheckbox ${this.props.className}`}
-        type="checkbox"
-        checked={this.state.character.hasDirection(this.props.direction)}
-        onChange={(event: React.FormEvent<HTMLInputElement>) => this.onCheckboxChange(event)}
-      />
+      <div className={`SemaphoreCheckbox ${this.props.className}`}>
+        <input
+          type="checkbox"
+          checked={this.state.character.hasDirection(this.props.direction)}
+          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onCheckboxChange(event)}
+        />
+        <label>{this.getPotentialMatch()}</label>
+      </div>
     );
+  }
+
+  private getPotentialMatch() {
+    const match = this.props.character.getPotentialMatch(this.props.direction);
+    if (match) {
+      return match.toString();
+    }
+
+    return '';
   }
 
   private onCheckboxChange(event: React.FormEvent<HTMLInputElement>) {
