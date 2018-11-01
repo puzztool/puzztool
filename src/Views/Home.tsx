@@ -1,8 +1,6 @@
 import * as React from 'react';
 import './Home.css';
 
-const version = require('../version');
-
 class Home extends React.Component {
   public render() {
     return (
@@ -17,13 +15,13 @@ class Home extends React.Component {
           </h3>
           <ul>
             <li>
-              <a href="/#/cipher/caesar">Cipher - Letters are shifted by a fixed value (simple)</a>
+              <a href="/#/cipher/caesar">Caesar Cipher</a> - Letters are shifted by a fixed value
             </li>
             <li>
-              <a href="/#/cipher/vigenere">Vignere Cipher - Letters are mapped based on a key word</a>
+              <a href="/#/cipher/vigenere">Vignere Cipher</a> - Letters are mapped based on a key word
             </li>
             <li>
-              <a href="/#/cipher/autokey">Autokey Cipher - A Vignere cipher which uses plaintext as the key</a>
+              <a href="/#/cipher/autokey">Autokey Cipher</a> - A Vignere cipher which uses plaintext as the key
             </li>
           </ul>
 
@@ -31,24 +29,42 @@ class Home extends React.Component {
             Encoding - Different Ways To Represent Letters
           </h3>
           <ul>
-            <li>AutoConvert - Mapping numbers to letters (ASCII, Binary, Ordinal)</li>
-            <li>Braille - Six dots in a two-by-three grid</li>
-            <li>Morse - Dots and dashes with separations</li>
-            <li>Semaphore - Positions of two different flags</li>
-            <li>Pigpen - Parts of a tic-tac-toe grid or X, some with dots </li>
+            <li>
+              <a href="/#/encoding/autoconvert">AutoConvert</a> - Mapping numbers to letters (ASCII, Binary, Ordinal)
+            </li>
+            <li>
+              <a href="/#/encoding/braille">Braille</a> - Six dots in a two-by-three grid
+            </li>
+            <li>
+              <a href="/#/encoding/morse">Morse Code</a> - Dots and dashes with separations
+            </li>
+            <li>
+              <a href="/#/encoding/semaphore">Semaphore</a> - Positions of two different flags
+            </li>
+            <li>
+              <a href="/#/encoding/pigpen">Pigpen</a> - Parts of a tic-tac-toe grid or X, some with dot
+            </li>
           </ul>
 
           <h3>
             Reference - Misc information
           </h3>
           <ul>
-            <li>Character Encodings - Static display of number to letter mapping</li>
-            <li>NATO Alphabet - Words used to clearly identify a letter</li>
-            <li>Naval Flags - Different simple flags which convey a letter</li>
-            <li>Resistors - Find a resistor value using different colored bands</li>
+            <li>
+              <a href="/#/reference/characterencodings">Character Encodings</a>
+               - Static display of number to letter mapping
+            </li>
+            <li>
+              <a href="/#/reference/nato">NATO Alphabet</a> - Words used to clearly identify a letter
+            </li>
+            <li>
+              <a href="/#/reference/navalflags">Naval Flags</a> - Different simple flags which convey a letter
+            </li>
+            <li>
+              <a href="/#/reference/resistors">Resistors</a> - Find a resistor value using different colored bands
+            </li>
           </ul>
-        </div>
-        PuzzTool Version {version}
+          </div>
       </div>
     );
   }
