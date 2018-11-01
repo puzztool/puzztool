@@ -8,19 +8,47 @@ class Home extends React.Component {
     return (
       <div className="Home">
         <div className="Home-content">
-          <h1>PuzzTool v{version}</h1>
-          <p>
-            A collection of useful tools to help with encodings and ciphers used
-            in puzzle competitions such
-            as <a href="https://en.wikipedia.org/wiki/Microsoft_Puzzle_Hunt" target="_blank">
-              Puzzle Hunt
-            </a>, <a href="http://www.mit.edu/%7Epuzzle/" target="_blank">
-              Mystery Hunt
-            </a>, <a href="http://www.puzzledpint.com/" target="_blank">
-              Puzzled Pint
-            </a>, and many others.
-          </p>
+          <h2>
+            What type of puzzle are you trying to solve?
+          </h2>
+
+          <h3>
+            Ciphers - Scrambled Letters
+          </h3>
+          <ul>
+            <li>
+              <a href="/#/cipher/caesar">Cipher - Letters are shifted by a fixed value (simple)</a>
+            </li>
+            <li>
+              <a href="/#/cipher/vigenere">Vignere Cipher - Letters are mapped based on a key word</a>
+            </li>
+            <li>
+              <a href="/#/cipher/autokey">Autokey Cipher - A Vignere cipher which uses plaintext as the key</a>
+            </li>
+          </ul>
+
+          <h3>
+            Encoding - Different Ways To Represent Letters
+          </h3>
+          <ul>
+            <li>AutoConvert - Mapping numbers to letters (ASCII, Binary, Ordinal)</li>
+            <li>Braille - Six dots in a two-by-three grid</li>
+            <li>Morse - Dots and dashes with separations</li>
+            <li>Semaphore - Positions of two different flags</li>
+            <li>Pigpen - Parts of a tic-tac-toe grid or X, some with dots </li>
+          </ul>
+
+          <h3>
+            Reference - Misc information
+          </h3>
+          <ul>
+            <li>Character Encodings - Static display of number to letter mapping</li>
+            <li>NATO Alphabet - Words used to clearly identify a letter</li>
+            <li>Naval Flags - Different simple flags which convey a letter</li>
+            <li>Resistors - Find a resistor value using different colored bands</li>
+          </ul>
         </div>
+        PuzzTool Version {version}
       </div>
     );
   }
