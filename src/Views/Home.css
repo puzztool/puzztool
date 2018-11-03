@@ -2,11 +2,6 @@
   padding: 0px 15px 20px 25px;
 }
 
-.Home-content a {
-  color: #0000ff;
-  text-decoration: underline;
-}
-
 .Home-content ul {
   list-style-type: disc;
   margin: 0;
