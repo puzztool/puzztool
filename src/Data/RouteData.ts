@@ -1,96 +1,112 @@
+export interface RouteChild {
+    description: string;
+    name: string;
+    url: string;
+}
+
+export interface RouteCategory {
+    children: RouteChild[];
+    description: string;
+    name: string;
+    rootUrl: string;
+}
+
+export interface RoutesInfo {
+    categories: RouteCategory[];
+    name: string;
+}
+
 export class RouteData {
     public static getCategories() {
         return RouteData.getRoutes().categories;
     }
 
-    private static getRoutes() {
-        const routes = {
-            'name': 'Puzztool',
-            'categories': [
+    private static getRoutes(): RoutesInfo {
+        return {
+            categories: [
                 {
-                    'name': 'Ciphers',
-                    'description': 'Scrambled letters',
-                    'rootUrl': '/cipher',
-                    'children': [
+                    children: [
                         {
-                            'name': 'Caesar',
-                            'url': '/caesar',
-                            'description': 'Letters are shifted by a fixed value'
+                            description: ' A Vignere cipher which uses plaintext as the key',
+                            name: 'Autokey',
+                            url: '/autokey',
                         },
                         {
-                            'name': 'Vignere',
-                            'url': '/vigenere',
-                            'description': 'Letters are mapped based on a key word'
+                            description: 'Letters are shifted by a fixed value',
+                            name: 'Caesar',
+                            url: '/caesar',
                         },
                         {
-                            'name': 'Caesar',
-                            'url': '/autokey',
-                            'description': ' A Vignere cipher which uses plaintext as the key'
-                        }
-                    ]
+                            description: 'Letters are mapped based on a key word',
+                            name: 'Vignere',
+                            url: '/vigenere',
+                        },
+                    ],
+                    description: 'Scrambled letters',
+                    name: 'Ciphers',
+                    rootUrl: '/cipher',
                 },
                 {
-                    'name': 'Encodings',
-                    'description': 'Different ways to represent letters',
-                    'rootUrl': '/encoding',
-                    'children': [
+                    children: [
                         {
-                            'name': 'AutoConvert',
-                            'url': '/autoconvert',
-                            'description': 'Mapping numbers to letters (ASCII, Binary, Ordinal)'
+                            description: 'Mapping numbers to letters (ASCII, Binary, Ordinal)',
+                            name: 'AutoConvert',
+                            url: '/autoconvert',
                         },
                         {
-                            'name': 'Braille',
-                            'url': '/braille',
-                            'description': 'Six dots in a two-by-three grid'
+                            description: 'Six dots in a two-by-three grid',
+                            name: 'Braille',
+                            url: '/braille',
                         },
                         {
-                            'name': 'Morse Code',
-                            'url': '/morse',
-                            'description': 'Dots and dashes with separations'
+                            description: 'Dots and dashes with separations',
+                            name: 'Morse Code',
+                            url: '/morse',
                         },
                         {
-                            'name': 'Semaphore',
-                            'url': '/semaphore',
-                            'description': ' Positions of two different flags'
+                            description: 'Parts of a tic-tac-toe grid or X, some with dot',
+                            name: 'Pigpen',
+                            url: '/pigpen',
                         },
                         {
-                            'name': 'Pigpen',
-                            'url': '/pigpen',
-                            'description': 'Parts of a tic-tac-toe grid or X, some with dot'
-                        }
-        
-                    ]
+                            description: ' Positions of two different flags',
+                            name: 'Semaphore',
+                            url: '/semaphore',
+                        },
+                    ],
+                    description: 'Different ways to represent letters',
+                    name: 'Encodings',
+                    rootUrl: '/encoding',
                 },
                 {
-                    'name': 'Reference',
-                    'description': 'Miscellaneous information',
-                    'rootUrl': '/reference',
-                    'children': [
+                    children: [
                         {
-                            'name': 'Character Encodings',
-                            'url': '/characterencodings',
-                            'description': 'Static display of number to letter mapping'
+                            description: 'Static display of number to letter mapping',
+                            name: 'Character Encodings',
+                            url: '/characterencodings',
                         },
                         {
-                            'name': 'NATO Alphabet',
-                            'url': '/nato',
-                            'description': 'Words used to clearly identify a letter'
+                            description: 'Words used to clearly identify a letter',
+                            name: 'NATO Alphabet',
+                            url: '/nato',
                         },
                         {
-                            'name': 'Naval Flags',
-                            'url': '/navalflags',
-                            'description': 'Different simple flags which convey a letter'
+                            description: 'Different simple flags which convey a letter',
+                            name: 'Naval Flags',
+                            url: '/navalflags',
                         },
                         {
-                            'name': 'Resistors',
-                            'url': '/resistors',
-                            'description': 'Find a resistor value using different colored bands'
+                            description: 'Find a resistor value using different colored bands',
+                            name: 'Resistors',
+                            url: '/resistors',
                         }
-                    ]
+                    ],
+                    description: 'Miscellaneous information',
+                    name: 'Reference',
+                    rootUrl: '/reference',
                 }
-            ]
+            ],
+            name: 'Puzztool',
         };
-        return routes;
     }
 }
