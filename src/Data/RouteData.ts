@@ -31,7 +31,7 @@ export class RouteData {
                 },
                 {
                     'name': 'Encodings',
-                    'description': 'Different Ways To Represent Letters',
+                    'description': 'Different ways to represent letters',
                     'rootUrl': '/encoding',
                     'children': [
                         {
@@ -64,7 +64,7 @@ export class RouteData {
                 },
                 {
                     'name': 'Reference',
-                    'description': 'Misc information',
+                    'description': 'Miscellaneous information',
                     'rootUrl': '/reference',
                     'children': [
                         {

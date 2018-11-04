@@ -11,7 +11,7 @@ class AutoConvert extends React.Component {
           <p>
             AutoConvert will automatically detect and convert several encodings - simply enter your ciphertext.
             If all of your text is in the same encoding, you can select "force consistent encoding".  
-            This can be useful for ambigious strings
+            This can be useful for ambigious strings.
           </p>
           <p>
             Some of the supported encodings are:
