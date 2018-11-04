@@ -162,7 +162,7 @@ class ResistorInput extends React.Component<Props, State> {
     if (value === Resistor.INVALID_RESISTOR) {
       return 'Invalid Resistor Colors';
     } else {
-      return value.toString() + '\u2126 \u00b1 ' + bands[bands.length - 1]!.toleranceInPercent + '%';
+      return `${Resistor.getDisplayValue(value)} \u2126 \u00b1 ${bands[bands.length - 1]!.toleranceInPercent}%`;
     }
   }
 }
