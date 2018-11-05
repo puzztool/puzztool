@@ -17,7 +17,7 @@ class Morse extends TabViewBase {
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
           >
-            <Tab eventKey={1} title="Value">
+            <Tab className="Morse-tab-value" eventKey={1} title="Value">
               <MorseStream />
             </Tab>
             <Tab eventKey={2} title="Reference">

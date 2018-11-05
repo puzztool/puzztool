@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { MenuItem, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as Loadable from 'react-loadable';
+import { RouteData } from './Data/RouteData';
 import Loading from './Views/Loading';
 import './App.css';
 
@@ -97,86 +98,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar
-            inverse={true}
-            staticTop={true}
-            fluid={true}
-            collapseOnSelect={true}
-            // Remove focus from the selected element to prevent it from taking
-            // further keyboard input.
-            onSelect={() => (document.activeElement as HTMLElement).blur()}
-          >
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="#/">PuzzTool</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                <LinkContainer to="/cipher" onClick={(e) => e.preventDefault()}>
-                  <NavDropdown eventKey={1} title="Ciphers" id="cipher-dropdown">
-                  <LinkContainer to="/cipher/autokey">
-                      <MenuItem eventKey={1.1}>Autokey Cipher</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/cipher/caesar">
-                      <MenuItem eventKey={1.2}>Caesar Cipher</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/cipher/vigenere">
-                      <MenuItem eventKey={1.3}>Vigenere Cipher</MenuItem>
-                    </LinkContainer>
-                  </NavDropdown>
-                </LinkContainer>
-                <LinkContainer to="/encoding" onClick={(e) => e.preventDefault()}>
-                  <NavDropdown eventKey={2} title="Encodings" id="conversion-dropdown">
-                    <LinkContainer to="/encoding/autoconvert">
-                      <MenuItem eventKey={2.1}>AutoConvert</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/encoding/braille">
-                      <MenuItem eventKey={2.2}>Braille</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/encoding/morse">
-                      <MenuItem eventKey={2.3}>Morse</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/encoding/semaphore">
-                      <MenuItem eventKey={2.4}>Semaphore</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/encoding/pigpen">
-                      <MenuItem eventKey={2.5}>Pigpen</MenuItem>
-                    </LinkContainer>
-                  </NavDropdown>
-                </LinkContainer>
-                <LinkContainer to="/reference" onClick={(e) => e.preventDefault()}>
-                  <NavDropdown eventKey={3} title="Reference" id="reference-dropdown">
-                    <LinkContainer to="/reference/characterencodings">
-                      <MenuItem eventKey={3.1}>Character Encodings</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/reference/nato">
-                      <MenuItem eventKey={3.2}>NATO Alphabet</MenuItem>
-                    </LinkContainer>
-                    <LinkContainer to="/reference/navalflags">
-                      <MenuItem eventKey={3.3}>Naval Flags</MenuItem>
-                    </LinkContainer>   
-                    <LinkContainer to="/reference/resistors">
-                      <MenuItem eventKey={3.4}>Resistors</MenuItem>
-                    </LinkContainer>
-                  </NavDropdown>
-                </LinkContainer>
-              </Nav>
-              <Nav pullRight={true}>
-                <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
-                  <NavDropdown eventKey={4} title="Help" id="help-dropdown">
-                    <LinkContainer to="/help/settings">
-                      <MenuItem eventKey={4.1}>Settings</MenuItem>
-                    </LinkContainer>
-                    <MenuItem href="https://github.com/beckbria/puzztool/issues/new" target="_blank">
-                      Feedback
-                    </MenuItem>
-                  </NavDropdown>
-                </LinkContainer>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          {this.renderNavbar()}
           <div className="App-content">
             <Route exact={true} path="/" component={Home} />
             <Route path="/encoding/braille" component={Braille} />
@@ -195,6 +117,73 @@ class App extends React.Component {
           </div>
         </div>
       </Router>
+    );
+  }
+
+  private getCategoryDropdownId(categoryName: string) {
+    return categoryName.toLowerCase().replace(/[^a-z]/, '').concat('-dropdown');
+  }
+
+  private renderNavbarCategories() {
+    return RouteData.getCategories().map((category) => (
+      <LinkContainer
+        key={category.name}
+        onClick={(e) => e.preventDefault()}
+        to={category.rootUrl}
+      >
+        <NavDropdown
+          eventKey={category.name}
+          id={this.getCategoryDropdownId(category.name)}
+          title={category.name}
+        >
+          {category.children.map((child) => (
+            <LinkContainer
+              key={`${category.name}-${child.name}`}
+              to={category.rootUrl + child.url}
+            >
+              <MenuItem eventKey={category.name + child.name}>{child.name}</MenuItem>
+            </LinkContainer>
+          ))}
+        </NavDropdown>
+      </LinkContainer>
+    ));
+  }
+
+  private renderNavbar() {
+    return (
+      <Navbar
+        collapseOnSelect={true}
+        fluid={true}
+        inverse={true}
+        // Remove focus from the selected element to prevent it from taking
+        // further keyboard input.
+        onSelect={() => (document.activeElement as HTMLElement).blur()}
+        staticTop={true}
+      >
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">PuzzTool</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            {this.renderNavbarCategories()}
+          </Nav>
+          <Nav pullRight={true}>
+            <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
+              <NavDropdown eventKey="Help" title="Help" id="help-dropdown">
+                <LinkContainer to="/help/settings">
+                  <MenuItem eventKey="Help.Settings">Settings</MenuItem>
+                </LinkContainer>
+                <MenuItem href="https://github.com/beckbria/puzztool/issues/new" target="_blank">
+                  Feedback
+                </MenuItem>
+              </NavDropdown>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }

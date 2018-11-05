@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Home.css';
-import { RouteData } from '../Data/RouteData';
+import { RouteData, RouteCategory } from '../Data/RouteData';
 import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
@@ -9,31 +9,29 @@ class Home extends React.Component {
       <div className="Home">
         <div className="Home-content">
           {this.generateHelpText()}
-          </div>
+        </div>
       </div>
     );
   }
 
-  private generateHelpText() {
-    const categoryData = RouteData.getCategories();
-    var markup = [];
-    for (const category of categoryData) {
-      markup.push(<h2>{category.name}</h2>);
-      markup.push(<h4>{category.description}</h4>);
-      
-      for (const child of category.children) {
-        const fullUrl = category.rootUrl + child.url;
-        markup.push(
-          (
-          <li>
-            <Link to={fullUrl}>{child.name}</Link> - {child.description}
-          </li>
-        )
-        );
-      }
+  private renderCategoryChildren(category: RouteCategory) {
+    return category.children.map((child) => (
+      <li key={child.name}>
+        <Link to={category.rootUrl + child.url}>{child.name}</Link> - {child.description}
+      </li>
+    ));
+  }
 
-    }
-    return markup;
+  private generateHelpText() {
+    return RouteData.getCategories().map((category) => (
+      <div key={category.name}>
+        <h2>{category.name}</h2>
+        <p>{category.description}</p>
+        <ul>
+          {this.renderCategoryChildren(category)}
+        </ul>
+      </div>
+    ));
   }
 }
 
