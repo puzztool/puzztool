@@ -1,11 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 import LocalStorage from '../Data/LocalStorage';
+import { version } from '../version';
 import './Settings.css';
 
-const version = require('../version');
-
-class Home extends React.Component {
+class Home extends Component {
   public render() {
     return (
       <div className="Settings">

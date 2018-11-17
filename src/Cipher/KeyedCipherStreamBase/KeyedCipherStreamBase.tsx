@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { KeyedCipherStringBase  } from 'puzzle-lib';
@@ -23,7 +23,7 @@ abstract class KeyedCipherStreamBase
     extends LocalStorageComponent<KeyedCipherStreamProps, KeyedCipherStreamState, KeyedCipherStreamSavedState> {
   private readonly _cipher: KeyedCipherStringBase;
   private _conversion: number = 2;
-  private _input: HTMLInputElement;
+  private _input?: HTMLInputElement;
 
   constructor(props: KeyedCipherStreamProps, cipher: KeyedCipherStringBase) {
     super(props);
@@ -39,7 +39,10 @@ abstract class KeyedCipherStreamBase
 
   public componentDidMount() {
     super.componentDidMount();
-    this._input.focus();
+
+    if (this._input) {
+      this._input.focus();
+    }
   }
 
   public render() {
@@ -48,13 +51,13 @@ abstract class KeyedCipherStreamBase
         <FormControl
           className="KeyedCipherStreamBase-input"
           inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
         />
         <FormControl
           className="KeyedCipherStreamBase-input"
-          onChange={(event: React.FormEvent<FormControl>) => this.onKeyChanged(event)}
+          onChange={(event: FormEvent<FormControl>) => this.onKeyChanged(event)}
           placeholder="Key"
           value={this.state.key}
         />
@@ -70,7 +73,7 @@ abstract class KeyedCipherStreamBase
             <ToggleButton value={2}>Decrypt</ToggleButton>
           </ToggleButtonGroup>
           <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
+            <Button onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <pre className="KeyedCipherStreamBase-output">
@@ -105,13 +108,13 @@ abstract class KeyedCipherStreamBase
     });
   }
 
-  private onTextChanged(event: React.SyntheticEvent<FormControl>) {
+  private onTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._cipher.text = element.value;
     this.updateState();
   }
 
-  private onKeyChanged(event: React.SyntheticEvent<FormControl>) {
+  private onKeyChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._cipher.key = element.value;
     this.updateState();
@@ -122,7 +125,7 @@ abstract class KeyedCipherStreamBase
     this.updateState();
   }
 
-  private onClearClick(event: React.MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<Button>) {
     this._cipher.key = '';
     this._cipher.text = '';
     this._conversion = 2;

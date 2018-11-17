@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { CharacterTableEntry as Entry } from 'puzzle-lib';
 import './CharacterTable.css';
@@ -7,7 +7,7 @@ type Props = {
   data: Entry[],
 };
 
-class CharacterTable extends React.Component<Props> {
+class CharacterTable extends Component<Props> {
   public render() {
     return (
       <div className="CharacterTable">

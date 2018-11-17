@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   character: Character
 };
 
-class BraillePicture extends React.Component<Props> {
+class BraillePicture extends Component<Props> {
   public render() {
     // 12x12 Circles with padding width 6 between them.  Padding width 2 on the edges.
     return (

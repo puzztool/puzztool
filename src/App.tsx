@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { MenuItem, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import * as Loadable from 'react-loadable';
+import Loadable from 'react-loadable';
 import { RouteData } from './Data/RouteData';
 import Loading from './Views/Loading';
 import './App.css';
@@ -93,7 +93,7 @@ const Vigenere = Loadable({
   timeout: defaultTimeout,
 });
 
-class App extends React.Component {
+class App extends Component {
   public render() {
     return (
       <Router>

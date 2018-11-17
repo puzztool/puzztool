@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { SemaphoreCharacter as Character } from 'puzzle-lib';
 
 type Props = {
@@ -11,7 +11,7 @@ type State = {
   right: number
 };
 
-class SemaphorePicture extends React.Component<Props, State> {
+class SemaphorePicture extends Component<Props, State> {
   public static getDerivedStateFromProps(nextProps: Props, prevState: State): State {
     const { left, right } = SemaphorePicture.getFlagAngles(nextProps.character);
 

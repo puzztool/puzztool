@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { NavalFlags, CharacterImage } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import './NavalFlagTable.css';
 
-class NavalFlagTable extends React.Component {
+class NavalFlagTable extends Component {
   public render() {
     return (
       <div className="NavalFlagsTable">

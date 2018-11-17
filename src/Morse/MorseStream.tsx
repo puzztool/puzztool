@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';

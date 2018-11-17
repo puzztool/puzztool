@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import SemaphoreCheckbox from './SemaphoreCheckbox';
 import SemaphorePicture from './SemaphorePicture';
 import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
@@ -9,7 +9,7 @@ type Props = {
   onChange: (type: string, direction: Direction) => void,
 };
 
-class SemaphoreCharacter extends React.Component<Props> {
+class SemaphoreCharacter extends Component<Props> {
   constructor(props: Props) {
     super(props);
   }

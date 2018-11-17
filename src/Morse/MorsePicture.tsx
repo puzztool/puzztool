@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 
 type Props = {
   morseString: String
 };
 
-class MorsePicture extends React.Component<Props> {
+class MorsePicture extends Component<Props> {
   public static renderDot() {
     return (
       <svg className="MorsePicture-dotIcon" viewBox="0 0 30 30">

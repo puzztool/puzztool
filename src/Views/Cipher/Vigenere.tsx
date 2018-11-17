@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import VigenereStream from '../../Cipher/Vigenere/VigenereStream';
 import './Vigenere.css';
 
-class Vigenere extends React.Component {
+class Vigenere extends Component {
   public render() {
     return (
       <div className="Vigenere">

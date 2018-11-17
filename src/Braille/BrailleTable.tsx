@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { BrailleCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import BraillePicture from './BraillePicture';
 import './BrailleTable.css';
 
-class BrailleTable extends React.Component {
+class BrailleTable extends Component {
   public render() {
     return (
       <div className="BrailleTable">
