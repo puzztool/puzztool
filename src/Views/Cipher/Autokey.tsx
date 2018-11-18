@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import AutokeyStream from '../../Cipher/Autokey/AutokeyStream';
 import './Autokey.css';
 
-class Autokey extends React.Component {
+class Autokey extends Component {
   public render() {
     return (
       <div className="Autokey">

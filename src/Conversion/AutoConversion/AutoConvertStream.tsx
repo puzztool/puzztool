@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
@@ -18,7 +18,7 @@ type SavedState = {
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
   private _text: string = '';
-  private _input: HTMLInputElement;
+  private _input?: HTMLInputElement;
   private _homogeneous = false;
 
   constructor(props: Props) {
@@ -33,7 +33,10 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
 
   public componentDidMount() {
     super.componentDidMount();
-    this._input.focus();
+
+    if (this._input) {
+      this._input.focus();
+    }
   }
 
   public render() {
@@ -42,7 +45,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
         <FormControl
           className="AutoConvertStream-input"
           inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
         />
@@ -52,12 +55,12 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
         <ButtonToolbar className="AutoConvertStream-commands">
           <ButtonGroup>
             <Button 
-              onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}
+              onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}
             >
               Clear
             </Button>
             <Button 
-              onClick={(event: React.MouseEvent<Button>) => this.toggleHomogeneous(event)}
+              onClick={(event: MouseEvent<Button>) => this.toggleHomogeneous(event)}
               active={this.state.homogeneous}
             >
               Force Consistent Encoding
@@ -94,18 +97,18 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     });
   }
 
-  private onTextChanged(event: React.SyntheticEvent<FormControl>) {
+  private onTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: React.MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<Button>) {
     this._text = '';
     this.updateState();
   }
 
-  private toggleHomogeneous(event: React.MouseEvent<Button>) {
+  private toggleHomogeneous(event: MouseEvent<Button>) {
     this._homogeneous = !this._homogeneous;
     this.updateState();
   }

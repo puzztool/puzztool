@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import * as Loadable from 'react-loadable';
 import './Loading.css';
 
-class Loading extends React.Component<Loadable.LoadingComponentProps> {
+class Loading extends Component<Loadable.LoadingComponentProps> {
   public render() {
     return (
       <div className="Loading">

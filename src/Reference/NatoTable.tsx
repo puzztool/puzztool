@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { NatoCharacter, NatoData } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 
-class NatoTable extends React.Component {
+class NatoTable extends Component {
   public render() {
     return (
         <Table striped={true} responsive={true}>

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import NatoTable from '../../Reference/NatoTable';
 import './CharacterEncodings.css';
 
-class Nato extends React.Component {
+class Nato extends Component {
     public render() {
       return (
         <div className="NatoTable">

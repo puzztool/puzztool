@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import AutoConvertStream from '../../Conversion/AutoConversion/AutoConvertStream';
 import './AutoConvert.css';
 
-class AutoConvert extends React.Component {
+class AutoConvert extends Component {
   public render() {
     return (
       <div className="AutoConvert">

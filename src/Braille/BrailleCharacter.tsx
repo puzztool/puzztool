@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import BrailleCell from './BrailleCell';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 import './BrailleCharacter.css';
@@ -8,7 +8,7 @@ type Props = {
   onClick: (mask: Dot) => void,
 };
 
-class BrailleCharacter extends React.Component<Props> {
+class BrailleCharacter extends Component<Props> {
   public render() {
     return (
       <div className="BrailleCharacter">

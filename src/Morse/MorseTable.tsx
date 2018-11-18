@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import MorsePicture from './MorsePicture';
 import './MorseTable.css';
 
-class MorseTable extends React.Component {
+class MorseTable extends Component {
   public render() {
     return (
       <div className="MorseTable">

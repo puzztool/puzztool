@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component, FormEvent } from 'react';
 import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
 import './SemaphoreCheckbox.css';
 
@@ -13,7 +13,7 @@ type State = {
   character: Character,
 };
 
-class SemaphoreCheckbox extends React.Component<Props, State> {
+class SemaphoreCheckbox extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -28,7 +28,7 @@ class SemaphoreCheckbox extends React.Component<Props, State> {
         <input
           type="checkbox"
           checked={this.state.character.hasDirection(this.props.direction)}
-          onChange={(event: React.FormEvent<HTMLInputElement>) => this.onCheckboxChange(event)}
+          onChange={(event: FormEvent<HTMLInputElement>) => this.onCheckboxChange(event)}
         />
         <label>{this.getPotentialMatch()}</label>
       </div>
@@ -44,7 +44,7 @@ class SemaphoreCheckbox extends React.Component<Props, State> {
     return '';
   }
 
-  private onCheckboxChange(event: React.FormEvent<HTMLInputElement>) {
+  private onCheckboxChange(event: FormEvent<HTMLInputElement>) {
     const element = (event.target as HTMLInputElement);
     this.props.onChange(element.checked ? 'add' : 'remove', this.props.direction);
   }

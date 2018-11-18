@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
 import CaesarList from './CaesarList';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
@@ -17,7 +17,7 @@ type SavedState = {
 
 class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _str: CaesarString = new CaesarString();
-  private _input: HTMLInputElement;
+  private _input?: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
@@ -30,7 +30,10 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
 
   public componentDidMount() {
     super.componentDidMount();
-    this._input.focus();
+
+    if (this._input) {
+      this._input.focus();
+    }
   }
 
   public render() {
@@ -39,13 +42,13 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
         <FormControl
           className="CaesarStream-input"
           inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: React.FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
         />
         <ButtonToolbar className="CaesarStream-commands">
           <ButtonGroup>
-            <Button onClick={(event: React.MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
+            <Button onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <CaesarList list={this.state.list} />
@@ -76,13 +79,13 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
-  private onTextChanged(event: React.SyntheticEvent<FormControl>) {
+  private onTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: React.MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<Button>) {
     this._str.text = '';
     this.updateState();
   }

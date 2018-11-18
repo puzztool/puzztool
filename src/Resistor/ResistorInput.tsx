@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 import './ResistorInput.css';
@@ -11,7 +11,7 @@ type State = {
   bands: (Color | null)[]
 };
 
-class ResistorInput extends React.Component<Props, State> {
+class ResistorInput extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 

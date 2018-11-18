@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import Helpers from '../Common/Helpers';
 import './ResistorTable.css';
 
-class ResistorTable extends React.Component {
+class ResistorTable extends Component {
   public render() {
     return (
       <div className="ResistorTable">

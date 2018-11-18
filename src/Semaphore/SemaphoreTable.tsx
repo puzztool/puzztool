@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { SemaphoreCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import SemaphorePicture from './SemaphorePicture';
 import './SemaphoreTable.css';
 
-class SemaphoreTable extends React.Component {
+class SemaphoreTable extends Component {
   public render() {
     return (
       <div className="SemaphoreTable">

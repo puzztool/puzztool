@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import './PigpenReference.css';
 
-class PigpenReference extends React.Component {
+class PigpenReference extends Component {
   public render() {
     return (
       <div id="PigpenReference-container">

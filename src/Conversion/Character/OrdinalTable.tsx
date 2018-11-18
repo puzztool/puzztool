@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { CharacterConversion as Conversion } from 'puzzle-lib';
 import CharacterTable from './CharacterTable';
 import './OrdinalTable.css';
 
-class OrdinalTable extends React.Component {
+class OrdinalTable extends Component {
   public render() {
     return (
       <div className="OrdinalTable">

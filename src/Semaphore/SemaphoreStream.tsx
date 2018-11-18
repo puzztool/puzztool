@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import SemaphoreCharacter from './SemaphoreCharacter';

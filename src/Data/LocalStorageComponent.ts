@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { Component } from 'react';
 import LocalStorage from './LocalStorage';
 
-abstract class LocalStorageComponent<P = {}, S = {}, SavedState = {}> extends React.Component<P, S> {
+abstract class LocalStorageComponent<P = {}, S = {}, SavedState = {}> extends Component<P, S> {
   public componentDidMount() {
     this.restoreState();
     this.updateState();
