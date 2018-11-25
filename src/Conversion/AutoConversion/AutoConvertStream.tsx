@@ -19,7 +19,7 @@ type SavedState = {
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
   private _text: string = '';
   private _input?: HTMLInputElement;
-  private _homogeneous = false;
+  private _homogeneous = true;
 
   constructor(props: Props) {
     super(props);
@@ -27,7 +27,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.state = {
       text: '',
       output: '',
-      homogeneous: false,
+      homogeneous: true,
     };
   }
 
