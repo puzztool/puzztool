@@ -9,6 +9,12 @@ import './App.css';
 
 const defaultTimeout = 10000;
 
+const WordSearch = Loadable({
+  loader: () => import('./Views/Solvers/WordSearch'),
+  loading: Loading,
+  timeout: defaultTimeout,
+});
+
 const AutoConvert = Loadable({
   loader: () => import('./Views/Encoding/AutoConvert'),
   loading: Loading,
@@ -101,6 +107,7 @@ class App extends Component {
           {this.renderNavbar()}
           <div className="App-content">
             <Route exact={true} path="/" component={Home} />
+            <Route path="/solvers/wordsearch" component={WordSearch} />
             <Route path="/encoding/braille" component={Braille} />
             <Route path="/cipher/autokey" component={Autokey} />
             <Route path="/cipher/caesar" component={Caesar} />

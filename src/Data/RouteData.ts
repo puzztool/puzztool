@@ -27,6 +27,18 @@ export class RouteData {
                 {
                     children: [
                         {
+                            description: 'Word Search Solver',
+                            name: 'Word Search',
+                            url: '/wordsearch',
+                        },
+                    ],
+                    description: 'Automated puzzle solvers',
+                    name: 'Solvers',
+                    rootUrl: '/solvers',
+                },
+                {   
+                    children: [
+                        {
                             description: ' A Vignere cipher which uses plaintext as the key',
                             name: 'Autokey',
                             url: '/autokey',

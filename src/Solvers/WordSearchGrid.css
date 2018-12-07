@@ -1,0 +1,10 @@
+.WordSearchGrid {
+    margin: 0px 15px;
+  }
+  
+  .WordSearchGrid-input {
+    margin-bottom: 10px;
+    font-family: monospace;
+    letter-spacing: 5px;
+  }
+  
