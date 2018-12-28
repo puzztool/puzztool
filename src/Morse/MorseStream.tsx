@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
-import { MorseCharacter as Character, MorseString, MorseCharacter } from 'puzzle-lib';
+import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
 import './MorseStream.css';
@@ -168,13 +168,13 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private onDotClick() {
-    this._morseStream += MorseCharacter.DOT;
+    this._morseStream += Character.DOT;
 
     this.updateState();
   }
 
   private onDashClick() {
-    this._morseStream += MorseCharacter.DASH;
+    this._morseStream += Character.DASH;
 
     this.updateState();
   }
@@ -188,8 +188,14 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private onNextClick() {
-    if ((this._morseStream.length > 0) && (this._morseStream.slice(-1) !== MorseCharacter.DIVIDER)) {
-      this._morseStream += MorseCharacter.DIVIDER;
+    if (this._morseStream.length > 0) {
+      const lastCharacter = this._morseStream.slice(-1);
+      if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
+        // Pressing next twice starts a new word
+        this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1) + MorseString.WORD_DIVIDER;
+      } else if (lastCharacter != MorseString.WORD_DIVIDER) {
+        this._morseStream += MorseString.CHARACTER_DIVIDER;
+      }
     }
 
     this.updateState();
