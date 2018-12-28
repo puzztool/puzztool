@@ -1,24 +1,22 @@
 import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
-import { MorseCharacter as Character } from 'puzzle-lib';
+import { MorseCharacter as Character, MorseString, MorseCharacter } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
 import './MorseStream.css';
 
 type Props = {};
 type State = {
-  character: Character,
-  stream: string
+  morseStream: string
 };
 
 type SavedState = {
-  character: string,
-  stream: string,
+  morseStream: string
 };
 
 class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _character: Character = new Character();
-  private _stream: string = '';
+
+  private _morseStream: string = '';
 
   constructor(props: Props) {
     super(props);
@@ -27,8 +25,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this.onKeyPress = this.onKeyPress.bind(this);
 
     this.state = {
-      character: this._character,
-      stream: this._stream,
+      morseStream: this._morseStream,
     };
   }
 
@@ -46,16 +43,25 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="MorseStream">
-        <Well className="MorseStream-input">
-          <div className="MorseStream-view">
-            {this.state.character.toString() || '¯\\_(ツ)_/¯'}
-          </div>
-          <div className="MorseStream-morseView">
-            <MorsePicture morseString={this.state.character.morseString} />
-          </div>
-        </Well>
+        <p className="MorseLabel">Input:</p>
         <pre className="MorseStream-output">
-          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+          {this.codeText()}<span className="blinking-cursor">|</span>
+        </pre>
+        <p className="MorseLabel">Plaintext:</p>
+        <pre className="MorseStream-output">
+          {this.plainText()}
+        </pre>
+        <p className="MorseLabel">Swap Dots/Dashes:</p>
+        <pre className="MorseStream-output">
+          {this.invertText()}
+        </pre>
+        <p className="MorseLabel">Right to Left:</p>
+        <pre className="MorseStream-output">
+          {this.reverseText()}
+        </pre>
+        <p className="MorseLabel">Right to Left + Swap Dots/Dashes:</p>
+        <pre className="MorseStream-output">
+          {this.invertReverseText()}
         </pre>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
@@ -82,23 +88,41 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
   protected onSaveState() {
     return {
-      character: this._character.morseString,
-      stream: this._stream,
+      morseStream: this._morseStream,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
-      this._character.morseString = savedState.character;
-      this._stream = savedState.stream;
+      this._morseStream = savedState.morseStream;
     }
   }
 
   protected onUpdateState() {
     this.setState({
-      character: this._character,
-      stream: this._stream,
+      morseStream: this._morseStream,
     });
+  }
+
+  private codeText(): string {
+    // Replace dot with interpunct for readability
+    return this._morseStream.replace(/\./g, '\u00b7');
+  }
+
+  private plainText(): string {
+    return new MorseString(this._morseStream).toString();
+  }
+
+  private invertText(): string {
+    return new MorseString(this._morseStream).invertDotsAndDashes().toString();
+  }
+
+  private reverseText(): string {
+    return new MorseString(this._morseStream).reverse().toString();
+  }
+
+  private invertReverseText(): string {
+    return new MorseString(this._morseStream).invertDotsAndDashes().reverse().toString();
   }
 
   private onKeyDown(ev: KeyboardEvent) {
@@ -144,41 +168,35 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private onDotClick() {
-    this._character.dot();
+    this._morseStream += MorseCharacter.DOT;
 
     this.updateState();
   }
 
   private onDashClick() {
-    this._character.dash();
+    this._morseStream += MorseCharacter.DASH;
 
     this.updateState();
   }
 
-  private onBackspaceClick() {
-    if (!this._character.empty()) {
-      this._character.backspace();
-    } else if (this._stream.length > 0) {
-      this._stream = this._stream.substring(0, this._stream.length - 1);
+  private onBackspaceClick() {   
+    if (this._morseStream.length > 0) {
+      this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1);
     }
 
     this.updateState();
   }
 
   private onNextClick() {
-    if (this._character.valid()) {
-      this._stream += this._character.toString();
-      this._character.clear();
-    } else {
-      this._stream += ' ';
+    if ((this._morseStream.length > 0) && (this._morseStream.slice(-1) !== MorseCharacter.DIVIDER)) {
+      this._morseStream += MorseCharacter.DIVIDER;
     }
 
     this.updateState();
   }
 
   private onClearClick() {
-    this._character.clear();
-    this._stream = '';
+    this._morseStream = '';
 
     this.updateState();
   }
