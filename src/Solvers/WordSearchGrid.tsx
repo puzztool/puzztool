@@ -5,51 +5,44 @@ import './WordSearchGrid.css';
 
 type Props = {};
 type State = {
-  text: string,
-  output: string,
+  gridInputText: string,
+  output: JSX.Element[],
 };
 
 type SavedState = {
-  text: string,
+  gridInputText: string,
 };
 
 class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
-  private _text: string = '';
-  private _input?: HTMLInputElement;
+  private _gridInputText: string = '';
+  private _gridInputElement?: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
-
     this.state = {
-      text: '',
-      output: '',
+      gridInputText: '',
+      output: [],
     };
   }
 
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    if (this._gridInputElement) {
+      this._gridInputElement.focus();
     }
   }
 
-  /*
-    <FormGroup controlId="formControlsTextarea">
-      <ControlLabel>Textarea</ControlLabel>
-      <FormControl componentClass="textarea" placeholder="textarea" />
-    </FormGroup>
-  */
   public render() {
     return (
       <div className="WordSearchGrid">
         <FormControl
           componentClass="textarea"
           className="WordSearchGrid-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
+          inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
           onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
-          placeholder="Text"
-          value={this.state.text}
+          placeholder="Grid Text"
+          value={this.state.gridInputText}
         />
         <pre className="WordSearchGrid-output">
           {this.state.output}
@@ -60,36 +53,36 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   protected getLocalStorageKey() {
-    return 'AutoConvertStream';
+    return 'WordSearchGrid';
   }
 
   protected onSaveState() {
     return {
-      text: this._text
+      gridInputText: this._gridInputText
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
-      this._text = savedState.text;
+      this._gridInputText = savedState.gridInputText;
     }
   }
 
   protected onUpdateState() {
     this.setState({
-      text: this._text,
+      gridInputText: this._gridInputText,
       output: this.calculateOutput(),
     });
   }
 
   private onTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
-    this._text = element.value;
+    this._gridInputText = element.value;
     this.updateState();
   }
 
   private onClearClick(event: MouseEvent<Button>) {
-    this._text = '';
+    this._gridInputText = '';
     this.updateState();
   }
 
@@ -98,8 +91,22 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private calculateOutput() {
-    // Transform output here
-    return this._text;
+    if (!this._gridInputText) {
+      return [];
+    }
+
+    let idx = 0;
+    let result = [];
+    for (const s of this._gridInputText) {
+        if (idx % 2 === 0) {
+            result.push(<span className="highlightedLetter"> {s} </span>);
+        } else {
+            result.push(<span>{s}</span>);
+        }
+        idx++;
+    }
+
+    return result;
   }
 }
 
