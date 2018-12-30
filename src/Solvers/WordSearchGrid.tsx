@@ -6,21 +6,26 @@ import './WordSearchGrid.css';
 type Props = {};
 type State = {
   gridInputText: string,
+  wordListInputText: string,
   output: JSX.Element[],
 };
 
 type SavedState = {
   gridInputText: string,
+  wordListInputText: string,
 };
 
 class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   private _gridInputText: string = '';
   private _gridInputElement?: HTMLInputElement;
+  private _wordListInputText: string = '';
+  private _wordListInputElement?: HTMLInputElement;
 
   constructor(props: Props) {
     super(props);
     this.state = {
       gridInputText: '',
+      wordListInputText: '',
       output: [],
     };
   }
@@ -40,9 +45,17 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
           componentClass="textarea"
           className="WordSearchGrid-input"
           inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
           placeholder="Grid Text"
           value={this.state.gridInputText}
+        />
+        <FormControl
+          componentClass="textarea"
+          className="WordList-input"
+          inputRef={(input: HTMLInputElement) => { this._wordListInputElement = input; }}
+          onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
+          placeholder="Word List To Find"
+          value={this.state.wordListInputText}
         />
         <pre className="WordSearchGrid-output">
           {this.state.output}
@@ -58,26 +71,35 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
 
   protected onSaveState() {
     return {
-      gridInputText: this._gridInputText
+      gridInputText: this._gridInputText,
+      wordListInputText: this._wordListInputText
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._gridInputText = savedState.gridInputText;
+      this._wordListInputText = savedState.wordListInputText;
     }
   }
 
   protected onUpdateState() {
     this.setState({
       gridInputText: this._gridInputText,
+      wordListInputText: this._wordListInputText,
       output: this.calculateOutput(),
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onGridTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._gridInputText = element.value;
+    this.updateState();
+  }
+
+  private onListTextChanged(event: SyntheticEvent<FormControl>) {
+    const element = (event.target as HTMLInputElement);
+    this._wordListInputText = element.value;
     this.updateState();
   }
 
