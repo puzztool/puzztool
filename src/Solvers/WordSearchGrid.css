@@ -9,7 +9,6 @@
   }
   
   .highlightedLetter {
-    font-weight: bold;
     color: green;
     background-color: yellow;
   }

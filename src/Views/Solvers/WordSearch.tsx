@@ -8,9 +8,7 @@ class WordSearch extends Component {
         <p>
           Enter the text and words that you want to find
         </p>
-        <p>
-          <WordSearchGrid />
-        </p>
+        <WordSearchGrid />
       </div>
     );
   }
