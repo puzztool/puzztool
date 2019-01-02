@@ -1,6 +1,6 @@
 import { LineSolver, WordSearchResult, WordSearchPoint } from 'puzzle-lib';
 import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchGrid.css';
 
@@ -41,25 +41,34 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="WordSearchGrid">
-        <FormControl
-          componentClass="textarea"
-          className="WordSearchGrid-input"
-          inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
-          placeholder="Grid Text"
-          value={this.state.gridInputText}
-        />
-        <FormControl
-          componentClass="textarea"
-          className="WordList-input"
-          onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
-          placeholder="Word List To Find"
-          value={this.state.wordListInputText}
-        />
-        <pre className="WordSearchGrid-output">
-          {this.state.output}
-        </pre>
+        <Grid>
+          <Row>
+            <Col md={4}>
+              <FormControl
+                componentClass="textarea"
+                className="WordSearchList-input"
+                onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
+                placeholder="Word List To Find"
+                value={this.state.wordListInputText}
+              />
+            </Col>
 
+            <Col md={8}>
+                <FormControl
+                  componentClass="textarea"
+                  className="WordSearchGrid-input"
+                  inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
+                  onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
+                  placeholder="Grid Text"
+                  value={this.state.gridInputText}
+                />
+            </Col>
+          </Row>
+
+          <pre className="WordSearchGrid-output">
+            {this.state.output}
+          </pre>
+        </Grid>
       </div>
     );
   }
@@ -127,18 +136,17 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
     // find the results
     const solver = new LineSolver(charArray);
     const results = solver.findWords(wordsToFind);
-    this.printDebug('char arr' + JSON.stringify(lines));
-    this.printDebug('words to find' + JSON.stringify(wordsToFind));
 
     // display / highlight the results
     const shoudHighlight = this.highlightArray(charArray, results);
 
     let result = [];
-
     for (let i = 0; i < charArray.length; i++) {
       for (let j = 0; j < charArray[i].length; j++) {
-        if (shoudHighlight[i][j]) {
-            result.push(<span className="highlightedLetter"> {charArray[i][j]} </span>);
+        if (shoudHighlight[i][j] !== 0) {
+            // tslint:disable-next-line
+            let color = '#' + (1 << shoudHighlight[i][j]);
+            result.push(<span className="highlightedLetter" style={{backgroundColor: color}}>{charArray[i][j]}</span>);
         } else {
             result.push(<span>{charArray[i][j]}</span>);
         }
@@ -150,30 +158,27 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private highlightArray(inputGrid: string[][], results: WordSearchResult[]) {
-    let shouldHighlight: boolean[][];
+    let shouldHighlight: number[][];
     shouldHighlight = [];
+
     for (const line of inputGrid) {
       const hightlightLine = [];
       for (const character of line) {
-        hightlightLine.push(false);
+        hightlightLine.push(0);
       }
       shouldHighlight.push(hightlightLine);
     }
 
+    let colorIndex = 1;
     for (const result of results) {
       for (const point of result.points) {
-        shouldHighlight[point.i][point.j] = true;
+        shouldHighlight[point.i][point.j] = colorIndex;
       }
+      colorIndex++;
     }
 
     return shouldHighlight;
   }
-  
-  private printDebug(strToPrint: string) {
-    // tslint:disable-next-line
-    console.log(strToPrint);
-  }
-
 }
 
 export default WordSearchGrid;
