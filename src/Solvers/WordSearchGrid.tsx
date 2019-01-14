@@ -1,4 +1,4 @@
-import { LineSolver, WordSearchResult, WordSearchPoint } from 'puzzle-lib';
+import { WordSearchSolver, WordSearchResult, WordSearchPoint } from 'puzzle-lib';
 import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
@@ -134,7 +134,7 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
       charArray.push(line.split(''));
     }
     // find the results
-    const solver = new LineSolver(charArray);
+    const solver = new WordSearchSolver(charArray);
     const results = solver.findWords(wordsToFind);
 
     // display / highlight the results
@@ -144,9 +144,7 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
     for (let i = 0; i < charArray.length; i++) {
       for (let j = 0; j < charArray[i].length; j++) {
         if (shoudHighlight[i][j] !== 0) {
-            // tslint:disable-next-line
-            let color = '#' + (1 << shoudHighlight[i][j]);
-            result.push(<span className="highlightedLetter" style={{backgroundColor: color}}>{charArray[i][j]}</span>);
+            result.push(<span className="highlightedLetter">{charArray[i][j]}</span>);
         } else {
             result.push(<span>{charArray[i][j]}</span>);
         }
