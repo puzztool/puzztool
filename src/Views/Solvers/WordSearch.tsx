@@ -6,7 +6,7 @@ class WordSearch extends Component {
     return (
       <div className="Search">
         <p>
-          Enter the text and words that you want to find
+          Enter the list of words to find (one per line) on the left, and the grid to find words to search on the right
         </p>
         <WordSearchGrid />
       </div>

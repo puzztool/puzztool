@@ -1,4 +1,4 @@
-import { WordSearchSolver, WordSearchResult, WordSearchPoint } from 'puzzle-lib';
+import { WordSearchSolver, WordSearchResult } from 'puzzle-lib';
 import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
@@ -141,12 +141,12 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
     const shoudHighlight = this.highlightArray(charArray, results);
 
     let result = [];
-    for (let i = 0; i < charArray.length; i++) {
-      for (let j = 0; j < charArray[i].length; j++) {
-        if (shoudHighlight[i][j] !== 0) {
-            result.push(<span className="highlightedLetter">{charArray[i][j]}</span>);
+    for (let y = 0; y < charArray.length; y++) {
+      for (let x = 0; x < charArray[y].length; x++) {
+        if (shoudHighlight[y][x] !== 0) {
+            result.push(<span className="highlightedLetter">{charArray[y][x]}</span>);
         } else {
-            result.push(<span>{charArray[i][j]}</span>);
+            result.push(<span>{charArray[y][x]}</span>);
         }
       }
       result.push(<br/>);
@@ -167,12 +167,10 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
       shouldHighlight.push(hightlightLine);
     }
 
-    let colorIndex = 1;
     for (const result of results) {
       for (const point of result.points) {
-        shouldHighlight[point.i][point.j] = colorIndex;
+        shouldHighlight[point.y][point.x] = 1;
       }
-      colorIndex++;
     }
 
     return shouldHighlight;
