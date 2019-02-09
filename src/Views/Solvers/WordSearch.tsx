@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import WordSearchGrid from '../../Solvers/WordSearchGrid';
+import WordSearchComponent from '../../Solvers/WordSearchComponent';
+import './WordSearch.css';
 
 class WordSearch extends Component {
   public render() {
     return (
       <div className="Search">
-        <p>
-          Enter the list of words to find (one per line) on the left, and the grid to find words to search on the right
-        </p>
-        <WordSearchGrid />
+        <div className="helpText">
+          <p>
+            Enter the list of words to find (one per line), and the grid to find words in
+          </p>
+        </div>
+        <WordSearchComponent />
       </div>
     );
   }

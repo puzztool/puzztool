@@ -1,12 +1,7 @@
-.WordSearchGrid {
-  margin: 0px 15px;
-  display: grid;
-}
-  
 .WordSearchGrid-input {
   margin-bottom: 10px;
   font-family: monospace;
-  letter-spacing: 5px;
+  letter-spacing: 10px;
   min-height: 200px;
 }
 
@@ -15,7 +10,17 @@
   min-height: 200px;
 }
 
-.highlightedLetter {
-  color: green;
-  background-color: yellow;
+.WordSearchGrid-output {
+  font-family: monospace;
+  font-size: 16px;
 }
+
+.highlightedLetter {
+  background-color: yellow;
+  padding: 5px;
+}
+
+.unhighlightedLetter {
+  padding: 5px;
+}
+

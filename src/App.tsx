@@ -107,12 +107,11 @@ class App extends Component {
           {this.renderNavbar()}
           <div className="App-content">
             <Route exact={true} path="/" component={Home} />
-            <Route path="/solvers/wordsearch" component={WordSearch} />
-            <Route path="/encoding/braille" component={Braille} />
             <Route path="/cipher/autokey" component={Autokey} />
             <Route path="/cipher/caesar" component={Caesar} />
             <Route path="/cipher/vigenere" component={Vigenere} />
             <Route path="/encoding/autoconvert" component={AutoConvert} />
+            <Route path="/encoding/braille" component={Braille} />
             <Route path="/encoding/morse" component={Morse} />
             <Route path="/encoding/pigpen" component={PigpenReference} />
             <Route path="/encoding/semaphore" component={Semaphore} />
@@ -121,6 +120,7 @@ class App extends Component {
             <Route path="/reference/nato" component={NatoAlphabet} />
             <Route path="/reference/navalflags" component={NavalFlags} />
             <Route path="/reference/resistors" component={Resistors} />
+            <Route path="/solvers/wordsearch" component={WordSearch} />
           </div>
         </div>
       </Router>

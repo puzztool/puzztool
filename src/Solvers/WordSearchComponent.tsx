@@ -2,7 +2,7 @@ import { WordSearchSolver, WordSearchResult } from 'puzzle-lib';
 import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, FormControl, Grid, Row, Col } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
-import './WordSearchGrid.css';
+import './WordSearchComponent.css';
 
 type Props = {};
 type State = {
@@ -16,7 +16,7 @@ type SavedState = {
   wordListInputText: string,
 };
 
-class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
+class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
   private _gridInputText: string = '';
   private _gridInputElement?: HTMLInputElement;
   private _wordListInputText: string = '';
@@ -57,6 +57,7 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
                 <FormControl
                   componentClass="textarea"
                   className="WordSearchGrid-input"
+                  spellCheck={false}
                   inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
                   onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
                   placeholder="Grid Text"
@@ -111,19 +112,12 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
-    this._gridInputText = '';
-    this.updateState();
-  }
-
-  private toggleHomogeneous(event: MouseEvent<Button>) {
-    this.updateState();
-  }
-
   private calculateOutput() {
-    if (!this._gridInputText) {
+    // Save work if possible
+    if (!this._gridInputText.trim() || !this._wordListInputText.trim()) {
       return [];
     }
+
     // get inputs
     const lines = this._gridInputText.split(/\r?\n/);
     const wordsToFind = this._wordListInputText.split(/\r?\n/);
@@ -146,7 +140,7 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
         if (shoudHighlight[y][x] !== 0) {
             result.push(<span className="highlightedLetter">{charArray[y][x]}</span>);
         } else {
-            result.push(<span>{charArray[y][x]}</span>);
+            result.push(<span className="unhighlightedLetter">{charArray[y][x]}</span>);
         }
       }
       result.push(<br/>);
@@ -160,10 +154,7 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
     shouldHighlight = [];
 
     for (const line of inputGrid) {
-      const hightlightLine = [];
-      for (const character of line) {
-        hightlightLine.push(0);
-      }
+      const hightlightLine = Array.from({length: line.length}, (v, i) => 0);
       shouldHighlight.push(hightlightLine);
     }
 
@@ -177,4 +168,4 @@ class WordSearchGrid extends LocalStorageComponent<Props, State, SavedState> {
   }
 }
 
-export default WordSearchGrid;
+export default WordSearchComponent;
