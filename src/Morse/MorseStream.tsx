@@ -44,7 +44,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     return (
       <div className="MorseStream">
         <p className="MorseLabel">Input:</p>
-        <pre className="MorseStream-output">
+        <pre className="MorseStream-morse-output">
           {this.codeText()}<span className="blinking-cursor">|</span>
         </pre>
         <p className="MorseLabel">Plaintext:</p>
@@ -106,7 +106,9 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
   private codeText(): string {
     // Replace dot with interpunct for readability
-    return this._morseStream.replace(/\./g, '\u00b7');
+    // Replace dash with full width hyphen for readability.  Don't use emdash because
+    // multiple emdashes get combined with no space between them.
+    return this._morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
   }
 
   private plainText(): string {
