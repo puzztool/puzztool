@@ -151,18 +151,27 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
       return;
     }
 
-    let handled = false;
-
-    if (ev.keyCode === 13) { // Enter
-      this.onNextClick();
-      handled = true;
-    } else if (ev.charCode === 45 || ev.charCode === 106) { // '-' or 'J'
-      this.onDashClick();
-      handled = true;
-    } else if (ev.charCode === 46 || ev.charCode === 107) { // '.' or 'K'
-      this.onDotClick();
-      handled = true;
-    }
+    let handled = true;
+    switch (ev.keyCode) {
+      case 45: // '-'
+      case 106: // 'J'
+        this.onDashClick();
+        break;
+      case 46: // '.'
+      case 107: // 'K'
+        this.onDotClick();
+        break;
+      case 13: // Enter
+      case 32: // Space
+      case 108: // 'L'
+        this.onNextClick();
+        break;
+      case 59: // ';'
+        this.onBackspaceClick();
+        break;
+      default:
+        handled = false;
+    }  
 
     if (handled) {
       ev.preventDefault();
