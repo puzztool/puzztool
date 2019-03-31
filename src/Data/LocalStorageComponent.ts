@@ -19,6 +19,9 @@ abstract class LocalStorageComponent<P = {}, S = {}, SavedState = {}> extends Co
 
   private versionIncreased(prev: string | null, current: string): boolean {
     if (prev == null) {
+      // If there's no recorded version number, this is the user's first visit
+      // to the page since 0.7.0 released.  To clean up any potential legacy
+      // incompatabilities, clear storage and write the version.
       return true;
     }
 

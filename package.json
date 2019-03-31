@@ -1,7 +1,7 @@
 {
   "name": "puzztool",
   "homepage": "https://puzztool.com/",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "dependencies": {
     "ajv": "^6.9.1",
