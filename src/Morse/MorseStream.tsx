@@ -136,7 +136,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
     // Chrome won't trigger keypress for any keys that can invoke browser
     // actions.
-    if (ev.keyCode === 8) { // Backspace
+    if ((ev.key === "Backspace") || (ev.keyCode === 8)) { // Backspace
       this.onBackspaceClick();
       handled = true;
     }
@@ -152,26 +152,50 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     }
 
     let handled = true;
-    switch (ev.keyCode) {
-      case 45: // '-'
-      case 106: // 'J'
-        this.onDashClick();
-        break;
-      case 46: // '.'
-      case 107: // 'K'
-        this.onDotClick();
-        break;
-      case 13: // Enter
-      case 32: // Space
-      case 108: // 'L'
-        this.onNextClick();
-        break;
-      case 59: // ';'
-        this.onBackspaceClick();
-        break;
-      default:
-        handled = false;
-    }  
+    if (ev.key) {
+      switch (ev.key) {
+        case "-":
+        case "j":
+          this.onDashClick();
+          break;
+        case ".":
+        case "k":
+          this.onDotClick();
+          break;
+        case "Enter":
+        case " ":
+        case "l":
+          this.onNextClick();
+          break;
+        case ";":
+          this.onBackspaceClick();
+          break;
+        default:
+          handled = false;
+      }
+    } else {
+      // Older browsers such as Edge don't support ev.key
+      switch (ev.keyCode) {
+        case 45: // '-'
+        case 106: // 'J'
+          this.onDashClick();
+          break;
+        case 46: // '.'
+        case 107: // 'K'
+          this.onDotClick();
+          break;
+        case 13: // Enter
+        case 32: // Space
+        case 108: // 'L'
+          this.onNextClick();
+          break;
+        case 59: // ';'
+          this.onBackspaceClick();
+          break;
+        default:
+          handled = false;
+      }  
+    }
 
     if (handled) {
       ev.preventDefault();
