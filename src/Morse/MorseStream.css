@@ -47,3 +47,10 @@ div.MorseStream-input {
   min-height: 56px;
   white-space: pre-wrap;
 }
+
+.MorseStream-morse-output {
+  font-size: 24px;
+  font-weight: bold;
+  min-height: 56px;
+  white-space: pre-wrap;
+}

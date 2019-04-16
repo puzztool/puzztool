@@ -36,7 +36,7 @@ export class RouteData {
                     name: 'Solvers',
                     rootUrl: '/solvers',
                 },
-                {   
+                {
                     children: [
                         {
                             description: ' A Vignere cipher which uses plaintext as the key',

@@ -1,24 +1,22 @@
 import React from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
-import { MorseCharacter as Character } from 'puzzle-lib';
+import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
 import './MorseStream.css';
 
 type Props = {};
 type State = {
-  character: Character,
-  stream: string
+  morseStream: string
 };
 
 type SavedState = {
-  character: string,
-  stream: string,
+  morseStream: string
 };
 
 class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _character: Character = new Character();
-  private _stream: string = '';
+
+  private _morseStream: string = '';
 
   constructor(props: Props) {
     super(props);
@@ -27,8 +25,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this.onKeyPress = this.onKeyPress.bind(this);
 
     this.state = {
-      character: this._character,
-      stream: this._stream,
+      morseStream: this._morseStream,
     };
   }
 
@@ -46,16 +43,25 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="MorseStream">
-        <Well className="MorseStream-input">
-          <div className="MorseStream-view">
-            {this.state.character.toString() || '¯\\_(ツ)_/¯'}
-          </div>
-          <div className="MorseStream-morseView">
-            <MorsePicture morseString={this.state.character.morseString} />
-          </div>
-        </Well>
+        <p className="MorseLabel">Input:</p>
+        <pre className="MorseStream-morse-output">
+          {this.codeText()}<span className="blinking-cursor">|</span>
+        </pre>
+        <p className="MorseLabel">Plaintext:</p>
         <pre className="MorseStream-output">
-          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+          {this.plainText()}
+        </pre>
+        <p className="MorseLabel">Swap Dots/Dashes:</p>
+        <pre className="MorseStream-output">
+          {this.invertText()}
+        </pre>
+        <p className="MorseLabel">Right to Left:</p>
+        <pre className="MorseStream-output">
+          {this.reverseText()}
+        </pre>
+        <p className="MorseLabel">Right to Left + Swap Dots/Dashes:</p>
+        <pre className="MorseStream-output">
+          {this.invertReverseText()}
         </pre>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
@@ -82,23 +88,43 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
   protected onSaveState() {
     return {
-      character: this._character.morseString,
-      stream: this._stream,
+      morseStream: this._morseStream,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
-      this._character.morseString = savedState.character;
-      this._stream = savedState.stream;
+      this._morseStream = savedState.morseStream;
     }
   }
 
   protected onUpdateState() {
     this.setState({
-      character: this._character,
-      stream: this._stream,
+      morseStream: this._morseStream,
     });
+  }
+
+  private codeText(): string {
+    // Replace dot with interpunct for readability
+    // Replace dash with full width hyphen for readability.  Don't use emdash because
+    // multiple emdashes get combined with no space between them.
+    return this._morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
+  }
+
+  private plainText(): string {
+    return new MorseString(this._morseStream).toString();
+  }
+
+  private invertText(): string {
+    return new MorseString(this._morseStream).invertDotsAndDashes().toString();
+  }
+
+  private reverseText(): string {
+    return new MorseString(this._morseStream).reverse().toString();
+  }
+
+  private invertReverseText(): string {
+    return new MorseString(this._morseStream).invertDotsAndDashes().reverse().toString();
   }
 
   private onKeyDown(ev: KeyboardEvent) {
@@ -110,7 +136,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
     // Chrome won't trigger keypress for any keys that can invoke browser
     // actions.
-    if (ev.keyCode === 8) { // Backspace
+    if ((ev.key === "Backspace") || (ev.keyCode === 8)) { // Backspace
       this.onBackspaceClick();
       handled = true;
     }
@@ -125,17 +151,50 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
       return;
     }
 
-    let handled = false;
-
-    if (ev.keyCode === 13) { // Enter
-      this.onNextClick();
-      handled = true;
-    } else if (ev.charCode === 45 || ev.charCode === 106) { // '-' or 'J'
-      this.onDashClick();
-      handled = true;
-    } else if (ev.charCode === 46 || ev.charCode === 107) { // '.' or 'K'
-      this.onDotClick();
-      handled = true;
+    let handled = true;
+    if (ev.key) {
+      switch (ev.key) {
+        case "-":
+        case "j":
+          this.onDashClick();
+          break;
+        case ".":
+        case "k":
+          this.onDotClick();
+          break;
+        case "Enter":
+        case " ":
+        case "l":
+          this.onNextClick();
+          break;
+        case ";":
+          this.onBackspaceClick();
+          break;
+        default:
+          handled = false;
+      }
+    } else {
+      // Older browsers such as Edge don't support ev.key
+      switch (ev.keyCode) {
+        case 45: // '-'
+        case 106: // 'J'
+          this.onDashClick();
+          break;
+        case 46: // '.'
+        case 107: // 'K'
+          this.onDotClick();
+          break;
+        case 13: // Enter
+        case 32: // Space
+        case 108: // 'L'
+          this.onNextClick();
+          break;
+        case 59: // ';'
+          this.onBackspaceClick();
+          break;
+        default:
+          handled = false;
+      }  
     }
 
     if (handled) {
@@ -144,41 +203,41 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private onDotClick() {
-    this._character.dot();
+    this._morseStream += Character.DOT;
 
     this.updateState();
   }
 
   private onDashClick() {
-    this._character.dash();
+    this._morseStream += Character.DASH;
 
     this.updateState();
   }
 
-  private onBackspaceClick() {
-    if (!this._character.empty()) {
-      this._character.backspace();
-    } else if (this._stream.length > 0) {
-      this._stream = this._stream.substring(0, this._stream.length - 1);
+  private onBackspaceClick() {   
+    if (this._morseStream.length > 0) {
+      this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1);
     }
 
     this.updateState();
   }
 
   private onNextClick() {
-    if (this._character.valid()) {
-      this._stream += this._character.toString();
-      this._character.clear();
-    } else {
-      this._stream += ' ';
+    if (this._morseStream.length > 0) {
+      const lastCharacter = this._morseStream.slice(-1);
+      if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
+        // Pressing next twice starts a new word
+        this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1) + MorseString.WORD_DIVIDER;
+      } else if (lastCharacter != MorseString.WORD_DIVIDER) {
+        this._morseStream += MorseString.CHARACTER_DIVIDER;
+      }
     }
 
     this.updateState();
   }
 
   private onClearClick() {
-    this._character.clear();
-    this._stream = '';
+    this._morseStream = '';
 
     this.updateState();
   }
