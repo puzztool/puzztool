@@ -40,13 +40,13 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
   public render() {
     return (
-      <div className="WordSearchGrid">
+      <div className="WordSearchComponent-Root">
         <Grid>
           <Row>
             <Col md={4}>
               <FormControl
                 componentClass="textarea"
-                className="WordSearchList-input"
+                className="WordSearchComponent-ListInput"
                 onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
                 placeholder="Word List To Find"
                 value={this.state.wordListInputText}
@@ -56,7 +56,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             <Col md={8}>
                 <FormControl
                   componentClass="textarea"
-                  className="WordSearchGrid-input"
+                  className="WordSearchComponent-GridInput"
                   spellCheck={false}
                   inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
                   onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
@@ -66,7 +66,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             </Col>
           </Row>
 
-          <pre className="WordSearchGrid-output">
+          <pre className="WordSearchComponent-GridOutput">
             {this.state.output}
           </pre>
         </Grid>
@@ -75,7 +75,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   }
 
   protected getLocalStorageKey() {
-    return 'WordSearchGrid';
+    return 'WordSearchComponent';
   }
 
   protected onSaveState() {
@@ -96,7 +96,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.setState({
       gridInputText: this._gridInputText,
       wordListInputText: this._wordListInputText,
-      output: this.calculateOutput(),
+      output: this.renderOutput(),
     });
   }
 
@@ -112,7 +112,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.updateState();
   }
 
-  private calculateOutput() {
+  private renderOutput() {
     // Save work if possible
     if (!this._gridInputText.trim() || !this._wordListInputText.trim()) {
       return [];
@@ -137,13 +137,14 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     let result = [];
     for (let y = 0; y < charArray.length; y++) {
       for (let x = 0; x < charArray[y].length; x++) {
+        let reactKey = x.toString() + y.toString();
         if (shoudHighlight[y][x] !== 0) {
-            result.push(<span className="highlightedLetter">{charArray[y][x]}</span>);
+            result.push(<span key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</span>);
         } else {
-            result.push(<span className="unhighlightedLetter">{charArray[y][x]}</span>);
+            result.push(<span key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</span>);
         }
       }
-      result.push(<br/>);
+      result.push(<br key={'fu'}/>);
     }
 
     return result;

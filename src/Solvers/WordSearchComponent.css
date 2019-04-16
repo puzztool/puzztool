@@ -1,26 +1,27 @@
-.WordSearchGrid-input {
+.WordSearchComponent-GridInput {
   margin-bottom: 10px;
   font-family: monospace;
   letter-spacing: 10px;
   min-height: 200px;
+  overflow-x: scroll;
 }
 
-.WordSearchList-input {
+.WordSearchComponent-ListInput {
   margin-bottom: 10px;
   min-height: 200px;
 }
 
-.WordSearchGrid-output {
+.WordSearchComponent-GridOutput {
   font-family: monospace;
   font-size: 16px;
 }
 
-.highlightedLetter {
+.WordSearchComponent-HighlightChar {
   background-color: yellow;
   padding: 5px;
 }
 
-.unhighlightedLetter {
+.WordSearchComponent-PlainChar {
   padding: 5px;
 }
 

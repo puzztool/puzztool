@@ -8,7 +8,7 @@ class WordSearch extends Component {
       <div className="Search">
         <div className="helpText">
           <p>
-            Enter the list of words to find (one per line), and the grid to find words in
+            Wordsearch solver.  Enter text below.
           </p>
         </div>
         <WordSearchComponent />
