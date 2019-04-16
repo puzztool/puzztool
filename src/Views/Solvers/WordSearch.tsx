@@ -5,8 +5,8 @@ import './WordSearch.css';
 class WordSearch extends Component {
   public render() {
     return (
-      <div className="Search">
-        <div className="helpText">
+      <div>
+        <div className="WordSearch-helpText">
           <h2>
             Wordsearch solver
           </h2>

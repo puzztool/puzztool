@@ -54,7 +54,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             </Col>
 
             <Col md={8}>
-              <p> Enter the word search grid, one row of letters per line</p>
+              <p>Enter the word search grid, one row of letters per line</p>
               <FormControl
                 componentClass="textarea"
                 className="WordSearchComponent-GridInput"
