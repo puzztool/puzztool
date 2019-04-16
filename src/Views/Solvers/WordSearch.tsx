@@ -7,9 +7,9 @@ class WordSearch extends Component {
     return (
       <div className="Search">
         <div className="helpText">
-          <p>
-            Wordsearch solver.  Enter text below.
-          </p>
+          <h2>
+            Wordsearch solver
+          </h2>
         </div>
         <WordSearchComponent />
       </div>

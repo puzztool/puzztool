@@ -1,6 +1,6 @@
 import { WordSearchSolver, WordSearchResult } from 'puzzle-lib';
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl, Grid, Row, Col } from 'react-bootstrap';
+import React, { FormEvent, SyntheticEvent } from 'react';
+import { FormControl, Grid, Row, Col, Table } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchComponent.css';
 
@@ -8,7 +8,6 @@ type Props = {};
 type State = {
   gridInputText: string,
   wordListInputText: string,
-  output: JSX.Element[],
 };
 
 type SavedState = {
@@ -26,7 +25,6 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.state = {
       gridInputText: '',
       wordListInputText: '',
-      output: [],
     };
   }
 
@@ -44,30 +42,37 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
         <Grid>
           <Row>
             <Col md={4}>
+              <p>Enter the list of words to find, one word per line</p>
               <FormControl
                 componentClass="textarea"
                 className="WordSearchComponent-ListInput"
                 onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
                 placeholder="Word List To Find"
                 value={this.state.wordListInputText}
+                label="Enter the word search grid, one row of letters per line"
               />
             </Col>
 
             <Col md={8}>
-                <FormControl
-                  componentClass="textarea"
-                  className="WordSearchComponent-GridInput"
-                  spellCheck={false}
-                  inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
-                  onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
-                  placeholder="Grid Text"
-                  value={this.state.gridInputText}
-                />
+              <p> Enter the word search grid, one row of letters per line</p>
+              <FormControl
+                componentClass="textarea"
+                className="WordSearchComponent-GridInput"
+                spellCheck={false}
+                inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
+                onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
+                placeholder="Grid Text"
+                value={this.state.gridInputText}
+              />
             </Col>
           </Row>
 
           <pre className="WordSearchComponent-GridOutput">
-            {this.state.output}
+            <Table className="WordSearchComponent-TableOutput">
+              <tbody>
+                {this.renderOutput()}
+              </tbody>
+            </Table>
           </pre>
         </Grid>
       </div>
@@ -96,7 +101,6 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.setState({
       gridInputText: this._gridInputText,
       wordListInputText: this._wordListInputText,
-      output: this.renderOutput(),
     });
   }
 
@@ -120,7 +124,9 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
     // get inputs
     const lines = this._gridInputText.split(/\r?\n/);
-    const wordsToFind = this._wordListInputText.split(/\r?\n/);
+    const wordList = this._wordListInputText.split(/\r?\n/);
+
+    const wordsToFind = wordList.filter(word => word.length > 0); 
     
     let charArray: string[][];
     charArray = [];
@@ -135,18 +141,20 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     const shoudHighlight = this.highlightArray(charArray, results);
 
     let result = [];
+
     for (let y = 0; y < charArray.length; y++) {
+      let row = [];
       for (let x = 0; x < charArray[y].length; x++) {
         let reactKey = x.toString() + y.toString();
         if (shoudHighlight[y][x] !== 0) {
-            result.push(<span key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</span>);
+            row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
         } else {
-            result.push(<span key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</span>);
+            row.push(<td key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</td>);
         }
       }
-      result.push(<br key={'fu'}/>);
-    }
 
+      result.push(<tr key={y}>{row}</tr> );
+    }
     return result;
   }
 

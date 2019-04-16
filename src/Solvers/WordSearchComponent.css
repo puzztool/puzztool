@@ -18,10 +18,14 @@
 
 .WordSearchComponent-HighlightChar {
   background-color: yellow;
-  padding: 5px;
+  padding: 8px;
 }
 
 .WordSearchComponent-PlainChar {
-  padding: 5px;
+  padding: 8px;
 }
 
+.WordSearchComponent-TableOutput {
+  border-collapse: collapse;
+  display: block;
+}
