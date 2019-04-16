@@ -1,0 +1,31 @@
+.WordSearchComponent-GridInput {
+  margin-bottom: 10px;
+  font-family: monospace;
+  letter-spacing: 10px;
+  min-height: 200px;
+  overflow-x: scroll;
+}
+
+.WordSearchComponent-ListInput {
+  margin-bottom: 10px;
+  min-height: 200px;
+}
+
+.WordSearchComponent-GridOutput {
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.WordSearchComponent-HighlightChar {
+  background-color: yellow;
+  padding: 8px;
+}
+
+.WordSearchComponent-PlainChar {
+  padding: 8px;
+}
+
+.WordSearchComponent-TableOutput {
+  border-collapse: collapse;
+  display: block;
+}
