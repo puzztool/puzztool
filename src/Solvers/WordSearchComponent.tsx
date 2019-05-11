@@ -8,23 +8,31 @@ type Props = {};
 type State = {
   gridInputText: string,
   wordListInputText: string,
+  useDiagonals: boolean,
+  useCardinals: boolean,
 };
 
 type SavedState = {
   gridInputText: string,
   wordListInputText: string,
+  useDiagonals: boolean,
+  useCardinals: boolean,
 };
 
 class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
   private _gridInputText: string = '';
   private _gridInputElement?: HTMLInputElement;
   private _wordListInputText: string = '';
+  private _useCardinals: boolean = true;
+  private _useDiagonals: boolean = true;
 
   constructor(props: Props) {
     super(props);
     this.state = {
       gridInputText: '',
       wordListInputText: '',
+      useCardinals: true,
+      useDiagonals: true,
     };
   }
 
@@ -67,6 +75,27 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             </Col>
           </Row>
 
+          <Row>
+            <Col md={4}>
+              <input
+                type="checkbox"
+                checked={this._useDiagonals}
+                onChange={(event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)}
+              />  
+              <label>Use diagonal directions</label>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
+              <input
+                type="checkbox"
+                checked={this._useCardinals}
+                onChange={(event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)}
+              />
+              <label>Use cardinal directions</label>
+            </Col>
+          </Row>
+
           <pre className="WordSearchComponent-GridOutput">
             <Table className="WordSearchComponent-TableOutput">
               <tbody>
@@ -86,7 +115,9 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   protected onSaveState() {
     return {
       gridInputText: this._gridInputText,
-      wordListInputText: this._wordListInputText
+      wordListInputText: this._wordListInputText,
+      useDiagonals: this._useDiagonals,
+      useCardinals: this._useCardinals,
     };
   }
 
@@ -94,6 +125,8 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     if (savedState !== null) {
       this._gridInputText = savedState.gridInputText;
       this._wordListInputText = savedState.wordListInputText;
+      this._useDiagonals = savedState.useDiagonals;
+      this._useCardinals = savedState.useCardinals;
     }
   }
 
@@ -101,6 +134,8 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.setState({
       gridInputText: this._gridInputText,
       wordListInputText: this._wordListInputText,
+      useDiagonals: this._useDiagonals,
+      useCardinals: this._useCardinals,
     });
   }
 
@@ -113,6 +148,18 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   private onListTextChanged(event: SyntheticEvent<FormControl>) {
     const element = (event.target as HTMLInputElement);
     this._wordListInputText = element.value;
+    this.updateState();
+  }
+
+  private onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+    const element = (event.target as HTMLInputElement);
+    this._useCardinals = element.checked;
+    this.updateState();
+  }
+
+  private onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+    const element = (event.target as HTMLInputElement);
+    this._useDiagonals = element.checked;
     this.updateState();
   }
 
@@ -134,8 +181,11 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
       charArray.push(line.split(''));
     }
     // find the results
-    const solver = new WordSearchSolver(charArray);
-    const results = solver.findWords(wordsToFind);
+    const solver = new WordSearchSolver();
+    solver.setDirections(this._useDiagonals, this._useCardinals);
+    solver.setGrid(charArray);
+    solver.setWords(wordsToFind);
+    const results = solver.findWords();
 
     // display / highlight the results
     const shoudHighlight = this.highlightArray(charArray, results);
