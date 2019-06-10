@@ -1,4 +1,4 @@
-import { WordSearchSolver, WordSearchResult } from 'puzzle-lib';
+import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
 import React, { FormEvent, SyntheticEvent } from 'react';
 import { FormControl, Grid, Row, Col, Table } from 'react-bootstrap';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
@@ -72,6 +72,12 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
                 placeholder="Grid Text"
                 value={this.state.gridInputText}
               />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={8}>
+              {this.renderEmptyDirection()}
             </Col>
           </Row>
 
@@ -163,6 +169,13 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     this.updateState();
   }
 
+  private renderEmptyDirection() {
+    if (this._useCardinals || this._useDiagonals) {
+      return [];
+    }
+    return <p>Warning: No directions are checked. No results will be shown.</p>;
+  }
+
   private renderOutput() {
     // Save work if possible
     if (!this._gridInputText.trim() || !this._wordListInputText.trim()) {
@@ -180,9 +193,21 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     for (const line of lines) {
       charArray.push(line.split(''));
     }
+
+    let wordSearchDirection: WordSearchDirection;
+    if (this._useCardinals && this._useDiagonals) {
+      wordSearchDirection = WordSearchDirection.CardinalAndDiagonal;
+    } else if (this._useCardinals) {
+      wordSearchDirection = WordSearchDirection.Cardinal;
+    } else if (this._useDiagonals) {
+      wordSearchDirection = WordSearchDirection.Diagonal;
+    } else {
+      wordSearchDirection = WordSearchDirection.None;
+    }
+
     // find the results
-    const solver = new WordSearchSolver();
-    solver.setDirections(this._useDiagonals, this._useCardinals);
+    const solver = new WordSearchSolver();    
+    solver.setDirections(wordSearchDirection);
     solver.setGrid(charArray);
     solver.setWords(wordsToFind);
     const results = solver.findWords();
