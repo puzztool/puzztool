@@ -7,7 +7,7 @@
     "ajv": "^6.10.1",
     "bootstrap": "^3.4.0",
     "compare-versions": "^3.5.0",
-    "puzzle-lib": "^0.10.0",
+    "puzzle-lib": "^0.10.2",
     "react": "^16.8.6",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.8.6",
