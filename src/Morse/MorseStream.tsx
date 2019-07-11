@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup, ButtonToolbar, Well } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
@@ -65,8 +65,12 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
         </pre>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
-            <Button onClick={() => this.onDotClick()}>{MorsePicture.renderDot()}</Button>
-            <Button onClick={() => this.onDashClick()}>{MorsePicture.renderDash()}</Button>
+            <Button onClick={() => this.onDotClick()}>
+              {MorsePicture.renderDot()}
+            </Button>
+            <Button onClick={() => this.onDashClick()}>
+              {MorsePicture.renderDash()}
+            </Button>
             <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
           </ButtonGroup>
         </ButtonToolbar>
@@ -106,8 +110,8 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
   private codeText(): string {
     // Replace dot with interpunct for readability
-    // Replace dash with full width hyphen for readability.  Don't use emdash because
-    // multiple emdashes get combined with no space between them.
+    // Replace dash with full width hyphen for readability.  Don't use emdash
+    // because multiple emdashes get combined with no space between them.
     return this._morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
   }
 
@@ -124,7 +128,10 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   }
 
   private invertReverseText(): string {
-    return new MorseString(this._morseStream).invertDotsAndDashes().reverse().toString();
+    return new MorseString(this._morseStream)
+      .invertDotsAndDashes()
+      .reverse()
+      .toString();
   }
 
   private onKeyDown(ev: KeyboardEvent) {
@@ -216,7 +223,8 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
   private onBackspaceClick() {   
     if (this._morseStream.length > 0) {
-      this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1);
+      this._morseStream =
+        this._morseStream.substring(0, this._morseStream.length - 1);
     }
 
     this.updateState();
@@ -227,8 +235,10 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
       const lastCharacter = this._morseStream.slice(-1);
       if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
         // Pressing next twice starts a new word
-        this._morseStream = this._morseStream.substring(0, this._morseStream.length - 1) + MorseString.WORD_DIVIDER;
-      } else if (lastCharacter != MorseString.WORD_DIVIDER) {
+        this._morseStream =
+          this._morseStream.substring(0, this._morseStream.length - 1) +
+          MorseString.WORD_DIVIDER;
+      } else if (lastCharacter !== MorseString.WORD_DIVIDER) {
         this._morseStream += MorseString.CHARACTER_DIVIDER;
       }
     }

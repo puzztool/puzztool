@@ -26,12 +26,13 @@ class NavalFlagTable extends Component {
 
   private renderRows(data: CharacterImage[]) {
     return data.map((value: CharacterImage) => {
-      const dataUri = `data:image/svg+xml,${encodeURIComponent(value.image.render())}`;
+      const dataUri =
+        `data:image/svg+xml,${encodeURIComponent(value.image.render())}`;
       return (
         <tr key={value.character}>
           <td className="flagCharacter">{value.character}</td>
           <td>
-            <img className="flagImage" src={dataUri} />
+            <img className="flagImage" src={dataUri} alt={value.character} />
           </td>
         </tr>
       );
