@@ -17,7 +17,9 @@ class Home extends Component {
                 local storage. In the event that state becomes corrupted it can
                 be cleared using the button below.
               </p>
-              <Button onClick={() => this.onClearClick()}>Clear saved state</Button>
+              <Button onClick={() => this.onClearClick()}>
+                Clear saved state
+              </Button>
             </Panel.Body>
           </Panel>
           <Panel>
@@ -25,7 +27,12 @@ class Home extends Component {
             <Panel.Body>
               <h3>PuzzTool</h3>
               Version: {version}<br/>
-              <a href="https://github.com/beckbria/puzztool/" target="_blank">Project page</a>
+              <a
+                href="https://github.com/beckbria/puzztool/"
+                rel="noopener noreferrer"
+                target="_blank">
+                Project page
+              </a>
             </Panel.Body>
           </Panel>
         </div>

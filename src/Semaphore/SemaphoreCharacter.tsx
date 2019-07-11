@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import SemaphoreCheckbox from './SemaphoreCheckbox';
 import SemaphorePicture from './SemaphorePicture';
-import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
+import {
+  SemaphoreCharacter as Character,
+  SemaphoreDirection as Direction
+} from 'puzzle-lib';
 import './SemaphoreCharacter.css';
 
 type Props = {
@@ -10,10 +13,6 @@ type Props = {
 };
 
 class SemaphoreCharacter extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
-
   public render() {
     return (
       <div className="SemaphoreCharacter">
