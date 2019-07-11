@@ -183,7 +183,7 @@ class App extends Component {
                 <LinkContainer to="/help/settings">
                   <MenuItem eventKey="Help.Settings">Settings</MenuItem>
                 </LinkContainer>
-                <MenuItem href="https://github.com/beckbria/puzztool/issues/new" target="_blank">
+                <MenuItem href="https://github.com/puzztool/puzztool/issues/new" target="_blank">
                   Feedback
                 </MenuItem>
               </NavDropdown>
