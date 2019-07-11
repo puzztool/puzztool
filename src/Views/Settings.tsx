@@ -28,7 +28,7 @@ class Home extends Component {
               <h3>PuzzTool</h3>
               Version: {version}<br/>
               <a
-                href="https://github.com/beckbria/puzztool/"
+                href="https://github.com/puzztool/puzztool/"
                 rel="noopener noreferrer"
                 target="_blank">
                 Project page
