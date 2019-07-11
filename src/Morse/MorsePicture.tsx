@@ -23,18 +23,13 @@ class MorsePicture extends Component<Props> {
     );
   }
 
-  constructor(props: Props) {
-    super(props);
-  }
-
   public render() {
-    return this.props.morseString.split('').map((value: string, index: number) => {
-      return (
+    return Array.from(this.props.morseString)
+      .map((value: string, index: number) => (
         <span key={index}>
-        {value === '.' ? MorsePicture.renderDot() : MorsePicture.renderDash()}
+          {value === '.' ? MorsePicture.renderDot() : MorsePicture.renderDash()}
         </span>
-      );
-    });
+      ));
   }
 }
 

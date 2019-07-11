@@ -19,7 +19,7 @@ class CaesarList extends Component<Props> {
   private renderListItems() {
     return this.props.list.map((value: string, index: number) => {
       if (index === 0) {
-        return;
+        return null;
       }
 
       return (

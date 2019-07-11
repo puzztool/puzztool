@@ -4,19 +4,19 @@
   "version": "0.7.0",
   "private": true,
   "dependencies": {
-    "ajv": "^6.9.1",
+    "ajv": "^6.10.1",
     "bootstrap": "^3.4.0",
-    "compare-versions": "^3.4.0",
+    "compare-versions": "^3.5.0",
     "puzzle-lib": "^0.10.0",
-    "react": "^16.8.1",
+    "react": "^16.8.6",
     "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.8.1",
+    "react-dom": "^16.8.6",
     "react-loadable": "^5.5.0",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
-    "tslint": "^5.12.1",
-    "tslint-react": "^3.6.0"
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.0.1",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0"
   },
   "scripts": {
     "build": "react-scripts build",
@@ -29,16 +29,16 @@
     "version": "npm run genversion"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
-    "@types/node": "^10.12.24",
-    "@types/react": "^16.8.2",
-    "@types/react-bootstrap": "^0.32.16",
-    "@types/react-dom": "^16.8.0",
-    "@types/react-loadable": "^5.5.0",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.2",
+    "@types/react": "^16.8.23",
+    "@types/react-bootstrap": "^0.32.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-loadable": "^5.5.1",
     "@types/react-router-bootstrap": "^0.24.5",
-    "@types/react-router-dom": "^4.3.1",
+    "@types/react-router-dom": "^4.3.4",
     "genversion": "^2.1.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.5.3"
   },
   "browserslist": [
     ">0.2%",
