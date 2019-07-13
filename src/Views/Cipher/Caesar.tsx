@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CaesarStream from '../../Cipher/Caesar/CaesarStream';
-import './Caesar.css';
+import './Caesar.scss';
 
 class Caesar extends Component {
   public render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AutoConvertStream from '../../Conversion/AutoConversion/AutoConvertStream';
-import './AutoConvert.css';
+import './AutoConvert.scss';
 
 class AutoConvert extends Component {
   public render() {

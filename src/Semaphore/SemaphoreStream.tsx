@@ -7,7 +7,7 @@ import {
   SemaphoreDirection as Direction,
   SemaphoreDegrees as Degrees,
 } from 'puzzle-lib';
-import './SemaphoreStream.css';
+import './SemaphoreStream.scss';
 
 type Props = {};
 type State = {

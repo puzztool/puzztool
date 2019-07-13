@@ -1,6 +1,6 @@
 import React, { Component, FormEvent } from 'react';
 import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
-import './SemaphoreCheckbox.css';
+import './SemaphoreCheckbox.scss';
 
 type Props = {
   character: Character,

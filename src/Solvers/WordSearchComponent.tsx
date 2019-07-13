@@ -1,8 +1,12 @@
 import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
-import React, { FormEvent, SyntheticEvent } from 'react';
-import { FormControl, Grid, Row, Col, Table } from 'react-bootstrap';
+import React, { FormEvent } from 'react';
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl'
+import Row from 'react-bootstrap/Row'
+import Table from 'react-bootstrap/Table'
 import LocalStorageComponent from '../Data/LocalStorageComponent';
-import './WordSearchComponent.css';
+import './WordSearchComponent.scss';
 
 type Props = {};
 type State = {
@@ -46,30 +50,29 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
   public render() {
     return (
-      <div className="WordSearchComponent-Root">
-        <Grid>
+      <div className="WordSearchComponent">
+        <Container>
           <Row>
             <Col md={4}>
               <p>Enter the list of words to find, one word per line</p>
               <FormControl
-                componentClass="textarea"
+                as="textarea"
                 className="WordSearchComponent-ListInput"
-                onChange={(event: FormEvent<FormControl>) => this.onListTextChanged(event)}
+                label="Enter the word search grid, one row of letters per line"
+                onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
                 placeholder="Word List To Find"
                 value={this.state.wordListInputText}
-                label="Enter the word search grid, one row of letters per line"
               />
             </Col>
 
             <Col md={8}>
               <p>Enter the word search grid, one row of letters per line</p>
               <FormControl
-                componentClass="textarea"
+                as="textarea"
                 className="WordSearchComponent-GridInput"
-                spellCheck={false}
-                inputRef={(input: HTMLInputElement) => { this._gridInputElement = input; }}
-                onChange={(event: FormEvent<FormControl>) => this.onGridTextChanged(event)}
+                onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
                 placeholder="Grid Text"
+                spellCheck={false}
                 value={this.state.gridInputText}
               />
             </Col>
@@ -109,7 +112,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
               </tbody>
             </Table>
           </pre>
-        </Grid>
+        </Container>
       </div>
     );
   }
@@ -145,13 +148,13 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     });
   }
 
-  private onGridTextChanged(event: SyntheticEvent<FormControl>) {
+  private onGridTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._gridInputText = element.value;
     this.updateState();
   }
 
-  private onListTextChanged(event: SyntheticEvent<FormControl>) {
+  private onListTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._wordListInputText = element.value;
     this.updateState();

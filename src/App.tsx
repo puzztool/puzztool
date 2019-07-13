@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { MenuItem, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import DropdownItem from 'react-bootstrap/DropdownItem';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import Loadable from 'react-loadable';
 import { RouteData } from './Data/RouteData';
 import Loading from './Views/Loading';
-import './App.css';
 
 const defaultTimeout = 10000;
 
@@ -148,7 +150,7 @@ class App extends Component {
               key={`${category.name}-${child.name}`}
               to={category.rootUrl + child.url}
             >
-              <MenuItem eventKey={category.name + child.name}>{child.name}</MenuItem>
+              <DropdownItem eventKey={category.name + child.name}>{child.name}</DropdownItem>
             </LinkContainer>
           ))}
         </NavDropdown>
@@ -159,33 +161,31 @@ class App extends Component {
   private renderNavbar() {
     return (
       <Navbar
+        bg="dark"
         collapseOnSelect={true}
-        fluid={true}
-        inverse={true}
+        variant="dark"
         // Remove focus from the selected element to prevent it from taking
         // further keyboard input.
         onSelect={() => (document.activeElement as HTMLElement).blur()}
-        staticTop={true}
+        sticky="top"
       >
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">PuzzTool</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
+        <LinkContainer to="/">
+          <Navbar.Brand>PuzzTool</Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
             {this.renderNavbarCategories()}
           </Nav>
-          <Nav pullRight={true}>
+          <Nav>
             <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
               <NavDropdown eventKey="Help" title="Help" id="help-dropdown">
                 <LinkContainer to="/help/settings">
-                  <MenuItem eventKey="Help.Settings">Settings</MenuItem>
+                  <DropdownItem eventKey="Help.Settings">Settings</DropdownItem>
                 </LinkContainer>
-                <MenuItem href="https://github.com/puzztool/puzztool/issues/new" target="_blank">
+                <DropdownItem href="https://github.com/puzztool/puzztool/issues/new" target="_blank">
                   Feedback
-                </MenuItem>
+                </DropdownItem>
               </NavDropdown>
             </LinkContainer>
           </Nav>

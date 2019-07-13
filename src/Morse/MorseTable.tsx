@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import MorsePicture from './MorsePicture';
-import './MorseTable.css';
+import './MorseTable.scss';
 
 class MorseTable extends Component {
   public render() {

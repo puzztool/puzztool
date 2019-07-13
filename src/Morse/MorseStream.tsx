@@ -3,7 +3,7 @@ import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
-import './MorseStream.css';
+import './MorseStream.scss';
 
 type Props = {};
 type State = {

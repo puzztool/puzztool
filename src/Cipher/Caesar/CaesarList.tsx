@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import './CaesarList.css';
-
-const leftPad = require('left-pad');
+import './CaesarList.scss';
 
 type Props = {
   list: Array<string>,
@@ -23,7 +21,7 @@ class CaesarList extends Component<Props> {
       }
 
       return (
-        <div key={index}>{leftPad(index, 2)}: {value}</div>
+        <div key={index}>{index.toString().padStart(2)}: {value}</div>
       );
     });
   }

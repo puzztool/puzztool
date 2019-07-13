@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import AsciiTable from '../../Conversion/Character/AsciiTable';
 import OrdinalTable from '../../Conversion/Character/OrdinalTable';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
-import './CharacterEncodings.css';
+import './CharacterEncodings.scss';
 
 type Props = {};
 type State = {

@@ -1,9 +1,9 @@
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import React, { FormEvent, MouseEvent } from 'react';
+import { Button, ButtonGroup, ButtonToolbar, FormControl, FormControlProps } from 'react-bootstrap';
 import CaesarList from './CaesarList';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
-import './CaesarStream.css';
+import './CaesarStream.scss';
 
 type Props = {};
 type State = {
@@ -41,14 +41,15 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
       <div className="CaesarStream">
         <FormControl
           className="CaesarStream-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
         />
         <ButtonToolbar className="CaesarStream-commands">
           <ButtonGroup>
-            <Button onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
+            <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>
+              Clear
+            </Button>
           </ButtonGroup>
         </ButtonToolbar>
         <CaesarList list={this.state.list} />
@@ -79,13 +80,13 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<HTMLButtonElement>) {
     this._str.text = '';
     this.updateState();
   }

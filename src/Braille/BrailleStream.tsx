@@ -8,7 +8,7 @@ import {
   BrailleEncoding as Encoding,
   BrailleStream as Stream
 } from 'puzzle-lib';
-import './BrailleStream.css';
+import './BrailleStream.scss';
 
 type Props = {};
 type State = {

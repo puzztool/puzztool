@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import TabViewBase from '../TabViewBase';
 import MorseStream from '../../Morse/MorseStream';
 import MorseTable from '../../Morse/MorseTable';
-import './Morse.css';
+import './Morse.scss';
 
 class Morse extends TabViewBase {
   public render() {

@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import TabViewBase from '../TabViewBase';
 import SemaphoreStream from '../../Semaphore/SemaphoreStream';
 import SemaphoreTable from '../../Semaphore/SemaphoreTable';
-import './Semaphore.css';
+import './Semaphore.scss';
 
 class Semaphore extends TabViewBase {
   public render() {

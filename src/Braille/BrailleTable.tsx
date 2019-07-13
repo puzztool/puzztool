@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrailleCharacter as Character } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
 import BraillePicture from './BraillePicture';
-import './BrailleTable.css';
+import './BrailleTable.scss';
 
 class BrailleTable extends Component {
   public render() {

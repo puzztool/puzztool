@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { CharacterTableEntry as Entry } from 'puzzle-lib';
-import './CharacterTable.css';
+import './CharacterTable.scss';
 
 type Props = {
   data: Entry[],

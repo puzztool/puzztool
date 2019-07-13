@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { NavalFlags, CharacterImage } from 'puzzle-lib';
 import { Table } from 'react-bootstrap';
-import './NavalFlagTable.css';
+import './NavalFlagTable.scss';
 
 class NavalFlagTable extends Component {
   public render() {
     return (
-      <div className="NavalFlagsTable">
-        <div className="NavalFlagsTable-content">
+      <div className="NavalFlagTable">
+        <div className="NavalFlagTable-content">
           <Table striped={true} responsive={true}>
             <thead>
               <tr>

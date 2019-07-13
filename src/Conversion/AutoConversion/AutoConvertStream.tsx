@@ -1,8 +1,8 @@
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import React, { FormEvent } from 'react';
+import { Button, ButtonGroup, ButtonToolbar, FormControl, FormControlProps } from 'react-bootstrap';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
-import './AutoConvertStream.css';
+import './AutoConvertStream.scss';
 
 type Props = {};
 type State = {
@@ -44,8 +44,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
       <div className="AutoConvertStream">
         <FormControl
           className="AutoConvertStream-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
+          onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
           placeholder="Text"
           value={this.state.text}
         />
@@ -54,13 +53,11 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
         </pre>
         <ButtonToolbar className="AutoConvertStream-commands">
           <ButtonGroup>
-            <Button 
-              onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}
-            >
+            <Button onClick={() => this.onClearClick()}>
               Clear
             </Button>
             <Button 
-              onClick={(event: MouseEvent<Button>) => this.toggleHomogeneous(event)}
+              onClick={() => this.toggleHomogeneous()}
               active={this.state.homogeneous}
             >
               Force Consistent Encoding
@@ -97,18 +94,18 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
+  private onClearClick() {
     this._text = '';
     this.updateState();
   }
 
-  private toggleHomogeneous(event: MouseEvent<Button>) {
+  private toggleHomogeneous() {
     this._homogeneous = !this._homogeneous;
     this.updateState();
   }

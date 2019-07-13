@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import { ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
-import './ResistorInput.css';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownItem from 'react-bootstrap/DropdownItem';
+import './ResistorInput.scss';
 
 type Props = {
 };
@@ -125,7 +127,7 @@ class ResistorInput extends Component<Props, State> {
       >
         {colors.map((color: Color, itemIndex: number) => {
           return (
-            <MenuItem key={`${index}-${itemIndex}`} eventKey={color.name}>{color.name}</MenuItem>
+            <DropdownItem key={`${index}-${itemIndex}`} eventKey={color.name}>{color.name}</DropdownItem>
           );
         })}
       </DropdownButton>

@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import TabViewBase from '../TabViewBase';
 import BrailleStream from '../../Braille/BrailleStream';
 import BrailleTable from '../../Braille/BrailleTable';
-import './Braille.css';
+import './Braille.scss';
 
 class Braille extends TabViewBase {
   public render() {

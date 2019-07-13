@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import TabViewBase from '../TabViewBase';
 import ResistorTable from '../../Resistor/ResistorTable';
 import ResistorInput from '../../Resistor/ResistorInput';
-import './Resistors.css';
+import './Resistors.scss';
 
 class Resistors extends TabViewBase {
   public render() {

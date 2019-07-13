@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VigenereStream from '../../Cipher/Vigenere/VigenereStream';
-import './Vigenere.css';
+import './Vigenere.scss';
 
 class Vigenere extends Component {
   public render() {

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import LocalStorage from '../Data/LocalStorage';
 import { version } from '../version';
-import './Settings.css';
+import './Settings.scss';
 
 class Home extends Component {
   public render() {
     return (
       <div className="Settings">
         <div className="Settings-content">
-          <Panel>
-            <Panel.Heading>Saved state</Panel.Heading>
-            <Panel.Body>
+          <Card>
+            <Card.Header>Saved state</Card.Header>
+            <Card.Body>
               <p>
                 The most recent inputs to each tool are stored in the browser's
                 local storage. In the event that state becomes corrupted it can
@@ -20,11 +21,11 @@ class Home extends Component {
               <Button onClick={() => this.onClearClick()}>
                 Clear saved state
               </Button>
-            </Panel.Body>
-          </Panel>
-          <Panel>
-            <Panel.Heading>About</Panel.Heading>
-            <Panel.Body>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Header>About</Card.Header>
+            <Card.Body>
               <h3>PuzzTool</h3>
               Version: {version}<br/>
               <a
@@ -33,8 +34,8 @@ class Home extends Component {
                 target="_blank">
                 Project page
               </a>
-            </Panel.Body>
-          </Panel>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     );

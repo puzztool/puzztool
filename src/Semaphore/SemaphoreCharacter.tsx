@@ -5,7 +5,7 @@ import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction
 } from 'puzzle-lib';
-import './SemaphoreCharacter.css';
+import './SemaphoreCharacter.scss';
 
 type Props = {
   character: Character,

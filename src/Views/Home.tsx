@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Home.css';
 import { RouteData, RouteCategory } from '../Data/RouteData';
 import { Link } from 'react-router-dom';
+import './Home.scss';
 
 class Home extends Component {
   public render() {

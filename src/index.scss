@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+body {
+  font-size: 16px;
+}
+
+.btn {
+  font-size: 20px;
+  min-height: 44px;
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+.blinking-cursor {
+  animation: 1s blink step-end infinite;
+  font-weight: 100;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: inherit;
+  }
+}

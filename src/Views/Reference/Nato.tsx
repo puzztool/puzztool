@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NatoTable from '../../Reference/NatoTable';
-import './CharacterEncodings.css';
+import './CharacterEncodings.scss';
 
 class Nato extends Component {
     public render() {
