@@ -1,18 +1,11 @@
 .WordSearchComponent {
-  .row > div {
-    margin-bottom: 10px;
+  textarea {
+    min-height: 200px;
+    resize: none;
   }
 
-  .WordSearchComponent-GridInput {
-    height: 100%;
-
-    textarea {
-      font-family: monospace;
-      letter-spacing: 10px;
-      min-height: 200px;
-      height: 100%;
-      overflow-x: scroll;
-    }
+  .row > div {
+    margin-bottom: 10px;
   }
 
   .WordSearchComponent-ListInput {
@@ -30,13 +23,13 @@
     }
   }
 
-  .WordSearchComponent-HighlightChar {
-    background-color: yellow;
-    padding: 8px;
-  }
+  .WordSearchComponent-GridInput {
+    height: 100%;
 
-  .WordSearchComponent-PlainChar {
-    padding: 8px;
+    textarea {
+      letter-spacing: 10px;
+      height: 100%;
+    }
   }
 
   .WordSearchComponent-TableOutput {
@@ -45,5 +38,13 @@
     font-family: monospace;
     font-size: 16px;
     margin-bottom: 0px;
+
+    td {
+      padding: 8px;
+
+      &.WordSearchComponent-HighlightChar {
+        background-color: yellow;
+      }
+    }
   }
 }

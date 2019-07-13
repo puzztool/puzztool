@@ -235,7 +235,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
         if (shoudHighlight[y][x] !== 0) {
           row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
         } else {
-          row.push(<td key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</td>);
+          row.push(<td key={reactKey}>{charArray[y][x]}</td>);
         }
       }
 
