@@ -55,8 +55,8 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   public render() {
     return (
       <div className="WordSearchComponent">
-        <Container fluid={true}>
-          <Row>
+        <Container fluid={true} >
+          <Row noGutters={true}>
             <Col md={4}>
               <Card className="WordSearchComponent-ListInput">
                 <Card.Header>Enter the list of words to find, one word per line</Card.Header>
@@ -103,7 +103,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
               </Card>
             </Col>
           </Row>
-          <Row>
+          <Row noGutters={true}>
             <Col md={12}>
               <Card className="WordSearchComponent-GridOutput">
                 <Card.Header>Output</Card.Header>

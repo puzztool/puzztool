@@ -4,12 +4,22 @@
     resize: none;
   }
 
-  .row > div {
-    margin-bottom: 10px;
+  .row {
+    margin-right: -5px;
+    margin-left: -5px;
+
+    > div {
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-bottom: 10px;
+    }
   }
 
   .WordSearchComponent-ListInput {
     textarea {
+      border-left: none;
+      border-right: none;
+      border-top: none;
       margin-bottom: 5px;
       min-height: 200px;
     }
@@ -27,8 +37,9 @@
     height: 100%;
 
     textarea {
-      letter-spacing: 10px;
+      border: none;
       height: 100%;
+      letter-spacing: 10px;
     }
   }
 
