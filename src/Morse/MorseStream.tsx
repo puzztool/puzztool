@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';
@@ -45,26 +46,36 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="MorseStream">
-        <p className="MorseLabel">Input:</p>
-        <pre className="MorseStream-morse-output">
-          {this.codeText()}<span className="blinking-cursor">|</span>
-        </pre>
-        <p className="MorseLabel">Plaintext:</p>
-        <pre className="MorseStream-output">
-          {this.plainText()}
-        </pre>
-        <p className="MorseLabel">Swap Dots/Dashes:</p>
-        <pre className="MorseStream-output">
-          {this.invertText()}
-        </pre>
-        <p className="MorseLabel">Right to Left:</p>
-        <pre className="MorseStream-output">
-          {this.reverseText()}
-        </pre>
-        <p className="MorseLabel">Right to Left + Swap Dots/Dashes:</p>
-        <pre className="MorseStream-output">
-          {this.invertReverseText()}
-        </pre>
+        <Card className="MorseStream-morse-output">
+          <Card.Header>Input</Card.Header>
+          <pre>
+            {this.codeText()}<span className="blinking-cursor">|</span>
+          </pre>
+        </Card>
+        <Card className="MorseStream-output">
+          <Card.Header>Plaintext</Card.Header>
+          <pre>
+            {this.plainText() || ' '}
+          </pre>
+        </Card>
+        <Card className="MorseStream-output">
+          <Card.Header>Swap Dots/Dashes</Card.Header>
+          <pre>
+            {this.invertText() || ' '}
+          </pre>
+        </Card>
+        <Card className="MorseStream-output">
+          <Card.Header>Right to Left</Card.Header>
+          <pre>
+            {this.reverseText() || ' '}
+          </pre>
+        </Card>
+        <Card className="MorseStream-output">
+          <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
+          <pre>
+            {this.invertReverseText() || ' '}
+          </pre>
+        </Card>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
             <Button onClick={() => this.onDotClick()}>
@@ -203,7 +214,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
           break;
         default:
           handled = false;
-      }  
+      }
     }
 
     if (handled) {
@@ -223,7 +234,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     this.updateState();
   }
 
-  private onBackspaceClick() {   
+  private onBackspaceClick() {
     if (this._morseStream.length > 0) {
       this._morseStream =
         this._morseStream.substring(0, this._morseStream.length - 1);

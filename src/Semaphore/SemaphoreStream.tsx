@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import SemaphoreCharacter from './SemaphoreCharacter';
 import {

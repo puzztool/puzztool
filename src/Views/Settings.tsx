@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck'
+import CardDeck from 'react-bootstrap/CardDeck';
 import LocalStorage from '../Data/LocalStorage';
 import { version } from '../version';
 import './Settings.scss';

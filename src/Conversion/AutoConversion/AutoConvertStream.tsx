@@ -1,8 +1,8 @@
 import React, { FormEvent } from 'react';
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
 import './AutoConvertStream.scss';

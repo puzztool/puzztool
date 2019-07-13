@@ -1,8 +1,8 @@
 import React, { FormEvent, MouseEvent } from 'react';
-import Button from 'react-bootstrap/Button'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import CaesarList from './CaesarList';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';

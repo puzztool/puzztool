@@ -1,10 +1,11 @@
 import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
 import React, { FormEvent } from 'react';
-import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl'
-import Row from 'react-bootstrap/Row'
-import Table from 'react-bootstrap/Table'
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import FormCheck from 'react-bootstrap/FormCheck';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchComponent.scss';
 
@@ -52,7 +53,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   public render() {
     return (
       <div className="WordSearchComponent">
-        <Container>
+        <Container fluid={true}>
           <Row>
             <Col md={4}>
               <p>Enter the list of words to find, one word per line</p>
@@ -88,22 +89,28 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
           <Row>
             <Col md={4}>
-              <input
-                type="checkbox"
+              <FormCheck
                 checked={this._useDiagonals}
-                onChange={(event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)}
-              />  
-              <label>Use diagonal directions</label>
+                id="WordSearchComponent-checkbox-diagonal"
+                label="Use diagonal directions"
+                onChange={
+                  (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
+                }
+                type="checkbox"
+              />
             </Col>
           </Row>
           <Row>
             <Col md={4}>
-              <input
-                type="checkbox"
+              <FormCheck
                 checked={this._useCardinals}
-                onChange={(event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)}
+                id="WordSearchComponent-checkbox-cardinal"
+                label="Use cardinal directions"
+                onChange={
+                  (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
+                }
+                type="checkbox"
               />
-              <label>Use cardinal directions</label>
             </Col>
           </Row>
 
