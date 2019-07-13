@@ -1,11 +1,13 @@
-import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
 import React, { FormEvent } from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FormCheck from 'react-bootstrap/FormCheck';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
+import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchComponent.scss';
 
@@ -56,71 +58,63 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
         <Container fluid={true}>
           <Row>
             <Col md={4}>
-              <p>Enter the list of words to find, one word per line</p>
-              <FormControl
-                as="textarea"
-                className="WordSearchComponent-ListInput"
-                label="Enter the word search grid, one row of letters per line"
-                onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
-                placeholder="Word List To Find"
-                value={this.state.wordListInputText}
-              />
+              <Card className="WordSearchComponent-ListInput">
+                <Card.Header>Enter the list of words to find, one word per line</Card.Header>
+                <FormControl
+                  as="textarea"
+                  className="WordSearchComponent-ListInput"
+                  label="Enter the word search grid, one row of letters per line"
+                  onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
+                  placeholder="Word List To Find"
+                  value={this.state.wordListInputText}
+                />
+                {this.renderEmptyDirection()}
+                <FormCheck
+                  checked={this._useDiagonals}
+                  id="WordSearchComponent-checkbox-diagonal"
+                  label="Use diagonal directions"
+                  onChange={
+                    (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
+                  }
+                  type="checkbox"
+                />
+                <FormCheck
+                  checked={this._useCardinals}
+                  id="WordSearchComponent-checkbox-cardinal"
+                  label="Use cardinal directions"
+                  onChange={
+                    (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
+                  }
+                  type="checkbox"
+                />
+              </Card>
             </Col>
-
             <Col md={8}>
-              <p>Enter the word search grid, one row of letters per line</p>
-              <FormControl
-                as="textarea"
-                className="WordSearchComponent-GridInput"
-                onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
-                placeholder="Grid Text"
-                ref={this._input}
-                spellCheck={false}
-                value={this.state.gridInputText}
-              />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={8}>
-              {this.renderEmptyDirection()}
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={4}>
-              <FormCheck
-                checked={this._useDiagonals}
-                id="WordSearchComponent-checkbox-diagonal"
-                label="Use diagonal directions"
-                onChange={
-                  (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
-                }
-                type="checkbox"
-              />
+              <Card className="WordSearchComponent-GridInput">
+                <Card.Header>Enter the word search grid, one row of letters per line</Card.Header>
+                <FormControl
+                  as="textarea"
+                  onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
+                  placeholder="Grid Text"
+                  ref={this._input}
+                  spellCheck={false}
+                  value={this.state.gridInputText}
+                />
+              </Card>
             </Col>
           </Row>
           <Row>
-            <Col md={4}>
-              <FormCheck
-                checked={this._useCardinals}
-                id="WordSearchComponent-checkbox-cardinal"
-                label="Use cardinal directions"
-                onChange={
-                  (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
-                }
-                type="checkbox"
-              />
+            <Col md={12}>
+              <Card className="WordSearchComponent-GridOutput">
+                <Card.Header>Output</Card.Header>
+                <Table className="WordSearchComponent-TableOutput" borderless={true}>
+                  <tbody>
+                    {this.renderOutput()}
+                  </tbody>
+                </Table>
+              </Card>
             </Col>
           </Row>
-
-          <pre className="WordSearchComponent-GridOutput">
-            <Table className="WordSearchComponent-TableOutput">
-              <tbody>
-                {this.renderOutput()}
-              </tbody>
-            </Table>
-          </pre>
         </Container>
       </div>
     );
@@ -183,14 +177,19 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
   private renderEmptyDirection() {
     if (this._useCardinals || this._useDiagonals) {
-      return [];
+      return null;
     }
-    return <p>Warning: No directions are checked. No results will be shown.</p>;
+
+    return (
+      <Alert variant="warning">
+        No directions are checked. No results will be shown.
+      </Alert>
+    );
   }
 
   private renderOutput() {
     // Save work if possible
-    if (!this._gridInputText.trim() || !this._wordListInputText.trim()) {
+    if (!this._gridInputText.trim()) {
       return [];
     }
 
@@ -198,8 +197,8 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     const lines = this._gridInputText.split(/\r?\n/);
     const wordList = this._wordListInputText.split(/\r?\n/);
 
-    const wordsToFind = wordList.filter(word => word.length > 0); 
-    
+    const wordsToFind = wordList.filter(word => word.length > 0);
+
     let charArray: string[][];
     charArray = [];
     for (const line of lines) {
@@ -218,7 +217,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     }
 
     // find the results
-    const solver = new WordSearchSolver();    
+    const solver = new WordSearchSolver();
     solver.setDirections(wordSearchDirection);
     solver.setGrid(charArray);
     solver.setWords(wordsToFind);
@@ -234,13 +233,13 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
       for (let x = 0; x < charArray[y].length; x++) {
         let reactKey = x.toString() + y.toString();
         if (shoudHighlight[y][x] !== 0) {
-            row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
+          row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
         } else {
-            row.push(<td key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</td>);
+          row.push(<td key={reactKey} className="WordSearchComponent-PlainChar">{charArray[y][x]}</td>);
         }
       }
 
-      result.push(<tr key={y}>{row}</tr> );
+      result.push(<tr key={y}>{row}</tr>);
     }
     return result;
   }
@@ -250,7 +249,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     shouldHighlight = [];
 
     for (const line of inputGrid) {
-      const hightlightLine = Array.from({length: line.length}, (v, i) => 0);
+      const hightlightLine = Array.from({ length: line.length }, (v, i) => 0);
       shouldHighlight.push(hightlightLine);
     }
 
