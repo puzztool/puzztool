@@ -183,15 +183,15 @@ class App extends Component {
                 <LinkContainer to="/help/settings">
                   <NavDropdown.Item eventKey="Help.Settings">Settings</NavDropdown.Item>
                 </LinkContainer>
-                <NavDropdown.Item
-                  eventKey="Help.Feedback"
-                  href="https://github.com/puzztool/puzztool/issues/new"
-                  target="_blank"
-                >
-                  Feedback
-                </NavDropdown.Item>
               </NavDropdown>
             </LinkContainer>
+            <Nav.Link
+              eventKey="Help.Feedback"
+              href="https://github.com/puzztool/puzztool/issues/new"
+              target="_blank"
+            >
+              Feedback
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
