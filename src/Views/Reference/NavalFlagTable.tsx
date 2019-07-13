@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavalFlags, CharacterImage } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import './NavalFlagTable.scss';
 
 class NavalFlagTable extends Component {

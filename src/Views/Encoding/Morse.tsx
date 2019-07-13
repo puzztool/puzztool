@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import TabViewBase from '../TabViewBase';
 import MorseStream from '../../Morse/MorseStream';
 import MorseTable from '../../Morse/MorseTable';

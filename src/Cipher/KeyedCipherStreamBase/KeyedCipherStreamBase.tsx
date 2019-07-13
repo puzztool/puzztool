@@ -1,5 +1,10 @@
 import React, { FormEvent, MouseEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl, ToggleButton, ToggleButtonGroup, FormControlProps } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl'
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { KeyedCipherStringBase  } from 'puzzle-lib';
 import './KeyedCipherStreamBase.scss';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import { CharacterTableEntry as Entry } from 'puzzle-lib';
 import './CharacterTable.scss';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SemaphoreCharacter as Character } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import SemaphorePicture from './SemaphorePicture';
 import './SemaphoreTable.scss';
 

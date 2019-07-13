@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NatoCharacter, NatoData } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 
 class NatoTable extends Component {
   public render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MorseCharacter as Character } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import MorsePicture from './MorsePicture';
 import './MorseTable.scss';
 

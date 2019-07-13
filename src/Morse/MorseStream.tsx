@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import MorsePicture from './MorsePicture';

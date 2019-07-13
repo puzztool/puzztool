@@ -1,9 +1,10 @@
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 
 // To inherit from this class:
-// 1. import { Tab, Tabs } from 'react-bootstrap';
-// 2. override render() and getLocalStorageKey()
-// 3. Ensure your constructor calls super()
+// 1. import Tab from 'react-bootstrap/Tab';
+// 2. import Tabs from 'react-bootstrap/Tabs';
+// 3. override render() and getLocalStorageKey()
+// 4. Ensure your constructor calls super()
 
 type TabViewBaseProps = {};
 type State = {

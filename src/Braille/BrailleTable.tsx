@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrailleCharacter as Character } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import BraillePicture from './BraillePicture';
 import './BrailleTable.scss';
 
