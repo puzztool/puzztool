@@ -2,14 +2,17 @@ import React, { FormEvent, MouseEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
-import { KeyedCipherStringBase  } from 'puzzle-lib';
+import { KeyedCipherStringBase } from 'puzzle-lib';
 import './KeyedCipherStreamBase.scss';
 
-export interface KeyedCipherStreamProps {}
+export interface KeyedCipherStreamProps {
+  prompt: string;
+}
 
 interface KeyedCipherStreamState {
   conversion: number;
@@ -26,9 +29,9 @@ interface KeyedCipherStreamSavedState {
 
 abstract class KeyedCipherStreamBase
   extends LocalStorageComponent<
-    KeyedCipherStreamProps,
-    KeyedCipherStreamState,
-    KeyedCipherStreamSavedState> {
+  KeyedCipherStreamProps,
+  KeyedCipherStreamState,
+  KeyedCipherStreamSavedState> {
   private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
   private readonly _cipher: KeyedCipherStringBase;
   private _conversion = 2;
@@ -57,36 +60,42 @@ abstract class KeyedCipherStreamBase
   public render() {
     return (
       <div className="KeyedCipherStreamBase">
-        <FormControl
-          className="KeyedCipherStreamBase-input"
-          onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
-          placeholder="Text"
-          ref={this._input}
-          value={this.state.text}
-        />
-        <FormControl
-          className="KeyedCipherStreamBase-input"
-          onChange={(event: FormEvent<FormControlProps>) => this.onKeyChanged(event)}
-          placeholder="Key"
-          value={this.state.key}
-        />
-        <ButtonToolbar className="KeyedCipherStreamBase-commands">
-          <ToggleButtonGroup<number>
-            name="KeyedCipherStreamBase-conversion"
-            onChange={(value: number) => this.onConversionChanged(value)}
-            type="radio"
-            value={this.state.conversion}
-          >
-            <ToggleButton value={1}>Encrypt</ToggleButton>
-            <ToggleButton value={2}>Decrypt</ToggleButton>
-          </ToggleButtonGroup>
-          <ButtonGroup>
-            <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <pre className="KeyedCipherStreamBase-output">
-          {this.state.output}
-        </pre>
+        <Card>
+          <Card.Header>{this.props.prompt}</Card.Header>
+          <FormControl
+            className="KeyedCipherStreamBase-input"
+            onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+            placeholder="Text"
+            ref={this._input}
+            value={this.state.text}
+          />
+          <FormControl
+            className="KeyedCipherStreamBase-input"
+            onChange={(event: FormEvent<FormControlProps>) => this.onKeyChanged(event)}
+            placeholder="Key"
+            value={this.state.key}
+          />
+          <ButtonToolbar className="KeyedCipherStreamBase-commands">
+            <ToggleButtonGroup<number>
+              name="KeyedCipherStreamBase-conversion"
+              onChange={(value: number) => this.onConversionChanged(value)}
+              type="radio"
+              value={this.state.conversion}
+            >
+              <ToggleButton value={1}>Encrypt</ToggleButton>
+              <ToggleButton value={2}>Decrypt</ToggleButton>
+            </ToggleButtonGroup>
+            <ButtonGroup>
+              <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>Clear</Button>
+            </ButtonGroup>
+          </ButtonToolbar>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <pre className="KeyedCipherStreamBase-output">
+            {this.state.output}
+          </pre>
+        </Card>
       </div>
     );
   }
