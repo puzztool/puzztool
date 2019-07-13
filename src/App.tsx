@@ -7,6 +7,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Loadable from 'react-loadable';
 import { RouteData } from './Data/RouteData';
 import Loading from './Views/Loading';
+import './App.scss';
 
 const defaultTimeout = 10000;
 
@@ -163,11 +164,12 @@ class App extends Component {
       <Navbar
         bg="dark"
         collapseOnSelect={true}
-        variant="dark"
+        expand="md"
         // Remove focus from the selected element to prevent it from taking
         // further keyboard input.
         onSelect={() => (document.activeElement as HTMLElement).blur()}
         sticky="top"
+        variant="dark"
       >
         <LinkContainer to="/">
           <Navbar.Brand>PuzzTool</Navbar.Brand>
