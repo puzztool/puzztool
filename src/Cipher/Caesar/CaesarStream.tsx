@@ -19,8 +19,8 @@ type SavedState = {
 };
 
 class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _str: CaesarString = new CaesarString();
-  private _input?: HTMLInputElement;
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private readonly _str = new CaesarString();
 
   constructor(props: Props) {
     super(props);
@@ -34,8 +34,9 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
@@ -46,6 +47,7 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
           className="CaesarStream-input"
           onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
           placeholder="Text"
+          ref={this._input}
           value={this.state.text}
         />
         <ButtonToolbar className="CaesarStream-commands">

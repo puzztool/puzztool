@@ -25,10 +25,13 @@ interface KeyedCipherStreamSavedState {
 }
 
 abstract class KeyedCipherStreamBase
-    extends LocalStorageComponent<KeyedCipherStreamProps, KeyedCipherStreamState, KeyedCipherStreamSavedState> {
+  extends LocalStorageComponent<
+    KeyedCipherStreamProps,
+    KeyedCipherStreamState,
+    KeyedCipherStreamSavedState> {
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
   private readonly _cipher: KeyedCipherStringBase;
-  private _conversion: number = 2;
-  private _input?: HTMLInputElement;
+  private _conversion = 2;
 
   constructor(props: KeyedCipherStreamProps, cipher: KeyedCipherStringBase) {
     super(props);
@@ -45,8 +48,9 @@ abstract class KeyedCipherStreamBase
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
@@ -57,6 +61,7 @@ abstract class KeyedCipherStreamBase
           className="KeyedCipherStreamBase-input"
           onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
           placeholder="Text"
+          ref={this._input}
           value={this.state.text}
         />
         <FormControl

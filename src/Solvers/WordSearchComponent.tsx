@@ -24,8 +24,8 @@ type SavedState = {
 };
 
 class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
+  private readonly _input = React.createRef<FormControl<"textarea"> & HTMLTextAreaElement>();
   private _gridInputText: string = '';
-  private _gridInputElement?: HTMLInputElement;
   private _wordListInputText: string = '';
   private _useCardinals: boolean = true;
   private _useDiagonals: boolean = true;
@@ -43,8 +43,9 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._gridInputElement) {
-      this._gridInputElement.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
@@ -72,6 +73,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
                 className="WordSearchComponent-GridInput"
                 onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
                 placeholder="Grid Text"
+                ref={this._input}
                 spellCheck={false}
                 value={this.state.gridInputText}
               />

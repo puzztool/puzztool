@@ -20,8 +20,8 @@ type SavedState = {
 };
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
-  private _text: string = '';
-  private _input?: HTMLInputElement;
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private _text = '';
   private _homogeneous = true;
 
   constructor(props: Props) {
@@ -37,8 +37,9 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
@@ -49,6 +50,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
           className="AutoConvertStream-input"
           onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
           placeholder="Text"
+          ref={this._input}
           value={this.state.text}
         />
         <pre className="AutoConvertStream-output">
