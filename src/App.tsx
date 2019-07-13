@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DropdownItem from 'react-bootstrap/DropdownItem';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -150,7 +149,9 @@ class App extends Component {
               key={`${category.name}-${child.name}`}
               to={category.rootUrl + child.url}
             >
-              <DropdownItem eventKey={category.name + child.name}>{child.name}</DropdownItem>
+              <NavDropdown.Item eventKey={category.name + child.name}>
+                {child.name}
+              </NavDropdown.Item>
             </LinkContainer>
           ))}
         </NavDropdown>
@@ -181,11 +182,15 @@ class App extends Component {
             <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
               <NavDropdown eventKey="Help" title="Help" id="help-dropdown">
                 <LinkContainer to="/help/settings">
-                  <DropdownItem eventKey="Help.Settings">Settings</DropdownItem>
+                  <NavDropdown.Item eventKey="Help.Settings">Settings</NavDropdown.Item>
                 </LinkContainer>
-                <DropdownItem href="https://github.com/puzztool/puzztool/issues/new" target="_blank">
+                <NavDropdown.Item
+                  eventKey="Help.Feedback"
+                  href="https://github.com/puzztool/puzztool/issues/new"
+                  target="_blank"
+                >
                   Feedback
-                </DropdownItem>
+                </NavDropdown.Item>
               </NavDropdown>
             </LinkContainer>
           </Nav>
