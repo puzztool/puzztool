@@ -6,7 +6,7 @@ class WordSearch extends Component {
   public render() {
     return (
       <div className="WordSearch">
-        <h2>Wordsearch solver</h2>
+        <h2>Word Search</h2>
         <WordSearchComponent />
       </div>
     );
