@@ -140,7 +140,6 @@ class App extends Component {
         to={category.rootUrl}
       >
         <NavDropdown
-          eventKey={category.name}
           id={this.getCategoryDropdownId(category.name)}
           title={category.name}
         >
@@ -180,7 +179,7 @@ class App extends Component {
           </Nav>
           <Nav>
             <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
-              <NavDropdown eventKey="Help" title="Help" id="help-dropdown">
+              <NavDropdown title="Help" id="help-dropdown">
                 <LinkContainer to="/help/settings">
                   <NavDropdown.Item eventKey="Help.Settings">Settings</NavDropdown.Item>
                 </LinkContainer>
