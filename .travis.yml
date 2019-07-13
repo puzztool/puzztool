@@ -35,6 +35,7 @@ deploy:
   github-token: $GITHUB_TOKEN
   keep-history: true
   local-dir: build
+  fqdn: puzztool.com
   on:
     branch: master
     condition: $NODEJS_VERSION = node/10
