@@ -60,41 +60,43 @@ abstract class KeyedCipherStreamBase
   public render() {
     return (
       <div className="KeyedCipherStreamBase">
-        <Card>
+        <Card className="KeyedCipherStreamBase-input">
           <Card.Header>{this.props.prompt}</Card.Header>
-          <FormControl
-            className="KeyedCipherStreamBase-input"
-            onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
-            placeholder="Text"
-            ref={this._input}
-            value={this.state.text}
-          />
-          <FormControl
-            className="KeyedCipherStreamBase-input"
-            onChange={(event: FormEvent<FormControlProps>) => this.onKeyChanged(event)}
-            placeholder="Key"
-            value={this.state.key}
-          />
-          <ButtonToolbar className="KeyedCipherStreamBase-commands">
-            <ToggleButtonGroup<number>
-              name="KeyedCipherStreamBase-conversion"
-              onChange={(value: number) => this.onConversionChanged(value)}
-              type="radio"
-              value={this.state.conversion}
-            >
-              <ToggleButton value={1}>Encrypt</ToggleButton>
-              <ToggleButton value={2}>Decrypt</ToggleButton>
-            </ToggleButtonGroup>
-            <ButtonGroup>
-              <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>Clear</Button>
-            </ButtonGroup>
-          </ButtonToolbar>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onKeyChanged(event)}
+              placeholder="Key"
+              value={this.state.key}
+            />
+            <ButtonToolbar>
+              <ToggleButtonGroup<number>
+                name="KeyedCipherStreamBase-conversion"
+                onChange={(value: number) => this.onConversionChanged(value)}
+                type="radio"
+                value={this.state.conversion}
+              >
+                <ToggleButton value={1}>Encrypt</ToggleButton>
+                <ToggleButton value={2}>Decrypt</ToggleButton>
+              </ToggleButtonGroup>
+              <ButtonGroup>
+                <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>Clear</Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
         </Card>
-        <Card>
+        <Card className="KeyedCipherStreamBase-output">
           <Card.Header>Output</Card.Header>
-          <pre className="KeyedCipherStreamBase-output">
-            {this.state.output}
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.state.output || ' '}
+            </pre>
+          </Card.Body>
         </Card>
       </div>
     );

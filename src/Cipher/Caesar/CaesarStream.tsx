@@ -2,13 +2,16 @@ import React, { FormEvent, MouseEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import CaesarList from './CaesarList';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.scss';
 
-type Props = {};
+type Props = {
+  prompt: string;
+};
 type State = {
   text: string,
   list: Array<string>,
@@ -43,21 +46,32 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="CaesarStream">
-        <FormControl
-          className="CaesarStream-input"
-          onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
-          placeholder="Text"
-          ref={this._input}
-          value={this.state.text}
-        />
-        <ButtonToolbar className="CaesarStream-commands">
-          <ButtonGroup>
-            <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>
-              Clear
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <CaesarList list={this.state.list} />
+        <Card className="CaesarStream-input">
+          <Card.Header>{this.props.prompt}</Card.Header>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <ButtonToolbar>
+              <ButtonGroup>
+                <Button
+                  onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}
+                >
+                  Clear
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <CaesarList list={this.state.list} />
+          </Card.Body>
+        </Card>
       </div>
     );
   }

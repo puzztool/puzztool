@@ -10,14 +10,13 @@ class Caesar extends Component {
           <div className="Caesar-info">
             <h2>Caesar Cipher</h2>
             <p>
-              A Caesar cipher works by shifting every letter by a fixed amount.  
+              A Caesar cipher works by shifting every letter by a fixed amount.
               This is a simple cipher - there are only 25 different shifts for each letter.
             </p>
-            <p>
-              Type in your text, and all possible shifts will be displayed. 
-            </p>
           </div>
-          <CaesarStream />
+          <CaesarStream
+            prompt="Type in your text, and all possible shifts will be displayed."
+          />
         </div>
       </div>
     );

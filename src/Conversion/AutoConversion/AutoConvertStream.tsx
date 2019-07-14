@@ -2,6 +2,7 @@ import React, { FormEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
@@ -46,29 +47,38 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   public render() {
     return (
       <div className="AutoConvertStream">
-        <FormControl
-          className="AutoConvertStream-input"
-          onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
-          placeholder="Text"
-          ref={this._input}
-          value={this.state.text}
-        />
-        <pre className="AutoConvertStream-output">
-          {this.state.output}
-        </pre>
-        <ButtonToolbar className="AutoConvertStream-commands">
-          <ButtonGroup>
-            <Button onClick={() => this.onClearClick()}>
-              Clear
+        <Card className="AutoConvertStream-input">
+          <Card.Header>Input</Card.Header>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <ButtonToolbar className="AutoConvertStream-commands">
+              <ButtonGroup>
+                <Button onClick={() => this.onClearClick()}>
+                  Clear
             </Button>
-            <Button 
-              onClick={() => this.toggleHomogeneous()}
-              active={this.state.homogeneous}
-            >
-              Force Consistent Encoding
+                <Button
+                  onClick={() => this.toggleHomogeneous()}
+                  active={this.state.homogeneous}
+                >
+                  Force Consistent Encoding
             </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <pre className="AutoConvertStream-output">
+              {this.state.output || ' '}
+            </pre>
+          </Card.Body>
+        </Card>
       </div>
     );
   }

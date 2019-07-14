@@ -3,11 +3,13 @@
 
   .AutoConvertStream-input {
     margin-bottom: 10px;
-  }
 
-  .AutoConvertStream-output {
-    font-size: 16px;
-    min-height: 44px;
-    white-space: pre-wrap;
+    input {
+      margin-bottom: 10px;
+    }
+
+    .btn-toolbar {
+      margin-bottom: -10px;
+    }
   }
 }

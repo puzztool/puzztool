@@ -60,46 +60,50 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             <Col md={4}>
               <Card className="WordSearchComponent-ListInput">
                 <Card.Header>Enter the list of words to find, one word per line</Card.Header>
-                <FormControl
-                  as="textarea"
-                  className="WordSearchComponent-ListInput"
-                  label="Enter the word search grid, one row of letters per line"
-                  onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
-                  placeholder="Word List To Find"
-                  value={this.state.wordListInputText}
-                />
-                {this.renderEmptyDirection()}
-                <FormCheck
-                  checked={this._useDiagonals}
-                  id="WordSearchComponent-checkbox-diagonal"
-                  label="Use diagonal directions"
-                  onChange={
-                    (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
-                  }
-                  type="checkbox"
-                />
-                <FormCheck
-                  checked={this._useCardinals}
-                  id="WordSearchComponent-checkbox-cardinal"
-                  label="Use cardinal directions"
-                  onChange={
-                    (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
-                  }
-                  type="checkbox"
-                />
+                <Card.Body>
+                  <FormControl
+                    as="textarea"
+                    className="WordSearchComponent-ListInput"
+                    label="Enter the word search grid, one row of letters per line"
+                    onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
+                    placeholder="Word List To Find"
+                    value={this.state.wordListInputText}
+                  />
+                  {this.renderEmptyDirection()}
+                  <FormCheck
+                    checked={this._useDiagonals}
+                    id="WordSearchComponent-checkbox-diagonal"
+                    label="Use diagonal directions"
+                    onChange={
+                      (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
+                    }
+                    type="checkbox"
+                  />
+                  <FormCheck
+                    checked={this._useCardinals}
+                    id="WordSearchComponent-checkbox-cardinal"
+                    label="Use cardinal directions"
+                    onChange={
+                      (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
+                    }
+                    type="checkbox"
+                  />
+                </Card.Body>
               </Card>
             </Col>
             <Col md={8}>
               <Card className="WordSearchComponent-GridInput">
                 <Card.Header>Enter the word search grid, one row of letters per line</Card.Header>
-                <FormControl
-                  as="textarea"
-                  onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
-                  placeholder="Grid Text"
-                  ref={this._input}
-                  spellCheck={false}
-                  value={this.state.gridInputText}
-                />
+                <Card.Body>
+                  <FormControl
+                    as="textarea"
+                    onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
+                    placeholder="Grid Text"
+                    ref={this._input}
+                    spellCheck={false}
+                    value={this.state.gridInputText}
+                  />
+                </Card.Body>
               </Card>
             </Col>
           </Row>
@@ -107,11 +111,13 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
             <Col md={12}>
               <Card className="WordSearchComponent-GridOutput">
                 <Card.Header>Output</Card.Header>
-                <Table className="WordSearchComponent-TableOutput" borderless={true}>
-                  <tbody>
-                    {this.renderOutput()}
-                  </tbody>
-                </Table>
+                <Card.Body>
+                  <Table className="WordSearchComponent-TableOutput" borderless={true}>
+                    <tbody>
+                      {this.renderOutput()}
+                    </tbody>
+                  </Table>
+                </Card.Body>
               </Card>
             </Col>
           </Row>

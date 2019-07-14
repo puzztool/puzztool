@@ -4,6 +4,21 @@ body {
   font-size: 16px;
 }
 
+pre {
+  font-size: 16px;
+  margin-bottom: 0px;
+  white-space: pre-wrap;
+}
+
+.btn-toolbar {
+  margin-right: -5px;
+}
+
+.btn-group {
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
 .btn {
   font-size: 20px;
   min-height: 44px;
@@ -11,6 +26,14 @@ body {
 
 .form-control {
   font-size: 16px;
+}
+
+.card-header {
+  padding: 7px 10px;
+}
+
+.card-body {
+  padding: 10px;
 }
 
 .blinking-cursor {

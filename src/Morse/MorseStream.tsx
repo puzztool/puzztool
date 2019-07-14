@@ -48,33 +48,43 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
       <div className="MorseStream">
         <Card className="MorseStream-morse-output">
           <Card.Header>Input</Card.Header>
-          <pre>
-            {this.codeText()}<span className="blinking-cursor">|</span>
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.codeText()}<span className="blinking-cursor">|</span>
+            </pre>
+          </Card.Body>
         </Card>
         <Card className="MorseStream-output">
           <Card.Header>Plaintext</Card.Header>
-          <pre>
-            {this.plainText() || ' '}
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.plainText() || ' '}
+            </pre>
+          </Card.Body>
         </Card>
         <Card className="MorseStream-output">
           <Card.Header>Swap Dots/Dashes</Card.Header>
-          <pre>
-            {this.invertText() || ' '}
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.invertText() || ' '}
+            </pre>
+          </Card.Body>
         </Card>
         <Card className="MorseStream-output">
           <Card.Header>Right to Left</Card.Header>
-          <pre>
-            {this.reverseText() || ' '}
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.reverseText() || ' '}
+            </pre>
+          </Card.Body>
         </Card>
         <Card className="MorseStream-output">
           <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
-          <pre>
-            {this.invertReverseText() || ' '}
-          </pre>
+          <Card.Body>
+            <pre>
+              {this.invertReverseText() || ' '}
+            </pre>
+          </Card.Body>
         </Card>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
