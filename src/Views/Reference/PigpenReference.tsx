@@ -4,7 +4,7 @@ import './PigpenReference.scss';
 class PigpenReference extends Component {
   public render() {
     return (
-      <div id="PigpenReference">
+      <div className="PigpenReference">
         <img
           className="PigpenReference-img"
           src={require('../../Images/pigpen_key.svg')}
