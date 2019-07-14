@@ -2,6 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import SemaphoreCharacter from './SemaphoreCharacter';
 import {
@@ -50,25 +54,56 @@ class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="SemaphoreStream">
-        <div className="SemaphoreStream-input">
-          <SemaphoreCharacter
-            character={this.state.character}
-            onChange={(type, direction) => this.onCharacterChange(type, direction)}
-          />
-          <div className="SemaphoreStream-view">{this.state.character.toString() || '?'}</div>
-        </div>
-        <ButtonToolbar className="SemaphoreStream-commands">
-          <ButtonGroup>
-            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
-            <Button onClick={() => this.onNextClick()}>Next</Button>
-          </ButtonGroup>
-          <ButtonGroup>
-            <Button onClick={() => this.onClearClick()}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <pre className="SemaphoreStream-output">
-          {this.state.stream}<span className="blinking-cursor">|</span>
-        </pre>
+        <Card className="SemaphoreStream-input">
+          <Card.Header>Input</Card.Header>
+          <Card.Body>
+            <Container fluid={true}>
+              <Row>
+                <Col
+                  xs="auto"
+                  sm="auto"
+                  md="auto"
+                >
+                  <SemaphoreCharacter
+                    character={this.state.character}
+                    onChange={(type, direction) => this.onCharacterChange(type, direction)}
+                  />
+                </Col>
+                <Col>
+                  <div className="SemaphoreStream-view">{this.state.character.toString() || '?'}</div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <ButtonToolbar>
+                    <ButtonGroup>
+                      <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button onClick={() => this.onNextClick()}>Next</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        onClick={() => this.onClearClick()}
+                        variant="danger"
+                      >
+                        Clear
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonToolbar>
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <pre className="SemaphoreStream-output">
+              {this.state.stream}<span className="blinking-cursor">|</span>
+            </pre>
+          </Card.Body>
+        </Card>
       </div>
     );
   }

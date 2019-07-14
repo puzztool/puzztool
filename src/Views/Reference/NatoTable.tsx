@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { NatoCharacter, NatoData } from 'puzzle-lib';
 import Table from 'react-bootstrap/Table';
+import { NatoCharacter, NatoData } from 'puzzle-lib';
+import './NatoTable.scss';
 
 class NatoTable extends Component {
   public render() {
     return (
+      <div className="NatoTable">
         <Table striped={true} responsive={true}>
           <thead>
             <tr>
@@ -16,6 +18,7 @@ class NatoTable extends Component {
             {this.renderRows(NatoData.instance.entries)}
           </tbody>
         </Table>
+      </div>
     );
   }
 

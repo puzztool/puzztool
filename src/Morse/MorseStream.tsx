@@ -88,21 +88,34 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
         </Card>
         <ButtonToolbar className="MorseStream-inputCommands">
           <ButtonGroup>
-            <Button onClick={() => this.onDotClick()}>
+            <Button
+              onClick={() => this.onDotClick()}
+              variant="primary"
+            >
               {MorsePicture.renderDot()}
             </Button>
-            <Button onClick={() => this.onDashClick()}>
+            <Button
+              onClick={() => this.onDashClick()}
+              variant="primary"
+            >
               {MorsePicture.renderDash()}
             </Button>
-            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
           </ButtonGroup>
         </ButtonToolbar>
         <ButtonToolbar className="MorseStream-commands">
           <ButtonGroup>
+            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+          </ButtonGroup>
+          <ButtonGroup>
             <Button onClick={() => this.onNextClick()}>Next</Button>
           </ButtonGroup>
           <ButtonGroup>
-            <Button onClick={() => this.onClearClick()}>Clear</Button>
+            <Button
+              onClick={() => this.onClearClick()}
+              variant="danger"
+            >
+              Clear
+            </Button>
           </ButtonGroup>
         </ButtonToolbar>
       </div>

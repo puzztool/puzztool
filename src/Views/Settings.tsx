@@ -20,7 +20,10 @@ class Home extends Component {
                   local storage. In the event that state becomes corrupted it can
                   be cleared using the button below.
                 </p>
-                <Button onClick={() => this.onClearClick()}>
+                <Button
+                  onClick={() => this.onClearClick()}
+                  variant="danger"
+                >
                   Clear saved state
                 </Button>
               </Card.Body>

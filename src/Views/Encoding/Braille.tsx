@@ -4,7 +4,6 @@ import Tabs from 'react-bootstrap/Tabs';
 import TabViewBase from '../TabViewBase';
 import BrailleStream from '../../Braille/BrailleStream';
 import BrailleTable from '../../Braille/BrailleTable';
-import './Braille.scss';
 
 class Braille extends TabViewBase {
   public render() {

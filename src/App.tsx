@@ -60,7 +60,7 @@ const Morse = Loadable({
 });
 
 const NatoAlphabet = Loadable({
-  loader: () => import('./Views/Reference/Nato'),
+  loader: () => import('./Views/Reference/NatoTable'),
   loading: Loading,
   timeout: defaultTimeout,
 });

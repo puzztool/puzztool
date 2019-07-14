@@ -4,7 +4,6 @@ import Tabs from 'react-bootstrap/Tabs';
 import TabViewBase from '../TabViewBase';
 import ResistorTable from '../../Resistor/ResistorTable';
 import ResistorInput from '../../Resistor/ResistorInput';
-import './Resistors.scss';
 
 class Resistors extends TabViewBase {
   public render() {

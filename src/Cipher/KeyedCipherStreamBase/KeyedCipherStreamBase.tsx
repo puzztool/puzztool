@@ -11,7 +11,7 @@ import { KeyedCipherStringBase } from 'puzzle-lib';
 import './KeyedCipherStreamBase.scss';
 
 export interface KeyedCipherStreamProps {
-  prompt: string;
+  prompt: JSX.Element | string;
 }
 
 interface KeyedCipherStreamState {
@@ -85,7 +85,12 @@ abstract class KeyedCipherStreamBase
                 <ToggleButton value={2}>Decrypt</ToggleButton>
               </ToggleButtonGroup>
               <ButtonGroup>
-                <Button onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}>Clear</Button>
+                <Button
+                  onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}
+                  variant="danger"
+                >
+                  Clear
+                </Button>
               </ButtonGroup>
             </ButtonToolbar>
           </Card.Body>

@@ -1,13 +1,18 @@
 .ResistorInput {
-  margin: 0px 15px;
+  margin: 10px 15px 0px;
 
-  .ResistorDisplay {
+  .btn-toolbar {
+    margin-bottom: -10px;
+  }
+
+  .ResistorInput-display {
     margin-bottom: 10px;
   }
 
-  .ResistorValue {
-    font-size: 16pt;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .ResistorInput-output {
+    .card-body {
+      font-size: 16pt;
+      font-weight: bold;
+    }
   }
 }

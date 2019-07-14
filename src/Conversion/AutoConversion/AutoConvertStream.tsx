@@ -4,11 +4,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
 import './AutoConvertStream.scss';
 
-type Props = {};
+type Props = {
+  prompt: JSX.Element | string;
+};
 type State = {
   text: string,
   output: string,
@@ -23,7 +27,7 @@ type SavedState = {
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
   private _text = '';
-  private _homogeneous = true;
+  private _useConsistentEncoding = true;
 
   constructor(props: Props) {
     super(props);
@@ -48,7 +52,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     return (
       <div className="AutoConvertStream">
         <Card className="AutoConvertStream-input">
-          <Card.Header>Input</Card.Header>
+          <Card.Header>{this.props.prompt}</Card.Header>
           <Card.Body>
             <FormControl
               onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
@@ -57,16 +61,22 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
               value={this.state.text}
             />
             <ButtonToolbar className="AutoConvertStream-commands">
+              <ToggleButtonGroup<boolean>
+                defaultValue={true}
+                name="options"
+                onChange={(value) => this.requireConsistentEncoding(value)}
+                type="radio"
+              >
+                <ToggleButton value={true}>Consistent</ToggleButton>
+                <ToggleButton value={false}>Mixed</ToggleButton>
+              </ToggleButtonGroup>
               <ButtonGroup>
-                <Button onClick={() => this.onClearClick()}>
-                  Clear
-            </Button>
                 <Button
-                  onClick={() => this.toggleHomogeneous()}
-                  active={this.state.homogeneous}
+                  onClick={() => this.onClearClick()}
+                  variant="danger"
                 >
-                  Force Consistent Encoding
-            </Button>
+                  Clear
+                </Button>
               </ButtonGroup>
             </ButtonToolbar>
           </Card.Body>
@@ -90,14 +100,14 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   protected onSaveState() {
     return {
       text: this._text,
-      homogeneous: this._homogeneous,
+      homogeneous: this._useConsistentEncoding,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._text = savedState.text;
-      this._homogeneous = savedState.homogeneous;
+      this._useConsistentEncoding = savedState.homogeneous;
     }
   }
 
@@ -105,7 +115,7 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.setState({
       text: this._text,
       output: this.calculateOutput(),
-      homogeneous: this._homogeneous,
+      homogeneous: this._useConsistentEncoding,
     });
   }
 
@@ -120,13 +130,13 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.updateState();
   }
 
-  private toggleHomogeneous() {
-    this._homogeneous = !this._homogeneous;
+  private requireConsistentEncoding(value: boolean) {
+    this._useConsistentEncoding = value;
     this.updateState();
   }
 
   private calculateOutput() {
-    return StringAutoConvert.convertString(this._text, this._homogeneous);
+    return StringAutoConvert.convertString(this._text, this._useConsistentEncoding);
   }
 }
 

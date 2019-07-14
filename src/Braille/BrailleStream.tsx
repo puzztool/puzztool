@@ -2,6 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import BrailleCharacter from './BrailleCharacter';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import {
@@ -53,25 +57,56 @@ class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
   public render() {
     return (
       <div className="BrailleStream">
-        <pre className="BrailleStream-output">
-          {this.state.stream.toString()}<span className="blinking-cursor">|</span>
-        </pre>
-        <div className="BrailleStream-input">
-          <BrailleCharacter
-            character={this.state.character}
-            onClick={i => this.onCharacterClick(i)}
-          />
-          <div className="BrailleStream-view">{this.state.character.toString() || '?'}</div>
-        </div>
-        <ButtonToolbar className="BrailleStream-commands">
-          <ButtonGroup>
-            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
-            <Button onClick={() => this.onNextClick()}>Next</Button>
-          </ButtonGroup>
-          <ButtonGroup>
-            <Button onClick={() => this.onClearClick()}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
+        <Card className="BrailleStream-input">
+          <Card.Header>Input</Card.Header>
+          <Card.Body>
+            <Container fluid={true}>
+              <Row>
+                <Col
+                  xs="auto"
+                  sm="auto"
+                  md="auto"
+                >
+                  <BrailleCharacter
+                    character={this.state.character}
+                    onClick={i => this.onCharacterClick(i)}
+                  />
+                </Col>
+                <Col className="BrailleStream-view">
+                  {this.state.character.toString() || '?'}
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <ButtonToolbar>
+                    <ButtonGroup>
+                      <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button onClick={() => this.onNextClick()}>Next</Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        onClick={() => this.onClearClick()}
+                        variant="danger"
+                      >
+                        Clear
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonToolbar>
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <pre className="BrailleStream-output">
+              {this.state.stream.toString()}<span className="blinking-cursor">|</span>
+            </pre>
+          </Card.Body>
+        </Card>
       </div>
     );
   }

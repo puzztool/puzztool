@@ -1,10 +1,12 @@
 .NavalFlagTable {
-  .flagCharacter {
+  text-align: center;
+
+  .NavalFlagTable-flagCharacter {
     font-size: 72px;
     font-weight: bold;
   }
 
-  .flagImage {
+  .NavalFlagTable-flagImage {
     width: 100px;
   }
 }

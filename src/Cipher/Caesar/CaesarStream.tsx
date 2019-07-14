@@ -10,7 +10,7 @@ import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.scss';
 
 type Props = {
-  prompt: string;
+  prompt: JSX.Element | string;
 };
 type State = {
   text: string,
@@ -59,6 +59,7 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
               <ButtonGroup>
                 <Button
                   onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}
+                  variant="danger"
                 >
                   Clear
                 </Button>
