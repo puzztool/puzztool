@@ -1,1 +1,0 @@
-{"version":3,"sources":["NavalFlagTable.css"],"names":[],"mappings":"AAAA,eACI,cAAe,CACf,eACJ,CAEA,WACI,WACJ","file":"17.c8b40d14.chunk.css","sourcesContent":[".flagCharacter {\n    font-size: 72px;\n    font-weight: bold;\n}\n\n.flagImage {\n    width: 100px;\n}\n"]}
