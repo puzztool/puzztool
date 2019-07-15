@@ -94,6 +94,8 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
             >
               {MorsePicture.renderDot()}
             </Button>
+          </ButtonGroup>
+          <ButtonGroup>
             <Button
               onClick={() => this.onDashClick()}
               variant="primary"
