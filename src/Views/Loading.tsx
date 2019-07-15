@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as Loadable from 'react-loadable';
-import './Loading.css';
+import './Loading.scss';
 
 class Loading extends Component<Loadable.LoadingComponentProps> {
   public render() {

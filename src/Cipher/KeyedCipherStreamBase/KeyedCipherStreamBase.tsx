@@ -1,10 +1,18 @@
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import React, { FormEvent, MouseEvent } from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
-import { KeyedCipherStringBase  } from 'puzzle-lib';
-import './KeyedCipherStreamBase.css';
+import { KeyedCipherStringBase } from 'puzzle-lib';
+import './KeyedCipherStreamBase.scss';
 
-export interface KeyedCipherStreamProps {}
+export interface KeyedCipherStreamProps {
+  prompt: JSX.Element | string;
+}
 
 interface KeyedCipherStreamState {
   conversion: number;
@@ -20,10 +28,13 @@ interface KeyedCipherStreamSavedState {
 }
 
 abstract class KeyedCipherStreamBase
-    extends LocalStorageComponent<KeyedCipherStreamProps, KeyedCipherStreamState, KeyedCipherStreamSavedState> {
+  extends LocalStorageComponent<
+  KeyedCipherStreamProps,
+  KeyedCipherStreamState,
+  KeyedCipherStreamSavedState> {
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
   private readonly _cipher: KeyedCipherStringBase;
-  private _conversion: number = 2;
-  private _input?: HTMLInputElement;
+  private _conversion = 2;
 
   constructor(props: KeyedCipherStreamProps, cipher: KeyedCipherStringBase) {
     super(props);
@@ -40,45 +51,58 @@ abstract class KeyedCipherStreamBase
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
   public render() {
     return (
       <div className="KeyedCipherStreamBase">
-        <FormControl
-          className="KeyedCipherStreamBase-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
-          placeholder="Text"
-          value={this.state.text}
-        />
-        <FormControl
-          className="KeyedCipherStreamBase-input"
-          onChange={(event: FormEvent<FormControl>) => this.onKeyChanged(event)}
-          placeholder="Key"
-          value={this.state.key}
-        />
-        <ButtonToolbar className="KeyedCipherStreamBase-commands">
-          <ToggleButtonGroup
-            name="KeyedCipherStreamBase-conversion"
-            // tslint:disable-next-line: no-any
-            onChange={(value: any) => this.onConversionChanged(value as number)}
-            type="radio"
-            value={this.state.conversion}
-          >
-            <ToggleButton value={1}>Encrypt</ToggleButton>
-            <ToggleButton value={2}>Decrypt</ToggleButton>
-          </ToggleButtonGroup>
-          <ButtonGroup>
-            <Button onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <pre className="KeyedCipherStreamBase-output">
-          {this.state.output}
-        </pre>
+        <Card className="KeyedCipherStreamBase-input">
+          <Card.Header>{this.props.prompt}</Card.Header>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onKeyChanged(event)}
+              placeholder="Key"
+              value={this.state.key}
+            />
+            <ButtonToolbar>
+              <ToggleButtonGroup<number>
+                name="KeyedCipherStreamBase-conversion"
+                onChange={(value: number) => this.onConversionChanged(value)}
+                type="radio"
+                value={this.state.conversion}
+              >
+                <ToggleButton value={1}>Encrypt</ToggleButton>
+                <ToggleButton value={2}>Decrypt</ToggleButton>
+              </ToggleButtonGroup>
+              <ButtonGroup>
+                <Button
+                  onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}
+                  variant="danger"
+                >
+                  Clear
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
+        </Card>
+        <Card className="KeyedCipherStreamBase-output">
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <pre>
+              {this.state.output || ' '}
+            </pre>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
@@ -108,13 +132,13 @@ abstract class KeyedCipherStreamBase
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._cipher.text = element.value;
     this.updateState();
   }
 
-  private onKeyChanged(event: SyntheticEvent<FormControl>) {
+  private onKeyChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._cipher.key = element.value;
     this.updateState();
@@ -125,7 +149,7 @@ abstract class KeyedCipherStreamBase
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<HTMLButtonElement>) {
     this._cipher.key = '';
     this._cipher.text = '';
     this._conversion = 2;

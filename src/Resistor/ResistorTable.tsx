@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import Helpers from '../Common/Helpers';
-import './ResistorTable.css';
+import './ResistorTable.scss';
 
 class ResistorTable extends Component {
   public render() {

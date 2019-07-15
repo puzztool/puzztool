@@ -1,10 +1,18 @@
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import React, { FormEvent } from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
-import './AutoConvertStream.css';
+import './AutoConvertStream.scss';
 
-type Props = {};
+type Props = {
+  prompt: JSX.Element | string;
+};
 type State = {
   text: string,
   output: string,
@@ -17,9 +25,9 @@ type SavedState = {
 };
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
-  private _text: string = '';
-  private _input?: HTMLInputElement;
-  private _homogeneous = true;
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private _text = '';
+  private _useConsistentEncoding = true;
 
   constructor(props: Props) {
     super(props);
@@ -34,39 +42,53 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
   public render() {
     return (
       <div className="AutoConvertStream">
-        <FormControl
-          className="AutoConvertStream-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
-          placeholder="Text"
-          value={this.state.text}
-        />
-        <pre className="AutoConvertStream-output">
-          {this.state.output}
-        </pre>
-        <ButtonToolbar className="AutoConvertStream-commands">
-          <ButtonGroup>
-            <Button 
-              onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}
-            >
-              Clear
-            </Button>
-            <Button 
-              onClick={(event: MouseEvent<Button>) => this.toggleHomogeneous(event)}
-              active={this.state.homogeneous}
-            >
-              Force Consistent Encoding
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
+        <Card className="AutoConvertStream-input">
+          <Card.Header>{this.props.prompt}</Card.Header>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <ButtonToolbar className="AutoConvertStream-commands">
+              <ToggleButtonGroup<boolean>
+                defaultValue={true}
+                name="options"
+                onChange={(value) => this.requireConsistentEncoding(value)}
+                type="radio"
+              >
+                <ToggleButton value={true}>Consistent</ToggleButton>
+                <ToggleButton value={false}>Mixed</ToggleButton>
+              </ToggleButtonGroup>
+              <ButtonGroup>
+                <Button
+                  onClick={() => this.onClearClick()}
+                  variant="danger"
+                >
+                  Clear
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <pre className="AutoConvertStream-output">
+              {this.state.output || ' '}
+            </pre>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
@@ -78,14 +100,14 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
   protected onSaveState() {
     return {
       text: this._text,
-      homogeneous: this._homogeneous,
+      homogeneous: this._useConsistentEncoding,
     };
   }
 
   protected onRestoreState(savedState: SavedState | null) {
     if (savedState !== null) {
       this._text = savedState.text;
-      this._homogeneous = savedState.homogeneous;
+      this._useConsistentEncoding = savedState.homogeneous;
     }
   }
 
@@ -93,28 +115,28 @@ class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> 
     this.setState({
       text: this._text,
       output: this.calculateOutput(),
-      homogeneous: this._homogeneous,
+      homogeneous: this._useConsistentEncoding,
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
+  private onClearClick() {
     this._text = '';
     this.updateState();
   }
 
-  private toggleHomogeneous(event: MouseEvent<Button>) {
-    this._homogeneous = !this._homogeneous;
+  private requireConsistentEncoding(value: boolean) {
+    this._useConsistentEncoding = value;
     this.updateState();
   }
 
   private calculateOutput() {
-    return StringAutoConvert.convertString(this._text, this._homogeneous);
+    return StringAutoConvert.convertString(this._text, this._useConsistentEncoding);
   }
 }
 

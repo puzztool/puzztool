@@ -1,11 +1,17 @@
-import React, { FormEvent, MouseEvent, SyntheticEvent } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, FormControl } from 'react-bootstrap';
+import React, { FormEvent, MouseEvent } from 'react';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Card from 'react-bootstrap/Card';
+import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import CaesarList from './CaesarList';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
-import './CaesarStream.css';
+import './CaesarStream.scss';
 
-type Props = {};
+type Props = {
+  prompt: JSX.Element | string;
+};
 type State = {
   text: string,
   list: Array<string>,
@@ -16,8 +22,8 @@ type SavedState = {
 };
 
 class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _str: CaesarString = new CaesarString();
-  private _input?: HTMLInputElement;
+  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private readonly _str = new CaesarString();
 
   constructor(props: Props) {
     super(props);
@@ -31,27 +37,42 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   public componentDidMount() {
     super.componentDidMount();
 
-    if (this._input) {
-      this._input.focus();
+    const element = this._input.current;
+    if (element) {
+      element.focus();
     }
   }
 
   public render() {
     return (
       <div className="CaesarStream">
-        <FormControl
-          className="CaesarStream-input"
-          inputRef={(input: HTMLInputElement) => { this._input = input; }}
-          onChange={(event: FormEvent<FormControl>) => this.onTextChanged(event)}
-          placeholder="Text"
-          value={this.state.text}
-        />
-        <ButtonToolbar className="CaesarStream-commands">
-          <ButtonGroup>
-            <Button onClick={(event: MouseEvent<Button>) => this.onClearClick(event)}>Clear</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <CaesarList list={this.state.list} />
+        <Card className="CaesarStream-input">
+          <Card.Header>{this.props.prompt}</Card.Header>
+          <Card.Body>
+            <FormControl
+              onChange={(event: FormEvent<FormControlProps>) => this.onTextChanged(event)}
+              placeholder="Text"
+              ref={this._input}
+              value={this.state.text}
+            />
+            <ButtonToolbar>
+              <ButtonGroup>
+                <Button
+                  onClick={(event: MouseEvent<HTMLButtonElement>) => this.onClearClick(event)}
+                  variant="danger"
+                >
+                  Clear
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Output</Card.Header>
+          <Card.Body>
+            <CaesarList list={this.state.list} />
+          </Card.Body>
+        </Card>
       </div>
     );
   }
@@ -79,13 +100,13 @@ class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
     });
   }
 
-  private onTextChanged(event: SyntheticEvent<FormControl>) {
+  private onTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
     this._str.text = element.value;
     this.updateState();
   }
 
-  private onClearClick(event: MouseEvent<Button>) {
+  private onClearClick(event: MouseEvent<HTMLButtonElement>) {
     this._str.text = '';
     this.updateState();
   }

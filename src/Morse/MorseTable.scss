@@ -1,0 +1,22 @@
+.MorseTable {
+  .table-responsive {
+    border-top: none;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  td {
+    text-align: center;
+    font-size: 40pt;
+    font-weight: bold;
+    height: 16px;
+  }
+
+  .MorseTable-morseView svg.MorsePicture-dotIcon,
+  .MorseTable-morseView svg.MorsePicture-dashIcon {
+    height: 16px;
+    margin-right: 16px;
+  }
+}

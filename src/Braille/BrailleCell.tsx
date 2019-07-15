@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
-import './BrailleCell.css';
+import './BrailleCell.scss';
 
 type Props = {
   character: Character,

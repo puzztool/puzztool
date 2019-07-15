@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import TabViewBase from '../TabViewBase';
 import BrailleStream from '../../Braille/BrailleStream';
 import BrailleTable from '../../Braille/BrailleTable';
-import './Braille.css';
 
 class Braille extends TabViewBase {
   public render() {

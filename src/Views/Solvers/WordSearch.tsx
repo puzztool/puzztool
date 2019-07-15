@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import WordSearchComponent from '../../Solvers/WordSearchComponent';
-import './WordSearch.css';
+import './WordSearch.scss';
 
 class WordSearch extends Component {
   public render() {
     return (
-      <div>
-        <div className="WordSearch-helpText">
-          <h2>
-            Wordsearch solver
-          </h2>
-        </div>
+      <div className="WordSearch">
+        <h2>Word Search</h2>
         <WordSearchComponent />
       </div>
     );

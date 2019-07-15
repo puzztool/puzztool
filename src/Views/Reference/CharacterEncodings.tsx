@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import AsciiTable from '../../Conversion/Character/AsciiTable';
 import OrdinalTable from '../../Conversion/Character/OrdinalTable';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
-import './CharacterEncodings.css';
 
 type Props = {};
 type State = {

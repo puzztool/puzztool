@@ -1,0 +1,51 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+body {
+  font-size: 16px;
+}
+
+pre {
+  font-size: 16px;
+  margin-bottom: 0px;
+  white-space: pre-wrap;
+}
+
+.btn-toolbar {
+  margin-right: -5px;
+}
+
+.btn-group {
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.btn {
+  font-size: 20px;
+  min-height: 44px;
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+.card-header {
+  padding: 7px 10px;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.blinking-cursor {
+  animation: 1s blink step-end infinite;
+  font-weight: 100;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: inherit;
+  }
+}

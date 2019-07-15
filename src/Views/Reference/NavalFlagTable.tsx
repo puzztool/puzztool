@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { NavalFlags, CharacterImage } from 'puzzle-lib';
-import { Table } from 'react-bootstrap';
-import './NavalFlagTable.css';
+import Table from 'react-bootstrap/Table';
+import './NavalFlagTable.scss';
 
 class NavalFlagTable extends Component {
   public render() {
     return (
-      <div className="NavalFlagsTable">
-        <div className="NavalFlagsTable-content">
-          <Table striped={true} responsive={true}>
-            <thead>
-              <tr>
-                <th>Letter</th>
-                <th>Flag</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.renderRows(NavalFlags.instance.entries)}
-            </tbody>
-          </Table>
-        </div>
+      <div className="NavalFlagTable">
+        <Table striped={true} responsive={true}>
+          <thead>
+            <tr>
+              <th>Letter</th>
+              <th>Flag</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderRows(NavalFlags.instance.entries)}
+          </tbody>
+        </Table>
       </div>
     );
   }
@@ -30,9 +28,9 @@ class NavalFlagTable extends Component {
         `data:image/svg+xml,${encodeURIComponent(value.image.render())}`;
       return (
         <tr key={value.character}>
-          <td className="flagCharacter">{value.character}</td>
+          <td className="NavalFlagTable-flagCharacter">{value.character}</td>
           <td>
-            <img className="flagImage" src={dataUri} alt={value.character} />
+            <img className="NavalFlagTable-flagImage" src={dataUri} alt={value.character} />
           </td>
         </tr>
       );

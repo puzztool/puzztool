@@ -1,0 +1,23 @@
+.BrailleCell {
+  background: transparent;
+  border: none;
+  padding: 0px 2px;
+
+  svg {
+    fill: transparent;
+    height: 100%;
+    stroke: black;
+    stroke-width: 2px;
+    width: 100%;
+  }
+
+  &:active svg,
+  &.BrailleCell-selected:active svg {
+    fill: #888;
+    stroke: #888;
+  }
+
+  &.BrailleCell-selected svg {
+    fill: black;
+  }
+}

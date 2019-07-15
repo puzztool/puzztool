@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import TabViewBase from '../TabViewBase';
 import ResistorTable from '../../Resistor/ResistorTable';
 import ResistorInput from '../../Resistor/ResistorInput';
-import './Resistors.css';
 
 class Resistors extends TabViewBase {
   public render() {

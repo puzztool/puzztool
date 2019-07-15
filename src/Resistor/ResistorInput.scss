@@ -1,0 +1,22 @@
+.ResistorInput {
+  margin: 10px 15px 0px;
+
+  .btn-toolbar {
+    margin-bottom: -10px;
+  }
+
+  .ResistorInput-input {
+    margin-bottom: 10px;
+  }
+
+  .ResistorInput-display {
+    margin-bottom: 10px;
+  }
+
+  .ResistorInput-output {
+    .card-body {
+      font-size: 16pt;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { CharacterConversion as Conversion } from 'puzzle-lib';
 import CharacterTable from './CharacterTable';
-import './OrdinalTable.css';
 
 class OrdinalTable extends Component {
   public render() {
