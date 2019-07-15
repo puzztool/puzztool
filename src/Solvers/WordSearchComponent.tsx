@@ -188,7 +188,7 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
     return (
       <Alert variant="warning">
-        No directions are checked. No results will be shown.
+        No directions are selected. No results will be shown.
       </Alert>
     );
   }
