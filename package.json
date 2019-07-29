@@ -10,7 +10,7 @@
     "node-sass": "^4.12.0",
     "puzzle-lib": "^0.10.2",
     "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.9",
+    "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
     "react-loadable": "^5.5.0",
     "react-router-bootstrap": "^0.25.0",
@@ -37,7 +37,7 @@
     "@types/react-loadable": "^5.5.1",
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^4.3.4",
-    "genversion": "^2.1.1",
+    "genversion": "^2.2.0",
     "typescript": "^3.5.3"
   },
   "browserslist": [
