@@ -1,1 +1,0 @@
-{"version":3,"sources":["/home/travis/build/puzztool/puzztool/src/Views/Settings.scss"],"names":[],"mappings":"AAAA,4BAEI,mBAA2B","file":"13.67fa0d8f.chunk.css","sourcesContent":[".Settings {\n  .Settings-content {\n    padding: 0px 15px 20px 15px;\n  }\n}\n"]}

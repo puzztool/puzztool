@@ -1,0 +1,1 @@
+{"version":3,"sources":["CharacterTable.scss"],"names":[],"mappings":"AAAA,kCAEI,eAAgB,CAFpB,sCAOI,iBAAkB","file":"10.6b1fbcf6.chunk.css","sourcesContent":[".CharacterTable {\n  .table-responsive {\n    border-top: none;\n  }\n\n  th,\n  td {\n    text-align: center;\n  }\n}\n"]}
