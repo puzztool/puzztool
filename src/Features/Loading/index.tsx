@@ -1,32 +1,64 @@
-import { LoadingComponentProps } from "react-loadable";
+import { useState, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
+import ErrorIcon from "./ErrorIcon";
 import styles from "./index.module.scss";
 
-function Loading(props: LoadingComponentProps) {
+interface Props {
+  delay?: number;
+  timeout?: number;
+}
+
+function Loading(props: Props) {
+  const [pastDelay, setPastDelay] = useState(false);
+  const [timedOut, setTimedOut] = useState(false);
+
+  useEffect(() => {
+    const delay = props.delay;
+    const timeout = props.timeout;
+    let delayTimer: number;
+    let timeoutTimer: number;
+
+    if (delay && delay > 0) {
+      delayTimer = window.setTimeout(() => setPastDelay(true), delay);
+    } else {
+      setPastDelay(true);
+    }
+
+    if (timeout && timeout > 0) {
+      timeoutTimer = window.setTimeout(() => setTimedOut(true), timeout);
+    }
+
+    return () => {
+      if (delayTimer) {
+        clearTimeout(delayTimer);
+      }
+
+      if (timeoutTimer) {
+        clearTimeout(timeoutTimer);
+      }
+    };
+  }, [props.delay, props.timeout]);
+
   function getContent() {
-    if (props.error) {
+    if (timedOut) {
       return (
         <div className={styles.content}>
-          <div className={styles.error} />
-          <div>Failed to load content</div>
-        </div>
-      );
-    } else if (props.timedOut) {
-      return (
-        <div className={styles.content}>
-          <div className={styles.error} />
+          <ErrorIcon />
           <div>Timed out while loading content</div>
         </div>
       );
-    } else if (props.pastDelay) {
+    } else if (pastDelay) {
       return (
         <div className={styles.content}>
-          <div className={styles.spinner} />
-          <div>Loading</div>
+          <Spinner animation="border" role="status">
+            <div className="visually-hidden">Loading...</div>
+          </Spinner>
+          <div>Loading...</div>
         </div>
       );
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   return <div>{getContent()}</div>;
