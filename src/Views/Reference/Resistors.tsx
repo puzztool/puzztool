@@ -12,7 +12,6 @@ class Resistors extends TabViewBase {
         <div className="Resistors-content">
           <Tabs
             activeKey={this.state.activeKey}
-            animation={false}
             id="Resistors-tabs"
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
