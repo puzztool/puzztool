@@ -12,7 +12,6 @@ class Morse extends TabViewBase {
       <div className="Morse">
         <Tabs
           activeKey={this.state.activeKey}
-          animation={false}
           id="Morse-tabs"
           // tslint:disable-next-line: no-any
           onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}

@@ -12,7 +12,6 @@ class Semaphore extends TabViewBase {
         <div className="Semaphore-content">
           <Tabs
             activeKey={this.state.activeKey}
-            animation={false}
             id="Semaphore-tabs"
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}

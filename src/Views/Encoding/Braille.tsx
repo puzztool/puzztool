@@ -12,7 +12,6 @@ class Braille extends TabViewBase {
         <div className="Braille-content">
           <Tabs
             activeKey={this.state.activeKey}
-            animation={false}
             id="Braille-tabs"
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}

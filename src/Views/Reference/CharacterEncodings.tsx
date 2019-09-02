@@ -31,7 +31,6 @@ class CharacterEncodings extends LocalStorageComponent<Props, State, SavedState>
         <div className="CharacterEncodings-content">
           <Tabs
             activeKey={this.state.activeKey}
-            animation={false}
             id="CharacterEncodings-tabs"
             // tslint:disable-next-line: no-any
             onSelect={(activeKey: any) => this.onTabSelect(activeKey as number)}
