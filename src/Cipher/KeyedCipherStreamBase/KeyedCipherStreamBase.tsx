@@ -32,7 +32,7 @@ abstract class KeyedCipherStreamBase
   KeyedCipherStreamProps,
   KeyedCipherStreamState,
   KeyedCipherStreamSavedState> {
-  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private readonly _input = React.createRef<FormControl<'input'> & HTMLInputElement>();
   private readonly _cipher: KeyedCipherStringBase;
   private _conversion = 2;
 

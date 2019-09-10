@@ -4,9 +4,9 @@ import './SemaphoreCheckbox.scss';
 
 type Props = {
   character: Character,
-  className: string,
+  className?: string,
   direction: Direction,
-  onChange: (type: string, direction: Direction) => void,
+  onChange?: (type: string, direction: Direction) => void,
 };
 
 type State = {
@@ -17,6 +17,7 @@ class SemaphoreCheckbox extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    this.onChange = this.onChange.bind(this);
     this.state = {
       character: props.character,
     };
@@ -28,7 +29,7 @@ class SemaphoreCheckbox extends Component<Props, State> {
         <input
           type="checkbox"
           checked={this.state.character.hasDirection(this.props.direction)}
-          onChange={(event: FormEvent<HTMLInputElement>) => this.onCheckboxChange(event)}
+          onChange={this.onChange}
         />
         <label>{this.getPotentialMatch()}</label>
       </div>
@@ -44,9 +45,12 @@ class SemaphoreCheckbox extends Component<Props, State> {
     return '';
   }
 
-  private onCheckboxChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    this.props.onChange(element.checked ? 'add' : 'remove', this.props.direction);
+  private onChange(event: FormEvent<HTMLInputElement>) {
+    const handler = this.props.onChange;
+    if (handler) {
+      const element = event.target as HTMLInputElement;
+      handler(element.checked ? 'add' : 'remove', this.props.direction);
+    }
   }
 }
 

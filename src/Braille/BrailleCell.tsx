@@ -5,14 +5,20 @@ import './BrailleCell.scss';
 type Props = {
   character: Character,
   mask: Dot,
-  onClick: (mask: Dot) => void,
+  onClick?: (mask: Dot) => void,
 };
 
 class BrailleCell extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
   public render() {
     const classNames = `BrailleCell ${this.props.character.get(this.props.mask) ? 'BrailleCell-selected' : ''}`;
     return (
-      <button className={classNames} onClick={() => this.onClick()}>
+      <button className={classNames} onClick={this.onClick}>
         <svg viewBox="0 0 60 60">
           <circle cx="30" cy="30" r="12" />
           Sorry, your browser does not support inline SVG.
@@ -22,7 +28,10 @@ class BrailleCell extends Component<Props> {
   }
 
   private onClick() {
-    this.props.onClick(this.props.mask);
+    const handler = this.props.onClick;
+    if (handler) {
+      handler(this.props.mask);
+    }
   }
 }
 
