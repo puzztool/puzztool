@@ -27,7 +27,7 @@ type SavedState = {
 };
 
 class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _input = React.createRef<FormControl<"textarea"> & HTMLTextAreaElement>();
+  private readonly _input = React.createRef<FormControl<'textarea'> & HTMLTextAreaElement>();
   private _gridInputText: string = '';
   private _wordListInputText: string = '';
   private _useCardinals: boolean = true;

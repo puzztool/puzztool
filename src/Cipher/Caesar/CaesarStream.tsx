@@ -22,7 +22,7 @@ type SavedState = {
 };
 
 class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private readonly _input = React.createRef<FormControl<'input'> & HTMLInputElement>();
   private readonly _str = new CaesarString();
 
   constructor(props: Props) {

@@ -36,7 +36,8 @@ class Home extends Component {
                 <a
                   href="https://github.com/puzztool/puzztool/"
                   rel="noopener noreferrer"
-                  target="_blank">
+                  target="_blank"
+                >
                   Project page
                 </a>
               </Card.Body>

@@ -13,6 +13,7 @@ import './AutoConvertStream.scss';
 type Props = {
   prompt: JSX.Element | string;
 };
+
 type State = {
   text: string,
   output: string,
@@ -25,7 +26,7 @@ type SavedState = {
 };
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _input = React.createRef<FormControl<"input"> & HTMLInputElement>();
+  private readonly _input = React.createRef<FormControl<'input'> & HTMLInputElement>();
   private _text = '';
   private _useConsistentEncoding = true;
 

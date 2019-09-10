@@ -23,8 +23,7 @@ class AutoConvert extends Component {
             <li>Ordinal (A=1, B=2)</li>
           </ul>
         </div>
-        <AutoConvertStream
-          prompt="Input" />
+        <AutoConvertStream prompt="Input" />
       </div>
     );
   }

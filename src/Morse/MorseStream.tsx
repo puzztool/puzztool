@@ -181,7 +181,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
     // Chrome won't trigger keypress for any keys that can invoke browser
     // actions.
-    if ((ev.key === "Backspace") || (ev.keyCode === 8)) { // Backspace
+    if ((ev.key === 'Backspace') || (ev.keyCode === 8)) { // Backspace
       this.onBackspaceClick();
       handled = true;
     }
@@ -199,20 +199,20 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
     let handled = true;
     if (ev.key) {
       switch (ev.key) {
-        case "-":
-        case "j":
+        case '-':
+        case 'j':
           this.onDashClick();
           break;
-        case ".":
-        case "k":
+        case '.':
+        case 'k':
           this.onDotClick();
           break;
-        case "Enter":
-        case " ":
-        case "l":
+        case 'Enter':
+        case ' ':
+        case 'l':
           this.onNextClick();
           break;
-        case ";":
+        case ';':
           this.onBackspaceClick();
           break;
         default:

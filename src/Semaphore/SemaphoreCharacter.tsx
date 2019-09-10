@@ -9,10 +9,16 @@ import './SemaphoreCharacter.scss';
 
 type Props = {
   character: Character,
-  onChange: (type: string, direction: Direction) => void,
+  onChange?: (type: string, direction: Direction) => void,
 };
 
 class SemaphoreCharacter extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    this.onChange = this.onChange.bind(this);
+  }
+
   public render() {
     return (
       <div className="SemaphoreCharacter">
@@ -20,49 +26,49 @@ class SemaphoreCharacter extends Component<Props> {
           character={this.props.character}
           className="SemaphoreCheckbox-north"
           direction={Direction.North}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-northEast"
           direction={Direction.NorthEast}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-east"
           direction={Direction.East}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-southEast"
           direction={Direction.SouthEast}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-south"
           direction={Direction.South}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-southWest"
           direction={Direction.SouthWest}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-west"
           direction={Direction.West}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphoreCheckbox
           character={this.props.character}
           className="SemaphoreCheckbox-northWest"
           direction={Direction.NorthWest}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
         />
         <SemaphorePicture
           width={240}
@@ -70,6 +76,13 @@ class SemaphoreCharacter extends Component<Props> {
         />
       </div>
     );
+  }
+
+  private onChange(type: string, direction: Direction) {
+    const handler = this.props.onChange;
+    if (handler) {
+      handler(type, direction);
+    }
   }
 }
 
