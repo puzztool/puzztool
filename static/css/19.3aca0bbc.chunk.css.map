@@ -1,1 +1,0 @@
-{"version":3,"sources":["NavalFlagTable.scss"],"names":[],"mappings":"AAAA,gBACE,iBAAkB,CADpB,8CAII,cAAe,CACf,eAAiB,CALrB,0CASI,WAAY","file":"19.3aca0bbc.chunk.css","sourcesContent":[".NavalFlagTable {\n  text-align: center;\n\n  .NavalFlagTable-flagCharacter {\n    font-size: 72px;\n    font-weight: bold;\n  }\n\n  .NavalFlagTable-flagImage {\n    width: 100px;\n  }\n}\n"]}
