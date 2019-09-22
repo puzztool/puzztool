@@ -8,14 +8,12 @@ import ResistorPicture from './ResistorPicture';
 import './ResistorInput.scss';
 
 function getResistorValue(bands: (Color | null)[]) {
-  let colors: Color[] = [];
-  for (let i = 0; i < (bands.length - 1); ++i) {
-    if (bands[i] !== null) {
-      colors.push(bands[i]!);
-    }
-  }
+  // The last band is a tolerance so we need to calculate the value without it.
+  const colors = bands
+    .slice(0, -1)
+    .filter((band) => band !== null) as Color[];
 
-  let value = Resistor.getValue(colors);
+  const value = Resistor.getValue(colors);
   if (value === Resistor.INVALID_RESISTOR) {
     return 'Invalid Resistor Colors';
   } else {
@@ -29,7 +27,7 @@ function ResistorInput() {
   const [bands, setBands] = useState(initialBands);
 
   function onColorChange(index: number, color?: Color) {
-    let newBands = Array.from(bands);
+    const newBands = Array.from(bands);
     newBands[index] = color || null;
     setValue(getResistorValue(newBands));
     setBands(newBands);

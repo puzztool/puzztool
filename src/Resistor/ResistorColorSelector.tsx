@@ -11,7 +11,7 @@ interface ColorSelectorProps {
 }
 
 function colorByName(name: String) {
-  for (let color of Resistor.colorTable) {
+  for (const color of Resistor.colorTable) {
     if (name === color.name) {
       return color;
     }
