@@ -3,9 +3,14 @@ import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
+import { useLocalStorage } from '../Data/LocalStorageHooks';
 import ResistorColorSelector from './ResistorColorSelector';
 import ResistorPicture from './ResistorPicture';
 import './ResistorInput.scss';
+
+interface SavedState {
+  bands: (Color | null)[];
+}
 
 function getResistorValue(bands: (Color | null)[]) {
   // The last band is a tolerance so we need to calculate the value without it.
@@ -26,11 +31,26 @@ function ResistorInput() {
   const [value, setValue] = useState(getResistorValue(initialBands));
   const [bands, setBands] = useState(initialBands);
 
+  useLocalStorage<SavedState>(
+    'ResistorInput',
+    (savedState) => {
+      if (savedState) {
+        updateBands(savedState.bands);
+      }
+    },
+    () => {
+      return { bands };
+    });
+
+  function updateBands(newBands: (Color | null)[]) {
+    setBands(newBands);
+    setValue(getResistorValue(newBands));
+  }
+
   function onColorChange(index: number, color?: Color) {
     const newBands = Array.from(bands);
     newBands[index] = color || null;
-    setValue(getResistorValue(newBands));
-    setBands(newBands);
+    updateBands(newBands);
   }
 
   const colorsWithValue = Resistor.colorTable.filter(color => color.hasValue());
