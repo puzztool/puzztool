@@ -6,19 +6,20 @@ import LocalStorageComponent from '../Data/LocalStorageComponent';
 // 3. override render() and getLocalStorageKey()
 // 4. Ensure your constructor calls super()
 
-type TabViewBaseProps = {};
-type State = {
-  activeKey: number,
-};
+interface Props {}
 
-type SavedState = {
-  activeKey: number,
-};
+interface State {
+  activeKey: number;
+}
 
-abstract class TabViewBase extends LocalStorageComponent<TabViewBaseProps, State, SavedState> {
+interface SavedState {
+  activeKey: number;
+}
+
+abstract class TabViewBase extends LocalStorageComponent<Props, State, SavedState> {
   private _activeKey: number = 1;
 
-  constructor(props: TabViewBaseProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

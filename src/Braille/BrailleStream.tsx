@@ -16,16 +16,17 @@ import {
 } from 'puzzle-lib';
 import './BrailleStream.scss';
 
-type Props = {};
-type State = {
-  character: Character,
-  stream: Stream,
-};
+interface Props {}
 
-type SavedState = {
-  character: number,
-  stream: Encoding[],
-};
+interface State {
+  character: Character;
+  stream: Stream;
+}
+
+interface SavedState {
+  character: number;
+  stream: Encoding[];
+}
 
 class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _stream: Stream = new Stream();

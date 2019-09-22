@@ -1,14 +1,12 @@
 .MorseTable {
+  text-align: center;
+  vertical-align: middle;
+
   .table-responsive {
     border-top: none;
   }
 
-  th {
-    text-align: center;
-  }
-
   td {
-    text-align: center;
     font-size: 40pt;
     font-weight: bold;
     height: 16px;

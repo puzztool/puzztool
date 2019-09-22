@@ -10,20 +10,20 @@ import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { StringAutoConvert } from 'puzzle-lib';
 import './AutoConvertStream.scss';
 
-type Props = {
+interface Props {
   prompt: JSX.Element | string;
-};
+}
 
-type State = {
-  text: string,
-  output: string,
-  homogeneous: boolean
-};
+interface State {
+  text: string;
+  output: string;
+  homogeneous: boolean;
+}
 
-type SavedState = {
-  text: string,
-  homogeneous: boolean,
-};
+interface SavedState {
+  text: string;
+  homogeneous: boolean;
+}
 
 class AutoConvertStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _input = React.createRef<FormControl<'input'> & HTMLInputElement>();

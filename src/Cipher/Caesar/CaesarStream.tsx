@@ -9,17 +9,18 @@ import LocalStorageComponent from '../../Data/LocalStorageComponent';
 import { CaesarString } from 'puzzle-lib';
 import './CaesarStream.scss';
 
-type Props = {
+interface Props {
   prompt: JSX.Element | string;
-};
-type State = {
-  text: string,
-  list: Array<string>,
-};
+}
 
-type SavedState = {
-  text: string,
-};
+interface State {
+  text: string;
+  list: Array<string>;
+}
+
+interface SavedState {
+  text: string;
+}
 
 class CaesarStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _input = React.createRef<FormControl<'input'> & HTMLInputElement>();

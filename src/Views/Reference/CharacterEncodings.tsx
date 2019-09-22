@@ -5,14 +5,15 @@ import AsciiTable from '../../Conversion/Character/AsciiTable';
 import OrdinalTable from '../../Conversion/Character/OrdinalTable';
 import LocalStorageComponent from '../../Data/LocalStorageComponent';
 
-type Props = {};
-type State = {
-  activeKey: number,
-};
+interface Props {}
 
-type SavedState = {
-  activeKey: number,
-};
+interface State {
+  activeKey: number;
+}
+
+interface SavedState {
+  activeKey: number;
+}
 
 class CharacterEncodings extends LocalStorageComponent<Props, State, SavedState> {
   private _activeKey: number = 1;

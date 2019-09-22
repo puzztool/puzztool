@@ -1,32 +1,24 @@
-import React, { Component } from 'react';
-import * as Loadable from 'react-loadable';
+import React from 'react';
 import './Loading.scss';
+import { LoadingComponentProps } from 'react-loadable';
 
-class Loading extends Component<Loadable.LoadingComponentProps> {
-  public render() {
-    return (
-      <div className="Loading">
-        {this.getContent()}
-      </div>
-    );
-  }
-
-  private getContent() {
-    if (this.props.error) {
+function Loading(props: LoadingComponentProps) {
+  function getContent() {
+    if (props.error) {
       return (
         <div className="Loading-content">
           <div className="Loading-error" />
           <div>Failed to load content</div>
         </div>
       );
-    } else if (this.props.timedOut) {
+    } else if (props.timedOut) {
       return (
         <div className="Loading-content">
           <div className="Loading-error" />
           <div>Timed out while loading content</div>
         </div>
       );
-    } else if (this.props.pastDelay) {
+    } else if (props.pastDelay) {
       return (
         <div className="Loading-content">
           <div className="Loading-spinner" />
@@ -37,6 +29,12 @@ class Loading extends Component<Loadable.LoadingComponentProps> {
       return null;
     }
   }
+
+  return (
+    <div className="Loading">
+      {getContent()}
+    </div>
+  );
 }
 
 export default Loading;

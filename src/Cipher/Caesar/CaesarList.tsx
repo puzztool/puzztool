@@ -1,21 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './CaesarList.scss';
 
-type Props = {
-  list: Array<string>,
-};
+interface Props {
+  list: string[];
+}
 
-class CaesarList extends Component<Props> {
-  public render() {
-    return (
-      <pre className="CaesarList">
-        {this.renderListItems()}
-      </pre>
-    );
-  }
-
-  private renderListItems() {
-    return this.props.list.map((value: string, index: number) => {
+function CaesarList(props: Props) {
+  function renderListItems() {
+    return props.list.map((value: string, index: number) => {
       if (index === 0) {
         return null;
       }
@@ -25,6 +17,12 @@ class CaesarList extends Component<Props> {
       );
     });
   }
+
+  return (
+    <pre className="CaesarList">
+      {renderListItems()}
+    </pre>
+  );
 }
 
 export default CaesarList;

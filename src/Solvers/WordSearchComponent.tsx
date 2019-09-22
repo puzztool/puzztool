@@ -11,20 +11,21 @@ import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchComponent.scss';
 
-type Props = {};
-type State = {
-  gridInputText: string,
-  wordListInputText: string,
-  useDiagonals: boolean,
-  useCardinals: boolean,
-};
+interface Props {}
 
-type SavedState = {
-  gridInputText: string,
-  wordListInputText: string,
-  useDiagonals: boolean,
-  useCardinals: boolean,
-};
+interface State {
+  gridInputText: string;
+  wordListInputText: string;
+  useDiagonals: boolean;
+  useCardinals: boolean;
+}
+
+interface SavedState {
+  gridInputText: string;
+  wordListInputText: string;
+  useDiagonals: boolean;
+  useCardinals: boolean;
+}
 
 class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _input = React.createRef<FormControl<'textarea'> & HTMLTextAreaElement>();

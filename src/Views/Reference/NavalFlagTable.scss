@@ -1,7 +1,8 @@
 .NavalFlagTable {
   text-align: center;
+  vertical-align: middle;
 
-  .NavalFlagTable-flagCharacter {
+  td {
     font-size: 72px;
     font-weight: bold;
   }
