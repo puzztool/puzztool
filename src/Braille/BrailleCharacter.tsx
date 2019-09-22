@@ -1,49 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BrailleCell from './BrailleCell';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 import './BrailleCharacter.scss';
 
-type Props = {
-  character: Character,
-  onClick?: (mask: Dot) => void,
-};
+interface Props {
+  character: Character;
+  onClick?: (mask: Dot) => void;
+}
 
-class BrailleCharacter extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
-  public render() {
-    return (
-      <div className="BrailleCharacter">
-        {this.renderCell(Dot.UpperLeft)}
-        {this.renderCell(Dot.UpperRight)}
-        {this.renderCell(Dot.MiddleLeft)}
-        {this.renderCell(Dot.MiddleRight)}
-        {this.renderCell(Dot.LowerLeft)}
-        {this.renderCell(Dot.LowerRight)}
-      </div>
-    );
-  }
-
-  private renderCell(mask: Dot) {
-    return (
-      <BrailleCell
-        character={this.props.character}
-        mask={mask}
-        onClick={this.onClick}
-      />
-    );
-  }
-
-  private onClick(mask: Dot) {
-    const handler = this.props.onClick;
+function BrailleCharacter(props: Props) {
+  function onClick(mask: Dot) {
+    const handler = props.onClick;
     if (handler) {
       handler(mask);
     }
   }
+
+  function renderCell(mask: Dot) {
+    return (
+      <BrailleCell
+        character={props.character}
+        mask={mask}
+        onClick={onClick}
+      />
+    );
+  }
+
+  return (
+    <div className="BrailleCharacter">
+      {renderCell(Dot.UpperLeft)}
+      {renderCell(Dot.UpperRight)}
+      {renderCell(Dot.MiddleLeft)}
+      {renderCell(Dot.MiddleRight)}
+      {renderCell(Dot.LowerLeft)}
+      {renderCell(Dot.LowerRight)}
+    </div>
+  );
 }
 
 export default BrailleCharacter;

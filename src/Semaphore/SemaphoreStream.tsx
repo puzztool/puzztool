@@ -15,16 +15,17 @@ import {
 } from 'puzzle-lib';
 import './SemaphoreStream.scss';
 
-type Props = {};
-type State = {
-  character: Character,
-  stream: string,
-};
+interface Props {}
 
-type SavedState = {
-  directions: Direction[],
-  stream: string,
-};
+interface State {
+  character: Character;
+  stream: string;
+}
+
+interface SavedState {
+  directions: Direction[];
+  stream: string;
+}
 
 class SemaphoreStream extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _character: Character = new Character();

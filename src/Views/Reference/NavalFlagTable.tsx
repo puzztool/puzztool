@@ -1,41 +1,35 @@
-import React, { Component } from 'react';
-import { NavalFlags, CharacterImage } from 'puzzle-lib';
+import React from 'react';
+import { NavalFlags } from 'puzzle-lib';
 import Table from 'react-bootstrap/Table';
 import './NavalFlagTable.scss';
 
-class NavalFlagTable extends Component {
-  public render() {
-    return (
-      <div className="NavalFlagTable">
-        <Table striped={true} responsive={true}>
-          <thead>
-            <tr>
-              <th>Letter</th>
-              <th>Flag</th>
+function NavalFlagTable() {
+  return (
+    <div className="NavalFlagTable">
+      <Table striped={true} responsive={true}>
+        <thead>
+          <tr>
+            <th>Letter</th>
+            <th>Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {NavalFlags.instance.entries.map((value) => (
+            <tr key={value.character}>
+              <td>{value.character}</td>
+              <td>
+                <img
+                  className="NavalFlagTable-flagImage"
+                  src={`data:image/svg+xml,${encodeURIComponent(value.image.render())}`}
+                  alt={value.character}
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {this.renderRows(NavalFlags.instance.entries)}
-          </tbody>
-        </Table>
-      </div>
-    );
-  }
-
-  private renderRows(data: CharacterImage[]) {
-    return data.map((value: CharacterImage) => {
-      const dataUri =
-        `data:image/svg+xml,${encodeURIComponent(value.image.render())}`;
-      return (
-        <tr key={value.character}>
-          <td className="NavalFlagTable-flagCharacter">{value.character}</td>
-          <td>
-            <img className="NavalFlagTable-flagImage" src={dataUri} alt={value.character} />
-          </td>
-        </tr>
-      );
-    });
-  }
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
 }
 
 export default NavalFlagTable;

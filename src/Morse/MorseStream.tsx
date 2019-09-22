@@ -5,17 +5,18 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
 import LocalStorageComponent from '../Data/LocalStorageComponent';
-import MorsePicture from './MorsePicture';
+import { renderDot, renderDash } from './MorsePicture';
 import './MorseStream.scss';
 
-type Props = {};
-type State = {
-  morseStream: string
-};
+interface Props {}
 
-type SavedState = {
-  morseStream: string
-};
+interface State {
+  morseStream: string;
+}
+
+interface SavedState {
+  morseStream: string;
+}
 
 class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
 
@@ -92,7 +93,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
               onClick={() => this.onDotClick()}
               variant="primary"
             >
-              {MorsePicture.renderDot()}
+              {renderDot()}
             </Button>
           </ButtonGroup>
           <ButtonGroup>
@@ -100,7 +101,7 @@ class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
               onClick={() => this.onDashClick()}
               variant="primary"
             >
-              {MorsePicture.renderDash()}
+              {renderDash()}
             </Button>
           </ButtonGroup>
         </ButtonToolbar>

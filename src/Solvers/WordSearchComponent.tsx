@@ -11,20 +11,21 @@ import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-
 import LocalStorageComponent from '../Data/LocalStorageComponent';
 import './WordSearchComponent.scss';
 
-type Props = {};
-type State = {
-  gridInputText: string,
-  wordListInputText: string,
-  useDiagonals: boolean,
-  useCardinals: boolean,
-};
+interface Props {}
 
-type SavedState = {
-  gridInputText: string,
-  wordListInputText: string,
-  useDiagonals: boolean,
-  useCardinals: boolean,
-};
+interface State {
+  gridInputText: string;
+  wordListInputText: string;
+  useDiagonals: boolean;
+  useCardinals: boolean;
+}
+
+interface SavedState {
+  gridInputText: string;
+  wordListInputText: string;
+  useDiagonals: boolean;
+  useCardinals: boolean;
+}
 
 class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
   private readonly _input = React.createRef<FormControl<'textarea'> & HTMLTextAreaElement>();
@@ -205,21 +206,18 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
     const wordsToFind = wordList.filter(word => word.length > 0);
 
-    let charArray: string[][];
-    charArray = [];
+    const charArray: string[][] = [];
     for (const line of lines) {
       charArray.push(line.split(''));
     }
 
-    let wordSearchDirection: WordSearchDirection;
+    let wordSearchDirection: WordSearchDirection = WordSearchDirection.None;
     if (this._useCardinals && this._useDiagonals) {
       wordSearchDirection = WordSearchDirection.CardinalAndDiagonal;
     } else if (this._useCardinals) {
       wordSearchDirection = WordSearchDirection.Cardinal;
     } else if (this._useDiagonals) {
       wordSearchDirection = WordSearchDirection.Diagonal;
-    } else {
-      wordSearchDirection = WordSearchDirection.None;
     }
 
     // find the results
@@ -232,12 +230,12 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
     // display / highlight the results
     const shoudHighlight = this.highlightArray(charArray, results);
 
-    let result = [];
+    const result = [];
 
     for (let y = 0; y < charArray.length; y++) {
-      let row = [];
+      const row = [];
       for (let x = 0; x < charArray[y].length; x++) {
-        let reactKey = x.toString() + y.toString();
+        const reactKey = x.toString() + y.toString();
         if (shoudHighlight[y][x] !== 0) {
           row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
         } else {
@@ -247,12 +245,12 @@ class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState
 
       result.push(<tr key={y}>{row}</tr>);
     }
+  
     return result;
   }
 
   private highlightArray(inputGrid: string[][], results: WordSearchResult[]) {
-    let shouldHighlight: number[][];
-    shouldHighlight = [];
+    const shouldHighlight: number[][] = [];
 
     for (const line of inputGrid) {
       const hightlightLine = Array.from({ length: line.length }, (v, i) => 0);

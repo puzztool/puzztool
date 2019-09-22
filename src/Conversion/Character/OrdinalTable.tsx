@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import { CharacterConversion as Conversion } from 'puzzle-lib';
+import React from 'react';
+import { CharacterConversion } from 'puzzle-lib';
 import CharacterTable from './CharacterTable';
 
-class OrdinalTable extends Component {
-  public render() {
-    return (
-      <div className="OrdinalTable">
-        <CharacterTable data={Conversion.getOrdinalTable()} />
-      </div>
-    );
-  }
+function OrdinalTable() {
+  return (
+    <CharacterTable data={CharacterConversion.getOrdinalTable()} />
+  );
 }
 
 export default OrdinalTable;
