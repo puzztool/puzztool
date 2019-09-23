@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react';
-import LocalStorage from './LocalStorage';
+import LocalStorage from '../Data/LocalStorage';
 
 export function useLocalStorage<T>(
   localStorageKey: string,

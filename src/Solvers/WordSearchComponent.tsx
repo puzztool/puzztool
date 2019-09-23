@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -6,19 +6,10 @@ import Container from 'react-bootstrap/Container';
 import FormCheck from 'react-bootstrap/FormCheck';
 import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
-import Table from 'react-bootstrap/Table';
-import { WordSearchSolver, WordSearchResult, WordSearchDirection } from 'puzzle-lib';
-import LocalStorageComponent from '../Data/LocalStorageComponent';
+import { useFocusInput } from '../Hooks/FocusInput';
+import { useLocalStorage } from '../Hooks/LocalStorage';
+import WordSearchOutput from './WordSearchOutput';
 import './WordSearchComponent.scss';
-
-interface Props {}
-
-interface State {
-  gridInputText: string;
-  wordListInputText: string;
-  useDiagonals: boolean;
-  useCardinals: boolean;
-}
 
 interface SavedState {
   gridInputText: string;
@@ -27,244 +18,132 @@ interface SavedState {
   useCardinals: boolean;
 }
 
-class WordSearchComponent extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _input = React.createRef<FormControl<'textarea'> & HTMLTextAreaElement>();
-  private _gridInputText: string = '';
-  private _wordListInputText: string = '';
-  private _useCardinals: boolean = true;
-  private _useDiagonals: boolean = true;
+function WordSearchComponent() {
+  const inputRef = useFocusInput();
+  const [gridInputText, setGridInputText] = useState('');
+  const [wordListInputText, setWordListInputText] = useState('');
+  const [useCardinals, setUseCardinals] = useState(true);
+  const [useDiagonals, setUseDiagonals] = useState(true);
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      gridInputText: '',
-      wordListInputText: '',
-      useCardinals: true,
-      useDiagonals: true,
-    };
-  }
-
-  public componentDidMount() {
-    super.componentDidMount();
-
-    const element = this._input.current;
-    if (element) {
-      element.focus();
-    }
-  }
-
-  public render() {
-    return (
-      <div className="WordSearchComponent">
-        <Container fluid={true} >
-          <Row noGutters={true}>
-            <Col md={4}>
-              <Card className="WordSearchComponent-ListInput">
-                <Card.Header>Enter the list of words to find, one word per line</Card.Header>
-                <Card.Body>
-                  <FormControl
-                    as="textarea"
-                    className="WordSearchComponent-ListInput"
-                    label="Enter the word search grid, one row of letters per line"
-                    onChange={(event: FormEvent<FormControlProps>) => this.onListTextChanged(event)}
-                    placeholder="Word List To Find"
-                    value={this.state.wordListInputText}
-                  />
-                  {this.renderEmptyDirection()}
-                  <FormCheck
-                    checked={this._useDiagonals}
-                    id="WordSearchComponent-checkbox-diagonal"
-                    label="Use diagonal directions"
-                    onChange={
-                      (event: FormEvent<HTMLInputElement>) => this.onDiagonalCheckboxChange(event)
-                    }
-                    type="checkbox"
-                  />
-                  <FormCheck
-                    checked={this._useCardinals}
-                    id="WordSearchComponent-checkbox-cardinal"
-                    label="Use cardinal directions"
-                    onChange={
-                      (event: FormEvent<HTMLInputElement>) => this.onCardinalCheckboxChange(event)
-                    }
-                    type="checkbox"
-                  />
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={8}>
-              <Card className="WordSearchComponent-GridInput">
-                <Card.Header>Enter the word search grid, one row of letters per line</Card.Header>
-                <Card.Body>
-                  <FormControl
-                    as="textarea"
-                    onChange={(event: FormEvent<FormControlProps>) => this.onGridTextChanged(event)}
-                    placeholder="Grid Text"
-                    ref={this._input}
-                    spellCheck={false}
-                    value={this.state.gridInputText}
-                  />
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          <Row noGutters={true}>
-            <Col md={12}>
-              <Card className="WordSearchComponent-GridOutput">
-                <Card.Header>Output</Card.Header>
-                <Card.Body>
-                  <Table className="WordSearchComponent-TableOutput" borderless={true}>
-                    <tbody>
-                      {this.renderOutput()}
-                    </tbody>
-                  </Table>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-
-  protected getLocalStorageKey() {
-    return 'WordSearchComponent';
-  }
-
-  protected onSaveState() {
-    return {
-      gridInputText: this._gridInputText,
-      wordListInputText: this._wordListInputText,
-      useDiagonals: this._useDiagonals,
-      useCardinals: this._useCardinals,
-    };
-  }
-
-  protected onRestoreState(savedState: SavedState | null) {
-    if (savedState !== null) {
-      this._gridInputText = savedState.gridInputText;
-      this._wordListInputText = savedState.wordListInputText;
-      this._useDiagonals = savedState.useDiagonals;
-      this._useCardinals = savedState.useCardinals;
-    }
-  }
-
-  protected onUpdateState() {
-    this.setState({
-      gridInputText: this._gridInputText,
-      wordListInputText: this._wordListInputText,
-      useDiagonals: this._useDiagonals,
-      useCardinals: this._useCardinals,
+  useLocalStorage<SavedState>(
+    'WordSearchComponent',
+    (savedState) => {
+      if (savedState) {
+        setGridInputText(savedState.gridInputText);
+        setWordListInputText(savedState.wordListInputText);
+        setUseCardinals(savedState.useCardinals);
+        setUseDiagonals(savedState.useDiagonals);
+      }
+    },
+    () => {
+      return {
+        gridInputText,
+        wordListInputText,
+        useCardinals,
+        useDiagonals,
+      };
     });
-  }
 
-  private onGridTextChanged(event: FormEvent<FormControlProps>) {
+  function onGridTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
-    this._gridInputText = element.value;
-    this.updateState();
+    setGridInputText(element.value);
   }
 
-  private onListTextChanged(event: FormEvent<FormControlProps>) {
+  function onListTextChanged(event: FormEvent<FormControlProps>) {
     const element = (event.target as HTMLInputElement);
-    this._wordListInputText = element.value;
-    this.updateState();
+    setWordListInputText(element.value);
   }
 
-  private onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+  function onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
     const element = (event.target as HTMLInputElement);
-    this._useCardinals = element.checked;
-    this.updateState();
+    setUseCardinals(element.checked);
   }
 
-  private onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+  function onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
     const element = (event.target as HTMLInputElement);
-    this._useDiagonals = element.checked;
-    this.updateState();
+    setUseDiagonals(element.checked);
   }
 
-  private renderEmptyDirection() {
-    if (this._useCardinals || this._useDiagonals) {
-      return null;
+  function renderEmptyDirection() {
+    if (!useCardinals && !useDiagonals) {
+      return (
+        <Alert variant="warning">
+          No directions are selected. No results will be shown.
+        </Alert>
+      );
     }
-
-    return (
-      <Alert variant="warning">
-        No directions are selected. No results will be shown.
-      </Alert>
-    );
   }
 
-  private renderOutput() {
-    // Save work if possible
-    if (!this._gridInputText.trim()) {
-      return [];
-    }
-
-    // get inputs
-    const lines = this._gridInputText.split(/\r?\n/);
-    const wordList = this._wordListInputText.split(/\r?\n/);
-
-    const wordsToFind = wordList.filter(word => word.length > 0);
-
-    const charArray: string[][] = [];
-    for (const line of lines) {
-      charArray.push(line.split(''));
-    }
-
-    let wordSearchDirection: WordSearchDirection = WordSearchDirection.None;
-    if (this._useCardinals && this._useDiagonals) {
-      wordSearchDirection = WordSearchDirection.CardinalAndDiagonal;
-    } else if (this._useCardinals) {
-      wordSearchDirection = WordSearchDirection.Cardinal;
-    } else if (this._useDiagonals) {
-      wordSearchDirection = WordSearchDirection.Diagonal;
-    }
-
-    // find the results
-    const solver = new WordSearchSolver();
-    solver.setDirections(wordSearchDirection);
-    solver.setGrid(charArray);
-    solver.setWords(wordsToFind);
-    const results = solver.findWords();
-
-    // display / highlight the results
-    const shoudHighlight = this.highlightArray(charArray, results);
-
-    const result = [];
-
-    for (let y = 0; y < charArray.length; y++) {
-      const row = [];
-      for (let x = 0; x < charArray[y].length; x++) {
-        const reactKey = x.toString() + y.toString();
-        if (shoudHighlight[y][x] !== 0) {
-          row.push(<td key={reactKey} className="WordSearchComponent-HighlightChar">{charArray[y][x]}</td>);
-        } else {
-          row.push(<td key={reactKey}>{charArray[y][x]}</td>);
-        }
-      }
-
-      result.push(<tr key={y}>{row}</tr>);
-    }
-  
-    return result;
-  }
-
-  private highlightArray(inputGrid: string[][], results: WordSearchResult[]) {
-    const shouldHighlight: number[][] = [];
-
-    for (const line of inputGrid) {
-      const hightlightLine = Array.from({ length: line.length }, (v, i) => 0);
-      shouldHighlight.push(hightlightLine);
-    }
-
-    for (const result of results) {
-      for (const point of result.points) {
-        shouldHighlight[point.y][point.x] = 1;
-      }
-    }
-
-    return shouldHighlight;
-  }
+  return (
+    <div className="WordSearchComponent">
+      <Container fluid={true}>
+        <Row noGutters={true}>
+          <Col md={4}>
+            <Card className="WordSearchComponent-ListInput">
+              <Card.Header>
+                Enter the list of words to find, one word per line
+              </Card.Header>
+              <Card.Body>
+                <FormControl
+                  as="textarea"
+                  onChange={onListTextChanged}
+                  placeholder="Word List To Find"
+                  value={wordListInputText}
+                />
+                {renderEmptyDirection()}
+                <FormCheck
+                  checked={useDiagonals}
+                  id="WordSearchComponent-checkbox-diagonal"
+                  label="Use diagonal directions"
+                  onChange={onDiagonalCheckboxChange}
+                  type="checkbox"
+                />
+                <FormCheck
+                  checked={useCardinals}
+                  id="WordSearchComponent-checkbox-cardinal"
+                  label="Use cardinal directions"
+                  onChange={onCardinalCheckboxChange}
+                  type="checkbox"
+                />
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={8}>
+            <Card className="WordSearchComponent-GridInput">
+              <Card.Header>
+                Enter the word search grid, one row of letters per line
+              </Card.Header>
+              <Card.Body>
+                <FormControl
+                  as="textarea"
+                  onChange={onGridTextChanged}
+                  placeholder="Grid Text"
+                  ref={inputRef}
+                  spellCheck={false}
+                  value={gridInputText}
+                />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row noGutters={true}>
+          <Col md={12}>
+            <Card className="WordSearchComponent-GridOutput">
+              <Card.Header>Output</Card.Header>
+              <Card.Body>
+                <WordSearchOutput
+                  gridInputText={gridInputText}
+                  useCardinals={useCardinals}
+                  useDiagonals={useDiagonals}
+                  wordListInputText={wordListInputText}
+                />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 }
 
 export default WordSearchComponent;
