@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react';
-import LocalStorage from '../Data/LocalStorage';
+import { getLocalStorageObject, setLocalStorageObject } from '../Data/LocalStorage';
 
 export function useLocalStorage<T>(
   localStorageKey: string,
@@ -11,11 +11,11 @@ export function useLocalStorage<T>(
   // omitted from deps since each call will have a unique version of the
   // function.
   useLayoutEffect(
-    () => onRestoreState(LocalStorage.getObject<T>(localStorageKey)),
+    () => onRestoreState(getLocalStorageObject<T>(localStorageKey)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [localStorageKey]);
 
   // This effect runs on every update of the control because the deps parameter
   // is intentionally omitted.
-  useEffect(() => LocalStorage.setObject(localStorageKey, onSaveState()));
+  useEffect(() => setLocalStorageObject(localStorageKey, onSaveState()));
 }

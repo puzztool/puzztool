@@ -1,5 +1,5 @@
-import { StringAutoConvert } from 'puzzle-lib';
-import React, { FormEvent, useState } from 'react';
+import { KeyedCipherStringBase } from 'puzzle-lib';
+import React, { FormEvent, MouseEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -9,33 +9,39 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useFocusInput } from '../../Hooks/FocusInput';
 import { useLocalStorage } from '../../Hooks/LocalStorage';
-import './AutoConvertStream.scss';
+import './KeyedCipherStream.scss';
 
 interface Props {
+  cipher: KeyedCipherStringBase;
+  id: string;
   prompt: JSX.Element | string;
 }
 
 interface SavedState {
+  conversion: number;
+  key: string;
   text: string;
-  homogeneous: boolean;
 }
 
-function AutoConvertStream(props: Props) {
+function KeyedCipherStream(props: Props) {
   const inputRef = useFocusInput();
-  const [homogeneous, setHomogeneous] = useState(true);
+  const [conversion, setConversion] = useState(2);
+  const [key, setKey] = useState('');
   const [text, setText] = useState('');
 
   useLocalStorage<SavedState>(
-    'AutoConvertStream',
+    props.id,
     (savedState) => {
       if (savedState) {
-        setHomogeneous(savedState.homogeneous);
+        setConversion(savedState.conversion);
+        setKey(savedState.key);
         setText(savedState.text);
       }
     },
     () => {
       return {
-        homogeneous,
+        conversion,
+        key,
         text,
       };
     });
@@ -45,17 +51,32 @@ function AutoConvertStream(props: Props) {
     setText(element.value);
   }
 
-  function onClearClick() {
+  function onKeyChanged(event: FormEvent<FormControlProps>) {
+    const element = (event.target as HTMLInputElement);
+    setKey(element.value);
+  }
+
+  function onConversionChanged(event: number) {
+    setConversion(event);
+  }
+
+  function onClearClick(event: MouseEvent<HTMLButtonElement>) {
+    setConversion(2);
+    setKey('');
     setText('');
   }
 
-  function onHomogeneousChange(value: boolean) {
-    setHomogeneous(value);
+  function calculateOutput() {
+    props.cipher.key = key;
+    props.cipher.text = text;
+    return conversion === 1 ?
+      props.cipher.encrypt() :
+      props.cipher.decrypt();
   }
 
   return (
-    <div className="AutoConvertStream">
-      <Card className="AutoConvertStream-input">
+    <div className="KeyedCipherStream">
+      <Card className="KeyedCipherStream-input">
         <Card.Header>{props.prompt}</Card.Header>
         <Card.Body>
           <FormControl
@@ -64,15 +85,20 @@ function AutoConvertStream(props: Props) {
             ref={inputRef}
             value={text}
           />
-          <ButtonToolbar className="AutoConvertStream-commands">
-            <ToggleButtonGroup<boolean>
-              defaultValue={true}
-              name="options"
-              onChange={onHomogeneousChange}
+          <FormControl
+            onChange={onKeyChanged}
+            placeholder="Key"
+            value={key}
+          />
+          <ButtonToolbar>
+            <ToggleButtonGroup<number>
+              name="KeyedCipherStream-conversion"
+              onChange={onConversionChanged}
               type="radio"
+              value={conversion}
             >
-              <ToggleButton value={true}>Consistent</ToggleButton>
-              <ToggleButton value={false}>Mixed</ToggleButton>
+              <ToggleButton value={1}>Encrypt</ToggleButton>
+              <ToggleButton value={2}>Decrypt</ToggleButton>
             </ToggleButtonGroup>
             <ButtonGroup>
               <Button
@@ -85,11 +111,11 @@ function AutoConvertStream(props: Props) {
           </ButtonToolbar>
         </Card.Body>
       </Card>
-      <Card>
+      <Card className="KeyedCipherStream-output">
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre className="AutoConvertStream-output">
-            {StringAutoConvert.convertString(text, homogeneous) || ' '}
+          <pre>
+            {calculateOutput() || ' '}
           </pre>
         </Card.Body>
       </Card>
@@ -97,4 +123,4 @@ function AutoConvertStream(props: Props) {
   );
 }
 
-export default AutoConvertStream;
+export default KeyedCipherStream;

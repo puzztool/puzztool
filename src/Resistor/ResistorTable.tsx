@@ -1,13 +1,13 @@
+import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import Helpers from '../Common/Helpers';
+import { getContrastingColor } from '../Common/Helpers';
 import './ResistorTable.scss';
 
 function cellColorStyle(value: Color) {
   return {
     backgroundColor: value.colorCode,
-    color: Helpers.contrastingColor(value.colorCode),
+    color: getContrastingColor(value.colorCode),
   };
 }
 
