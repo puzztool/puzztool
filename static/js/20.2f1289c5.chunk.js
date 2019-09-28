@@ -1,2 +1,0 @@
-(window.webpackJsonppuzztool=window.webpackJsonppuzztool||[]).push([[20],{235:function(e,n,t){},236:function(e,n,t){e.exports=t.p+"static/media/pigpen_key.d6ee0a09.svg"},249:function(e,n,t){"use strict";t.r(n);var c=t(0),a=t.n(c);t(235);n.default=function(){return a.a.createElement("div",{className:"PigpenReference"},a.a.createElement("img",{className:"PigpenReference-img",src:t(236),alt:"Pigpen cipher reference chart"}))}}}]);
-//# sourceMappingURL=20.2f1289c5.chunk.js.map
