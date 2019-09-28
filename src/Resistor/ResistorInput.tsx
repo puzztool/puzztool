@@ -3,7 +3,7 @@ import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import { useLocalStorage } from '../Data/LocalStorageHooks';
+import { useLocalStorage } from '../Hooks/LocalStorage';
 import ResistorColorSelector from './ResistorColorSelector';
 import ResistorPicture from './ResistorPicture';
 import './ResistorInput.scss';

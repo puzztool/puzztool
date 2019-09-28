@@ -52,20 +52,4 @@
       padding: 0px;
     }
   }
-
-  .WordSearchComponent-TableOutput {
-    border-collapse: collapse;
-    display: block;
-    font-family: monospace;
-    font-size: 16px;
-    margin-bottom: 0px;
-
-    td {
-      padding: 8px;
-
-      &.WordSearchComponent-HighlightChar {
-        background-color: yellow;
-      }
-    }
-  }
 }
