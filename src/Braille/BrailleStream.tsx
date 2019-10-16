@@ -1,4 +1,10 @@
-import React from 'react';
+import {
+  BrailleCharacter as Character,
+  BrailleDot as Dot,
+  BrailleEncoding as Encoding,
+  BrailleStream as Stream
+} from 'puzzle-lib';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -6,207 +12,170 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import { useLocalStorage } from '../Hooks/LocalStorage';
 import BrailleCharacter from './BrailleCharacter';
-import LocalStorageComponent from '../Data/LocalStorageComponent';
-import {
-  BrailleCharacter as Character,
-  BrailleDot as Dot,
-  BrailleEncoding as Encoding,
-  BrailleStream as Stream
-} from 'puzzle-lib';
 import './BrailleStream.scss';
-
-interface Props {}
-
-interface State {
-  character: Character;
-  stream: Stream;
-}
 
 interface SavedState {
   character: number;
   stream: Encoding[];
 }
 
-class BrailleStream extends LocalStorageComponent<Props, State, SavedState> {
-  private readonly _stream: Stream = new Stream();
-  private readonly _character: Character = new Character();
+function BrailleStream() {
+  const [stream, setStream] = useState(new Stream());
+  const [character, setCharacter] = useState(new Character());
 
-  constructor(props: Props) {
-    super(props);
+  useEffect(
+    () => {
+      function onKeyDown(ev: KeyboardEvent) {
+        if (ev.defaultPrevented) {
+          return;
+        }
 
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
+        let handled = false;
 
-    this.state = {
-      character: this._character,
-      stream: this._stream,
-    };
-  }
+        // Chrome won't trigger keypress for any keys that can invoke browser
+        // actions.
+        if (ev.keyCode === 8) { // Backspace
+          onBackspaceClick();
+          handled = true;
+        }
 
-  public componentDidMount() {
-    super.componentDidMount();
-    document.addEventListener('keydown', this.onKeyDown);
-    document.addEventListener('keypress', this.onKeyPress);
-  }
+        if (handled) {
+          ev.preventDefault();
+        }
+      }
 
-  public componentWillUnmount() {
-    document.removeEventListener('keydown', this.onKeyDown);
-    document.removeEventListener('keypress', this.onKeyPress);
-  }
+      function onKeyPress(ev: KeyboardEvent) {
+        if (ev.defaultPrevented) {
+          return;
+        }
 
-  public render() {
-    return (
-      <div className="BrailleStream">
-        <Card className="BrailleStream-input">
-          <Card.Header>Input</Card.Header>
-          <Card.Body>
-            <Container fluid={true}>
-              <Row>
-                <Col
-                  xs="auto"
-                  sm="auto"
-                  md="auto"
-                >
-                  <BrailleCharacter
-                    character={this.state.character}
-                    onClick={i => this.onCharacterClick(i)}
-                  />
-                </Col>
-                <Col className="BrailleStream-view">
-                  {this.state.character.toString() || '?'}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <ButtonToolbar>
-                    <ButtonGroup>
-                      <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                      <Button onClick={() => this.onNextClick()}>Next</Button>
-                    </ButtonGroup>
-                    <ButtonGroup>
-                      <Button
-                        onClick={() => this.onClearClick()}
-                        variant="danger"
-                      >
-                        Clear
-                      </Button>
-                    </ButtonGroup>
-                  </ButtonToolbar>
-                </Col>
-              </Row>
-            </Container>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Header>Output</Card.Header>
-          <Card.Body>
-            <pre className="BrailleStream-output">
-              {this.state.stream.toString()}<span className="blinking-cursor">|</span>
-            </pre>
-          </Card.Body>
-        </Card>
-      </div>
-    );
-  }
+        let handled = false;
 
-  protected getLocalStorageKey() {
-    return 'BrailleStream';
-  }
+        if (ev.keyCode === 13) { // Enter
+          onNextClick();
+          handled = true;
+        } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
+          // The braille dots are bitfields, so calculate the value based on the key
+          // pressed.
+          // TODO: This should probably be in puzzle-lib.
+          onCharacterClick(Math.pow(2, ev.charCode - 49));
+        }
 
-  protected onSaveState() {
-    return {
-      character: this._character.encoding,
-      stream: this._stream.chars,
-    };
-  }
+        if (handled) {
+          ev.preventDefault();
+        }
+      }
 
-  protected onRestoreState(savedState: SavedState | null) {
-    if (savedState !== null) {
-      this._character.encoding = savedState.character;
-      this._stream.chars = savedState.stream;
-    }
-  }
+      document.addEventListener('keydown', onKeyDown);
+      document.addEventListener('keypress', onKeyPress);
 
-  protected onUpdateState() {
-    this.setState({
-      character: this._character,
-      stream: this._stream,
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+        document.removeEventListener('keypress', onKeyPress);
+      };
     });
+
+  useLocalStorage<SavedState>(
+    'BrailleStream',
+    (savedState) => {
+      if (savedState) {
+        setCharacter(new Character(savedState.character));
+        setStream(new Stream(savedState.stream));
+      }
+    },
+    () => {
+      return {
+        character: character.encoding,
+        stream: stream.chars,
+      };
+    });
+
+  function onCharacterClick(mask: Dot) {
+    const newCharacter = new Character(character.encoding, character.category);
+    newCharacter.toggle(mask);
+    setCharacter(newCharacter);
   }
 
-  private onKeyDown(ev: KeyboardEvent) {
-    if (ev.defaultPrevented) {
-      return;
-    }
-
-    let handled = false;
-
-    // Chrome won't trigger keypress for any keys that can invoke browser
-    // actions.
-    if (ev.keyCode === 8) { // Backspace
-      this.onBackspaceClick();
-      handled = true;
-    }
-
-    if (handled) {
-      ev.preventDefault();
-    }
+  function onBackspaceClick() {
+    const newStream = new Stream(stream.chars);
+    newStream.backspace();
+    setStream(newStream);
   }
 
-  private onKeyPress(ev: KeyboardEvent) {
-    if (ev.defaultPrevented) {
-      return;
-    }
+  function onNextClick() {
+    const newStream = new Stream(stream.chars);
 
-    let handled = false;
-
-    if (ev.keyCode === 13) { // Enter
-      this.onNextClick();
-      handled = true;
-    } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
-      // The braille dots are bitfields, so calculate the value based on the key
-      // pressed.
-      // TODO: This should probably be in puzzle-lib.
-      this.onCharacterClick(Math.pow(2, ev.charCode - 49));
-    }
-
-    if (handled) {
-      ev.preventDefault();
-    }
-  }
-
-  private onCharacterClick(mask: Dot) {
-    this._character.toggle(mask);
-
-    this.updateState();
-  }
-
-  private onBackspaceClick() {
-    this._stream.backspace();
-
-    this.updateState();
-  }
-
-  private onNextClick() {
-    if (this._character.valid()) {
-      this._stream.append(this._character);
-      this._character.clear();
+    if (character.valid()) {
+      newStream.append(character);
+      setCharacter(new Character());
     } else {
-      this._stream.space();
+      newStream.space();
     }
 
-    this.updateState();
+    setStream(newStream);
   }
 
-  private onClearClick() {
-    this._character.clear();
-    this._stream.clear();
-
-    this.updateState();
+  function onClearClick() {
+    setCharacter(new Character());
+    setStream(new Stream());
   }
+
+  return (
+    <div className="BrailleStream">
+      <Card className="BrailleStream-input">
+        <Card.Header>Input</Card.Header>
+        <Card.Body>
+          <Container fluid={true}>
+            <Row>
+              <Col
+                xs="auto"
+                sm="auto"
+                md="auto"
+              >
+                <BrailleCharacter
+                  character={character}
+                  onClick={onCharacterClick}
+                />
+              </Col>
+              <Col className="BrailleStream-view">
+                {character.toString() || '?'}
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <ButtonToolbar>
+                  <ButtonGroup>
+                    <Button onClick={onBackspaceClick}>&#x232b;</Button>
+                  </ButtonGroup>
+                  <ButtonGroup>
+                    <Button onClick={onNextClick}>Next</Button>
+                  </ButtonGroup>
+                  <ButtonGroup>
+                    <Button
+                      onClick={onClearClick}
+                      variant="danger"
+                    >
+                      Clear
+                    </Button>
+                  </ButtonGroup>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+          </Container>
+        </Card.Body>
+      </Card>
+      <Card>
+        <Card.Header>Output</Card.Header>
+        <Card.Body>
+          <pre className="BrailleStream-output">
+            {stream.toString()}<span className="blinking-cursor">|</span>
+          </pre>
+        </Card.Body>
+      </Card>
+    </div>
+  );
 }
 
 export default BrailleStream;

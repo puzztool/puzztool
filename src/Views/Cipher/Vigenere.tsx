@@ -1,5 +1,5 @@
 import React from 'react';
-import VigenereStream from '../../Cipher/Vigenere/VigenereStream';
+import VigenereStream from '../../Cipher/KeyedCipherStream/VigenereStream';
 import './Vigenere.scss';
 
 function Vigenere() {

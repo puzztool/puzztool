@@ -1,295 +1,251 @@
-import React from 'react';
+import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
-import LocalStorageComponent from '../Data/LocalStorageComponent';
+import { useLocalStorage } from '../Hooks/LocalStorage';
 import { renderDot, renderDash } from './MorsePicture';
 import './MorseStream.scss';
-
-interface Props {}
-
-interface State {
-  morseStream: string;
-}
 
 interface SavedState {
   morseStream: string;
 }
 
-class MorseStream extends LocalStorageComponent<Props, State, SavedState> {
+function MorseStream() {
+  const [morseStream, setMorseStream] = useState('');
 
-  private _morseStream: string = '';
-
-  constructor(props: Props) {
-    super(props);
-
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
-
-    this.state = {
-      morseStream: this._morseStream,
-    };
-  }
-
-  public componentDidMount() {
-    super.componentDidMount();
-    document.addEventListener('keydown', this.onKeyDown);
-    document.addEventListener('keypress', this.onKeyPress);
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener('keydown', this.onKeyDown);
-    document.removeEventListener('keypress', this.onKeyPress);
-  }
-
-  public render() {
-    return (
-      <div className="MorseStream">
-        <Card className="MorseStream-morse-output">
-          <Card.Header>Input</Card.Header>
-          <Card.Body>
-            <pre>
-              {this.codeText()}<span className="blinking-cursor">|</span>
-            </pre>
-          </Card.Body>
-        </Card>
-        <Card className="MorseStream-output">
-          <Card.Header>Plaintext</Card.Header>
-          <Card.Body>
-            <pre>
-              {this.plainText() || ' '}
-            </pre>
-          </Card.Body>
-        </Card>
-        <Card className="MorseStream-output">
-          <Card.Header>Swap Dots/Dashes</Card.Header>
-          <Card.Body>
-            <pre>
-              {this.invertText() || ' '}
-            </pre>
-          </Card.Body>
-        </Card>
-        <Card className="MorseStream-output">
-          <Card.Header>Right to Left</Card.Header>
-          <Card.Body>
-            <pre>
-              {this.reverseText() || ' '}
-            </pre>
-          </Card.Body>
-        </Card>
-        <Card className="MorseStream-output">
-          <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
-          <Card.Body>
-            <pre>
-              {this.invertReverseText() || ' '}
-            </pre>
-          </Card.Body>
-        </Card>
-        <ButtonToolbar className="MorseStream-inputCommands">
-          <ButtonGroup>
-            <Button
-              onClick={() => this.onDotClick()}
-              variant="primary"
-            >
-              {renderDot()}
-            </Button>
-          </ButtonGroup>
-          <ButtonGroup>
-            <Button
-              onClick={() => this.onDashClick()}
-              variant="primary"
-            >
-              {renderDash()}
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        <ButtonToolbar className="MorseStream-commands">
-          <ButtonGroup>
-            <Button onClick={() => this.onBackspaceClick()}>&#x232b;</Button>
-          </ButtonGroup>
-          <ButtonGroup>
-            <Button onClick={() => this.onNextClick()}>Next</Button>
-          </ButtonGroup>
-          <ButtonGroup>
-            <Button
-              onClick={() => this.onClearClick()}
-              variant="danger"
-            >
-              Clear
-            </Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-      </div>
-    );
-  }
-
-  protected getLocalStorageKey() {
-    return 'MorseStream';
-  }
-
-  protected onSaveState() {
-    return {
-      morseStream: this._morseStream,
-    };
-  }
-
-  protected onRestoreState(savedState: SavedState | null) {
-    if (savedState !== null) {
-      this._morseStream = savedState.morseStream;
-    }
-  }
-
-  protected onUpdateState() {
-    this.setState({
-      morseStream: this._morseStream,
+  useLocalStorage<SavedState>(
+    'MorseStream',
+    (savedState) => {
+      if (savedState) {
+        setMorseStream(savedState.morseStream);
+      }
+    },
+    () => {
+      return {
+        morseStream,
+      };
     });
-  }
 
-  private codeText(): string {
+  useEffect(
+    () => {
+      function onKeyDown(ev: KeyboardEvent) {
+        if (ev.defaultPrevented) {
+          return;
+        }
+
+        let handled = false;
+
+        // Chrome won't trigger keypress for any keys that can invoke browser
+        // actions.
+        if ((ev.key === 'Backspace') || (ev.keyCode === 8)) { // Backspace
+          onBackspaceClick();
+          handled = true;
+        }
+
+        if (handled) {
+          ev.preventDefault();
+        }
+      }
+
+      function onKeyPress(ev: KeyboardEvent) {
+        if (ev.defaultPrevented) {
+          return;
+        }
+
+        let handled = true;
+        if (ev.key) {
+          switch (ev.key) {
+            case '-':
+            case 'j':
+              onDashClick();
+              break;
+            case '.':
+            case 'k':
+              onDotClick();
+              break;
+            case 'Enter':
+            case ' ':
+            case 'l':
+              onNextClick();
+              break;
+            case ';':
+              onBackspaceClick();
+              break;
+            default:
+              handled = false;
+          }
+        } else {
+          // Older browsers such as Edge don't support ev.key
+          switch (ev.keyCode) {
+            case 45: // '-'
+            case 106: // 'J'
+              onDashClick();
+              break;
+            case 46: // '.'
+            case 107: // 'K'
+              onDotClick();
+              break;
+            case 13: // Enter
+            case 32: // Space
+            case 108: // 'L'
+              onNextClick();
+              break;
+            case 59: // ';'
+              onBackspaceClick();
+              break;
+            default:
+              handled = false;
+          }
+        }
+
+        if (handled) {
+          ev.preventDefault();
+        }
+      }
+
+      document.addEventListener('keydown', onKeyDown);
+      document.addEventListener('keypress', onKeyPress);
+
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+        document.removeEventListener('keypress', onKeyPress);
+      };
+    });
+
+  function codeText(): string {
     // Replace dot with interpunct for readability
     // Replace dash with full width hyphen for readability.  Don't use emdash
     // because multiple emdashes get combined with no space between them.
-    return this._morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
+    return morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
   }
 
-  private plainText(): string {
-    return new MorseString(this._morseStream).toString();
+  function plainText(): string {
+    return new MorseString(morseStream).toString();
   }
 
-  private invertText(): string {
-    return new MorseString(this._morseStream).invertDotsAndDashes().toString();
+  function invertText(): string {
+    return new MorseString(morseStream).invertDotsAndDashes().toString();
   }
 
-  private reverseText(): string {
-    return new MorseString(this._morseStream).reverse().toString();
+  function reverseText(): string {
+    return new MorseString(morseStream).reverse().toString();
   }
 
-  private invertReverseText(): string {
-    return new MorseString(this._morseStream)
+  function invertReverseText(): string {
+    return new MorseString(morseStream)
       .invertDotsAndDashes()
       .reverse()
       .toString();
   }
 
-  private onKeyDown(ev: KeyboardEvent) {
-    if (ev.defaultPrevented) {
-      return;
-    }
-
-    let handled = false;
-
-    // Chrome won't trigger keypress for any keys that can invoke browser
-    // actions.
-    if ((ev.key === 'Backspace') || (ev.keyCode === 8)) { // Backspace
-      this.onBackspaceClick();
-      handled = true;
-    }
-
-    if (handled) {
-      ev.preventDefault();
-    }
+  function onDotClick() {
+    setMorseStream(morseStream + Character.DOT);
   }
 
-  private onKeyPress(ev: KeyboardEvent) {
-    if (ev.defaultPrevented) {
-      return;
-    }
-
-    let handled = true;
-    if (ev.key) {
-      switch (ev.key) {
-        case '-':
-        case 'j':
-          this.onDashClick();
-          break;
-        case '.':
-        case 'k':
-          this.onDotClick();
-          break;
-        case 'Enter':
-        case ' ':
-        case 'l':
-          this.onNextClick();
-          break;
-        case ';':
-          this.onBackspaceClick();
-          break;
-        default:
-          handled = false;
-      }
-    } else {
-      // Older browsers such as Edge don't support ev.key
-      switch (ev.keyCode) {
-        case 45: // '-'
-        case 106: // 'J'
-          this.onDashClick();
-          break;
-        case 46: // '.'
-        case 107: // 'K'
-          this.onDotClick();
-          break;
-        case 13: // Enter
-        case 32: // Space
-        case 108: // 'L'
-          this.onNextClick();
-          break;
-        case 59: // ';'
-          this.onBackspaceClick();
-          break;
-        default:
-          handled = false;
-      }
-    }
-
-    if (handled) {
-      ev.preventDefault();
-    }
+  function onDashClick() {
+    setMorseStream(morseStream + Character.DASH);
   }
 
-  private onDotClick() {
-    this._morseStream += Character.DOT;
-
-    this.updateState();
+  function onBackspaceClick() {
+    setMorseStream(morseStream.slice(0, -1));
   }
 
-  private onDashClick() {
-    this._morseStream += Character.DASH;
-
-    this.updateState();
-  }
-
-  private onBackspaceClick() {
-    if (this._morseStream.length > 0) {
-      this._morseStream =
-        this._morseStream.substring(0, this._morseStream.length - 1);
-    }
-
-    this.updateState();
-  }
-
-  private onNextClick() {
-    if (this._morseStream.length > 0) {
-      const lastCharacter = this._morseStream.slice(-1);
+  function onNextClick() {
+    if (morseStream.length > 0) {
+      const lastCharacter = morseStream.slice(-1);
       if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
         // Pressing next twice starts a new word
-        this._morseStream =
-          this._morseStream.substring(0, this._morseStream.length - 1) +
-          MorseString.WORD_DIVIDER;
+        setMorseStream(morseStream.slice(0, -1) + MorseString.WORD_DIVIDER);
       } else if (lastCharacter !== MorseString.WORD_DIVIDER) {
-        this._morseStream += MorseString.CHARACTER_DIVIDER;
+        setMorseStream(morseStream + MorseString.CHARACTER_DIVIDER);
       }
     }
-
-    this.updateState();
   }
 
-  private onClearClick() {
-    this._morseStream = '';
-
-    this.updateState();
+  function onClearClick() {
+    setMorseStream('');
   }
+
+  return (
+    <div className="MorseStream">
+      <Card className="MorseStream-morse-output">
+        <Card.Header>Input</Card.Header>
+        <Card.Body>
+          <pre>
+            {codeText()}<span className="blinking-cursor">|</span>
+          </pre>
+        </Card.Body>
+      </Card>
+      <Card className="MorseStream-output">
+        <Card.Header>Plaintext</Card.Header>
+        <Card.Body>
+          <pre>
+            {plainText() || ' '}
+          </pre>
+        </Card.Body>
+      </Card>
+      <Card className="MorseStream-output">
+        <Card.Header>Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>
+            {invertText() || ' '}
+          </pre>
+        </Card.Body>
+      </Card>
+      <Card className="MorseStream-output">
+        <Card.Header>Right to Left</Card.Header>
+        <Card.Body>
+          <pre>
+            {reverseText() || ' '}
+          </pre>
+        </Card.Body>
+      </Card>
+      <Card className="MorseStream-output">
+        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>
+            {invertReverseText() || ' '}
+          </pre>
+        </Card.Body>
+      </Card>
+      <ButtonToolbar className="MorseStream-inputCommands">
+        <ButtonGroup>
+          <Button
+            onClick={onDotClick}
+            variant="primary"
+          >
+            {renderDot()}
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button
+            onClick={onDashClick}
+            variant="primary"
+          >
+            {renderDash()}
+          </Button>
+        </ButtonGroup>
+      </ButtonToolbar>
+      <ButtonToolbar className="MorseStream-commands">
+        <ButtonGroup>
+          <Button onClick={onBackspaceClick}>&#x232b;</Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button onClick={onNextClick}>Next</Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button
+            onClick={onClearClick}
+            variant="danger"
+          >
+            Clear
+          </Button>
+        </ButtonGroup>
+      </ButtonToolbar>
+    </div>
+  );
 }
 
 export default MorseStream;
