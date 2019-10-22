@@ -1,5 +1,5 @@
 import React from 'react';
-import AutokeyStream from '../../Cipher/Autokey/AutokeyStream';
+import AutokeyStream from '../../Cipher/KeyedCipherStream/AutokeyStream';
 import './Autokey.scss';
 
 function Autokey() {

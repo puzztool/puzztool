@@ -1,12 +1,12 @@
 import React from 'react';
-import { RouteData } from '../Data/RouteData';
+import { getCategories } from '../Data/RouteData';
 import { Link } from 'react-router-dom';
 import './Home.scss';
 
 function Home() {
   return (
     <div className="Home">
-      {RouteData.getCategories().map((category) => (
+      {getCategories().map((category) => (
         <div key={category.name}>
           <h2>{category.name}</h2>
           <p>{category.description}</p>
