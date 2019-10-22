@@ -16,6 +16,7 @@ interface SavedState {
   wordListInputText: string;
   useDiagonals: boolean;
   useCardinals: boolean;
+  canBend: boolean;
 }
 
 function WordSearchComponent() {
@@ -24,6 +25,7 @@ function WordSearchComponent() {
   const [wordListInputText, setWordListInputText] = useState('');
   const [useCardinals, setUseCardinals] = useState(true);
   const [useDiagonals, setUseDiagonals] = useState(true);
+  const [canBend, setCanBend] = useState(false);
 
   useLocalStorage<SavedState>(
     'WordSearchComponent',
@@ -33,6 +35,7 @@ function WordSearchComponent() {
         setWordListInputText(savedState.wordListInputText);
         setUseCardinals(savedState.useCardinals);
         setUseDiagonals(savedState.useDiagonals);
+        setCanBend(savedState.canBend);
       }
     },
     () => {
@@ -41,6 +44,7 @@ function WordSearchComponent() {
         wordListInputText,
         useCardinals,
         useDiagonals,
+        canBend,
       };
     });
 
@@ -62,6 +66,11 @@ function WordSearchComponent() {
   function onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
     const element = (event.target as HTMLInputElement);
     setUseDiagonals(element.checked);
+  }
+
+  function onSetCanBendChange(event: FormEvent<HTMLInputElement>) {
+    const element = (event.target as HTMLInputElement);
+    setCanBend(element.checked);
   }
 
   function renderEmptyDirection() {
@@ -105,6 +114,13 @@ function WordSearchComponent() {
                   onChange={onCardinalCheckboxChange}
                   type="checkbox"
                 />
+                <FormCheck
+                  checked={canBend}
+                  id="WordSearchComponent-checkbox-bend"
+                  label="Words can bend (may not be straight lines)"
+                  onChange={onSetCanBendChange}
+                  type="checkbox"
+                />
               </Card.Body>
             </Card>
           </Col>
@@ -135,6 +151,7 @@ function WordSearchComponent() {
                   gridInputText={gridInputText}
                   useCardinals={useCardinals}
                   useDiagonals={useDiagonals}
+                  canBend={canBend}
                   wordListInputText={wordListInputText}
                 />
               </Card.Body>
