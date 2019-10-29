@@ -11,6 +11,7 @@ interface Props {
   gridInputText: string;
   useCardinals: boolean;
   useDiagonals: boolean;
+  canBend: boolean;
   wordListInputText: string;
 }
 
@@ -50,9 +51,11 @@ function highlightArray(inputGrid: string[][], results: WordSearchResult[]) {
 function getGridHighlights(
   grid: string[][],
   wordsToFind: string[],
-  direction: WordSearchDirection) {
+  direction: WordSearchDirection,
+  canBend: boolean) {
   const solver = new WordSearchSolver();
   solver.setDirections(direction);
+  solver.setCanBend(canBend);
   solver.setGrid(grid);
   solver.setWords(wordsToFind);
   const results = solver.findWords();
@@ -85,7 +88,7 @@ function WordSearchOutput(props: Props) {
   const wordList = splitLines(props.wordListInputText)
     .filter(word => word.length > 0);
 
-  const shouldHighlight = getGridHighlights(grid, wordList, direction);
+  const shouldHighlight = getGridHighlights(grid, wordList, direction, props.canBend);
 
   return (
     <Table className="WordSearchOutput" borderless={true}>
