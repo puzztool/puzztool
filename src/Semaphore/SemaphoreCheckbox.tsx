@@ -22,8 +22,7 @@ function SemaphoreCheckbox(props: Props) {
   function onChange(event: FormEvent<HTMLInputElement>) {
     const handler = props.onChange;
     if (handler) {
-      const element = event.target as HTMLInputElement;
-      handler(element.checked ? 'add' : 'remove', props.direction);
+      handler(event.currentTarget.checked ? 'add' : 'remove', props.direction);
     }
   }
 

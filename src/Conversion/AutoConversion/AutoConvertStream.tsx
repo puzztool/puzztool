@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import FormControl from 'react-bootstrap/FormControl';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useFocusInput } from '../../Hooks/FocusInput';
@@ -40,9 +40,8 @@ function AutoConvertStream(props: Props) {
       };
     });
 
-  function onTextChanged(event: FormEvent<FormControlProps>) {
-    const element = (event.target as HTMLInputElement);
-    setText(element.value);
+  function onTextChanged(event: FormEvent<HTMLInputElement>) {
+    setText(event.currentTarget.value);
   }
 
   function onClearClick() {

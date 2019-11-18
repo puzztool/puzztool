@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FormCheck from 'react-bootstrap/FormCheck';
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import { useFocusInput } from '../Hooks/FocusInput';
 import { useLocalStorage } from '../Hooks/LocalStorage';
@@ -48,29 +48,24 @@ function WordSearchComponent() {
       };
     });
 
-  function onGridTextChanged(event: FormEvent<FormControlProps>) {
-    const element = (event.target as HTMLInputElement);
-    setGridInputText(element.value);
+  function onGridTextChanged(event: FormEvent<HTMLTextAreaElement>) {
+    setGridInputText(event.currentTarget.value);
   }
 
-  function onListTextChanged(event: FormEvent<FormControlProps>) {
-    const element = (event.target as HTMLInputElement);
-    setWordListInputText(element.value);
+  function onListTextChanged(event: FormEvent<HTMLTextAreaElement>) {
+    setWordListInputText(event.currentTarget.value);
   }
 
   function onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setUseCardinals(element.checked);
+    setUseCardinals(event.currentTarget.checked);
   }
 
   function onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setUseDiagonals(element.checked);
+    setUseDiagonals(event.currentTarget.checked);
   }
 
   function onSetCanBendChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setCanBend(element.checked);
+    setCanBend(event.currentTarget.checked);
   }
 
   function renderEmptyDirection() {

@@ -1,10 +1,10 @@
 import { CaesarString } from 'puzzle-lib';
-import React, { FormEvent, MouseEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import FormControl from 'react-bootstrap/FormControl';
 import { useFocusInput } from '../../Hooks/FocusInput';
 import { useLocalStorage } from '../../Hooks/LocalStorage';
 import CaesarList from './CaesarList';
@@ -35,12 +35,11 @@ function CaesarStream(props: Props) {
       };
     });
 
-  function onTextChanged(event: FormEvent<FormControlProps>) {
-    const element = (event.target as HTMLInputElement);
-    setText(element.value);
+  function onTextChanged(event: FormEvent<HTMLInputElement>) {
+    setText(event.currentTarget.value);
   }
 
-  function onClearClick(event: MouseEvent<HTMLButtonElement>) {
+  function onClearClick() {
     setText('');
   }
 
