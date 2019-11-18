@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FormCheck from 'react-bootstrap/FormCheck';
-import FormControl, { FormControlProps } from 'react-bootstrap/FormControl';
+import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import { useFocusInput } from '../Hooks/FocusInput';
 import { useLocalStorage } from '../Hooks/LocalStorage';
@@ -48,12 +48,12 @@ function WordSearchComponent() {
       };
     });
 
-  function onGridTextChanged(event: FormEvent<FormControlProps>) {
+  function onGridTextChanged(event: FormEvent<HTMLTextAreaElement>) {
     const element = (event.target as HTMLInputElement);
     setGridInputText(element.value);
   }
 
-  function onListTextChanged(event: FormEvent<FormControlProps>) {
+  function onListTextChanged(event: FormEvent<HTMLTextAreaElement>) {
     const element = (event.target as HTMLInputElement);
     setWordListInputText(element.value);
   }
