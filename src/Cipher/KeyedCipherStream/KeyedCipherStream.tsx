@@ -47,13 +47,11 @@ function KeyedCipherStream(props: Props) {
     });
 
   function onTextChanged(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setText(element.value);
+    setText(event.currentTarget.value);
   }
 
   function onKeyChanged(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setKey(element.value);
+    setKey(event.currentTarget.value);
   }
 
   function onConversionChanged(event: number) {

@@ -41,8 +41,7 @@ function AutoConvertStream(props: Props) {
     });
 
   function onTextChanged(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setText(element.value);
+    setText(event.currentTarget.value);
   }
 
   function onClearClick() {

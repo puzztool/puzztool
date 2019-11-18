@@ -49,28 +49,23 @@ function WordSearchComponent() {
     });
 
   function onGridTextChanged(event: FormEvent<HTMLTextAreaElement>) {
-    const element = (event.target as HTMLInputElement);
-    setGridInputText(element.value);
+    setGridInputText(event.currentTarget.value);
   }
 
   function onListTextChanged(event: FormEvent<HTMLTextAreaElement>) {
-    const element = (event.target as HTMLInputElement);
-    setWordListInputText(element.value);
+    setWordListInputText(event.currentTarget.value);
   }
 
   function onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setUseCardinals(element.checked);
+    setUseCardinals(event.currentTarget.checked);
   }
 
   function onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setUseDiagonals(element.checked);
+    setUseDiagonals(event.currentTarget.checked);
   }
 
   function onSetCanBendChange(event: FormEvent<HTMLInputElement>) {
-    const element = (event.target as HTMLInputElement);
-    setCanBend(element.checked);
+    setCanBend(event.currentTarget.checked);
   }
 
   function renderEmptyDirection() {
