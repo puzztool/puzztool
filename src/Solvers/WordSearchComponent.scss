@@ -5,13 +5,13 @@
   }
 
   .row {
-    margin-right: -0.5rem;
-    margin-left: -0.5rem;
+    margin-right: -0.25rem;
+    margin-left: -0.25rem;
 
     > div {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -20,14 +20,14 @@
       border-left: none;
       border-right: none;
       border-top: none;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
       min-height: 12.5rem;
     }
 
     .alert {
-      margin-bottom: 0.5rem;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+      margin-bottom: 0.25rem;
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
     }
 
     .card-body {
@@ -35,7 +35,7 @@
     }
 
     .form-check {
-      margin: 0.5rem 0.5rem;
+      margin: 0.25rem 0.75rem;
     }
   }
 
