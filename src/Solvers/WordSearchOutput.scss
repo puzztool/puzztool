@@ -2,11 +2,11 @@
   border-collapse: collapse;
   display: block;
   font-family: monospace;
-  font-size: 16px;
-  margin-bottom: 0px;
+  font-size: 1rem;
+  margin-bottom: 0;
 
   td {
-    padding: 8px;
+    padding: 0.5rem;
 
     &.WordSearchOutput-highlightChar {
       background-color: yellow;

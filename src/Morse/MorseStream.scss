@@ -1,54 +1,54 @@
 .MorseStream {
-  margin: 0px 15px;
+  margin: 0.5rem 1rem 0;
 
   pre {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .MorseStream-view {
-    font-size: 72px;
+    font-size: 4.5rem;
     font-weight: bold;
   }
 
   div.MorseStream-input {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
   }
 
   .MorseStream-morseView {
-    line-height: 40px;
-    margin-right: -16px;
-    margin-top: 10px;
-    min-height: 40px;
+    line-height: 2.5rem;
+    margin-right: -1rem;
+    margin-top: 0.5rem;
+    min-height: 2.5rem;
 
     svg.MorsePicture-dotIcon,
     svg.MorsePicture-dashIcon {
-      height: 16px;
-      margin-right: 16px;
+      height: 1rem;
+      margin-right: 1rem;
     }
   }
 
   .MorseStream-inputCommands {
     .btn {
-      font-size: 40px;
-      height: 72px;
-      min-width: 112px;
+      font-size: 2.5rem;
+      height: 4.5rem;
+      min-width: 7rem;
     }
 
     svg.MorsePicture-dotIcon,
     svg.MorsePicture-dashIcon {
       display: block;
       fill: white;
-      height: 24px;
+      height: 1.5rem;
       margin: 0 auto;
     }
   }
 
   .MorseStream-output {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
   }
 
   .MorseStream-morse-output {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 
     pre {
       font-weight: bold;
