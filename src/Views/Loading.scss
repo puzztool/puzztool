@@ -1,29 +1,29 @@
 .Loading {
   .Loading-content {
-    padding: 0px 15px 20px 15px;
+    padding: 0 1rem 1rem;
     text-align: center;
   }
 
   .Loading-error {
     border-radius: 50%;
-    border: 8px solid red;
+    border: 0.5rem solid red;
     color: red;
     content: "!";
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: bold;
-    height: 60px;
-    margin: 0 auto 10px;
-    width: 60px;
+    height: 4rem;
+    margin: 0 auto 0.5rem;
+    width: 4rem;
   }
 
   .Loading-spinner {
     animation: spin 2s linear infinite;
     border-radius: 50%;
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3c3c3c;
-    height: 60px;
-    margin: 0 auto 10px;
-    width: 60px;
+    border: 0.5rem solid #f3f3f3;
+    border-top: 0.5rem solid #3c3c3c;
+    height: 4rem;
+    margin: 0 auto 0.5rem;
+    width: 4rem;
   }
 }
 

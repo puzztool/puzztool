@@ -1,6 +1,5 @@
 .App {
   .App-content {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 1rem env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 1rem) env(safe-area-inset-left);
   }
 }

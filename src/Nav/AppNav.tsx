@@ -1,15 +1,17 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
-import ReactNavbar from 'react-bootstrap/Navbar';
+import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getCategories } from '../Data/RouteData';
-import NavbarCategory from './NavbarCategory';
+import NavbarCategory from './AppNavCategory';
+import './AppNav.scss';
 
-function Navbar() {
+function AppNav() {
   return (
-    <ReactNavbar
+    <Navbar
       bg="dark"
+      className="AppNav"
       collapseOnSelect={true}
       expand="md"
       // Remove focus from the selected element to prevent it from taking
@@ -19,10 +21,10 @@ function Navbar() {
       variant="dark"
     >
       <LinkContainer to="/">
-        <ReactNavbar.Brand>PuzzTool</ReactNavbar.Brand>
+        <Navbar.Brand>PuzzTool</Navbar.Brand>
       </LinkContainer>
-      <ReactNavbar.Toggle />
-      <ReactNavbar.Collapse>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
         <Nav>
           {getCategories().map(
             category => <NavbarCategory key={category.name} category={category} />)}
@@ -43,9 +45,9 @@ function Navbar() {
             Feedback
           </Nav.Link>
         </Nav>
-      </ReactNavbar.Collapse>
-    </ReactNavbar>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 
-export default Navbar;
+export default AppNav;

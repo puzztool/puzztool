@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import Navbar from './Nav/Navbar';
+import AppNav from './Nav/AppNav';
 import Loading from './Views/Loading';
 import './App.scss';
 
@@ -101,7 +101,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <AppNav />
         <div className="App-content">
           <Route exact={true} path="/" component={Home} />
           <Route path="/cipher/autokey" component={Autokey} />
