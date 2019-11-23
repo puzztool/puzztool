@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   viewBox = "0 0 230 230"
+   id="svg2">
+   <defs>
+      <style>
+         @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i");
+      </style>
+   </defs>
+  <g
+     transform="translate(-9.5,-9.5)"
+     id="l1">
+    <g
+       transform="translate(9.25,9.5)"
+       id="g3">
+      <path
+         d="M 40,10 L 40,100"
+         id="p1"
+         style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <use
+         transform="translate(30,0)"
+         xlink:href="#p1" />
+      <use
+         transform="matrix(0,1,-1,0,110.5,0)"
+         id="u2"
+         xlink:href="#p1" />
+      <use
+         transform="translate(0,30)"
+         xlink:href="#u2" />
+    </g>
+    <use
+       transform="translate(120,0)"
+       xlink:href="#g3" />
+    <g
+       transform="translate(9.25,9.5)"
+       id="g5">
+      <path
+         d="M 10,130 L 100,220"
+         id="p4"
+         style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <use
+         transform="matrix(-1,0,0,1,110,0)"
+         xlink:href="#p4" />
+    </g>
+    <use
+       transform="translate(120,0)"
+       xlink:href="#g5" />
+    <g
+       transform="translate(9.25,9.5)"
+       id="g7">
+      <path
+         d="M 157,35 A 2,2 0 1 1 153,35 A 2,2 0 1 1 157,35 z"
+         id="p6"
+         style="opacity:1;fill:#000000;fill-opacity:1" />
+      <use
+         transform="translate(20,0)"
+         xlink:href="#p6" />
+      <use
+         transform="translate(40,0)"
+         xlink:href="#p6" />
+    </g>
+    <use
+       transform="translate(9.25,29.5)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(0,40)"
+       xlink:href="#g7" />
+    <use
+       transform="translate(49.25,29.5)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(29.25,39.5)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(29.25,142.429)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(29.25,156.571)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(22.179,149.5)"
+       xlink:href="#p6" />
+    <use
+       transform="translate(36.321,149.5)"
+       xlink:href="#p6" />
+    <text
+       x="27"
+       y="42"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">A</text>
+    <text
+       x="58"
+       y="42"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">B</text>
+    <text
+       x="87"
+       y="42"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">C</text>
+    <text
+       x="28"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">D</text>
+    <text
+       x="58"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">E</text>
+    <text
+       x="88"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">F</text>
+    <text
+       x="27"
+       y="102"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">G</text>
+    <text
+       x="57"
+       y="102"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">H</text>
+    <text
+       x="91"
+       y="102"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">I</text>
+    <text
+       x="147"
+       y="39"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">J</text>
+    <text
+       x="177"
+       y="39"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">K</text>
+    <text
+       x="210"
+       y="39"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">L</text>
+    <text
+       x="142"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">M</text>
+    <text
+       x="177"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">N</text>
+    <text
+       x="209"
+       y="72"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">O</text>
+    <text
+       x="147"
+       y="104"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">P</text>
+    <text
+       x="177"
+       y="104"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">Q</text>
+    <text
+       x="210"
+       y="104"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">R</text>
+    <text
+       x="58"
+       y="170"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">S</text>
+    <text
+       x="36"
+       y="192"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">T</text>
+    <text
+       x="78"
+       y="192"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">U</text>
+    <text
+       x="58"
+       y="213"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">V</text>
+    <text
+       x="175"
+       y="171"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">W</text>
+    <text
+       x="155"
+       y="192"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">X</text>
+    <text
+       x="198"
+       y="192"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">Y</text>
+    <text
+       x="179"
+       y="213"
+       style="font-size:20px;font-style:normal;font-weight:bold;fill:#000000;fill-opacity:1;font-family:Roboto, Helvetica, Arial, sans-serif">Z</text>
+  </g>
+</svg>
