@@ -33,7 +33,13 @@ function Settings() {
         <Card>
           <Card.Header>About</Card.Header>
           <Card.Body>
-            <h3>PuzzTool</h3>
+            <div className="AboutLogo">
+              <img
+                className="AboutLogo-img"
+                src={require('../Images/puzztool_banner_dark.svg')}
+                alt="PuzzTool logo"
+              />
+            </div>
             Version: {version}<br />
             <a
               href="https://github.com/puzztool/puzztool/"

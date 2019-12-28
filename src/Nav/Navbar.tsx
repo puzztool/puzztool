@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getCategories } from '../Data/RouteData';
 import NavbarCategory from './NavbarCategory';
+import './Navbar.scss';
 
 function Navbar() {
   return (
@@ -19,7 +20,15 @@ function Navbar() {
       variant="dark"
     >
       <LinkContainer to="/">
-        <ReactNavbar.Brand>PuzzTool</ReactNavbar.Brand>
+        <ReactNavbar.Brand>
+          <div className="NavbarLogo">
+            <img
+              className="NavbarLogo-img"
+              src={require('../Images/puzztool_banner_white.svg')}
+              alt="PuzzTool logo"
+            />
+          </div>
+        </ReactNavbar.Brand>
       </LinkContainer>
       <ReactNavbar.Toggle />
       <ReactNavbar.Collapse>
