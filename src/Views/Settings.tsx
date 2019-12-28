@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import { clearLocalStorage } from '../Data/LocalStorage';
-import { version } from '../version';
 import PuzztoolBannerDark from '../Images/puzztool_banner_dark.svg';
+import { version } from '../version';
 import './Settings.scss';
 
 function Settings() {

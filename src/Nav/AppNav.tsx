@@ -4,8 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getCategories } from '../Data/RouteData';
-import AppNavCategory from './AppNavCategory';
 import PuzztoolBannerWhite from '../Images/puzztool_banner_white.svg';
+import AppNavCategory from './AppNavCategory';
 import './AppNav.scss';
 
 function AppNav() {
