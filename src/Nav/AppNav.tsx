@@ -4,7 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getCategories } from '../Data/RouteData';
-import NavbarCategory from './AppNavCategory';
+import PuzztoolBannerWhite from '../Images/puzztool_banner_white.svg';
+import AppNavCategory from './AppNavCategory';
 import './AppNav.scss';
 
 function AppNav() {
@@ -21,13 +22,19 @@ function AppNav() {
       variant="dark"
     >
       <LinkContainer to="/">
-        <Navbar.Brand>PuzzTool</Navbar.Brand>
+        <Navbar.Brand>
+          <img
+            className="NavbarLogo"
+            src={PuzztoolBannerWhite}
+            alt="PuzzTool logo"
+          />
+        </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav>
           {getCategories().map(
-            category => <NavbarCategory key={category.name} category={category} />)}
+            category => <AppNavCategory key={category.name} category={category} />)}
         </Nav>
         <Nav>
           <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>

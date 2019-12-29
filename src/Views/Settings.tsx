@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import { clearLocalStorage } from '../Data/LocalStorage';
+import PuzztoolBannerDark from '../Images/puzztool_banner_dark.svg';
 import { version } from '../version';
 import './Settings.scss';
 
@@ -33,7 +34,11 @@ function Settings() {
         <Card>
           <Card.Header>About</Card.Header>
           <Card.Body>
-            <h3>PuzzTool</h3>
+            <img
+              className="AboutLogo"
+              src={PuzztoolBannerDark}
+              alt="PuzzTool logo"
+            />
             Version: {version}<br />
             <a
               href="https://github.com/puzztool/puzztool/"
