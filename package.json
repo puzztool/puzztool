@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",
-    "@types/node": "^13.1.1",
+    "@types/node": "^13.1.4",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-loadable": "^5.5.3",
