@@ -21,4 +21,4 @@ deploy:
   fqdn: puzztool.com
   on:
     branch: master
-    node_js: "10"
+    node_js: "12"
