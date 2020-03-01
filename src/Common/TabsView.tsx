@@ -9,11 +9,11 @@ interface Props {
 }
 
 interface SavedState {
-  activeKey: string;
+  activeKey?: string;
 }
 
 function TabsView(props: Props) {
-  const [activeKey, setActiveKey] = useState();
+  const [activeKey, setActiveKey] = useState<string>();
 
   useLocalStorage<SavedState>(
     props.id,
