@@ -1,46 +1,40 @@
 import { CaesarString } from 'puzzle-lib';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
 import FormControl from 'react-bootstrap/FormControl';
+import { connect, ConnectedProps } from 'react-redux';
 import { useFocusInput } from '../../../Hooks/FocusInput';
-import { useLocalStorage } from '../../../Hooks/LocalStorage';
+import { RootState } from '../../../Store/rootReducer';
+import { clear, setText } from './caesarCipherSlice';
 import CaesarList from './CaesarList';
 import './CaesarStream.scss';
 
-interface Props {
-  prompt: JSX.Element | string;
-}
+const mapStateToProps = (state: RootState) => ({
+  text: state.cipher.caesar.text,
+});
+const mapDispatchToProps = {
+  clear,
+  setText,
+};
 
-interface SavedState {
-  text: string;
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+interface Props extends ConnectedProps<typeof connector> {
+  prompt: JSX.Element | string;
 }
 
 function CaesarStream(props: Props) {
   const inputRef = useFocusInput();
-  const [text, setText] = useState('');
-
-  useLocalStorage<SavedState>(
-    'CaesarStream',
-    (savedState) => {
-      if (savedState) {
-        setText(savedState.text);
-      }
-    },
-    () => {
-      return {
-        text,
-      };
-    });
-
-  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
-    setText(event.currentTarget.value);
-  }
 
   function onClearClick() {
-    setText('');
+    props.clear();
+  }
+
+  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
+    props.setText(event.currentTarget.value);
   }
 
   return (
@@ -52,7 +46,7 @@ function CaesarStream(props: Props) {
             onChange={onTextChanged}
             placeholder="Text"
             ref={inputRef}
-            value={text}
+            value={props.text}
           />
           <ButtonToolbar>
             <ButtonGroup>
@@ -69,11 +63,11 @@ function CaesarStream(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <CaesarList list={new CaesarString(text).getRotations()} />
+          <CaesarList list={new CaesarString(props.text).getRotations()} />
         </Card.Body>
       </Card>
     </div>
   );
 }
 
-export default CaesarStream;
+export default connector(CaesarStream);

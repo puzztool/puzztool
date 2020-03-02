@@ -1,33 +1,29 @@
 import { MorseCharacter as Character, MorseString } from 'puzzle-lib';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import { useLocalStorage } from '../../../Hooks/LocalStorage';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../../../Store/rootReducer';
+import { append, backspace, clear } from './morseEncodingSlice';
 import { renderDot, renderDash } from './MorsePicture';
 import './MorseStream.scss';
 
-interface SavedState {
-  morseStream: string;
-}
+const mapStateToProps = (state: RootState) => ({
+  stream: state.encoding.morse.stream,
+});
+const mapDispatchToProps = {
+  append,
+  backspace,
+  clear,
+};
 
-function MorseStream() {
-  const [morseStream, setMorseStream] = useState('');
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-  useLocalStorage<SavedState>(
-    'MorseStream',
-    (savedState) => {
-      if (savedState) {
-        setMorseStream(savedState.morseStream);
-      }
-    },
-    () => {
-      return {
-        morseStream,
-      };
-    });
+interface Props extends ConnectedProps<typeof connector> { }
 
+function MorseStream(props: Props) {
   useEffect(
     () => {
       function onKeyDown(ev: KeyboardEvent) {
@@ -40,7 +36,7 @@ function MorseStream() {
         // Chrome won't trigger keypress for any keys that can invoke browser
         // actions.
         if ((ev.key === 'Backspace') || (ev.keyCode === 8)) { // Backspace
-          onBackspaceClick();
+          props.backspace();
           handled = true;
         }
 
@@ -71,7 +67,7 @@ function MorseStream() {
               onNextClick();
               break;
             case ';':
-              onBackspaceClick();
+              props.backspace();
               break;
             default:
               handled = false;
@@ -93,7 +89,7 @@ function MorseStream() {
               onNextClick();
               break;
             case 59: // ';'
-              onBackspaceClick();
+              props.backspace();
               break;
             default:
               handled = false;
@@ -118,54 +114,55 @@ function MorseStream() {
     // Replace dot with interpunct for readability
     // Replace dash with full width hyphen for readability.  Don't use emdash
     // because multiple emdashes get combined with no space between them.
-    return morseStream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
+    return props.stream.replace(/\./g, '\u00b7').replace(/-/g, '\uff0d');
   }
 
   function plainText(): string {
-    return new MorseString(morseStream).toString();
+    return new MorseString(props.stream).toString();
   }
 
   function invertText(): string {
-    return new MorseString(morseStream).invertDotsAndDashes().toString();
+    return new MorseString(props.stream).invertDotsAndDashes().toString();
   }
 
   function reverseText(): string {
-    return new MorseString(morseStream).reverse().toString();
+    return new MorseString(props.stream).reverse().toString();
   }
 
   function invertReverseText(): string {
-    return new MorseString(morseStream)
+    return new MorseString(props.stream)
       .invertDotsAndDashes()
       .reverse()
       .toString();
   }
 
-  function onDotClick() {
-    setMorseStream(morseStream + Character.DOT);
-  }
-
-  function onDashClick() {
-    setMorseStream(morseStream + Character.DASH);
-  }
-
   function onBackspaceClick() {
-    setMorseStream(morseStream.slice(0, -1));
-  }
-
-  function onNextClick() {
-    if (morseStream.length > 0) {
-      const lastCharacter = morseStream.slice(-1);
-      if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
-        // Pressing next twice starts a new word
-        setMorseStream(morseStream.slice(0, -1) + MorseString.WORD_DIVIDER);
-      } else if (lastCharacter !== MorseString.WORD_DIVIDER) {
-        setMorseStream(morseStream + MorseString.CHARACTER_DIVIDER);
-      }
-    }
+    props.backspace();
   }
 
   function onClearClick() {
-    setMorseStream('');
+    props.clear();
+  }
+
+  function onDotClick() {
+    props.append(Character.DOT);
+  }
+
+  function onDashClick() {
+    props.append(Character.DASH);
+  }
+
+  function onNextClick() {
+    if (props.stream.length > 0) {
+      const lastCharacter = props.stream.slice(-1);
+      if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
+        // Pressing next twice starts a new word
+        props.backspace();
+        props.append(MorseString.WORD_DIVIDER);
+      } else if (lastCharacter !== MorseString.WORD_DIVIDER) {
+        props.append(MorseString.CHARACTER_DIVIDER);
+      }
+    }
   }
 
   return (
@@ -248,4 +245,4 @@ function MorseStream() {
   );
 }
 
-export default MorseStream;
+export default connector(MorseStream);

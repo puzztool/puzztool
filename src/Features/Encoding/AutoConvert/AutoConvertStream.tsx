@@ -1,5 +1,5 @@
 import { StringAutoConvert } from 'puzzle-lib';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -7,49 +7,37 @@ import Card from 'react-bootstrap/Card';
 import FormControl from 'react-bootstrap/FormControl';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import { connect, ConnectedProps } from 'react-redux';
 import { useFocusInput } from '../../../Hooks/FocusInput';
-import { useLocalStorage } from '../../../Hooks/LocalStorage';
+import { RootState } from '../../../Store/rootReducer';
+import { clear, setHomogeneous, setText } from './autoConvertSlice';
 import './AutoConvertStream.scss';
 
-interface Props {
-  prompt: JSX.Element | string;
-}
+const mapStateToProps = (state: RootState) => ({
+  homogeneous: state.encoding.autoConvert.homogeneous,
+  text: state.encoding.autoConvert.text,
+});
+const mapDispatchToProps = {
+  clear,
+  setHomogeneous,
+  setText,
+};
 
-interface SavedState {
-  text: string;
-  homogeneous: boolean;
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+interface Props extends ConnectedProps<typeof connector> {
+  prompt: JSX.Element | string;
 }
 
 function AutoConvertStream(props: Props) {
   const inputRef = useFocusInput();
-  const [homogeneous, setHomogeneous] = useState(true);
-  const [text, setText] = useState('');
-
-  useLocalStorage<SavedState>(
-    'AutoConvertStream',
-    (savedState) => {
-      if (savedState) {
-        setHomogeneous(savedState.homogeneous);
-        setText(savedState.text);
-      }
-    },
-    () => {
-      return {
-        homogeneous,
-        text,
-      };
-    });
-
-  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
-    setText(event.currentTarget.value);
-  }
 
   function onClearClick() {
-    setText('');
+    props.clear();
   }
 
-  function onHomogeneousChange(value: boolean) {
-    setHomogeneous(value);
+  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
+    props.setText(event.currentTarget.value);
   }
 
   return (
@@ -61,13 +49,13 @@ function AutoConvertStream(props: Props) {
             onChange={onTextChanged}
             placeholder="Text"
             ref={inputRef}
-            value={text}
+            value={props.text}
           />
           <ButtonToolbar className="AutoConvertStream-commands">
             <ToggleButtonGroup<boolean>
               defaultValue={true}
               name="options"
-              onChange={onHomogeneousChange}
+              onChange={props.setHomogeneous}
               type="radio"
             >
               <ToggleButton value={true}>Consistent</ToggleButton>
@@ -88,7 +76,7 @@ function AutoConvertStream(props: Props) {
         <Card.Header>Output</Card.Header>
         <Card.Body>
           <pre className="AutoConvertStream-output">
-            {StringAutoConvert.convertString(text, homogeneous) || ' '}
+            {StringAutoConvert.convertString(props.text, props.homogeneous) || ' '}
           </pre>
         </Card.Body>
       </Card>
@@ -96,4 +84,4 @@ function AutoConvertStream(props: Props) {
   );
 }
 
-export default AutoConvertStream;
+export default connector(AutoConvertStream);

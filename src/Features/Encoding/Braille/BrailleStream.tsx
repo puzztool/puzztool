@@ -1,10 +1,9 @@
 import {
   BrailleCharacter as Character,
   BrailleDot as Dot,
-  BrailleEncoding as Encoding,
   BrailleStream as Stream
 } from 'puzzle-lib';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -12,19 +11,35 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { useLocalStorage } from '../../../Hooks/LocalStorage';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../../../Store/rootReducer';
 import BrailleCharacter from './BrailleCharacter';
+import {
+  append,
+  backspace,
+  clear,
+  setEncoding,
+  space,
+} from './brailleEncodingSlice';
 import './BrailleStream.scss';
 
-interface SavedState {
-  character: number;
-  stream: Encoding[];
-}
+const mapStateToProps = (state: RootState) => ({
+  encoding: state.encoding.braille.encoding,
+  stream: state.encoding.braille.stream,
+});
+const mapDispatchToProps = {
+  append,
+  backspace,
+  clear,
+  setEncoding,
+  space,
+};
 
-function BrailleStream() {
-  const [stream, setStream] = useState(new Stream());
-  const [character, setCharacter] = useState(new Character());
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
+interface Props extends ConnectedProps<typeof connector> { }
+
+function BrailleStream(props: Props) {
   useEffect(
     () => {
       function onKeyDown(ev: KeyboardEvent) {
@@ -37,7 +52,7 @@ function BrailleStream() {
         // Chrome won't trigger keypress for any keys that can invoke browser
         // actions.
         if (ev.keyCode === 8) { // Backspace
-          onBackspaceClick();
+          props.backspace();
           handled = true;
         }
 
@@ -77,50 +92,30 @@ function BrailleStream() {
       };
     });
 
-  useLocalStorage<SavedState>(
-    'BrailleStream',
-    (savedState) => {
-      if (savedState) {
-        setCharacter(new Character(savedState.character));
-        setStream(new Stream(savedState.stream));
-      }
-    },
-    () => {
-      return {
-        character: character.encoding,
-        stream: stream.chars,
-      };
-    });
+  function onBackspaceClick() {
+    props.backspace();
+  }
 
   function onCharacterClick(mask: Dot) {
-    const newCharacter = new Character(character.encoding, character.category);
-    newCharacter.toggle(mask);
-    setCharacter(newCharacter);
-  }
-
-  function onBackspaceClick() {
-    const newStream = new Stream(stream.chars);
-    newStream.backspace();
-    setStream(newStream);
-  }
-
-  function onNextClick() {
-    const newStream = new Stream(stream.chars);
-
-    if (character.valid()) {
-      newStream.append(character);
-      setCharacter(new Character());
-    } else {
-      newStream.space();
-    }
-
-    setStream(newStream);
+    const character = new Character(props.encoding);
+    character.toggle(mask);
+    props.setEncoding(character.encoding);
   }
 
   function onClearClick() {
-    setCharacter(new Character());
-    setStream(new Stream());
+    props.clear();
   }
+
+  function onNextClick() {
+    const character = new Character(props.encoding);
+    if (character.valid()) {
+      props.append(character.valueOf());
+    } else {
+      props.space();
+    }
+  }
+
+  const character = new Character(props.encoding);
 
   return (
     <div className="BrailleStream">
@@ -170,7 +165,7 @@ function BrailleStream() {
         <Card.Header>Output</Card.Header>
         <Card.Body>
           <pre className="BrailleStream-output">
-            {stream.toString()}<span className="blinking-cursor">|</span>
+            {new Stream(props.stream).toString()}<span className="blinking-cursor">|</span>
           </pre>
         </Card.Body>
       </Card>
@@ -178,4 +173,4 @@ function BrailleStream() {
   );
 }
 
-export default BrailleStream;
+export default connector(BrailleStream);

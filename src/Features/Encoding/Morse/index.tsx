@@ -1,21 +1,39 @@
 import React from 'react';
 import Tab from 'react-bootstrap/Tab';
-import TabsView from '../../../Common/TabsView';
+import Tabs from 'react-bootstrap/Tabs';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../../../Store/rootReducer';
+import { selectTab } from './morseEncodingSlice';
 import MorseStream from './MorseStream';
 import MorseTable from './MorseTable';
 import './index.scss';
 
-function Morse() {
+const mapStateToProps = (state: RootState) => ({
+  selectedTab: state.encoding.morse.selectedTab,
+});
+const mapDispatchToProps = {
+  selectTab,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+interface Props extends ConnectedProps<typeof connector> { }
+
+function Morse(props: Props) {
   return (
-    <TabsView id="Morse-tabs">
+    <Tabs
+      activeKey={props.selectedTab}
+      id="Morse-tabs"
+      onSelect={props.selectTab}
+    >
       <Tab className="Morse-tab-value" eventKey={1} title="Value">
         <MorseStream />
       </Tab>
       <Tab eventKey={2} title="Reference">
         <MorseTable />
       </Tab>
-    </TabsView>
+    </Tabs>
   );
 }
 
-export default Morse;
+export default connector(Morse);
