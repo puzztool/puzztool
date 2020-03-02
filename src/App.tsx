@@ -37,7 +37,7 @@ const Caesar = Loadable({
   timeout: defaultTimeout,
 });
 
-const CharacterEncodings = Loadable({
+const Character = Loadable({
   loader: () => import('./Features/Encoding/Character'),
   loading: Loading,
   timeout: defaultTimeout,
@@ -61,8 +61,8 @@ const Nato = Loadable({
   timeout: defaultTimeout,
 });
 
-const NavalFlags = Loadable({
-  loader: () => import('./Features/Encoding/NavalFlags'),
+const NavalFlag = Loadable({
+  loader: () => import('./Features/Encoding/NavalFlag'),
   loading: Loading,
   timeout: defaultTimeout,
 });
@@ -73,8 +73,8 @@ const Pigpen = Loadable({
   timeout: defaultTimeout,
 });
 
-const Resistors = Loadable({
-  loader: () => import('./Features/Resistors'),
+const Resistor = Loadable({
+  loader: () => import('./Features/Resistor'),
   loading: Loading,
   timeout: defaultTimeout,
 });
@@ -113,10 +113,10 @@ function App() {
           <Route path="/encoding/pigpen" component={Pigpen} />
           <Route path="/encoding/semaphore" component={Semaphore} />
           <Route path="/help/settings" component={Settings} />
-          <Route path="/reference/characterencodings" component={CharacterEncodings} />
+          <Route path="/reference/characterencodings" component={Character} />
           <Route path="/reference/nato" component={Nato} />
-          <Route path="/reference/navalflags" component={NavalFlags} />
-          <Route path="/reference/resistors" component={Resistors} />
+          <Route path="/reference/navalflags" component={NavalFlag} />
+          <Route path="/reference/resistors" component={Resistor} />
           <Route path="/solvers/wordsearch" component={WordSearch} />
         </div>
       </div>

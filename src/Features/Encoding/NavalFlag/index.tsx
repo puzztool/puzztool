@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavalFlags as Data } from 'puzzle-lib';
+import { NavalFlags } from 'puzzle-lib';
 import Table from 'react-bootstrap/Table';
 import './index.scss';
 
-function NavalFlags() {
+function NavalFlag() {
   return (
-    <div className="NavalFlags">
+    <div className="NavalFlag">
       <Table striped={true} responsive={true}>
         <thead>
           <tr>
@@ -14,12 +14,12 @@ function NavalFlags() {
           </tr>
         </thead>
         <tbody>
-          {Data.instance.entries.map((value) => (
+          {NavalFlags.instance.entries.map((value) => (
             <tr key={value.character}>
               <td>{value.character}</td>
               <td>
                 <img
-                  className="NavalFlags-flagImage"
+                  className="NavalFlag-flagImage"
                   src={`data:image/svg+xml,${encodeURIComponent(value.image.render())}`}
                   alt={value.character}
                 />
@@ -32,4 +32,4 @@ function NavalFlags() {
   );
 }
 
-export default NavalFlags;
+export default NavalFlag;
