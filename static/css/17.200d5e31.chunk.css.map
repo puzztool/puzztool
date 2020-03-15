@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA,QACE,YAAa,CACb,WAAY,CACZ,QAAS,CAHX,oBAMI,cAAe,CACf,eAAgB,CAChB,WAAY","file":"17.200d5e31.chunk.css","sourcesContent":[".Pigpen {\n  display: grid;\n  height: 100%;\n  margin: 0;\n\n  .Pigpen-img {\n    max-width: 100%;\n    max-height: 80vh;\n    margin: auto;\n  }\n}\n"]}
