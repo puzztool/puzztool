@@ -1,7 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import AppNav from './Features/AppNav';
+import NotFound from './Features/Error/NotFound';
 import Loading from './Common/Loading';
 import './App.scss';
 
@@ -99,28 +100,29 @@ const Vigenere = Loadable({
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <AppNav />
-        <div className="App-content">
+    <div className="App">
+      <AppNav />
+      <div className="App-content">
+        <Switch>
           <Route exact={true} path="/" component={Home} />
-          <Route path="/cipher/autokey" component={Autokey} />
-          <Route path="/cipher/caesar" component={Caesar} />
-          <Route path="/cipher/vigenere" component={Vigenere} />
-          <Route path="/encoding/autoconvert" component={AutoConvert} />
-          <Route path="/encoding/braille" component={Braille} />
-          <Route path="/encoding/morse" component={Morse} />
-          <Route path="/encoding/pigpen" component={Pigpen} />
-          <Route path="/encoding/semaphore" component={Semaphore} />
-          <Route path="/help/settings" component={Settings} />
-          <Route path="/reference/characterencodings" component={Character} />
-          <Route path="/reference/nato" component={Nato} />
-          <Route path="/reference/navalflags" component={NavalFlag} />
-          <Route path="/reference/resistors" component={Resistor} />
-          <Route path="/solvers/wordsearch" component={WordSearch} />
-        </div>
+          <Route exact={true} path="/cipher/autokey" component={Autokey} />
+          <Route exact={true} path="/cipher/caesar" component={Caesar} />
+          <Route exact={true} path="/cipher/vigenere" component={Vigenere} />
+          <Route exact={true} path="/encoding/autoconvert" component={AutoConvert} />
+          <Route exact={true} path="/encoding/braille" component={Braille} />
+          <Route exact={true} path="/encoding/morse" component={Morse} />
+          <Route exact={true} path="/encoding/pigpen" component={Pigpen} />
+          <Route exact={true} path="/encoding/semaphore" component={Semaphore} />
+          <Route exact={true} path="/help/settings" component={Settings} />
+          <Route exact={true} path="/reference/characterencodings" component={Character} />
+          <Route exact={true} path="/reference/nato" component={Nato} />
+          <Route exact={true} path="/reference/navalflags" component={NavalFlag} />
+          <Route exact={true} path="/reference/resistors" component={Resistor} />
+          <Route exact={true} path="/solvers/wordsearch" component={WordSearch} />
+          <Route component={NotFound} />
+        </Switch>
       </div>
-    </Router>
+    </div>
   );
 }
 
