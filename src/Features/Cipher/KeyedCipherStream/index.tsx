@@ -7,8 +7,8 @@ import Card from 'react-bootstrap/Card';
 import FormControl from 'react-bootstrap/FormControl';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { useFocusInput } from '../../Hooks/FocusInput';
-import { useLocalStorage } from '../../Hooks/LocalStorage';
+import { useFocusInput } from '../../../Hooks/FocusInput';
+import { useLocalStorage } from '../../../Hooks/LocalStorage';
 import './index.scss';
 
 interface Props {

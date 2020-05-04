@@ -1,6 +1,6 @@
 import { VigenereString } from 'puzzle-lib';
 import React from 'react';
-import KeyedCipherStream from '../../../Common/KeyedCipherStream';
+import KeyedCipherStream from '../KeyedCipherStream';
 
 interface Props {
   prompt: JSX.Element | string;
