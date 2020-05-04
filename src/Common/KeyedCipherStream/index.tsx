@@ -1,5 +1,5 @@
 import { KeyedCipherStringBase } from 'puzzle-lib';
-import React, { FormEvent, MouseEvent, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -46,11 +46,11 @@ function KeyedCipherStream(props: Props) {
       };
     });
 
-  function onTextChanged(event: FormEvent<HTMLInputElement>) {
+  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
     setText(event.currentTarget.value);
   }
 
-  function onKeyChanged(event: FormEvent<HTMLInputElement>) {
+  function onKeyChanged(event: ChangeEvent<HTMLInputElement>) {
     setKey(event.currentTarget.value);
   }
 

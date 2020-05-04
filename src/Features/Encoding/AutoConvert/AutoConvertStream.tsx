@@ -1,5 +1,5 @@
 import { StringAutoConvert } from 'puzzle-lib';
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -40,7 +40,7 @@ function AutoConvertStream(props: Props) {
       };
     });
 
-  function onTextChanged(event: FormEvent<HTMLInputElement>) {
+  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
     setText(event.currentTarget.value);
   }
 
