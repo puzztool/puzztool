@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { SemaphoreCharacter as Character, SemaphoreDirection as Direction } from 'puzzle-lib';
 import './SemaphoreCheckbox.scss';
 
@@ -19,7 +19,7 @@ function SemaphoreCheckbox(props: Props) {
     return '';
   }
 
-  function onChange(event: FormEvent<HTMLInputElement>) {
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
     const handler = props.onChange;
     if (handler) {
       handler(event.currentTarget.checked ? 'add' : 'remove', props.direction);

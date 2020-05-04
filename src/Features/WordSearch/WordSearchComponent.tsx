@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -48,23 +48,23 @@ function WordSearchComponent() {
       };
     });
 
-  function onGridTextChanged(event: FormEvent<HTMLTextAreaElement>) {
+  function onGridTextChanged(event: ChangeEvent<HTMLTextAreaElement>) {
     setGridInputText(event.currentTarget.value);
   }
 
-  function onListTextChanged(event: FormEvent<HTMLTextAreaElement>) {
+  function onListTextChanged(event: ChangeEvent<HTMLTextAreaElement>) {
     setWordListInputText(event.currentTarget.value);
   }
 
-  function onCardinalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+  function onCardinalCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
     setUseCardinals(event.currentTarget.checked);
   }
 
-  function onDiagonalCheckboxChange(event: FormEvent<HTMLInputElement>) {
+  function onDiagonalCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
     setUseDiagonals(event.currentTarget.checked);
   }
 
-  function onSetCanBendChange(event: FormEvent<HTMLInputElement>) {
+  function onSetCanBendChange(event: ChangeEvent<HTMLInputElement>) {
     setCanBend(event.currentTarget.checked);
   }
 
