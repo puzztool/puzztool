@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import AppNav from './Features/AppNav';
 import NotFound from './Features/Error/NotFound';
-import Loading from './Common/Loading';
+import Loading from './Features/Loading';
 import './App.scss';
 
 const defaultTimeout = 10000;
