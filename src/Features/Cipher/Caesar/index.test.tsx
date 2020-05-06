@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from '../../../Store/configureStore';
 import Caesar from '.';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Caesar />, div);
+  const { store } = configureStore();
+  
+  ReactDOM.render(
+    <Provider store={store}>
+      <Caesar />
+    </Provider>,
+    div);
 });
