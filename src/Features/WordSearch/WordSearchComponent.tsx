@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -6,70 +6,62 @@ import Container from 'react-bootstrap/Container';
 import FormCheck from 'react-bootstrap/FormCheck';
 import FormControl from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
+import { connect, ConnectedProps } from 'react-redux';
 import { useFocusInput } from '../../Hooks/FocusInput';
-import { useLocalStorage } from '../../Hooks/LocalStorage';
+import { RootState } from '../../Store/rootReducer';
 import WordSearchOutput from './WordSearchOutput';
+import {
+  setCanBend,
+  setGrid,
+  setUseCardinals,
+  setUseDiagonals,
+  setWordList
+} from './wordSearchSlice';
 import './WordSearchComponent.scss';
 
-interface SavedState {
-  gridInputText: string;
-  wordListInputText: string;
-  useDiagonals: boolean;
-  useCardinals: boolean;
-  canBend: boolean;
-}
+const mapStateToProps = (state: RootState) => ({
+  canBend: state.wordSearch.canBend,
+  grid: state.wordSearch.grid,
+  useCardinals: state.wordSearch.useCardinals,
+  useDiagonals: state.wordSearch.useDiagonals,
+  wordList: state.wordSearch.wordList,
+});
+const mapDispatchToProps = {
+  setCanBend,
+  setGrid,
+  setUseCardinals,
+  setUseDiagonals,
+  setWordList,
+};
 
-function WordSearchComponent() {
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type Props = ConnectedProps<typeof connector>;
+
+function WordSearchComponent(props: Props) {
   const inputRef = useFocusInput();
-  const [gridInputText, setGridInputText] = useState('');
-  const [wordListInputText, setWordListInputText] = useState('');
-  const [useCardinals, setUseCardinals] = useState(true);
-  const [useDiagonals, setUseDiagonals] = useState(true);
-  const [canBend, setCanBend] = useState(false);
-
-  useLocalStorage<SavedState>(
-    'WordSearchComponent',
-    (savedState) => {
-      if (savedState) {
-        setGridInputText(savedState.gridInputText);
-        setWordListInputText(savedState.wordListInputText);
-        setUseCardinals(savedState.useCardinals);
-        setUseDiagonals(savedState.useDiagonals);
-        setCanBend(savedState.canBend);
-      }
-    },
-    () => {
-      return {
-        gridInputText,
-        wordListInputText,
-        useCardinals,
-        useDiagonals,
-        canBend,
-      };
-    });
 
   function onGridTextChanged(event: ChangeEvent<HTMLTextAreaElement>) {
-    setGridInputText(event.currentTarget.value);
+    props.setGrid(event.currentTarget.value);
   }
 
   function onListTextChanged(event: ChangeEvent<HTMLTextAreaElement>) {
-    setWordListInputText(event.currentTarget.value);
+    props.setWordList(event.currentTarget.value);
   }
 
   function onCardinalCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
-    setUseCardinals(event.currentTarget.checked);
+    props.setUseCardinals(event.currentTarget.checked);
   }
 
   function onDiagonalCheckboxChange(event: ChangeEvent<HTMLInputElement>) {
-    setUseDiagonals(event.currentTarget.checked);
+    props.setUseDiagonals(event.currentTarget.checked);
   }
 
   function onSetCanBendChange(event: ChangeEvent<HTMLInputElement>) {
-    setCanBend(event.currentTarget.checked);
+    props.setCanBend(event.currentTarget.checked);
   }
 
   function renderEmptyDirection() {
-    if (!useCardinals && !useDiagonals) {
+    if (!props.useCardinals && !props.useDiagonals) {
       return (
         <Alert variant="warning">
           No directions are selected. No results will be shown.
@@ -92,25 +84,25 @@ function WordSearchComponent() {
                   as="textarea"
                   onChange={onListTextChanged}
                   placeholder="Word List To Find"
-                  value={wordListInputText}
+                  value={props.wordList}
                 />
                 {renderEmptyDirection()}
                 <FormCheck
-                  checked={useDiagonals}
+                  checked={props.useDiagonals}
                   id="WordSearchComponent-checkbox-diagonal"
                   label="Use diagonal directions"
                   onChange={onDiagonalCheckboxChange}
                   type="checkbox"
                 />
                 <FormCheck
-                  checked={useCardinals}
+                  checked={props.useCardinals}
                   id="WordSearchComponent-checkbox-cardinal"
                   label="Use cardinal directions"
                   onChange={onCardinalCheckboxChange}
                   type="checkbox"
                 />
                 <FormCheck
-                  checked={canBend}
+                  checked={props.canBend}
                   id="WordSearchComponent-checkbox-bend"
                   label="Words can bend (may not be straight lines)"
                   onChange={onSetCanBendChange}
@@ -131,7 +123,7 @@ function WordSearchComponent() {
                   placeholder="Grid Text"
                   ref={inputRef}
                   spellCheck={false}
-                  value={gridInputText}
+                  value={props.grid}
                 />
               </Card.Body>
             </Card>
@@ -143,11 +135,11 @@ function WordSearchComponent() {
               <Card.Header>Output</Card.Header>
               <Card.Body>
                 <WordSearchOutput
-                  gridInputText={gridInputText}
-                  useCardinals={useCardinals}
-                  useDiagonals={useDiagonals}
-                  canBend={canBend}
-                  wordListInputText={wordListInputText}
+                  gridInputText={props.grid}
+                  useCardinals={props.useCardinals}
+                  useDiagonals={props.useDiagonals}
+                  canBend={props.canBend}
+                  wordListInputText={props.wordList}
                 />
               </Card.Body>
             </Card>
@@ -158,4 +150,4 @@ function WordSearchComponent() {
   );
 }
 
-export default WordSearchComponent;
+export default connector(WordSearchComponent);

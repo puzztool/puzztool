@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
+import React from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';
-import { useLocalStorage } from '../../Hooks/LocalStorage';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '../../Store/rootReducer';
 import ResistorColorSelector from './ResistorColorSelector';
+import { setBand } from './resistorSlice';
 import ResistorPicture from './ResistorPicture';
 import './ResistorInput.scss';
 
-interface SavedState {
-  bands: (Color | null)[];
-}
+const mapStateToProps = (state: RootState) => ({
+  bands: state.resistor.bands,
+});
+const mapDispatchToProps = {
+  setBand,
+};
 
-function getResistorValue(bands: (Color | null)[]) {
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type Props = ConnectedProps<typeof connector>;
+
+function getResistorValue(bands: (Color | undefined)[]) {
   // The last band is a tolerance so we need to calculate the value without it.
   const colors = bands
     .slice(0, -1)
-    .filter((band) => band !== null) as Color[];
+    .filter((band) => !!band) as Color[];
 
   const value = Resistor.getValue(colors);
   if (value === Resistor.INVALID_RESISTOR) {
@@ -26,33 +34,16 @@ function getResistorValue(bands: (Color | null)[]) {
   }
 }
 
-function ResistorInput() {
-  const initialBands = [Resistor.BLACK, Resistor.BLACK, Resistor.BLACK, null, Resistor.BROWN];
-  const [value, setValue] = useState(getResistorValue(initialBands));
-  const [bands, setBands] = useState(initialBands);
-
-  useLocalStorage<SavedState>(
-    'ResistorInput',
-    (savedState) => {
-      if (savedState) {
-        updateBands(savedState.bands);
-      }
-    },
-    () => {
-      return { bands };
+function ResistorInput(props: Props) {
+  function onColorChange(bandIndex: number, color?: Color) {
+    const colorIndex = color ? Resistor.colorTable.indexOf(color) : -1;
+    props.setBand({
+      bandIndex,
+      colorIndex,
     });
-
-  function updateBands(newBands: (Color | null)[]) {
-    setBands(newBands);
-    setValue(getResistorValue(newBands));
   }
 
-  function onColorChange(index: number, color?: Color) {
-    const newBands = Array.from(bands);
-    newBands[index] = color || null;
-    updateBands(newBands);
-  }
-
+  const bands = props.bands.map((value) => Resistor.colorTable[value]);
   const colorsWithValue = Resistor.colorTable.filter(color => color.hasValue());
   const colorsWithTolerance = Resistor.colorTable.filter(color => color.hasTolerance());
 
@@ -113,11 +104,11 @@ function ResistorInput() {
       <Card className="ResistorInput-output">
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          {value}
+          {getResistorValue(bands)}
         </Card.Body>
       </Card>
     </div>
   );
 }
 
-export default ResistorInput;
+export default connector(ResistorInput);

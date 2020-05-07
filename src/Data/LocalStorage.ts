@@ -82,24 +82,6 @@ function setLocalStorageItem(key: string, value: string) {
   }
 }
 
-export function getLocalStorageObject<T>(key: string) {
-  if (isLocalStorageSupported()) {
-    const objString = window.localStorage.getItem(getKey(key));
-
-    if (objString !== null) {
-      return JSON.parse(objString) as T;
-    }
-  }
-
-  return null;
-}
-
-export function setLocalStorageObject<T>(key: string, object: T) {
-  if (isLocalStorageSupported()) {
-    window.localStorage.setItem(getKey(key), JSON.stringify(object));
-  }
-}
-
 export function clearLocalStorage() {
   if (isLocalStorageSupported()) {
     window.localStorage.clear();

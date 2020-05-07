@@ -1,20 +1,37 @@
 import React from 'react';
 import Tab from 'react-bootstrap/Tab';
-import TabsView from '../../Common/TabsView';
+import { connect, ConnectedProps } from 'react-redux';
+import Tabs from 'react-bootstrap/Tabs';
+import { RootState } from '../../Store/rootReducer';
 import ResistorInput from './ResistorInput';
+import { selectTab } from './resistorSlice';
 import ResistorTable from './ResistorTable';
 
-function Resistors() {
+const mapStateToProps = (state: RootState) => ({
+  selectedTab: state.resistor.selectedTab,
+});
+const mapDispatchToProps = {
+  selectTab,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type Props = ConnectedProps<typeof connector>;
+
+function Resistors(props: Props) {
   return (
-    <TabsView id="Resistors-tabs">
+    <Tabs
+      activeKey={props.selectedTab}
+      id="Resistors-tabs"
+      onSelect={props.selectTab}
+    >
       <Tab eventKey={1} title="Value">
         <ResistorInput />
       </Tab>
       <Tab eventKey={2} title="Reference">
         <ResistorTable />
       </Tab>
-    </TabsView>
+    </Tabs>
   );
 }
 
-export default Resistors;
+export default connector(Resistors);

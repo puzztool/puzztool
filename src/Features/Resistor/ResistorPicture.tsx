@@ -1,9 +1,8 @@
 import React from 'react';
 import { ResistorColorEntry as Color } from 'puzzle-lib';
-import './ResistorInput.scss';
 
 interface Props {
-  bands: (Color | null)[];
+  bands: (Color | undefined)[];
 }
 
 function ResistorPicture(props: Props) {
@@ -18,7 +17,7 @@ function ResistorPicture(props: Props) {
 
   function renderBand(index: number) {
     const band = props.bands[index];
-    if (band !== null) {
+    if (band) {
       return (
         <use
           xlinkHref="#Band"
