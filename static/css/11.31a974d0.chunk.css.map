@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA,UACE,mBAAoB,CADtB,qBAII,aAAc,CACd,WAAY,CACZ,kBAAmB","file":"11.31a974d0.chunk.css","sourcesContent":[".Settings {\n  padding: 0 1rem 1rem;\n\n  .AboutLogo {\n    display: block;\n    height: 3rem;\n    margin-bottom: 1rem;\n  }\n}\n"]}
