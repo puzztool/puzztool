@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface State {
+interface State {
   canBend: boolean;
   grid: string;
   useCardinals: boolean;

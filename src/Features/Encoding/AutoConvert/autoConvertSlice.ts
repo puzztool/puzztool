@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface State {
+interface State {
   homogeneous: boolean;
   text: string;
 }
@@ -15,7 +15,7 @@ const autoConvertSlice = createSlice({
   initialState,
   reducers: {
     clear(state) {
-      state.text = '';
+      state = initialState;
     },
     setHomogeneous(state, action: PayloadAction<boolean>) {
       state.homogeneous = action.payload;

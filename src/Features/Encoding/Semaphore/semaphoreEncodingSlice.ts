@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SemaphoreDirection } from 'puzzle-lib';
 
-export interface State {
+interface State {
   directions: SemaphoreDirection[];
   selectedTab?: string;
   stream: string;
@@ -24,8 +24,7 @@ const semaphoreEncodingSlice = createSlice({
       state.stream = state.stream.slice(0, -1);
     },
     clear(state) {
-      state.directions.length = 0;
-      state.stream = '';
+      state = initialState;
     },
     selectTab(state, action: PayloadAction<string>) {
       state.selectedTab = action.payload;

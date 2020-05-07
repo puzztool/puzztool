@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface State {
+interface State {
   text: string;
 }
 
@@ -13,7 +13,7 @@ const caesarCipherSlice = createSlice({
   initialState,
   reducers: {
     clear(state) {
-      state.text = '';
+      state = initialState;
     },
     setText(state, action: PayloadAction<string>) {
       state.text = action.payload;

@@ -10,13 +10,18 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useFocusInput } from '../../../Hooks/FocusInput';
 import './index.scss';
 
+export enum Conversion {
+  encrypt,
+  decrypt,
+}
+
 interface Props {
   cipher: KeyedCipherStringBase;
-  conversion: number;
+  conversion: Conversion;
   id: string;
   secret: string;
   onClear: () => void;
-  onConversionChange: (value: number) => void;
+  onConversionChange: (value: Conversion) => void;
   onSecretChange: (value: string) => void;
   onTextChange: (value: string) => void;
   prompt: JSX.Element | string;
@@ -42,7 +47,17 @@ function KeyedCipherStream(props: Props) {
     const cipher = props.cipher;
     cipher.key = props.secret;
     cipher.text = props.text;
-    return props.conversion === 1 ? cipher.encrypt() : cipher.decrypt();
+
+    switch (props.conversion) {
+      case Conversion.encrypt:
+        return cipher.encrypt();
+
+      case Conversion.decrypt:
+        return cipher.decrypt();
+
+      default:
+        throw new Error('Invalid conversion type');
+    }
   }
 
   return (
@@ -62,14 +77,14 @@ function KeyedCipherStream(props: Props) {
             value={props.secret}
           />
           <ButtonToolbar>
-            <ToggleButtonGroup<number>
+            <ToggleButtonGroup<Conversion>
               name="KeyedCipherStream-conversion"
               onChange={props.onConversionChange}
               type="radio"
               value={props.conversion}
             >
-              <ToggleButton value={1}>Encrypt</ToggleButton>
-              <ToggleButton value={2}>Decrypt</ToggleButton>
+              <ToggleButton value={Conversion.encrypt}>Encrypt</ToggleButton>
+              <ToggleButton value={Conversion.decrypt}>Decrypt</ToggleButton>
             </ToggleButtonGroup>
             <ButtonGroup>
               <Button

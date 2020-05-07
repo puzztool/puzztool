@@ -1,7 +1,7 @@
 import { BrailleEncoding } from 'puzzle-lib';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface State {
+interface State {
   encoding: BrailleEncoding,
   selectedTab?: string;
   stream: BrailleEncoding[];
@@ -24,8 +24,7 @@ const brailleEncodingSlice = createSlice({
       state.stream.pop();
     },
     clear(state) {
-      state.encoding = BrailleEncoding.None;
-      state.stream.length = 0;
+      state = initialState;
     },
     selectTab(state, action: PayloadAction<string>) {
       state.selectedTab = action.payload;
