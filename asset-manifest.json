@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.f8bd5651.chunk.css",
-    "main.js": "/static/js/main.602e2a1a.chunk.js",
-    "main.js.map": "/static/js/main.602e2a1a.chunk.js.map",
+    "main.js": "/static/js/main.66f3e8b4.chunk.js",
+    "main.js.map": "/static/js/main.66f3e8b4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.75cff629.js",
     "runtime-main.js.map": "/static/js/runtime-main.75cff629.js.map",
-    "static/js/2.91f363e7.chunk.js": "/static/js/2.91f363e7.chunk.js",
-    "static/js/2.91f363e7.chunk.js.map": "/static/js/2.91f363e7.chunk.js.map",
+    "static/js/2.40cd273d.chunk.js": "/static/js/2.40cd273d.chunk.js",
+    "static/js/2.40cd273d.chunk.js.map": "/static/js/2.40cd273d.chunk.js.map",
     "static/css/3.041cc1a7.chunk.css": "/static/css/3.041cc1a7.chunk.css",
     "static/js/3.ba9042ef.chunk.js": "/static/js/3.ba9042ef.chunk.js",
     "static/js/3.ba9042ef.chunk.js.map": "/static/js/3.ba9042ef.chunk.js.map",
@@ -53,7 +53,7 @@
     "static/js/17.ae457e03.chunk.js": "/static/js/17.ae457e03.chunk.js",
     "static/js/17.ae457e03.chunk.js.map": "/static/js/17.ae457e03.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9cd200f549612f256a7c3dc53a70c0b2.js": "/precache-manifest.9cd200f549612f256a7c3dc53a70c0b2.js",
+    "precache-manifest.e95dfa2d17bfe5eb95eaad53e5c23f40.js": "/precache-manifest.e95dfa2d17bfe5eb95eaad53e5c23f40.js",
     "service-worker.js": "/service-worker.js",
     "static/css/10.c1834a1e.chunk.css.map": "/static/css/10.c1834a1e.chunk.css.map",
     "static/css/11.31a974d0.chunk.css.map": "/static/css/11.31a974d0.chunk.css.map",
@@ -71,15 +71,15 @@
     "static/css/8.f80a6a42.chunk.css.map": "/static/css/8.f80a6a42.chunk.css.map",
     "static/css/9.3af2de28.chunk.css.map": "/static/css/9.3af2de28.chunk.css.map",
     "static/css/main.f8bd5651.chunk.css.map": "/static/css/main.f8bd5651.chunk.css.map",
-    "static/js/2.91f363e7.chunk.js.LICENSE.txt": "/static/js/2.91f363e7.chunk.js.LICENSE.txt",
+    "static/js/2.40cd273d.chunk.js.LICENSE.txt": "/static/js/2.40cd273d.chunk.js.LICENSE.txt",
     "static/media/pigpen_key.svg": "/static/media/pigpen_key.130bde26.svg",
     "static/media/puzztool_banner_dark.svg": "/static/media/puzztool_banner_dark.1521c511.svg",
     "static/media/puzztool_banner_white.svg": "/static/media/puzztool_banner_white.b6754a16.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.75cff629.js",
-    "static/js/2.91f363e7.chunk.js",
+    "static/js/2.40cd273d.chunk.js",
     "static/css/main.f8bd5651.chunk.css",
-    "static/js/main.602e2a1a.chunk.js"
+    "static/js/main.66f3e8b4.chunk.js"
   ]
 }
