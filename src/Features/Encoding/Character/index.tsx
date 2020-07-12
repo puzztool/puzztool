@@ -25,10 +25,10 @@ function CharacterEncodings(props: Props) {
       id="CharacterEncodings-tabs"
       onSelect={props.selectTab}
     >
-      <Tab eventKey={1} title="ASCII">
+      <Tab eventKey="1" title="ASCII">
         <AsciiTable />
       </Tab>
-      <Tab eventKey={2} title="Ordinal">
+      <Tab eventKey="2" title="Ordinal">
         <OrdinalTable />
       </Tab>
     </Tabs>

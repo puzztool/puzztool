@@ -52,7 +52,7 @@ function AutoConvertStream(props: Props) {
             value={props.text}
           />
           <ButtonToolbar className="AutoConvertStream-commands">
-            <ToggleButtonGroup<boolean>
+            <ToggleButtonGroup
               defaultValue={true}
               name="options"
               onChange={props.setHomogeneous}

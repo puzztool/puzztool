@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface State {
-  selectedTab?: string;
+  selectedTab: string | null;
   stream: string;
 }
 
 const initialState: State = {
+  selectedTab: null,
   stream: '',
 };
 
@@ -22,7 +23,7 @@ const morseEncodingSlice = createSlice({
     clear(state) {
       state = initialState;
     },
-    selectTab(state, action: PayloadAction<string>) {
+    selectTab(state, action: PayloadAction<string | null>) {
       state.selectedTab = action.payload;
     },
   }

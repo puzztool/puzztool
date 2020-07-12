@@ -3,12 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface State {
   encoding: BrailleEncoding,
-  selectedTab?: string;
+  selectedTab: string | null;
   stream: BrailleEncoding[];
 }
 
 const initialState: State = {
   encoding: BrailleEncoding.None,
+  selectedTab: null,
   stream: [],
 };
 
@@ -26,7 +27,7 @@ const brailleEncodingSlice = createSlice({
     clear(state) {
       state = initialState;
     },
-    selectTab(state, action: PayloadAction<string>) {
+    selectTab(state, action: PayloadAction<string | null>) {
       state.selectedTab = action.payload;
     },
     setEncoding(state, action: PayloadAction<BrailleEncoding>) {
