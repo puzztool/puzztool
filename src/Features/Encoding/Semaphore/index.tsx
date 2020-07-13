@@ -25,10 +25,10 @@ function Semaphore(props: Props) {
       id="Semaphore-tabs"
       onSelect={props.selectTab}
     >
-      <Tab eventKey={1} title="Value">
+      <Tab eventKey="1" title="Value">
         <SemaphoreStream />
       </Tab>
-      <Tab eventKey={2} title="Reference">
+      <Tab eventKey="2" title="Reference">
         <SemaphoreTable />
       </Tab>
     </Tabs>

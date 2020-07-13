@@ -77,7 +77,7 @@ function KeyedCipherStream(props: Props) {
             value={props.secret}
           />
           <ButtonToolbar>
-            <ToggleButtonGroup<Conversion>
+            <ToggleButtonGroup
               name="KeyedCipherStream-conversion"
               onChange={props.onConversionChange}
               type="radio"

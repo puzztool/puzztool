@@ -10,7 +10,7 @@ interface ColorSelectorProps {
   onChange?: (index: number, color?: Color) => void;
 }
 
-function colorByName(name: String) {
+function colorByName(name: string | null) {
   for (const color of Resistor.colorTable) {
     if (name === color.name) {
       return color;
@@ -21,7 +21,7 @@ function colorByName(name: String) {
 }
 
 function ResistorColorSelector(props: ColorSelectorProps) {
-  function onSelect(eventKey: string) {
+  function onSelect(eventKey: string | null) {
     const handler = props.onChange;
     if (handler) {
       handler(props.index, colorByName(eventKey));

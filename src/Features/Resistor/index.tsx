@@ -24,10 +24,10 @@ function Resistors(props: Props) {
       id="Resistors-tabs"
       onSelect={props.selectTab}
     >
-      <Tab eventKey={1} title="Value">
+      <Tab eventKey="1" title="Value">
         <ResistorInput />
       </Tab>
-      <Tab eventKey={2} title="Reference">
+      <Tab eventKey="2" title="Reference">
         <ResistorTable />
       </Tab>
     </Tabs>

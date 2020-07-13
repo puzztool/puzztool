@@ -26,10 +26,10 @@ function Morse(props: Props) {
       id="Morse-tabs"
       onSelect={props.selectTab}
     >
-      <Tab className="Morse-tab-value" eventKey={1} title="Value">
+      <Tab className="Morse-tab-value" eventKey="1" title="Value">
         <MorseStream />
       </Tab>
-      <Tab eventKey={2} title="Reference">
+      <Tab eventKey="2" title="Reference">
         <MorseTable />
       </Tab>
     </Tabs>
