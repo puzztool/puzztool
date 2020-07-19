@@ -13,7 +13,7 @@ const caesarCipherSlice = createSlice({
   initialState,
   reducers: {
     clear(state) {
-      state = initialState;
+      Object.assign(state, initialState);
     },
     setText(state, action: PayloadAction<string>) {
       state.text = action.payload;

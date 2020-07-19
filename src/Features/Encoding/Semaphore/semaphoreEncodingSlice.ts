@@ -3,13 +3,12 @@ import { SemaphoreDirection } from 'puzzle-lib';
 
 interface State {
   directions: SemaphoreDirection[];
-  selectedTab: string | null;
+  selectedTab?: string;
   stream: string;
 }
 
 const initialState: State = {
   directions: [],
-  selectedTab: null,
   stream: '',
 };
 
@@ -25,10 +24,10 @@ const semaphoreEncodingSlice = createSlice({
       state.stream = state.stream.slice(0, -1);
     },
     clear(state) {
-      state = initialState;
+      Object.assign(state, initialState);
     },
     selectTab(state, action: PayloadAction<string | null>) {
-      state.selectedTab = action.payload;
+      state.selectedTab = action.payload ?? undefined;
     },
     setDirections(state, action: PayloadAction<SemaphoreDirection[]>) {
       state.directions = action.payload;

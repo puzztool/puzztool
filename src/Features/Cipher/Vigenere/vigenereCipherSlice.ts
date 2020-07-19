@@ -18,7 +18,7 @@ const vigenereCipherSlice = createSlice({
   initialState,
   reducers: {
     clear(state) {
-      state = initialState;
+      Object.assign(state, initialState);
     },
     setConversion(state, action: PayloadAction<Conversion>) {
       state.conversion = action.payload;

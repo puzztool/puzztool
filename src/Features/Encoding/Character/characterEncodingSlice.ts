@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface State {
-  selectedTab: string | null;
+  selectedTab?: string;
 }
 
 const initialState: State = {
-  selectedTab: null,
 };
 
 const characterEncodingSlice = createSlice({
@@ -13,7 +12,7 @@ const characterEncodingSlice = createSlice({
   initialState,
   reducers: {
     selectTab(state, action: PayloadAction<string | null>) {
-      state.selectedTab = action.payload;
+      state.selectedTab = action.payload ?? undefined;
     },
   }
 });

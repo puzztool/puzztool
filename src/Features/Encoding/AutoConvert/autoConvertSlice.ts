@@ -15,7 +15,7 @@ const autoConvertSlice = createSlice({
   initialState,
   reducers: {
     clear(state) {
-      state = initialState;
+      Object.assign(state, initialState);
     },
     setHomogeneous(state, action: PayloadAction<boolean>) {
       state.homogeneous = action.payload;
