@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface State {
   bands: number[];
-  selectedTab: string | null;
+  selectedTab?: string;
 }
 
 interface SetBandPayload {
@@ -13,7 +13,6 @@ interface SetBandPayload {
 const initialState: State = {
   // BLACK, BLACK, BLACK, <blank>, BROWN
   bands: [0, 0, 0, -1, 1],
-  selectedTab: null,
 };
 
 const resistorSlice = createSlice({
@@ -21,7 +20,7 @@ const resistorSlice = createSlice({
   initialState,
   reducers: {
     selectTab(state, action: PayloadAction<string | null>) {
-      state.selectedTab = action.payload;
+      state.selectedTab = action.payload ?? undefined;
     },
     setBand(state, action: PayloadAction<SetBandPayload>) {
       const { bandIndex, colorIndex } = action.payload;
