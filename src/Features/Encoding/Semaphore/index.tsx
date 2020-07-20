@@ -5,7 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../../Store/rootReducer';
 import { selectTab } from './semaphoreEncodingSlice';
 import SemaphoreStream from './SemaphoreStream';
-import SemaphoreTable from './SemaphoreTable';
+import SemaphoreReference from './SemaphoreReference';
 
 const mapStateToProps = (state: RootState) => ({
   selectedTab: state.encoding.semaphore.selectedTab,
@@ -29,7 +29,7 @@ function Semaphore(props: Props) {
         <SemaphoreStream />
       </Tab>
       <Tab eventKey="2" title="Reference">
-        <SemaphoreTable />
+        <SemaphoreReference />
       </Tab>
     </Tabs>
   );
