@@ -5,7 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../../Store/rootReducer';
 import { selectTab } from './brailleEncodingSlice';
 import BrailleStream from './BrailleStream';
-import BrailleTable from './BrailleTable';
+import BrailleReference from './BrailleReference';
 
 const mapStateToProps = (state: RootState) => ({
   selectedTab: state.encoding.braille.selectedTab,
@@ -29,7 +29,7 @@ function Braille(props: Props) {
         <BrailleStream />
       </Tab>
       <Tab eventKey="2" title="Reference">
-        <BrailleTable />
+        <BrailleReference />
       </Tab>
     </Tabs>
   );
