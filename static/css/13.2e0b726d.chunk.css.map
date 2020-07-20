@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA,WACE,iBAAkB,CAClB,qBAAsB,CAFxB,cAKI,gBAAiB,CACjB,eAAiB,CANrB,gCAUI,aAAc","file":"13.2e0b726d.chunk.css","sourcesContent":[".NavalFlag {\n  text-align: center;\n  vertical-align: middle;\n\n  td {\n    font-size: 4.5rem;\n    font-weight: bold;\n  }\n\n  .NavalFlag-flagImage {\n    width: 6.25rem;\n  }\n}\n"]}
