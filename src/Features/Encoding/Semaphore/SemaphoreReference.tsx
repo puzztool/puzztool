@@ -10,7 +10,7 @@ function SemaphoreReference() {
       {characters.map((entry) => (
         <div>
           <SemaphorePicture
-            width={100}
+            width={96}
             character={new Character(entry.encoding, entry.category)}
           />
           <br />{entry.display}
