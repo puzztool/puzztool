@@ -1,13 +1,12 @@
 import React from 'react';
+import PuzzToolPage from '../../Common/PuzzToolPage';
 import WordSearchComponent from './WordSearchComponent';
-import './index.scss';
 
 function WordSearch() {
   return (
-    <div className="WordSearch">
-      <h2>Word Search</h2>
+    <PuzzToolPage title="Word Search">
       <WordSearchComponent />
-    </div>
+    </PuzzToolPage>
   );
 }
 
