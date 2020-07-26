@@ -4,7 +4,7 @@ import VigenereStream from './VigenereStream';
 
 const PAGE_TITLE = "Vigenere Cipher";
 const PAGE_DESCRIPTION = "A Vigenere cipher is a type of substitution " +
-  "cipher. It shifts each letter by using a keyword. For example, a the " +
+  "cipher. It shifts each letter by using a keyword. For example, the " +
   "keyword \"ace\" would shift the first letter by 1, second by 3, and third " +
   "by 5.";
 
