@@ -2,6 +2,7 @@ import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { connect, ConnectedProps } from 'react-redux';
+import PuzzToolPage from '../../../Common/PuzzToolPage';
 import { RootState } from '../../../Store/rootReducer';
 import { selectTab } from './morseEncodingSlice';
 import MorseStream from './MorseStream';
@@ -21,18 +22,20 @@ interface Props extends ConnectedProps<typeof connector> { }
 
 function Morse(props: Props) {
   return (
-    <Tabs
-      activeKey={props.selectedTab}
-      id="Morse-tabs"
-      onSelect={props.selectTab}
-    >
-      <Tab className="Morse-tab-value" eventKey="1" title="Value">
-        <MorseStream />
-      </Tab>
-      <Tab eventKey="2" title="Reference">
-        <MorseTable />
-      </Tab>
-    </Tabs>
+    <PuzzToolPage title="Morse Code">
+      <Tabs
+        activeKey={props.selectedTab}
+        id="Morse-tabs"
+        onSelect={props.selectTab}
+      >
+        <Tab className="Morse-tab-value" eventKey="1" title="Value">
+          <MorseStream />
+        </Tab>
+        <Tab eventKey="2" title="Reference">
+          <MorseTable />
+        </Tab>
+      </Tabs>
+    </PuzzToolPage>
   );
 }
 
