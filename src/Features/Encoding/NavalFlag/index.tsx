@@ -10,7 +10,7 @@ function NavalFlag() {
     <PuzzToolPage title="Naval Flags">
       <ReferenceList>
         {characters.map((entry) => (
-          <div>
+          <div key={entry.character}>
             <img
               className="NavalFlag-flagImage"
               src={`data:image/svg+xml,${encodeURIComponent(entry.image.render())}`}

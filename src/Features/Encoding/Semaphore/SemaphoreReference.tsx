@@ -8,7 +8,7 @@ function SemaphoreReference() {
   return (
     <ReferenceList>
       {characters.map((entry) => (
-        <div>
+        <div key={entry.display}>
           <SemaphorePicture
             width={96}
             character={new Character(entry.encoding, entry.category)}
