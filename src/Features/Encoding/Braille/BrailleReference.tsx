@@ -8,7 +8,7 @@ function BrailleReference() {
   return (
     <ReferenceList>
       {characters.map((entry) => (
-        <div>
+        <div key={`${entry.encoding}_${entry.display}`}>
           <BraillePicture
             width={40}
             character={new Character(entry.encoding, entry.category)}
