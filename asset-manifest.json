@@ -5,8 +5,8 @@
     "main.js.map": "/static/js/main.c35cda5b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a87de785.js",
     "runtime-main.js.map": "/static/js/runtime-main.a87de785.js.map",
-    "static/js/2.9f316b4a.chunk.js": "/static/js/2.9f316b4a.chunk.js",
-    "static/js/2.9f316b4a.chunk.js.map": "/static/js/2.9f316b4a.chunk.js.map",
+    "static/js/2.4ed6864d.chunk.js": "/static/js/2.4ed6864d.chunk.js",
+    "static/js/2.4ed6864d.chunk.js.map": "/static/js/2.4ed6864d.chunk.js.map",
     "static/css/3.a5c50d75.chunk.css": "/static/css/3.a5c50d75.chunk.css",
     "static/js/3.0cb2eb0f.chunk.js": "/static/js/3.0cb2eb0f.chunk.js",
     "static/js/3.0cb2eb0f.chunk.js.map": "/static/js/3.0cb2eb0f.chunk.js.map",
@@ -51,7 +51,7 @@
     "static/js/17.7dd3d4ea.chunk.js": "/static/js/17.7dd3d4ea.chunk.js",
     "static/js/17.7dd3d4ea.chunk.js.map": "/static/js/17.7dd3d4ea.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1752f4ffcbab699d3ddffa1e5f69dff1.js": "/precache-manifest.1752f4ffcbab699d3ddffa1e5f69dff1.js",
+    "precache-manifest.daf979115beb78d5e109919b1998dd9a.js": "/precache-manifest.daf979115beb78d5e109919b1998dd9a.js",
     "service-worker.js": "/service-worker.js",
     "static/css/10.018556a1.chunk.css.map": "/static/css/10.018556a1.chunk.css.map",
     "static/css/11.31a974d0.chunk.css.map": "/static/css/11.31a974d0.chunk.css.map",
@@ -67,14 +67,14 @@
     "static/css/8.f80a6a42.chunk.css.map": "/static/css/8.f80a6a42.chunk.css.map",
     "static/css/9.1bce9ea8.chunk.css.map": "/static/css/9.1bce9ea8.chunk.css.map",
     "static/css/main.e21e6bc3.chunk.css.map": "/static/css/main.e21e6bc3.chunk.css.map",
-    "static/js/2.9f316b4a.chunk.js.LICENSE.txt": "/static/js/2.9f316b4a.chunk.js.LICENSE.txt",
+    "static/js/2.4ed6864d.chunk.js.LICENSE.txt": "/static/js/2.4ed6864d.chunk.js.LICENSE.txt",
     "static/media/pigpen_key.svg": "/static/media/pigpen_key.130bde26.svg",
     "static/media/puzztool_banner_dark.svg": "/static/media/puzztool_banner_dark.1521c511.svg",
     "static/media/puzztool_banner_white.svg": "/static/media/puzztool_banner_white.b6754a16.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a87de785.js",
-    "static/js/2.9f316b4a.chunk.js",
+    "static/js/2.4ed6864d.chunk.js",
     "static/css/main.e21e6bc3.chunk.css",
     "static/js/main.c35cda5b.chunk.js"
   ]
