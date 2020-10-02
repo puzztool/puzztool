@@ -18,6 +18,7 @@ function getDescription() {
         <li>Five bit binary (A=00001, B=00010)</li>
         <li>Eight bit binary (A=01100001, B=01100010)</li>
         <li>Ordinal (A=1, B=2)</li>
+        <li>Ternary (A=001, E=012)</li>
       </ul>
     </>
   );
