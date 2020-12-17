@@ -1,4 +1,3 @@
-import React from 'react';
 import { MorseCharacter as Character } from 'puzzle-lib';
 import Table from 'react-bootstrap/Table';
 import MorsePicture from './MorsePicture';

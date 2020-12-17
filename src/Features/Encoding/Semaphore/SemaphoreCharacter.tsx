@@ -1,4 +1,3 @@
-import React from 'react';
 import SemaphoreCheckbox from './SemaphoreCheckbox';
 import SemaphorePicture from './SemaphorePicture';
 import {

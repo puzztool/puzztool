@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { SemaphoreCharacter as Character } from 'puzzle-lib';
 import SemaphorePicture from './SemaphorePicture';

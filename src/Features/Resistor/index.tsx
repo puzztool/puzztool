@@ -1,4 +1,3 @@
-import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import { connect, ConnectedProps } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs';

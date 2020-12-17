@@ -1,4 +1,3 @@
-import React from 'react';
 import { ResistorColorEntry as Color } from 'puzzle-lib';
 
 interface Props {

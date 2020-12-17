@@ -1,5 +1,4 @@
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import React from 'react';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Card from 'react-bootstrap/Card';

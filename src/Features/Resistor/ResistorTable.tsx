@@ -1,5 +1,4 @@
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { getContrastingColor } from '../../Common/Helpers';
 import './ResistorTable.scss';

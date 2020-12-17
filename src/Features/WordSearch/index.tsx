@@ -1,4 +1,3 @@
-import React from 'react';
 import PuzzToolPage from '../../Common/PuzzToolPage';
 import WordSearchComponent from './WordSearchComponent';
 
