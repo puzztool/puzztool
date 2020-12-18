@@ -1,4 +1,3 @@
-import React from 'react';
 import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';

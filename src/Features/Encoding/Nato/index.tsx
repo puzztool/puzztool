@@ -1,4 +1,3 @@
-import React from 'react';
 import Table from 'react-bootstrap/Table';
 import { NatoData } from 'puzzle-lib';
 import PuzzToolPage from '../../../Common/PuzzToolPage';

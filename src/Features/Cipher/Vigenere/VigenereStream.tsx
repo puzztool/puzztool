@@ -1,5 +1,4 @@
 import { VigenereString } from 'puzzle-lib';
-import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../../Store/rootReducer';
 import KeyedCipherStream from '../KeyedCipherStream';

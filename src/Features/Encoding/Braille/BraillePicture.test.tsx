@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrailleCharacter as Character } from 'puzzle-lib';
 import BraillePicture from './BraillePicture';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavalFlags } from 'puzzle-lib';
 import PuzzToolPage from '../../../Common/PuzzToolPage';
 import ReferenceList from '../../../Common/ReferenceList';

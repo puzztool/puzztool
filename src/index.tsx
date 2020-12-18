@@ -1,5 +1,4 @@
 import { createBrowserHistory } from 'history';
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux';

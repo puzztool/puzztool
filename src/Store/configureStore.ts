@@ -17,7 +17,7 @@ const persistConfig = {
   storage,
 }
 
-export default () => {
+const configurePuzzToolStore = () => {
   const rootReducer = createRootReducer();
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -25,7 +25,7 @@ export default () => {
     reducer: persistedReducer,
     middleware: getDefaultMiddleware({
       serializableCheck: {
-        // Ignore actions for "react-persist"
+        // Ignore actions for "redux-persist"
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
     }),
@@ -35,3 +35,5 @@ export default () => {
 
   return { store, persistor };
 }
+
+export default configurePuzzToolStore;

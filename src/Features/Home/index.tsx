@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCategories } from '../../Data/RouteData';
 import { Link } from 'react-router-dom';
 import './index.scss';

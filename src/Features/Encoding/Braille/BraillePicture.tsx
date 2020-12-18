@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 
 interface Props {

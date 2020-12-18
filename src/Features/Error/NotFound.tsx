@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import PuzzToolPage from '../../Common/PuzzToolPage';
 import './NotFound.scss';

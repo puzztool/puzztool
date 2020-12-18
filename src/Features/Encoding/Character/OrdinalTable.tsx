@@ -1,4 +1,3 @@
-import React from 'react';
 import { CharacterConversion } from 'puzzle-lib';
 import CharacterTable from './CharacterTable';
 

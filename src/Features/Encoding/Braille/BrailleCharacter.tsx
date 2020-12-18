@@ -1,4 +1,3 @@
-import React from 'react';
 import BrailleCell from './BrailleCell';
 import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
 import './BrailleCharacter.scss';
