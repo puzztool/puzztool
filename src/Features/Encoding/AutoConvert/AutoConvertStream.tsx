@@ -1,17 +1,22 @@
-import { StringAutoConvert } from 'puzzle-lib';
-import React, { ChangeEvent } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { connect, ConnectedProps } from 'react-redux';
-import { useFocusInput } from '../../../Hooks/FocusInput';
-import { RootState } from '../../../Store/rootReducer';
-import { clear, setHomogeneous, setText } from './autoConvertSlice';
-import './AutoConvertStream.scss';
+import { StringAutoConvert } from "puzzle-lib";
+import React, { ChangeEvent } from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Card from "react-bootstrap/Card";
+import FormControl from "react-bootstrap/FormControl";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import { connect, ConnectedProps } from "react-redux";
+import { useFocusInput } from "../../../Hooks/FocusInput";
+import { RootState } from "../../../Store/rootReducer";
+import { clear, setHomogeneous, setText } from "./autoConvertSlice";
+import "./AutoConvertStream.scss";
+
+enum ConversionMode {
+  consistent,
+  mixed,
+}
 
 const mapStateToProps = (state: RootState) => ({
   homogeneous: state.encoding.autoConvert.homogeneous,
@@ -53,19 +58,24 @@ function AutoConvertStream(props: Props) {
           />
           <ButtonToolbar className="AutoConvertStream-commands">
             <ToggleButtonGroup
-              defaultValue={true}
               name="options"
-              onChange={props.setHomogeneous}
+              onChange={(value) =>
+                props.setHomogeneous(value === ConversionMode.consistent)
+              }
               type="radio"
+              value={
+                props.homogeneous
+                  ? ConversionMode.consistent
+                  : ConversionMode.mixed
+              }
             >
-              <ToggleButton value={true}>Consistent</ToggleButton>
-              <ToggleButton value={false}>Mixed</ToggleButton>
+              <ToggleButton value={ConversionMode.consistent}>
+                Consistent
+              </ToggleButton>
+              <ToggleButton value={ConversionMode.mixed}>Mixed</ToggleButton>
             </ToggleButtonGroup>
             <ButtonGroup>
-              <Button
-                onClick={onClearClick}
-                variant="danger"
-              >
+              <Button onClick={onClearClick} variant="danger">
                 Clear
               </Button>
             </ButtonGroup>
@@ -76,7 +86,8 @@ function AutoConvertStream(props: Props) {
         <Card.Header>Output</Card.Header>
         <Card.Body>
           <pre className="AutoConvertStream-output">
-            {StringAutoConvert.convertString(props.text, props.homogeneous) || ' '}
+            {StringAutoConvert.convertString(props.text, props.homogeneous) ||
+              " "}
           </pre>
         </Card.Body>
       </Card>
