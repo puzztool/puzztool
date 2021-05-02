@@ -1,4 +1,5 @@
 import PuzzToolPage from '../../Common/PuzzToolPage';
+import PigpenKey from '../../Images/pigpen_key.svg';
 import './index.scss';
 
 function Pigpen() {
@@ -7,7 +8,7 @@ function Pigpen() {
       <div className="Pigpen">
         <img
           className="Pigpen-img"
-          src={require('../../Images/pigpen_key.svg')}
+          src={PigpenKey}
           alt="Pigpen cipher reference chart"
         />
       </div>
