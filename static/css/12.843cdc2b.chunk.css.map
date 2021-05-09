@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Features/Settings/index.scss"],"names":[],"mappings":"AAAA,UACE,mBAAA,CAEA,qBACE,aAAA,CACA,WAAA,CACA,kBAAA","file":"12.843cdc2b.chunk.css","sourcesContent":[".Settings {\n  padding: 0 1rem 1rem;\n\n  .AboutLogo {\n    display: block;\n    height: 3rem;\n    margin-bottom: 1rem;\n  }\n}\n"]}
