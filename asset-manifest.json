@@ -5,8 +5,8 @@
     "main.js.map": "/static/js/main.2ce51942.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d4f4d2da.js",
     "runtime-main.js.map": "/static/js/runtime-main.d4f4d2da.js.map",
-    "static/js/2.ed0fa902.chunk.js": "/static/js/2.ed0fa902.chunk.js",
-    "static/js/2.ed0fa902.chunk.js.map": "/static/js/2.ed0fa902.chunk.js.map",
+    "static/js/2.3279d22e.chunk.js": "/static/js/2.3279d22e.chunk.js",
+    "static/js/2.3279d22e.chunk.js.map": "/static/js/2.3279d22e.chunk.js.map",
     "static/css/3.cee81ab8.chunk.css": "/static/css/3.cee81ab8.chunk.css",
     "static/js/3.524638e5.chunk.js": "/static/js/3.524638e5.chunk.js",
     "static/js/3.524638e5.chunk.js.map": "/static/js/3.524638e5.chunk.js.map",
@@ -69,14 +69,14 @@
     "static/css/8.3b67911f.chunk.css.map": "/static/css/8.3b67911f.chunk.css.map",
     "static/css/9.e38021cc.chunk.css.map": "/static/css/9.e38021cc.chunk.css.map",
     "static/css/main.07fc2d8d.chunk.css.map": "/static/css/main.07fc2d8d.chunk.css.map",
-    "static/js/2.ed0fa902.chunk.js.LICENSE.txt": "/static/js/2.ed0fa902.chunk.js.LICENSE.txt",
+    "static/js/2.3279d22e.chunk.js.LICENSE.txt": "/static/js/2.3279d22e.chunk.js.LICENSE.txt",
     "static/media/pigpen_key.e4f3b3e2.svg": "/static/media/pigpen_key.e4f3b3e2.svg",
     "static/media/puzztool_banner_dark.09d02cea.svg": "/static/media/puzztool_banner_dark.09d02cea.svg",
     "static/media/puzztool_banner_white.0b7fbfa4.svg": "/static/media/puzztool_banner_white.0b7fbfa4.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d4f4d2da.js",
-    "static/js/2.ed0fa902.chunk.js",
+    "static/js/2.3279d22e.chunk.js",
     "static/css/main.07fc2d8d.chunk.css",
     "static/js/main.2ce51942.chunk.js"
   ]
