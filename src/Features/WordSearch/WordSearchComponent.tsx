@@ -1,23 +1,23 @@
-import React, { ChangeEvent } from 'react';
-import Alert from 'react-bootstrap/Alert';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import FormCheck from 'react-bootstrap/FormCheck';
-import FormControl from 'react-bootstrap/FormControl';
-import Row from 'react-bootstrap/Row';
-import { connect, ConnectedProps } from 'react-redux';
-import { useFocusInput } from '../../Hooks/FocusInput';
-import { RootState } from '../../Store/rootReducer';
-import WordSearchOutput from './WordSearchOutput';
+import React, { ChangeEvent } from "react";
+import Alert from "react-bootstrap/Alert";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import FormCheck from "react-bootstrap/FormCheck";
+import FormControl from "react-bootstrap/FormControl";
+import Row from "react-bootstrap/Row";
+import { connect, ConnectedProps } from "react-redux";
+import { useFocusInput } from "../../Hooks/FocusInput";
+import { RootState } from "../../Store/rootReducer";
+import WordSearchOutput from "./WordSearchOutput";
 import {
   setCanBend,
   setGrid,
   setUseCardinals,
   setUseDiagonals,
-  setWordList
-} from './wordSearchSlice';
-import './WordSearchComponent.scss';
+  setWordList,
+} from "./wordSearchSlice";
+import "./WordSearchComponent.scss";
 
 const mapStateToProps = (state: RootState) => ({
   canBend: state.wordSearch.canBend,
@@ -73,7 +73,7 @@ function WordSearchComponent(props: Props) {
   return (
     <div className="WordSearchComponent">
       <Container fluid={true}>
-        <Row noGutters={true}>
+        <Row className="g-0">
           <Col md={4}>
             <Card className="WordSearchComponent-ListInput">
               <Card.Header>
@@ -129,7 +129,7 @@ function WordSearchComponent(props: Props) {
             </Card>
           </Col>
         </Row>
-        <Row noGutters={true}>
+        <Row className="g-0">
           <Col md={12}>
             <Card className="WordSearchComponent-GridOutput">
               <Card.Header>Output</Card.Header>
