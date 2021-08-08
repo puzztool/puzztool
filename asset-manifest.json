@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/static/css/main.07fc2d8d.chunk.css",
-    "main.js": "/static/js/main.2ce51942.chunk.js",
-    "main.js.map": "/static/js/main.2ce51942.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d4f4d2da.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d4f4d2da.js.map",
+    "main.js": "/static/js/main.7f3b2cb2.chunk.js",
+    "main.js.map": "/static/js/main.7f3b2cb2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d1401224.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d1401224.js.map",
     "static/js/2.3279d22e.chunk.js": "/static/js/2.3279d22e.chunk.js",
     "static/js/2.3279d22e.chunk.js.map": "/static/js/2.3279d22e.chunk.js.map",
     "static/css/3.cee81ab8.chunk.css": "/static/css/3.cee81ab8.chunk.css",
@@ -35,8 +35,8 @@
     "static/js/11.1db269ab.chunk.js": "/static/js/11.1db269ab.chunk.js",
     "static/js/11.1db269ab.chunk.js.map": "/static/js/11.1db269ab.chunk.js.map",
     "static/css/12.843cdc2b.chunk.css": "/static/css/12.843cdc2b.chunk.css",
-    "static/js/12.361dfbdf.chunk.js": "/static/js/12.361dfbdf.chunk.js",
-    "static/js/12.361dfbdf.chunk.js.map": "/static/js/12.361dfbdf.chunk.js.map",
+    "static/js/12.14b9da5b.chunk.js": "/static/js/12.14b9da5b.chunk.js",
+    "static/js/12.14b9da5b.chunk.js.map": "/static/js/12.14b9da5b.chunk.js.map",
     "static/css/13.d3bbdfc7.chunk.css": "/static/css/13.d3bbdfc7.chunk.css",
     "static/js/13.cb6abc19.chunk.js": "/static/js/13.cb6abc19.chunk.js",
     "static/js/13.cb6abc19.chunk.js.map": "/static/js/13.cb6abc19.chunk.js.map",
@@ -75,9 +75,9 @@
     "static/media/puzztool_banner_white.0b7fbfa4.svg": "/static/media/puzztool_banner_white.0b7fbfa4.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d4f4d2da.js",
+    "static/js/runtime-main.d1401224.js",
     "static/js/2.3279d22e.chunk.js",
     "static/css/main.07fc2d8d.chunk.css",
-    "static/js/main.2ce51942.chunk.js"
+    "static/js/main.7f3b2cb2.chunk.js"
   ]
 }
