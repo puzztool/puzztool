@@ -46,6 +46,7 @@ function AppNav() {
           <Nav.Link
             eventKey="Help.Feedback"
             href="https://github.com/puzztool/puzztool/issues/new"
+            rel="noreferrer"
             target="_blank"
           >
             Feedback

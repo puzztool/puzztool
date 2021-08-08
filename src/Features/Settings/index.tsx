@@ -43,7 +43,7 @@ function Settings() {
             Version: {version}<br />
               <a
                 href="https://github.com/puzztool/puzztool/"
-                rel="noopener noreferrer"
+                rel="noreferrer"
                 target="_blank"
               >
                 Project page
