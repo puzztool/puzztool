@@ -58,7 +58,7 @@ function AutoConvertStream(props: Props) {
           />
           <ButtonToolbar className="AutoConvertStream-commands">
             <ToggleButtonGroup
-              name="options"
+              name="AutoConvertStream-homogeneous"
               onChange={(value) =>
                 props.setHomogeneous(value === ConversionMode.consistent)
               }
@@ -69,10 +69,20 @@ function AutoConvertStream(props: Props) {
                   : ConversionMode.mixed
               }
             >
-              <ToggleButton value={ConversionMode.consistent}>
+              <ToggleButton
+                id="AutoConvertStream-homogeneous-consistent"
+                value={ConversionMode.consistent}
+                variant="outline-primary"
+              >
                 Consistent
               </ToggleButton>
-              <ToggleButton value={ConversionMode.mixed}>Mixed</ToggleButton>
+              <ToggleButton
+                id="AutoConvertStream-homogeneous-mixed"
+                value={ConversionMode.mixed}
+                variant="outline-primary"
+              >
+                Mixed
+              </ToggleButton>
             </ToggleButtonGroup>
             <ButtonGroup>
               <Button onClick={onClearClick} variant="danger">

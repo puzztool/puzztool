@@ -1,14 +1,14 @@
-import { KeyedCipherStringBase } from 'puzzle-lib';
-import React, { ChangeEvent } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import { useFocusInput } from '../../../Hooks/FocusInput';
-import './index.scss';
+import { KeyedCipherStringBase } from "puzzle-lib";
+import React, { ChangeEvent } from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Card from "react-bootstrap/Card";
+import FormControl from "react-bootstrap/FormControl";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import { useFocusInput } from "../../../Hooks/FocusInput";
+import "./index.scss";
 
 export enum Conversion {
   encrypt,
@@ -56,7 +56,7 @@ function KeyedCipherStream(props: Props) {
         return cipher.decrypt();
 
       default:
-        throw new Error('Invalid conversion type');
+        throw new Error("Invalid conversion type");
     }
   }
 
@@ -83,14 +83,23 @@ function KeyedCipherStream(props: Props) {
               type="radio"
               value={props.conversion}
             >
-              <ToggleButton value={Conversion.encrypt}>Encrypt</ToggleButton>
-              <ToggleButton value={Conversion.decrypt}>Decrypt</ToggleButton>
+              <ToggleButton
+                id="KeyedCipherStream-conversion-encrypt"
+                value={Conversion.encrypt}
+                variant="outline-primary"
+              >
+                Encrypt
+              </ToggleButton>
+              <ToggleButton
+                id="KeyedCipherStream-conversion-decrypt"
+                value={Conversion.decrypt}
+                variant="outline-primary"
+              >
+                Decrypt
+              </ToggleButton>
             </ToggleButtonGroup>
             <ButtonGroup>
-              <Button
-                onClick={onClearClick}
-                variant="danger"
-              >
+              <Button onClick={onClearClick} variant="danger">
                 Clear
               </Button>
             </ButtonGroup>
@@ -100,9 +109,7 @@ function KeyedCipherStream(props: Props) {
       <Card className="KeyedCipherStream-output">
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre>
-            {calculateOutput() || ' '}
-          </pre>
+          <pre>{calculateOutput() || " "}</pre>
         </Card.Body>
       </Card>
     </div>
