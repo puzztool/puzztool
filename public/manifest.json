@@ -6,20 +6,20 @@
       "src": "icons-64-fill.png",
       "sizes": "64x64",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "icons-192-fill.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
 
     },
     {
       "src": "icons-512-fill.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
