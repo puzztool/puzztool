@@ -1,10 +1,10 @@
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
 import {
   WordSearchSolver,
   WordSearchResult,
   WordSearchDirection,
-} from 'puzzle-lib';
-import './WordSearchOutput.scss';
+} from "puzzle-lib";
+import styles from "./WordSearchOutput.module.scss";
 
 interface Props {
   gridInputText: string;
@@ -51,7 +51,8 @@ function getGridHighlights(
   grid: string[][],
   wordsToFind: string[],
   direction: WordSearchDirection,
-  canBend: boolean) {
+  canBend: boolean
+) {
   const solver = new WordSearchSolver();
   solver.setDirections(direction);
   solver.setCanBend(canBend);
@@ -63,7 +64,7 @@ function getGridHighlights(
 }
 
 function getColumnClassName(shouldHighlight: boolean) {
-  return shouldHighlight ? 'WordSearchOutput-highlightChar' : '';
+  return shouldHighlight ? styles.highlightChar : "";
 }
 
 function WordSearchOutput(props: Props) {
@@ -75,28 +76,37 @@ function WordSearchOutput(props: Props) {
   const lines = splitLines(gridInputText);
   const grid: string[][] = [];
   for (const line of lines) {
-    grid.push(line.split(''));
+    grid.push(line.split(""));
   }
 
   // Process direction settings
   const direction = getWordSearchDirection(
     props.useCardinals,
-    props.useDiagonals);
+    props.useDiagonals
+  );
 
   // Split on newlines, trim any whitespace, and filter out empty lines.
-  const wordList = splitLines(props.wordListInputText)
-    .filter(word => word.length > 0);
+  const wordList = splitLines(props.wordListInputText).filter(
+    (word) => word.length > 0
+  );
 
-  const shouldHighlight = getGridHighlights(grid, wordList, direction, props.canBend);
+  const shouldHighlight = getGridHighlights(
+    grid,
+    wordList,
+    direction,
+    props.canBend
+  );
 
   return (
-    <Table className="WordSearchOutput" borderless={true}>
+    <Table className={styles.container} borderless={true}>
       <tbody>
         {grid.map((row, rowIndex) => (
           <tr key={rowIndex}>
             {row.map((col, colIndex) => (
               <td
-                className={getColumnClassName(shouldHighlight[rowIndex][colIndex])}
+                className={getColumnClassName(
+                  shouldHighlight[rowIndex][colIndex]
+                )}
                 key={`${rowIndex},${colIndex}`}
               >
                 {col}

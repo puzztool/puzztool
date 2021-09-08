@@ -1,5 +1,5 @@
-.ResistorTable {
-  .table-responsive {
+.container {
+  :global(.table-responsive) {
     border-top: none;
   }
 

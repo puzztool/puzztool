@@ -1,0 +1,35 @@
+.container {
+  margin: 0.5rem 1rem 0;
+
+  pre {
+    font-size: 1.5rem;
+  }
+}
+
+.inputCommands {
+  :global(.btn) {
+    font-size: 2.5rem;
+    height: 4.5rem;
+    min-width: 7rem;
+  }
+}
+
+.dot_button,
+.dash_button {
+  display: block;
+  fill: white;
+  height: 1.5rem;
+  margin: 0 auto;
+}
+
+.output {
+  margin-bottom: 0.5rem;
+}
+
+.morseOutput {
+  margin-bottom: 0.5rem;
+
+  pre {
+    font-weight: bold;
+  }
+}

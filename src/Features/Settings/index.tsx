@@ -7,7 +7,7 @@ import PuzzToolPage from "../../Common/PuzzToolPage";
 import { clearLocalStorage } from "../../Data/LocalStorage";
 import PuzztoolBannerDark from "../../Images/puzztool_banner_dark.svg";
 import { version } from "../../version";
-import "./index.scss";
+import styles from "./index.module.scss";
 
 function Settings() {
   function onClearClick() {
@@ -16,7 +16,7 @@ function Settings() {
 
   return (
     <PuzzToolPage title="Settings">
-      <div className="Settings">
+      <div className={styles.container}>
         <Container fluid={true}>
           <Row className="gy-3">
             <Col md={true}>
@@ -39,7 +39,7 @@ function Settings() {
                 <Card.Header>About</Card.Header>
                 <Card.Body>
                   <img
-                    className="AboutLogo"
+                    className={styles.logo}
                     src={PuzztoolBannerDark}
                     alt="PuzzTool logo"
                   />

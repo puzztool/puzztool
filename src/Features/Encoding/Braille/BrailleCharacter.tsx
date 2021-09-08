@@ -1,6 +1,6 @@
-import BrailleCell from './BrailleCell';
-import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
-import './BrailleCharacter.scss';
+import BrailleCell from "./BrailleCell";
+import { BrailleCharacter as Character, BrailleDot as Dot } from "puzzle-lib";
+import styles from "./BrailleCharacter.module.scss";
 
 interface Props {
   character: Character;
@@ -17,16 +17,12 @@ function BrailleCharacter(props: Props) {
 
   function renderCell(mask: Dot) {
     return (
-      <BrailleCell
-        character={props.character}
-        mask={mask}
-        onClick={onClick}
-      />
+      <BrailleCell character={props.character} mask={mask} onClick={onClick} />
     );
   }
 
   return (
-    <div className="BrailleCharacter">
+    <div className={styles.container}>
       {renderCell(Dot.UpperLeft)}
       {renderCell(Dot.UpperRight)}
       {renderCell(Dot.MiddleLeft)}

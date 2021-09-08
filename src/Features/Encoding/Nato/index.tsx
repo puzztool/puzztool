@@ -1,12 +1,12 @@
-import Table from 'react-bootstrap/Table';
-import { NatoData } from 'puzzle-lib';
-import PuzzToolPage from '../../../Common/PuzzToolPage';
-import './index.scss';
+import Table from "react-bootstrap/Table";
+import { NatoData } from "puzzle-lib";
+import PuzzToolPage from "../../../Common/PuzzToolPage";
+import styles from "./index.module.scss";
 
 function Nato() {
   return (
     <PuzzToolPage title="NATO Alphabet">
-      <div className="Nato">
+      <div className={styles.container}>
         <Table striped={true} responsive={true}>
           <thead>
             <tr>

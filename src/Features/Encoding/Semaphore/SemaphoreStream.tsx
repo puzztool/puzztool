@@ -2,26 +2,26 @@ import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
   SemaphoreDegrees as Degrees,
-} from 'puzzle-lib';
-import React, { useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../Store/rootReducer';
-import SemaphoreCharacter from './SemaphoreCharacter';
+} from "puzzle-lib";
+import { useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
+import SemaphoreCharacter from "./SemaphoreCharacter";
 import {
   append,
   backspace,
   clear,
   setDirections,
   space,
-} from './semaphoreEncodingSlice';
-import './SemaphoreStream.scss';
+} from "./semaphoreEncodingSlice";
+import styles from "./SemaphoreStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
   directions: state.encoding.semaphore.directions,
@@ -37,63 +37,66 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> { }
+interface Props extends ConnectedProps<typeof connector> {}
 
 function SemaphoreStream(props: Props) {
-  useEffect(
-    () => {
-      function onKeyDown(ev: KeyboardEvent) {
-        if (ev.defaultPrevented) {
-          return;
-        }
-
-        let handled = false;
-
-        // Chrome won't trigger keypress for any keys that can invoke browser
-        // actions.
-        if (ev.keyCode === 8) { // Backspace
-          props.backspace();
-          handled = true;
-        }
-
-        if (handled) {
-          ev.preventDefault();
-        }
+  useEffect(() => {
+    function onKeyDown(ev: KeyboardEvent) {
+      if (ev.defaultPrevented) {
+        return;
       }
 
-      function onKeyPress(ev: KeyboardEvent) {
-        if (ev.defaultPrevented) {
-          return;
-        }
+      let handled = false;
 
-        let handled = false;
-
-        if (ev.keyCode === 13) { // Enter
-          onNextClick();
-          handled = true;
-        } else if (ev.charCode >= 49 && ev.charCode <= 56) { // '1' through '8'
-          const character = new Character();
-          character.directions = props.directions;
-
-          const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
-          onCharacterChange(
-            !character.hasDirection(direction) ? 'add' : 'remove',
-            direction);
-        }
-
-        if (handled) {
-          ev.preventDefault();
-        }
+      // Chrome won't trigger keypress for any keys that can invoke browser
+      // actions.
+      if (ev.keyCode === 8) {
+        // Backspace
+        props.backspace();
+        handled = true;
       }
 
-      document.addEventListener('keydown', onKeyDown);
-      document.addEventListener('keypress', onKeyPress);
+      if (handled) {
+        ev.preventDefault();
+      }
+    }
 
-      return () => {
-        document.removeEventListener('keydown', onKeyDown);
-        document.removeEventListener('keypress', onKeyPress);
-      };
-    });
+    function onKeyPress(ev: KeyboardEvent) {
+      if (ev.defaultPrevented) {
+        return;
+      }
+
+      let handled = false;
+
+      if (ev.keyCode === 13) {
+        // Enter
+        onNextClick();
+        handled = true;
+      } else if (ev.charCode >= 49 && ev.charCode <= 56) {
+        // '1' through '8'
+        const character = new Character();
+        character.directions = props.directions;
+
+        const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
+        onCharacterChange(
+          !character.hasDirection(direction) ? "add" : "remove",
+          direction
+        );
+      }
+
+      if (handled) {
+        ev.preventDefault();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("keypress", onKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keypress", onKeyPress);
+    };
+  });
 
   function onBackspaceClick() {
     props.backspace();
@@ -104,16 +107,16 @@ function SemaphoreStream(props: Props) {
     character.directions = props.directions;
 
     switch (type) {
-      case 'add':
+      case "add":
         character.addDirection(direction);
         break;
 
-      case 'remove':
+      case "remove":
         character.removeDirection(direction);
         break;
 
       default:
-        throw new Error('Invalid change type');
+        throw new Error("Invalid change type");
     }
 
     props.setDirections(character.directions);
@@ -139,24 +142,20 @@ function SemaphoreStream(props: Props) {
   character.directions = props.directions;
 
   return (
-    <div className="SemaphoreStream">
-      <Card className="SemaphoreStream-input">
+    <div className={styles.container}>
+      <Card className={styles.input}>
         <Card.Header>Input</Card.Header>
         <Card.Body>
           <Container fluid={true}>
             <Row>
-              <Col
-                xs="auto"
-                sm="auto"
-                md="auto"
-              >
+              <Col xs="auto" sm="auto" md="auto">
                 <SemaphoreCharacter
                   character={character}
                   onChange={onCharacterChange}
                 />
               </Col>
               <Col>
-                <div className="SemaphoreStream-view">{character.toString() || '?'}</div>
+                <div className={styles.view}>{character.toString() || "?"}</div>
               </Col>
             </Row>
             <Row>
@@ -169,10 +168,7 @@ function SemaphoreStream(props: Props) {
                     <Button onClick={onNextClick}>Next</Button>
                   </ButtonGroup>
                   <ButtonGroup>
-                    <Button
-                      onClick={onClearClick}
-                      variant="danger"
-                    >
+                    <Button onClick={onClearClick} variant="danger">
                       Clear
                     </Button>
                   </ButtonGroup>
@@ -185,8 +181,9 @@ function SemaphoreStream(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre className="SemaphoreStream-output">
-            {props.stream}<span className="blinking-cursor">|</span>
+          <pre className={styles.output}>
+            {props.stream}
+            <span className="blinking-cursor">|</span>
           </pre>
         </Card.Body>
       </Card>

@@ -1,5 +1,3 @@
-import './CaesarList.scss';
-
 interface Props {
   list: string[];
 }
@@ -12,16 +10,14 @@ function CaesarList(props: Props) {
       }
 
       return (
-        <div key={index}>{index.toString().padStart(2)}: {value}</div>
+        <div key={index}>
+          {index.toString().padStart(2)}: {value}
+        </div>
       );
     });
   }
 
-  return (
-    <pre className="CaesarList">
-      {renderListItems()}
-    </pre>
-  );
+  return <pre>{renderListItems()}</pre>;
 }
 
 export default CaesarList;

@@ -1,4 +1,4 @@
-import { ResistorColorEntry as Color } from 'puzzle-lib';
+import { ResistorColorEntry as Color } from "puzzle-lib";
 
 interface Props {
   bands: (Color | undefined)[];
@@ -7,28 +7,24 @@ interface Props {
 function ResistorPicture(props: Props) {
   function getBandOffset(index: number) {
     // The tolerance band is spaced further apart than the rest of the bands
-    if (index === (props.bands.length - 1)) {
+    if (index === props.bands.length - 1) {
       return 104;
     }
 
-    return (18 * index) + 20;
+    return 18 * index + 20;
   }
 
   function renderBand(index: number) {
     const band = props.bands[index];
     if (band) {
       return (
-        <use
-          xlinkHref="#Band"
-          x={getBandOffset(index)}
-          fill={band.colorCode}
-        />
+        <use xlinkHref="#Band" x={getBandOffset(index)} fill={band.colorCode} />
       );
     }
   }
 
   return (
-    <div className="ResistorPicture">
+    <div>
       <svg width="240" viewBox="0 0 136 40">
         <defs>
           <g id="Wire">
@@ -50,7 +46,13 @@ function ResistorPicture(props: Props) {
             <use xlinkHref="#Wire" x="128" />
           </g>
           <g id="Band">
-            <rect y="8" height="24" width="12" stroke="black" strokeWidth="0.5" />
+            <rect
+              y="8"
+              height="24"
+              width="12"
+              stroke="black"
+              strokeWidth="0.5"
+            />
           </g>
         </defs>
         <use xlinkHref="#Resistor" x="0" y="0" />

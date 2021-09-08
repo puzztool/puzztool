@@ -1,6 +1,6 @@
-import React, { ReactChild } from 'react';
-import PuzzToolDocumentTitle from '../PuzzToolDocumentTitle';
-import './index.scss';
+import { ReactChild } from "react";
+import PuzzToolDocumentTitle from "../PuzzToolDocumentTitle";
+import styles from "./index.module.scss";
 
 interface Props {
   children: ReactChild;
@@ -8,14 +8,10 @@ interface Props {
   title: string;
 }
 
-function PuzzToolPage({children, description, title}: Props) {
+function PuzzToolPage({ children, description, title }: Props) {
   function renderDescription() {
     if (description) {
-      return (
-        <div className="PuzzToolPage-description">
-          {description}
-        </div>
-      )
+      return <div>{description}</div>;
     }
 
     return undefined;
@@ -24,8 +20,8 @@ function PuzzToolPage({children, description, title}: Props) {
   return (
     <PuzzToolDocumentTitle title={title}>
       <>
-        <div className="PuzzToolPage-header">
-          <h2 className="PuzzToolPage-title">{title}</h2>
+        <div className={styles.header}>
+          <h2 className={styles.title}>{title}</h2>
           {renderDescription()}
         </div>
         {children}

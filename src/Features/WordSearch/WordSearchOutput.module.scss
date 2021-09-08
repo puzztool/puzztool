@@ -1,4 +1,4 @@
-.WordSearchOutput {
+.container {
   border-collapse: collapse;
   display: block;
   font-family: monospace;
@@ -8,7 +8,7 @@
   td {
     padding: 0.5rem;
 
-    &.WordSearchOutput-highlightChar {
+    &.highlightChar {
       background-color: yellow;
     }
   }

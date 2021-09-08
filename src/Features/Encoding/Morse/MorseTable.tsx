@@ -1,12 +1,12 @@
-import { MorseCharacter as Character } from 'puzzle-lib';
-import Table from 'react-bootstrap/Table';
-import MorsePicture from './MorsePicture';
-import './MorseTable.scss';
+import { MorseCharacter as Character } from "puzzle-lib";
+import Table from "react-bootstrap/Table";
+import MorsePicture from "./MorsePicture";
+import styles from "./MorseTable.module.scss";
 
 function MorseTable() {
   const characters = new Character().getPotentialMatches();
   return (
-    <div className="MorseTable">
+    <div className={styles.container}>
       <Table striped={true} responsive={true}>
         <thead>
           <tr>
@@ -19,8 +19,11 @@ function MorseTable() {
             <tr key={entry.display}>
               <td>{entry.display}</td>
               <td>
-                <div className="MorseTable-morseView">
-                  <MorsePicture morseString={Character.toMorseString(entry.encoding)} />
+                <div className={styles.morseView}>
+                  <MorsePicture
+                    className={styles.morse_picture}
+                    morseString={Character.toMorseString(entry.encoding)}
+                  />
                 </div>
               </td>
             </tr>

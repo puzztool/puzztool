@@ -1,6 +1,6 @@
-import Table from 'react-bootstrap/Table';
-import { CharacterTableEntry as Entry } from 'puzzle-lib';
-import './CharacterTable.scss';
+import Table from "react-bootstrap/Table";
+import { CharacterTableEntry as Entry } from "puzzle-lib";
+import styles from "./CharacterTable.module.scss";
 
 interface Props {
   data: Entry[];
@@ -8,7 +8,7 @@ interface Props {
 
 function CharacterTable(props: Props) {
   return (
-    <div className="CharacterTable">
+    <div className={styles.container}>
       <Table striped={true} responsive={true}>
         <thead>
           <tr>

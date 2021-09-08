@@ -1,35 +1,38 @@
-
-interface Props {
+interface PictureProps {
+  className?: string;
   morseString: string;
 }
 
-export function renderDot() {
+interface CharacterProps {
+  className?: string;
+}
+
+export function MorseDot(props: CharacterProps) {
   return (
-    <svg className="MorsePicture-dotIcon" viewBox="0 0 30 30">
+    <svg className={props.className} viewBox="0 0 30 30">
       <circle cx="15" cy="15" r="15" />
       Sorry, your browser does not support inline SVG.
     </svg>
   );
 }
 
-export function renderDash() {
+export function MorseDash(props: CharacterProps) {
   return (
-    <svg className="MorsePicture-dashIcon" viewBox="0 0 90 30">
+    <svg className={props.className} viewBox="0 0 90 30">
       <rect width="90" height="30" />
       Sorry, your browser does not support inline SVG.
     </svg>
   );
 }
 
-function MorsePicture(props: Props) {
+function MorsePicture(props: PictureProps) {
   return (
     <>
-      {Array.from(props.morseString)
-        .map((value: string, index: number) => (
-          <span key={index}>
-            {value === '.' ? renderDot() : renderDash()}
-          </span>
-        ))}
+      {Array.from(props.morseString).map((value: string, index: number) => (
+        <span className={props.className} key={index}>
+          {value === "." ? <MorseDot /> : <MorseDash />}
+        </span>
+      ))}
     </>
   );
 }

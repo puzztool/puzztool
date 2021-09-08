@@ -1,26 +1,26 @@
-import { LoadingComponentProps } from 'react-loadable';
-import './index.scss';
+import { LoadingComponentProps } from "react-loadable";
+import styles from "./index.module.scss";
 
 function Loading(props: LoadingComponentProps) {
   function getContent() {
     if (props.error) {
       return (
-        <div className="Loading-content">
-          <div className="Loading-error" />
+        <div className={styles.content}>
+          <div className={styles.error} />
           <div>Failed to load content</div>
         </div>
       );
     } else if (props.timedOut) {
       return (
-        <div className="Loading-content">
-          <div className="Loading-error" />
+        <div className={styles.content}>
+          <div className={styles.error} />
           <div>Timed out while loading content</div>
         </div>
       );
     } else if (props.pastDelay) {
       return (
-        <div className="Loading-content">
-          <div className="Loading-spinner" />
+        <div className={styles.content}>
+          <div className={styles.spinner} />
           <div>Loading</div>
         </div>
       );
@@ -29,11 +29,7 @@ function Loading(props: LoadingComponentProps) {
     }
   }
 
-  return (
-    <div className="Loading">
-      {getContent()}
-    </div>
-  );
+  return <div>{getContent()}</div>;
 }
 
 export default Loading;

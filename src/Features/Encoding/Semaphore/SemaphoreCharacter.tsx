@@ -1,10 +1,10 @@
-import SemaphoreCheckbox from './SemaphoreCheckbox';
-import SemaphorePicture from './SemaphorePicture';
+import SemaphoreCheckbox from "./SemaphoreCheckbox";
+import SemaphorePicture from "./SemaphorePicture";
 import {
   SemaphoreCharacter as Character,
-  SemaphoreDirection as Direction
-} from 'puzzle-lib';
-import './SemaphoreCharacter.scss';
+  SemaphoreDirection as Direction,
+} from "puzzle-lib";
+import styles from "./SemaphoreCharacter.module.scss";
 
 interface Props {
   character: Character;
@@ -20,59 +20,56 @@ function SemaphoreCharacter(props: Props) {
   }
 
   return (
-    <div className="SemaphoreCharacter">
+    <div className={styles.container}>
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-north"
+        className={styles.north}
         direction={Direction.North}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-northEast"
+        className={styles.northEast}
         direction={Direction.NorthEast}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-east"
+        className={styles.east}
         direction={Direction.East}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-southEast"
+        className={styles.southEast}
         direction={Direction.SouthEast}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-south"
+        className={styles.south}
         direction={Direction.South}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-southWest"
+        className={styles.southWest}
         direction={Direction.SouthWest}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-west"
+        className={styles.west}
         direction={Direction.West}
         onChange={onChange}
       />
       <SemaphoreCheckbox
         character={props.character}
-        className="SemaphoreCheckbox-northWest"
+        className={styles.northWest}
         direction={Direction.NorthWest}
         onChange={onChange}
       />
-      <SemaphorePicture
-        width={240}
-        character={props.character}
-      />
+      <SemaphorePicture width={240} character={props.character} />
     </div>
   );
 }

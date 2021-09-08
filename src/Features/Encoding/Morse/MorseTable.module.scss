@@ -1,0 +1,19 @@
+.container {
+  text-align: center;
+  vertical-align: middle;
+
+  :global(.table-responsive) {
+    border-top: none;
+  }
+
+  td {
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 1rem;
+  }
+}
+
+.morse_picture svg {
+  height: 0.75rem;
+  margin-right: 0.75rem;
+}

@@ -1,17 +1,17 @@
-.SemaphoreStream {
+.container {
   margin: 0.5rem 1rem 0;
 
-  .btn-toolbar {
+  :global(.btn-toolbar) {
     margin-bottom: -0.5rem;
   }
 
-  .container-fluid {
+  :global(.container-fluid) {
     margin-bottom: -0.5rem;
     padding-left: 0;
     padding-right: 0;
   }
 
-  .row {
+  :global(.row) {
     margin-right: -0.25rem;
     margin-left: -0.25rem;
 
@@ -21,17 +21,17 @@
       margin-bottom: 0.5rem;
     }
   }
+}
 
-  .SemaphoreStream-input {
-    margin-bottom: 0.5rem;
-  }
+.input {
+  margin-bottom: 0.5rem;
+}
 
-  .SemaphoreStream-view {
-    font-size: 4.5rem;
-    font-weight: bold;
-  }
+.view {
+  font-size: 4.5rem;
+  font-weight: bold;
+}
 
-  .SemaphoreStream-output {
-    font-size: 1.5rem;
-  }
+.output {
+  font-size: 1.5rem;
 }

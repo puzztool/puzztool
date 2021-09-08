@@ -1,27 +1,27 @@
 import {
   BrailleCharacter as Character,
   BrailleDot as Dot,
-  BrailleStream as Stream
-} from 'puzzle-lib';
-import React, { useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../Store/rootReducer';
-import BrailleCharacter from './BrailleCharacter';
+  BrailleStream as Stream,
+} from "puzzle-lib";
+import { useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
+import BrailleCharacter from "./BrailleCharacter";
 import {
   append,
   backspace,
   clear,
   setEncoding,
   space,
-} from './brailleEncodingSlice';
-import './BrailleStream.scss';
+} from "./brailleEncodingSlice";
+import styles from "./BrailleStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
   encoding: state.encoding.braille.encoding,
@@ -37,60 +37,62 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> { }
+interface Props extends ConnectedProps<typeof connector> {}
 
 function BrailleStream(props: Props) {
-  useEffect(
-    () => {
-      function onKeyDown(ev: KeyboardEvent) {
-        if (ev.defaultPrevented) {
-          return;
-        }
-
-        let handled = false;
-
-        // Chrome won't trigger keypress for any keys that can invoke browser
-        // actions.
-        if (ev.keyCode === 8) { // Backspace
-          props.backspace();
-          handled = true;
-        }
-
-        if (handled) {
-          ev.preventDefault();
-        }
+  useEffect(() => {
+    function onKeyDown(ev: KeyboardEvent) {
+      if (ev.defaultPrevented) {
+        return;
       }
 
-      function onKeyPress(ev: KeyboardEvent) {
-        if (ev.defaultPrevented) {
-          return;
-        }
+      let handled = false;
 
-        let handled = false;
-
-        if (ev.keyCode === 13) { // Enter
-          onNextClick();
-          handled = true;
-        } else if (ev.charCode >= 49 && ev.charCode <= 54) { // '1' through '6'
-          // The braille dots are bitfields, so calculate the value based on the key
-          // pressed.
-          // TODO: This should probably be in puzzle-lib.
-          onCharacterClick(Math.pow(2, ev.charCode - 49));
-        }
-
-        if (handled) {
-          ev.preventDefault();
-        }
+      // Chrome won't trigger keypress for any keys that can invoke browser
+      // actions.
+      if (ev.keyCode === 8) {
+        // Backspace
+        props.backspace();
+        handled = true;
       }
 
-      document.addEventListener('keydown', onKeyDown);
-      document.addEventListener('keypress', onKeyPress);
+      if (handled) {
+        ev.preventDefault();
+      }
+    }
 
-      return () => {
-        document.removeEventListener('keydown', onKeyDown);
-        document.removeEventListener('keypress', onKeyPress);
-      };
-    });
+    function onKeyPress(ev: KeyboardEvent) {
+      if (ev.defaultPrevented) {
+        return;
+      }
+
+      let handled = false;
+
+      if (ev.keyCode === 13) {
+        // Enter
+        onNextClick();
+        handled = true;
+      } else if (ev.charCode >= 49 && ev.charCode <= 54) {
+        // '1' through '6'
+        // The braille dots are bitfields, so calculate the value based on the key
+        // pressed.
+        // TODO: This should probably be in puzzle-lib.
+        onCharacterClick(Math.pow(2, ev.charCode - 49));
+      }
+
+      if (handled) {
+        ev.preventDefault();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("keypress", onKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keypress", onKeyPress);
+    };
+  });
 
   function onBackspaceClick() {
     props.backspace();
@@ -118,25 +120,19 @@ function BrailleStream(props: Props) {
   const character = new Character(props.encoding);
 
   return (
-    <div className="BrailleStream">
-      <Card className="BrailleStream-input">
+    <div className={styles.container}>
+      <Card className={styles.input}>
         <Card.Header>Input</Card.Header>
         <Card.Body>
           <Container fluid={true}>
             <Row>
-              <Col
-                xs="auto"
-                sm="auto"
-                md="auto"
-              >
+              <Col xs="auto" sm="auto" md="auto">
                 <BrailleCharacter
                   character={character}
                   onClick={onCharacterClick}
                 />
               </Col>
-              <Col className="BrailleStream-view">
-                {character.toString() || '?'}
-              </Col>
+              <Col className={styles.view}>{character.toString() || "?"}</Col>
             </Row>
             <Row>
               <Col>
@@ -148,10 +144,7 @@ function BrailleStream(props: Props) {
                     <Button onClick={onNextClick}>Next</Button>
                   </ButtonGroup>
                   <ButtonGroup>
-                    <Button
-                      onClick={onClearClick}
-                      variant="danger"
-                    >
+                    <Button onClick={onClearClick} variant="danger">
                       Clear
                     </Button>
                   </ButtonGroup>
@@ -164,8 +157,9 @@ function BrailleStream(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre className="BrailleStream-output">
-            {new Stream(props.stream).toString()}<span className="blinking-cursor">|</span>
+          <pre className={styles.output}>
+            {new Stream(props.stream).toString()}
+            <span className="blinking-cursor">|</span>
           </pre>
         </Card.Body>
       </Card>
