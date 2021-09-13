@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Features/Encoding/Character/CharacterTable.module.scss"],"names":[],"mappings":"AACE,mDACE,eAAA,CAGF,wEAEE,iBAAA","file":"7.b7d2391c.chunk.css","sourcesContent":[".container {\n  :global(.table-responsive) {\n    border-top: none;\n  }\n\n  th,\n  td {\n    text-align: center;\n  }\n}\n"]}
