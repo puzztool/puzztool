@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {
   bands: number[];
@@ -16,7 +16,7 @@ const initialState: State = {
 };
 
 const resistorSlice = createSlice({
-  name: 'resistor',
+  name: "resistor",
   initialState,
   reducers: {
     selectTab(state, action: PayloadAction<string | null>) {
@@ -26,12 +26,9 @@ const resistorSlice = createSlice({
       const { bandIndex, colorIndex } = action.payload;
       state.bands[bandIndex] = colorIndex;
     },
-  }
+  },
 });
 
-export const {
-  selectTab,
-  setBand,
-} = resistorSlice.actions;
+export const { selectTab, setBand } = resistorSlice.actions;
 
 export default resistorSlice.reducer;

@@ -1,6 +1,6 @@
-import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { ResistorColorEntry as Color, Resistor } from "puzzle-lib";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 interface ColorSelectorProps {
   colors: Color[];
@@ -36,7 +36,10 @@ function ResistorColorSelector(props: ColorSelectorProps) {
     >
       {props.colors.map((color: Color, itemIndex: number) => {
         return (
-          <Dropdown.Item key={`${props.index}-${itemIndex}`} eventKey={color.name}>
+          <Dropdown.Item
+            key={`${props.index}-${itemIndex}`}
+            eventKey={color.name}
+          >
             {color.name}
           </Dropdown.Item>
         );

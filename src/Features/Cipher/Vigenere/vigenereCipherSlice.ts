@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Conversion } from '../KeyedCipherStream';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Conversion } from "../KeyedCipherStream";
 
 interface State {
   conversion: Conversion;
@@ -9,12 +9,12 @@ interface State {
 
 const initialState: State = {
   conversion: Conversion.decrypt,
-  secret: '',
-  text: '',
+  secret: "",
+  text: "",
 };
 
 const vigenereCipherSlice = createSlice({
-  name: 'vigenereCipher',
+  name: "vigenereCipher",
   initialState,
   reducers: {
     clear(state) {
@@ -29,14 +29,10 @@ const vigenereCipherSlice = createSlice({
     setText(state, action: PayloadAction<string>) {
       state.text = action.payload;
     },
-  }
+  },
 });
 
-export const {
-  clear,
-  setConversion,
-  setSecret,
-  setText,
-} = vigenereCipherSlice.actions;
+export const { clear, setConversion, setSecret, setText } =
+  vigenereCipherSlice.actions;
 
 export default vigenereCipherSlice.reducer;

@@ -1,6 +1,6 @@
-import { SemaphoreCharacter as Character } from 'puzzle-lib';
-import ReferenceList from '../../../Common/ReferenceList';
-import SemaphorePicture from './SemaphorePicture';
+import { SemaphoreCharacter as Character } from "puzzle-lib";
+import ReferenceList from "../../../Common/ReferenceList";
+import SemaphorePicture from "./SemaphorePicture";
 
 function SemaphoreReference() {
   const characters = new Character().getPotentialMatches();
@@ -12,7 +12,8 @@ function SemaphoreReference() {
             width={96}
             character={new Character(entry.encoding, entry.category)}
           />
-          <br />{entry.display}
+          <br />
+          {entry.display}
         </div>
       ))}
     </ReferenceList>

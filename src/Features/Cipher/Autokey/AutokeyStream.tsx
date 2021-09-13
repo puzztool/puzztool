@@ -1,8 +1,8 @@
-import { AutoKeyString } from 'puzzle-lib';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../Store/rootReducer';
-import KeyedCipherStream from '../KeyedCipherStream';
-import { clear, setConversion, setSecret, setText } from './autokeyCipherSlice';
+import { AutoKeyString } from "puzzle-lib";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
+import KeyedCipherStream from "../KeyedCipherStream";
+import { clear, setConversion, setSecret, setText } from "./autokeyCipherSlice";
 
 const mapStateToProps = (state: RootState) => ({
   conversion: state.cipher.autokey.conversion,

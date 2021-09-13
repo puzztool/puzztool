@@ -1,11 +1,11 @@
-import Tab from 'react-bootstrap/Tab';
-import { connect, ConnectedProps } from 'react-redux';
-import Tabs from 'react-bootstrap/Tabs';
-import PuzzToolPage from '../../Common/PuzzToolPage';
-import { RootState } from '../../Store/rootReducer';
-import ResistorInput from './ResistorInput';
-import { selectTab } from './resistorSlice';
-import ResistorTable from './ResistorTable';
+import Tab from "react-bootstrap/Tab";
+import { connect, ConnectedProps } from "react-redux";
+import Tabs from "react-bootstrap/Tabs";
+import PuzzToolPage from "../../Common/PuzzToolPage";
+import { RootState } from "../../Store/rootReducer";
+import ResistorInput from "./ResistorInput";
+import { selectTab } from "./resistorSlice";
+import ResistorTable from "./ResistorTable";
 
 const mapStateToProps = (state: RootState) => ({
   selectedTab: state.resistor.selectedTab,

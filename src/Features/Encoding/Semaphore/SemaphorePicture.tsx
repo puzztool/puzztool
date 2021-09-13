@@ -1,4 +1,4 @@
-import { SemaphoreCharacter as Character } from 'puzzle-lib';
+import { SemaphoreCharacter as Character } from "puzzle-lib";
 
 interface Props {
   width: number;
@@ -21,7 +21,12 @@ function getFlagAngles(character: Character) {
         angles.left = first;
       }
     } else {
-      if ((first === 0 && second <= 180) || (first <= 45 && second < 180) || (second <= 90 || first >= 270)) {
+      if (
+        (first === 0 && second <= 180) ||
+        (first <= 45 && second < 180) ||
+        second <= 90 ||
+        first >= 270
+      ) {
         angles.left = first;
         angles.right = second;
       } else {
@@ -49,7 +54,7 @@ function SemaphorePicture(props: Props) {
         <use
           transform={`rotate(${left}, 33, 32)`}
           x="33"
-          xlinkHref={left === 0 || left >= 180 ? '#LeftFlag' : '#Flag'}
+          xlinkHref={left === 0 || left >= 180 ? "#LeftFlag" : "#Flag"}
           y="4"
         />
       );
@@ -70,7 +75,7 @@ function SemaphorePicture(props: Props) {
         <use
           transform={`rotate(${right}, 43, 32)`}
           x="43"
-          xlinkHref={right <= 180 ? '#Flag' : '#LeftFlag'}
+          xlinkHref={right <= 180 ? "#Flag" : "#LeftFlag"}
           y="4"
         />
       );
@@ -88,7 +93,12 @@ function SemaphorePicture(props: Props) {
         </g>
         <g id="Flag">
           <polyline strokeWidth="1" stroke="black" points="0 0, 0 20" />
-          <polyline strokeWidth="2" strokeLinecap="round" stroke="black" points="0 20, 0 28" />
+          <polyline
+            strokeWidth="2"
+            strokeLinecap="round"
+            stroke="black"
+            points="0 20, 0 28"
+          />
           <rect stroke="black" height="10" width="10" />
           <polygon fill="red" points="0 0, 10 0, 0 10" />
           <polygon fill="yellow" points="10 0, 10 10, 0 10" />

@@ -1,6 +1,6 @@
-import { BrailleCharacter as Character } from 'puzzle-lib';
-import ReferenceList from '../../../Common/ReferenceList';
-import BraillePicture from './BraillePicture';
+import { BrailleCharacter as Character } from "puzzle-lib";
+import ReferenceList from "../../../Common/ReferenceList";
+import BraillePicture from "./BraillePicture";
 
 function BrailleReference() {
   const characters = new Character().getPotentialMatches();
@@ -12,7 +12,8 @@ function BrailleReference() {
             width={40}
             character={new Character(entry.encoding, entry.category)}
           />
-          <br />{entry.display}
+          <br />
+          {entry.display}
         </div>
       ))}
     </ReferenceList>

@@ -47,7 +47,8 @@ pre {
 }
 
 @keyframes blink {
-  from, to {
+  from,
+  to {
     color: transparent;
   }
   50% {
