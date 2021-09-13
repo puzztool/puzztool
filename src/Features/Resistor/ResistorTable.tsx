@@ -1,7 +1,7 @@
-import { ResistorColorEntry as Color, Resistor } from 'puzzle-lib';
-import Table from 'react-bootstrap/Table';
-import { getContrastingColor } from '../../Common/Helpers';
-import './ResistorTable.scss';
+import { ResistorColorEntry as Color, Resistor } from "puzzle-lib";
+import Table from "react-bootstrap/Table";
+import { getContrastingColor } from "../../Common/Helpers";
+import styles from "./ResistorTable.module.scss";
 
 function cellColorStyle(value: Color) {
   return {
@@ -12,7 +12,7 @@ function cellColorStyle(value: Color) {
 
 function ResistorTable() {
   return (
-    <div className="ResistorTable">
+    <div className={styles.container}>
       <Table striped={true} responsive={true}>
         <thead>
           <tr>

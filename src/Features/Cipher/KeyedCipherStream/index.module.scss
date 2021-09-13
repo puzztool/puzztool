@@ -1,0 +1,15 @@
+.container {
+  margin: 0 1rem;
+}
+
+.input {
+  margin-bottom: 0.5rem;
+
+  input {
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.btn-toolbar) {
+    margin-bottom: -0.5rem;
+  }
+}

@@ -1,4 +1,4 @@
-.BrailleCell {
+.container {
   background: transparent;
   border: none;
   padding: 0 2px;
@@ -12,12 +12,12 @@
   }
 
   &:active svg,
-  &.BrailleCell-selected:active svg {
+  &.selected:active svg {
     fill: #888;
     stroke: #888;
   }
 
-  &.BrailleCell-selected svg {
+  &.selected svg {
     fill: black;
   }
 }

@@ -1,0 +1,22 @@
+.container {
+  margin: 0.5rem 1rem 0;
+
+  :global(.btn-toolbar) {
+    margin-bottom: -0.5rem;
+  }
+}
+
+.input {
+  margin-bottom: 0.5rem;
+}
+
+.display {
+  margin-bottom: 0.5rem;
+}
+
+.output {
+  :global(.card-body) {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}

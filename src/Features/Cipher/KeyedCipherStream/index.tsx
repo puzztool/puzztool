@@ -1,5 +1,5 @@
 import { KeyedCipherStringBase } from "puzzle-lib";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -8,7 +8,7 @@ import FormControl from "react-bootstrap/FormControl";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useFocusInput } from "../../../Hooks/FocusInput";
-import "./index.scss";
+import styles from "./index.module.scss";
 
 export enum Conversion {
   encrypt,
@@ -61,8 +61,8 @@ function KeyedCipherStream(props: Props) {
   }
 
   return (
-    <div className="KeyedCipherStream">
-      <Card className="KeyedCipherStream-input">
+    <div className={styles.container}>
+      <Card className={styles.input}>
         <Card.Header>{props.prompt}</Card.Header>
         <Card.Body>
           <FormControl
@@ -106,7 +106,7 @@ function KeyedCipherStream(props: Props) {
           </ButtonToolbar>
         </Card.Body>
       </Card>
-      <Card className="KeyedCipherStream-output">
+      <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
           <pre>{calculateOutput() || " "}</pre>

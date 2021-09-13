@@ -1,0 +1,9 @@
+nav.container {
+  padding: calc(env(safe-area-inset-top) + 0.5rem)
+    calc(env(safe-area-inset-right) + 1rem) 0.5rem
+    calc(env(safe-area-inset-left) + 1rem);
+}
+
+.logo {
+  height: 1.5rem;
+}

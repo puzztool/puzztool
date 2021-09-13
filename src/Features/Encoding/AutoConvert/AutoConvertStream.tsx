@@ -1,5 +1,5 @@
 import { StringAutoConvert } from "puzzle-lib";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -11,7 +11,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
 import { clear, setHomogeneous, setText } from "./autoConvertSlice";
-import "./AutoConvertStream.scss";
+import styles from "./AutoConvertStream.module.scss";
 
 enum ConversionMode {
   consistent,
@@ -46,8 +46,8 @@ function AutoConvertStream(props: Props) {
   }
 
   return (
-    <div className="AutoConvertStream">
-      <Card className="AutoConvertStream-input">
+    <div className={styles.container}>
+      <Card className={styles.input}>
         <Card.Header>{props.prompt}</Card.Header>
         <Card.Body>
           <FormControl
@@ -56,7 +56,7 @@ function AutoConvertStream(props: Props) {
             ref={inputRef}
             value={props.text}
           />
-          <ButtonToolbar className="AutoConvertStream-commands">
+          <ButtonToolbar>
             <ToggleButtonGroup
               name="AutoConvertStream-homogeneous"
               onChange={(value) =>
@@ -95,7 +95,7 @@ function AutoConvertStream(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre className="AutoConvertStream-output">
+          <pre>
             {StringAutoConvert.convertString(props.text, props.homogeneous) ||
               " "}
           </pre>

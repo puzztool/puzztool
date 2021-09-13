@@ -1,16 +1,16 @@
-import { CaesarString } from 'puzzle-lib';
-import React, { ChangeEvent } from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
-import { connect, ConnectedProps } from 'react-redux';
-import { useFocusInput } from '../../../Hooks/FocusInput';
-import { RootState } from '../../../Store/rootReducer';
-import { clear, setText } from './caesarCipherSlice';
-import CaesarList from './CaesarList';
-import './CaesarStream.scss';
+import { CaesarString } from "puzzle-lib";
+import { ChangeEvent } from "react";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Card from "react-bootstrap/Card";
+import FormControl from "react-bootstrap/FormControl";
+import { connect, ConnectedProps } from "react-redux";
+import { useFocusInput } from "../../../Hooks/FocusInput";
+import { RootState } from "../../../Store/rootReducer";
+import { clear, setText } from "./caesarCipherSlice";
+import CaesarList from "./CaesarList";
+import styles from "./CaesarStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
   text: state.cipher.caesar.text,
@@ -38,8 +38,8 @@ function CaesarStream(props: Props) {
   }
 
   return (
-    <div className="CaesarStream">
-      <Card className="CaesarStream-input">
+    <div className={styles.container}>
+      <Card className={styles.input}>
         <Card.Header>{props.prompt}</Card.Header>
         <Card.Body>
           <FormControl
@@ -50,10 +50,7 @@ function CaesarStream(props: Props) {
           />
           <ButtonToolbar>
             <ButtonGroup>
-              <Button
-                onClick={onClearClick}
-                variant="danger"
-              >
+              <Button onClick={onClearClick} variant="danger">
                 Clear
               </Button>
             </ButtonGroup>

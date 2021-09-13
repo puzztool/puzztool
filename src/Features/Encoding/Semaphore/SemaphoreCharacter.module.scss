@@ -1,0 +1,59 @@
+@mixin checkbox {
+  position: absolute;
+}
+
+.container {
+  position: relative;
+
+  svg {
+    margin-right: 3px;
+  }
+}
+
+.north {
+  @include checkbox;
+  top: 16px;
+  left: 112.5px;
+}
+
+.northEast {
+  @include checkbox;
+  top: 47px;
+  left: 192px;
+}
+
+.east {
+  @include checkbox;
+  top: 103px;
+  left: 203px;
+}
+
+.southEast {
+  @include checkbox;
+  top: 149px;
+  left: 169px;
+}
+
+.south {
+  @include checkbox;
+  top: 161px;
+  left: 112.5px;
+}
+
+.southWest {
+  @include checkbox;
+  top: 149px;
+  left: 57px;
+}
+
+.west {
+  @include checkbox;
+  top: 103px;
+  left: 25px;
+}
+
+.northWest {
+  @include checkbox;
+  top: 47px;
+  left: 35px;
+}

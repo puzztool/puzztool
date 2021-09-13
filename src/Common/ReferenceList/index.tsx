@@ -1,12 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import './index.scss';
+import { FunctionComponent } from "react";
+import styles from "./index.module.scss";
 
 const ReferenceList: FunctionComponent = (props) => {
-  return (
-    <div className="ReferenceList">
-        {props.children}
-    </div>
-  );
-}
+  return <div className={styles.list}>{props.children}</div>;
+};
 
 export default ReferenceList;

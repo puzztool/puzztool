@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -17,7 +17,7 @@ import {
   setUseDiagonals,
   setWordList,
 } from "./wordSearchSlice";
-import "./WordSearchComponent.scss";
+import styles from "./WordSearchComponent.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
   canBend: state.wordSearch.canBend,
@@ -71,11 +71,11 @@ function WordSearchComponent(props: Props) {
   }
 
   return (
-    <div className="WordSearchComponent">
+    <div className={styles.container}>
       <Container fluid={true}>
         <Row className="g-0">
           <Col md={4}>
-            <Card className="WordSearchComponent-ListInput">
+            <Card className={styles.listInput}>
               <Card.Header>
                 Enter the list of words to find, one word per line
               </Card.Header>
@@ -112,7 +112,7 @@ function WordSearchComponent(props: Props) {
             </Card>
           </Col>
           <Col md={8}>
-            <Card className="WordSearchComponent-GridInput">
+            <Card className={styles.gridInput}>
               <Card.Header>
                 Enter the word search grid, one row of letters per line
               </Card.Header>
@@ -131,7 +131,7 @@ function WordSearchComponent(props: Props) {
         </Row>
         <Row className="g-0">
           <Col md={12}>
-            <Card className="WordSearchComponent-GridOutput">
+            <Card>
               <Card.Header>Output</Card.Header>
               <Card.Body>
                 <WordSearchOutput

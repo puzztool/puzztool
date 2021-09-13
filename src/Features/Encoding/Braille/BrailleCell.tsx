@@ -1,5 +1,6 @@
-import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
-import './BrailleCell.scss';
+import classNames from "classnames";
+import { BrailleCharacter as Character, BrailleDot as Dot } from "puzzle-lib";
+import styles from "./BrailleCell.module.scss";
 
 interface Props {
   character: Character;
@@ -15,13 +16,16 @@ function BrailleCell(props: Props) {
     }
   }
 
-  const classNames = `BrailleCell ${props.character.get(props.mask) ? 'BrailleCell-selected' : ''}`;
+  const btnClass = classNames(styles.container, {
+    [styles.selected]: props.character.get(props.mask),
+  });
+
   return (
-    <button className={classNames} onClick={onClick}>
+    <button className={btnClass} onClick={onClick}>
       <svg viewBox="0 0 60 60">
         <circle cx="30" cy="30" r="12" />
         Sorry, your browser does not support inline SVG.
-        </svg>
+      </svg>
     </button>
   );
 }

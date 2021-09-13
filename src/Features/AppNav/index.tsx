@@ -1,17 +1,17 @@
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { LinkContainer } from 'react-router-bootstrap';
-import { getCategories } from '../../Data/RouteData';
-import PuzztoolBannerWhite from '../../Images/puzztool_banner_white.svg';
-import AppNavCategory from './AppNavCategory';
-import './index.scss';
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { LinkContainer } from "react-router-bootstrap";
+import { getCategories } from "../../Data/RouteData";
+import PuzztoolBannerWhite from "../../Images/puzztool_banner_white.svg";
+import AppNavCategory from "./AppNavCategory";
+import styles from "./index.module.scss";
 
 function AppNav() {
   return (
     <Navbar
       bg="dark"
-      className="AppNav"
+      className={styles.container}
       collapseOnSelect={true}
       expand="md"
       // Remove focus from the selected element to prevent it from taking
@@ -23,7 +23,7 @@ function AppNav() {
       <LinkContainer to="/">
         <Navbar.Brand>
           <img
-            className="NavbarLogo"
+            className={styles.logo}
             src={PuzztoolBannerWhite}
             alt="PuzzTool logo"
           />
@@ -32,14 +32,17 @@ function AppNav() {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav>
-          {getCategories().map(
-            category => <AppNavCategory key={category.name} category={category} />)}
+          {getCategories().map((category) => (
+            <AppNavCategory key={category.name} category={category} />
+          ))}
         </Nav>
         <Nav>
           <LinkContainer to="/help" onClick={(e) => e.preventDefault()}>
             <NavDropdown title="Help" id="help-dropdown">
               <LinkContainer to="/help/settings">
-                <NavDropdown.Item eventKey="Help.Settings">Settings</NavDropdown.Item>
+                <NavDropdown.Item eventKey="Help.Settings">
+                  Settings
+                </NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
           </LinkContainer>

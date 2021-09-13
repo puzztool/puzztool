@@ -19,6 +19,7 @@
     "@types/react-router-dom": "^5.1.8",
     "ajv": "^6.12.6",
     "bootstrap": "^5.1.0",
+    "classnames": "^2.3.1",
     "compare-versions": "^3.6.0",
     "genversion": "^3.0.1",
     "jquery": "^3.6.0",
