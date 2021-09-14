@@ -9,16 +9,16 @@ This is the UI for a tool to help with encodings and ciphers used in puzzle comp
 
 Supported Ciphers and Encodings include:
 
-* Braille
-* Morse Code
-* Semaphore Flags
-* Caesar Ciphers
-* Vigenere Ciphers
-* Autokey Ciphers
-* ASCII and Ordinal Encodings (Binary, Ternary, Hexadecimal, etc.)
+- Braille
+- Morse Code
+- Semaphore Flags
+- Caesar Ciphers
+- Vigenere Ciphers
+- Autokey Ciphers
+- ASCII and Ordinal Encodings (Binary, Ternary, Hexadecimal, etc.)
 
 ## Contributing
 
-This is the UI for the tool, written in TypeScript and React.  Most of the decoding logic is provided by the [puzzle-lib](https://github.com/kfarnung/puzzle-lib) npm package.
+This is the UI for the tool, written in TypeScript and React. Most of the decoding logic is provided by the [puzzle-lib](https://github.com/kfarnung/puzzle-lib) npm package.
 
-This project is intended to work offline without internet access whenever possible to to be able to be packaged as a progressive web app.  As such, online-only components are discouraged unless there is a clear requirement.
+This project is intended to work offline without internet access whenever possible to to be able to be packaged as a progressive web app. As such, online-only components are discouraged unless there is a clear requirement.

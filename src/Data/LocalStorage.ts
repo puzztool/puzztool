@@ -1,8 +1,8 @@
-import compareVersions from 'compare-versions';
-import { version } from '../version';
+import compareVersions from "compare-versions";
+import { version } from "../version";
 
-const VERSION_STORAGE_KEY = 'appVersion';
-const STORAGE_KEY_PREFIX = 'puzztool';
+const VERSION_STORAGE_KEY = "appVersion";
+const STORAGE_KEY_PREFIX = "puzztool";
 let isSupported: boolean;
 
 function getKey(key: string) {
@@ -39,23 +39,24 @@ function clearOnVersionMismatch() {
 function isLocalStorageSupported() {
   if (isSupported === undefined) {
     const storage = window.localStorage;
-    const x = '__storage_test__';
+    const x = "__storage_test__";
 
     try {
       storage.setItem(x, x);
       storage.removeItem(x);
       isSupported = true;
     } catch (e) {
-      isSupported = e instanceof DOMException && (
+      isSupported =
+        e instanceof DOMException &&
         // everything except Firefox
-        e.code === 22 ||
-        // Firefox
-        e.code === 1014 ||
-        // test name field too, because code might not be present
-        // everything except Firefox
-        e.name === 'QuotaExceededError' ||
-        // Firefox
-        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        (e.code === 22 ||
+          // Firefox
+          e.code === 1014 ||
+          // test name field too, because code might not be present
+          // everything except Firefox
+          e.name === "QuotaExceededError" ||
+          // Firefox
+          e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
         // acknowledge QuotaExceededError only if there's something already stored
         storage.length !== 0;
     }

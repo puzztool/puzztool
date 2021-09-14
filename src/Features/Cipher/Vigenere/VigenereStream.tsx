@@ -1,8 +1,13 @@
-import { VigenereString } from 'puzzle-lib';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../Store/rootReducer';
-import KeyedCipherStream from '../KeyedCipherStream';
-import { clear, setConversion, setSecret, setText } from './vigenereCipherSlice';
+import { VigenereString } from "puzzle-lib";
+import { connect, ConnectedProps } from "react-redux";
+import { RootState } from "../../../Store/rootReducer";
+import KeyedCipherStream from "../KeyedCipherStream";
+import {
+  clear,
+  setConversion,
+  setSecret,
+  setText,
+} from "./vigenereCipherSlice";
 
 const mapStateToProps = (state: RootState) => ({
   conversion: state.cipher.vigenere.conversion,

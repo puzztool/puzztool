@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {
   canBend: boolean;
@@ -10,14 +10,14 @@ interface State {
 
 const initialState: State = {
   canBend: false,
-  grid: '',
+  grid: "",
   useCardinals: true,
   useDiagonals: true,
-  wordList: '',
+  wordList: "",
 };
 
 const wordSearchSlice = createSlice({
-  name: 'wordSearch',
+  name: "wordSearch",
   initialState,
   reducers: {
     setCanBend(state, action: PayloadAction<boolean>) {
@@ -35,7 +35,7 @@ const wordSearchSlice = createSlice({
     setWordList(state, action: PayloadAction<string>) {
       state.wordList = action.payload;
     },
-  }
+  },
 });
 
 export const {

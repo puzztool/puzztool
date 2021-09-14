@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {
   text: string;
 }
 
 const initialState: State = {
-  text: '',
+  text: "",
 };
 
 const caesarCipherSlice = createSlice({
-  name: 'caesarCipher',
+  name: "caesarCipher",
   initialState,
   reducers: {
     clear(state) {
@@ -18,12 +18,9 @@ const caesarCipherSlice = createSlice({
     setText(state, action: PayloadAction<string>) {
       state.text = action.payload;
     },
-  }
+  },
 });
 
-export const {
-  clear,
-  setText,
-} = caesarCipherSlice.actions;
+export const { clear, setText } = caesarCipherSlice.actions;
 
 export default caesarCipherSlice.reducer;

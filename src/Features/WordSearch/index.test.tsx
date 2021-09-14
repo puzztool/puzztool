@@ -1,15 +1,16 @@
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from '../../Store/configureStore';
-import WordSearch from '.';
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import configureStore from "../../Store/configureStore";
+import WordSearch from ".";
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+it("renders without crashing", () => {
+  const div = document.createElement("div");
   const { store } = configureStore();
-  
+
   ReactDOM.render(
     <Provider store={store}>
       <WordSearch />
     </Provider>,
-    div);
+    div
+  );
 });

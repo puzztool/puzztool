@@ -1,5 +1,5 @@
-import PuzzToolPage from '../../Common/PuzzToolPage';
-import WordSearchComponent from './WordSearchComponent';
+import PuzzToolPage from "../../Common/PuzzToolPage";
+import WordSearchComponent from "./WordSearchComponent";
 
 function WordSearch() {
   return (

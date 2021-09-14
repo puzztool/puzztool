@@ -1,4 +1,4 @@
-import { BrailleCharacter as Character, BrailleDot as Dot } from 'puzzle-lib';
+import { BrailleCharacter as Character, BrailleDot as Dot } from "puzzle-lib";
 
 interface Props {
   width: number;
@@ -10,7 +10,7 @@ function BraillePicture(props: Props) {
     return (
       <use
         transform={`translate(${x}, ${y})`}
-        xlinkHref={props.character.get(dot) ? '#FullDot' : '#EmptyDot'}
+        xlinkHref={props.character.get(dot) ? "#FullDot" : "#EmptyDot"}
       />
     );
   }
@@ -23,7 +23,14 @@ function BraillePicture(props: Props) {
           <circle r="6" fill="black" cx="0" cy="0" />
         </g>
         <g id="EmptyDot">
-          <circle r="6" fill="transparent" strokeWidth="1" stroke="black" cx="0" cy="0" />
+          <circle
+            r="6"
+            fill="transparent"
+            strokeWidth="1"
+            stroke="black"
+            cx="0"
+            cy="0"
+          />
         </g>
       </defs>
       {brailleDot(Dot.UpperLeft, 8, 8)}
@@ -33,7 +40,7 @@ function BraillePicture(props: Props) {
       {brailleDot(Dot.LowerLeft, 8, 44)}
       {brailleDot(Dot.LowerRight, 26, 44)}
       Sorry, your browser does not support inline SVG.
-        </svg>
+    </svg>
   );
 }
 

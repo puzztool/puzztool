@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {
   homogeneous: boolean;
@@ -7,11 +7,11 @@ interface State {
 
 const initialState: State = {
   homogeneous: true,
-  text: '',
+  text: "",
 };
 
 const autoConvertSlice = createSlice({
-  name: 'autoConvert',
+  name: "autoConvert",
   initialState,
   reducers: {
     clear(state) {
@@ -23,13 +23,9 @@ const autoConvertSlice = createSlice({
     setText(state, action: PayloadAction<string>) {
       state.text = action.payload;
     },
-  }
+  },
 });
 
-export const {
-  clear,
-  setHomogeneous,
-  setText,
-} = autoConvertSlice.actions;
+export const { clear, setHomogeneous, setText } = autoConvertSlice.actions;
 
 export default autoConvertSlice.reducer;
