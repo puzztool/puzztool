@@ -1,9 +1,8 @@
-import { createBrowserHistory } from "history";
 import React from "react";
 import ReactDOM from "react-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
@@ -12,16 +11,15 @@ import "./index.scss";
 
 const baseUrl =
   document.getElementsByTagName("base")[0].getAttribute("href") || "";
-const history = createBrowserHistory({ basename: baseUrl });
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Router history={history}>
+        <BrowserRouter basename={baseUrl}>
           <App />
-        </Router>
+        </BrowserRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

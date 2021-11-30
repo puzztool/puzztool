@@ -1,5 +1,5 @@
 import { KeyedCipherStringBase } from "puzzle-lib";
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactChild } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -24,7 +24,7 @@ interface Props {
   onConversionChange: (value: Conversion) => void;
   onSecretChange: (value: string) => void;
   onTextChange: (value: string) => void;
-  prompt: JSX.Element | string;
+  prompt: ReactChild | ReactChild[];
   text: string;
 }
 

@@ -1,14 +1,12 @@
-import { ReactChild } from "react";
-import DocumentTitle from "react-document-title";
+import { Helmet } from "react-helmet-async";
 
 const PUZZTOOL_TITLE = "PuzzTool";
 
 interface Props {
-  children?: ReactChild;
   title?: string;
 }
 
-function PuzzToolDocumentTitle({ children, title }: Props) {
+function PuzzToolDocumentTitle({ title }: Props) {
   function getDocumentTitle() {
     if (title) {
       return `${title} - ${PUZZTOOL_TITLE}`;
@@ -17,7 +15,11 @@ function PuzzToolDocumentTitle({ children, title }: Props) {
     return PUZZTOOL_TITLE;
   }
 
-  return <DocumentTitle title={getDocumentTitle()}>{children}</DocumentTitle>;
+  return (
+    <Helmet>
+      <title>{getDocumentTitle()}</title>
+    </Helmet>
+  );
 }
 
 export default PuzzToolDocumentTitle;

@@ -1,4 +1,5 @@
 import { VigenereString } from "puzzle-lib";
+import { ReactChild } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import KeyedCipherStream from "../KeyedCipherStream";
@@ -24,7 +25,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> {
-  prompt: JSX.Element | string;
+  prompt: ReactChild | ReactChild[];
 }
 
 function VigenereStream(props: Props) {
