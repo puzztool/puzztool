@@ -1,6 +1,6 @@
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { LinkContainer } from "react-router-bootstrap";
 import { RouteCategory } from "../../Data/RouteData";
+import AppNavDropdown from "./AppNavDropdown";
+import AppNavDropdownItem from "./AppNavDropdownItem";
 
 interface Props {
   category: RouteCategory;
@@ -13,23 +13,28 @@ function getCategoryDropdownId(categoryName: string) {
     .concat("-dropdown");
 }
 
-function NavbarCategory(props: Props) {
+function AppNavCategory(props: Props) {
   const name = props.category.name;
   const rootUrl = props.category.rootUrl;
 
   return (
-    <LinkContainer key={name} onClick={(e) => e.preventDefault()} to={rootUrl}>
-      <NavDropdown id={getCategoryDropdownId(name)} title={name}>
-        {props.category.children.map((child) => (
-          <LinkContainer key={`${name}-${child.name}`} to={rootUrl + child.url}>
-            <NavDropdown.Item eventKey={name + child.name}>
-              {child.name}
-            </NavDropdown.Item>
-          </LinkContainer>
-        ))}
-      </NavDropdown>
-    </LinkContainer>
+    <AppNavDropdown
+      id={getCategoryDropdownId(name)}
+      key={name}
+      baseUrl={rootUrl}
+      title={name}
+    >
+      {props.category.children.map((child) => (
+        <AppNavDropdownItem
+          eventKey={`${name}.${child.name}`}
+          to={rootUrl + child.url}
+          key={`${name}-${child.name}`}
+        >
+          {child.name}
+        </AppNavDropdownItem>
+      ))}
+    </AppNavDropdown>
   );
 }
 
-export default NavbarCategory;
+export default AppNavCategory;

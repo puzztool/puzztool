@@ -18,15 +18,14 @@ function PuzzToolPage({ children, description, title }: Props) {
   }
 
   return (
-    <PuzzToolDocumentTitle title={title}>
-      <>
-        <div className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
-          {renderDescription()}
-        </div>
-        {children}
-      </>
-    </PuzzToolDocumentTitle>
+    <>
+      <PuzzToolDocumentTitle title={title} />
+      <div className={styles.header}>
+        <h2 className={styles.title}>{title}</h2>
+        {renderDescription()}
+      </div>
+      {children}
+    </>
   );
 }
 

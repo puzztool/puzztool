@@ -1,5 +1,6 @@
-import { Route, Switch } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Loadable from "react-loadable";
+import { Route, Routes } from "react-router-dom";
 import PuzzToolDocumentTitle from "./Common/PuzzToolDocumentTitle";
 import AppNav from "./Features/AppNav";
 import NotFound from "./Features/Error/NotFound";
@@ -100,55 +101,35 @@ const Vigenere = Loadable({
 
 function App() {
   return (
-    <PuzzToolDocumentTitle>
+    <HelmetProvider>
+      <PuzzToolDocumentTitle />
       <div>
         <AppNav />
         <div className={styles.content}>
-          <Switch>
-            <Route exact={true} path="/" component={Home} />
-            <Route exact={true} path="/cipher/autokey" component={Autokey} />
-            <Route exact={true} path="/cipher/caesar" component={Caesar} />
-            <Route exact={true} path="/cipher/vigenere" component={Vigenere} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cipher/autokey" element={<Autokey />} />
+            <Route path="/cipher/caesar" element={<Caesar />} />
+            <Route path="/cipher/vigenere" element={<Vigenere />} />
+            <Route path="/encoding/autoconvert" element={<AutoConvert />} />
+            <Route path="/encoding/braille" element={<Braille />} />
+            <Route path="/encoding/morse" element={<Morse />} />
+            <Route path="/encoding/pigpen" element={<Pigpen />} />
+            <Route path="/encoding/semaphore" element={<Semaphore />} />
+            <Route path="/help/settings" element={<Settings />} />
             <Route
-              exact={true}
-              path="/encoding/autoconvert"
-              component={AutoConvert}
-            />
-            <Route exact={true} path="/encoding/braille" component={Braille} />
-            <Route exact={true} path="/encoding/morse" component={Morse} />
-            <Route exact={true} path="/encoding/pigpen" component={Pigpen} />
-            <Route
-              exact={true}
-              path="/encoding/semaphore"
-              component={Semaphore}
-            />
-            <Route exact={true} path="/help/settings" component={Settings} />
-            <Route
-              exact={true}
               path="/reference/characterencodings"
-              component={Character}
+              element={<Character />}
             />
-            <Route exact={true} path="/reference/nato" component={Nato} />
-            <Route
-              exact={true}
-              path="/reference/navalflags"
-              component={NavalFlag}
-            />
-            <Route
-              exact={true}
-              path="/reference/resistors"
-              component={Resistor}
-            />
-            <Route
-              exact={true}
-              path="/solvers/wordsearch"
-              component={WordSearch}
-            />
-            <Route component={NotFound} />
-          </Switch>
+            <Route path="/reference/nato" element={<Nato />} />
+            <Route path="/reference/navalflags" element={<NavalFlag />} />
+            <Route path="/reference/resistors" element={<Resistor />} />
+            <Route path="/solvers/wordsearch" element={<WordSearch />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
       </div>
-    </PuzzToolDocumentTitle>
+    </HelmetProvider>
   );
 }
 

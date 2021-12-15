@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import configureStore from "../../../Store/configureStore";
 import AutoConvert from ".";
@@ -9,7 +10,9 @@ it("renders without crashing", () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <AutoConvert />
+      <HelmetProvider>
+        <AutoConvert />
+      </HelmetProvider>
     </Provider>,
     div
   );
