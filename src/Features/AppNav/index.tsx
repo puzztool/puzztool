@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useHref } from "react-router";
+import { LinkContainer } from "react-router-bootstrap";
 import { getCategories } from "../../Data/RouteData";
 import PuzztoolBannerWhite from "../../Images/puzztool_banner_white.svg";
 import AppNavCategory from "./AppNavCategory";
@@ -21,13 +21,15 @@ function AppNav() {
       sticky="top"
       variant="dark"
     >
-      <Navbar.Brand href={useHref("/")}>
-        <img
-          className={styles.logo}
-          src={PuzztoolBannerWhite}
-          alt="PuzzTool logo"
-        />
-      </Navbar.Brand>
+      <LinkContainer to="/">
+        <Navbar.Brand>
+          <img
+            className={styles.logo}
+            src={PuzztoolBannerWhite}
+            alt="PuzzTool logo"
+          />
+        </Navbar.Brand>
+      </LinkContainer>
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav>
