@@ -1,6 +1,6 @@
 import { ReactChild } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useHref, useMatch } from "react-router";
+import { LinkContainer } from "react-router-bootstrap";
 
 interface Props {
   children: ReactChild | ReactChild[];
@@ -9,16 +9,12 @@ interface Props {
 }
 
 function AppNavDropdownItem(props: Props) {
-  const routeMatch = useMatch(props.to);
-
   return (
-    <NavDropdown.Item
-      active={!!routeMatch}
-      eventKey={props.eventKey}
-      href={useHref(props.to)}
-    >
-      {props.children}
-    </NavDropdown.Item>
+    <LinkContainer to={props.to}>
+      <NavDropdown.Item eventKey={props.eventKey}>
+        {props.children}
+      </NavDropdown.Item>
+    </LinkContainer>
   );
 }
 
