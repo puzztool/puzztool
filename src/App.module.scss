@@ -2,3 +2,12 @@
   margin: 1rem env(safe-area-inset-right)
     calc(env(safe-area-inset-bottom) + 1rem) env(safe-area-inset-left);
 }
+
+.loadError {
+  padding: 0 1rem 1rem;
+  text-align: center;
+
+  pre {
+    margin-bottom: 1rem;
+  }
+}
