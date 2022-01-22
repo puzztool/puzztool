@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/494.df781e4e.chunk.css","mappings":"AACE,oDACE,gBAGF,0EAEE","sources":["Features/Encoding/Character/CharacterTable.module.scss"],"sourcesContent":[".container {\n  :global(.table-responsive) {\n    border-top: none;\n  }\n\n  th,\n  td {\n    text-align: center;\n  }\n}\n"],"names":[],"sourceRoot":""}
