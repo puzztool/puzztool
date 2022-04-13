@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import Home from ".";
 import { HashRouter as Router } from "react-router-dom";
 
@@ -10,5 +10,6 @@ it("renders without crashing", () => {
     </Router>
   );
 
-  ReactDOM.render(element, div);
+  const root = createRoot(div);
+  root.render(element);
 });

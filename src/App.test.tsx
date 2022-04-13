@@ -1,13 +1,13 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
+  const root = createRoot(div);
+  root.render(
     <BrowserRouter>
       <App />
-    </BrowserRouter>,
-    div
+    </BrowserRouter>
   );
 });

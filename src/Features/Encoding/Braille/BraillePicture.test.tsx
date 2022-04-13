@@ -1,11 +1,11 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrailleCharacter as Character } from "puzzle-lib";
 import BraillePicture from "./BraillePicture";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
-    <BraillePicture character={new Character()} width={100} />,
-    div
+  const root = createRoot(div);
+  root.render(
+    <BraillePicture character={new Character()} width={100} />
   );
 });
