@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
@@ -10,5 +10,6 @@ it("renders without crashing", () => {
   const character = new Character();
   character.addDirection(Direction.North);
   character.addDirection(Direction.West);
-  ReactDOM.render(<SemaphoreCharacter character={character} />, div);
+  const root = createRoot(div);
+  root.render(<SemaphoreCharacter character={character} />);
 });

@@ -1,7 +1,8 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import BrailleReference from "./BrailleReference";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<BrailleReference />, div);
+  const root = createRoot(div);
+  root.render(<BrailleReference />);
 });

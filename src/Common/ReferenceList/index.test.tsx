@@ -1,7 +1,8 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import ReferenceList from ".";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<ReferenceList />, div);
+  const root = createRoot(div);
+  root.render(<ReferenceList />);
 });

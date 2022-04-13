@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
@@ -7,11 +7,11 @@ import SemaphoreCheckbox from "./SemaphoreCheckbox";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
+  const root = createRoot(div);
+  root.render(
     <SemaphoreCheckbox
       character={new Character()}
       direction={Direction.None}
-    />,
-    div
+    />
   );
 });
