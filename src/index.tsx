@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -13,8 +13,10 @@ const baseUrl =
   document.getElementsByTagName("base")[0].getAttribute("href") || "";
 const { store, persistor } = configureStore();
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById("root")!;
+const root = createRoot(container);
+root.render(
+  <StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter basename={baseUrl}>
@@ -22,8 +24,7 @@ ReactDOM.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
