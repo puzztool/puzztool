@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.d889f546.css",
-    "main.js": "/static/js/main.06df35e7.js",
+    "main.js": "/static/js/main.d7f4774d.js",
     "static/js/642.27a9d7a9.chunk.js": "/static/js/642.27a9d7a9.chunk.js",
     "static/css/422.b4ab5905.chunk.css": "/static/css/422.b4ab5905.chunk.css",
     "static/js/422.8a554876.chunk.js": "/static/js/422.8a554876.chunk.js",
@@ -37,7 +37,7 @@
     "static/media/puzztool_banner_white.svg": "/static/media/puzztool_banner_white.151d74051b4924c0f912d03bd0f4fdb1.svg",
     "index.html": "/index.html",
     "main.d889f546.css.map": "/static/css/main.d889f546.css.map",
-    "main.06df35e7.js.map": "/static/js/main.06df35e7.js.map",
+    "main.d7f4774d.js.map": "/static/js/main.d7f4774d.js.map",
     "642.27a9d7a9.chunk.js.map": "/static/js/642.27a9d7a9.chunk.js.map",
     "422.b4ab5905.chunk.css.map": "/static/css/422.b4ab5905.chunk.css.map",
     "422.8a554876.chunk.js.map": "/static/js/422.8a554876.chunk.js.map",
@@ -70,6 +70,6 @@
   },
   "entrypoints": [
     "static/css/main.d889f546.css",
-    "static/js/main.06df35e7.js"
+    "static/js/main.d7f4774d.js"
   ]
 }
