@@ -1,4 +1,4 @@
-import compareVersions from "compare-versions";
+import { compareVersions } from "compare-versions";
 import { version } from "../version";
 
 const VERSION_STORAGE_KEY = "appVersion";
