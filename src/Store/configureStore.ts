@@ -31,7 +31,7 @@ const configurePuzzToolStore = () => {
     }),
   });
 
-  let persistor = persistStore(store);
+  const persistor = persistStore(store);
 
   return { store, persistor };
 };

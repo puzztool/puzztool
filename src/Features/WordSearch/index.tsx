@@ -1,10 +1,10 @@
 import PuzzToolPage from "../../Common/PuzzToolPage";
-import WordSearchComponent from "./WordSearchComponent";
+import WordSearchComponentInner from "./WordSearchComponent";
 
 function WordSearch() {
   return (
     <PuzzToolPage title="Word Search">
-      <WordSearchComponent />
+      <WordSearchComponentInner />
     </PuzzToolPage>
   );
 }

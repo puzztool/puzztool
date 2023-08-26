@@ -2,6 +2,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import viteTsconfigPaths from "vite-tsconfig-paths";
+import eslint from 'vite-plugin-eslint'
 import { VitePWA } from "vite-plugin-pwa";
 import svgrPlugin from "vite-plugin-svgr";
 
@@ -12,6 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
   },
   plugins: [
+    eslint(),
     react(),
     viteTsconfigPaths(),
     svgrPlugin(),
