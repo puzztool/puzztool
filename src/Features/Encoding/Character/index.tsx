@@ -16,9 +16,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>
 
-function CharacterEncodings(props: Props) {
+function CharacterEncodingsInner(props: Props) {
   return (
     <PuzzToolPage title="Character Encodings">
       <Tabs
@@ -37,4 +37,5 @@ function CharacterEncodings(props: Props) {
   );
 }
 
-export default connector(CharacterEncodings);
+const CharacterEncodings = connector(CharacterEncodingsInner);
+export default CharacterEncodings;

@@ -37,9 +37,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>
 
-function BrailleStream(props: Props) {
+function BrailleStreamInner(props: Props) {
   useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
@@ -167,4 +167,5 @@ function BrailleStream(props: Props) {
   );
 }
 
-export default connector(BrailleStream);
+const BrailleStream = connector(BrailleStreamInner);
+export default BrailleStream;

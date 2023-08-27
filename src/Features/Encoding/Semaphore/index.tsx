@@ -16,9 +16,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>
 
-function Semaphore(props: Props) {
+function SemaphoreInner(props: Props) {
   return (
     <PuzzToolPage title="Semaphore">
       <Tabs
@@ -37,4 +37,5 @@ function Semaphore(props: Props) {
   );
 }
 
-export default connector(Semaphore);
+const Semaphore = connector(SemaphoreInner);
+export default Semaphore;

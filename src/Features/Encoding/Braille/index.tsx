@@ -16,9 +16,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>
 
-function Braille(props: Props) {
+function BrailleInner(props: Props) {
   return (
     <PuzzToolPage title="Braille">
       <Tabs
@@ -37,4 +37,5 @@ function Braille(props: Props) {
   );
 }
 
-export default connector(Braille);
+const Braille = connector(BrailleInner);
+export default Braille;

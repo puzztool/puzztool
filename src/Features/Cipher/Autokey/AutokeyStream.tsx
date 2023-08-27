@@ -1,5 +1,5 @@
 import { AutoKeyString } from "puzzle-lib";
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import KeyedCipherStream from "../KeyedCipherStream";
@@ -20,10 +20,10 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> {
-  prompt: ReactChild | ReactChild[];
+  prompt: ReactNode;
 }
 
-function AutokeyStream(props: Props) {
+function AutokeyStreamInner(props: Props) {
   return (
     <KeyedCipherStream
       cipher={new AutoKeyString()}
@@ -40,4 +40,5 @@ function AutokeyStream(props: Props) {
   );
 }
 
-export default connector(AutokeyStream);
+const AutokeyStream = connector(AutokeyStreamInner);
+export default AutokeyStream;

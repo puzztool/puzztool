@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Conversion } from "../KeyedCipherStream";
+import { Conversion } from "../KeyedCipherStream/Conversion";
 
 interface State {
   conversion: Conversion;
