@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { BrailleCharacter as Character } from "puzzle-lib";
+import { it } from "vitest";
 import BraillePicture from "./BraillePicture";
 
 it("renders without crashing", () => {

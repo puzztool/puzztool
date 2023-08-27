@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { SemaphoreCharacter as Character } from "puzzle-lib";
+import { it } from "vitest";
 import SemaphorePicture from "./SemaphorePicture";
 
 it("renders without crashing", () => {

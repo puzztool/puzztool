@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { it } from "vitest";
 import CharacterTable from "./CharacterTable";
 
 it("renders without crashing", () => {

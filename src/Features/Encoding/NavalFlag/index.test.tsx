@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
+import { it } from "vitest";
 import NavalFlag from ".";
 
 it("renders without crashing", () => {

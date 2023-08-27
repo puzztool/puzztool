@@ -3,6 +3,7 @@ import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
 } from "puzzle-lib";
+import { it } from "vitest";
 import SemaphoreCheckbox from "./SemaphoreCheckbox";
 
 it("renders without crashing", () => {
