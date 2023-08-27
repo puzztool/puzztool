@@ -1,10 +1,8 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import { SemaphoreCharacter as Character } from "puzzle-lib";
-import { it } from "vitest";
+import { test } from "vitest";
 import SemaphorePicture from "./SemaphorePicture";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  const root = createRoot(div);
-  root.render(<SemaphorePicture character={new Character()} width={100} />);
+test("renders without crashing", () => {
+  render(<SemaphorePicture character={new Character()} width={100} />);
 });
