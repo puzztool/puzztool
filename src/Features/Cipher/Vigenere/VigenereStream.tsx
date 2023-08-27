@@ -1,5 +1,5 @@
 import { VigenereString } from "puzzle-lib";
-import { ReactChild } from "react";
+import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import KeyedCipherStream from "../KeyedCipherStream";
@@ -25,10 +25,10 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> {
-  prompt: ReactChild | ReactChild[];
+  prompt: ReactNode;
 }
 
-function VigenereStream(props: Props) {
+function VigenereStreamInner(props: Props) {
   return (
     <KeyedCipherStream
       cipher={new VigenereString()}
@@ -45,4 +45,5 @@ function VigenereStream(props: Props) {
   );
 }
 
-export default connector(VigenereStream);
+const VigenereStream = connector(VigenereStreamInner);
+export default VigenereStream;

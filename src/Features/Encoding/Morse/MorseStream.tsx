@@ -21,9 +21,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>;
 
-function MorseStream(props: Props) {
+function MorseStreamInner(props: Props) {
   useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
@@ -229,4 +229,5 @@ function MorseStream(props: Props) {
   );
 }
 
-export default connector(MorseStream);
+const MorseStream = connector(MorseStreamInner);
+export default MorseStream;

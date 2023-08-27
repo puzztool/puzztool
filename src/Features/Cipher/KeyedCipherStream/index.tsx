@@ -1,5 +1,5 @@
 import { KeyedCipherStringBase } from "puzzle-lib";
-import { ChangeEvent, ReactChild } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -8,12 +8,8 @@ import FormControl from "react-bootstrap/FormControl";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { useFocusInput } from "../../../Hooks/FocusInput";
+import { Conversion } from "./Conversion";
 import styles from "./index.module.scss";
-
-export enum Conversion {
-  encrypt,
-  decrypt,
-}
 
 interface Props {
   cipher: KeyedCipherStringBase;
@@ -24,7 +20,7 @@ interface Props {
   onConversionChange: (value: Conversion) => void;
   onSecretChange: (value: string) => void;
   onTextChange: (value: string) => void;
-  prompt: ReactChild | ReactChild[];
+  prompt: ReactNode;
   text: string;
 }
 

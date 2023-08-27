@@ -17,7 +17,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
-function Resistors(props: Props) {
+function ResistorInner(props: Props) {
   return (
     <PuzzToolPage title="Resistors">
       <Tabs
@@ -36,4 +36,5 @@ function Resistors(props: Props) {
   );
 }
 
-export default connector(Resistors);
+const Resistor = connector(ResistorInner);
+export default Resistor;

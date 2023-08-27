@@ -1,14 +1,17 @@
-import { ReactChild } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import PuzzToolDocumentTitle from "../PuzzToolDocumentTitle";
 import styles from "./index.module.scss";
 
 interface Props {
-  children: ReactChild;
-  description?: ReactChild;
+  description?: ReactNode;
   title: string;
 }
 
-function PuzzToolPage({ children, description, title }: Props) {
+function PuzzToolPage({
+  children,
+  description,
+  title,
+}: PropsWithChildren<Props>) {
   function renderDescription() {
     if (description) {
       return <div>{description}</div>;

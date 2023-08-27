@@ -37,9 +37,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>;
 
-function SemaphoreStream(props: Props) {
+function SemaphoreStreamInner(props: Props) {
   useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
@@ -80,7 +80,7 @@ function SemaphoreStream(props: Props) {
         const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
         onCharacterChange(
           !character.hasDirection(direction) ? "add" : "remove",
-          direction
+          direction,
         );
       }
 
@@ -191,4 +191,5 @@ function SemaphoreStream(props: Props) {
   );
 }
 
-export default connector(SemaphoreStream);
+const SemaphoreStream = connector(SemaphoreStreamInner);
+export default SemaphoreStream;

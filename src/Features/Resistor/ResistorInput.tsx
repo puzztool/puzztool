@@ -33,7 +33,7 @@ function getResistorValue(bands: (Color | undefined)[]) {
   }
 }
 
-function ResistorInput(props: Props) {
+function ResistorInputInner(props: Props) {
   function onColorChange(bandIndex: number, color?: Color) {
     const colorIndex = color ? Resistor.colorTable.indexOf(color) : -1;
     props.setBand({
@@ -44,10 +44,10 @@ function ResistorInput(props: Props) {
 
   const bands = props.bands.map((value) => Resistor.colorTable[value]);
   const colorsWithValue = Resistor.colorTable.filter((color) =>
-    color.hasValue()
+    color.hasValue(),
   );
   const colorsWithTolerance = Resistor.colorTable.filter((color) =>
-    color.hasTolerance()
+    color.hasTolerance(),
   );
 
   return (
@@ -112,4 +112,5 @@ function ResistorInput(props: Props) {
   );
 }
 
-export default connector(ResistorInput);
+const ResistorInput = connector(ResistorInputInner);
+export default ResistorInput;

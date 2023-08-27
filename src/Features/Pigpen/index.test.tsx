@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
+import { it } from "vitest";
 import Pigpen from ".";
 
 it("renders without crashing", () => {
@@ -8,6 +9,6 @@ it("renders without crashing", () => {
   root.render(
     <HelmetProvider>
       <Pigpen />
-    </HelmetProvider>
+    </HelmetProvider>,
   );
 });

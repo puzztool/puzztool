@@ -1,5 +1,5 @@
 import { StringAutoConvert } from "puzzle-lib";
-import { ChangeEvent, ReactChild } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -31,10 +31,10 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> {
-  prompt: ReactChild | ReactChild[];
+  prompt: ReactNode;
 }
 
-function AutoConvertStream(props: Props) {
+function AutoConvertStreamInner(props: Props) {
   const inputRef = useFocusInput();
 
   function onClearClick() {
@@ -105,4 +105,5 @@ function AutoConvertStream(props: Props) {
   );
 }
 
-export default connector(AutoConvertStream);
+const AutoConvertStream = connector(AutoConvertStreamInner);
+export default AutoConvertStream;

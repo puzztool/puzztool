@@ -51,7 +51,7 @@ function getGridHighlights(
   grid: string[][],
   wordsToFind: string[],
   direction: WordSearchDirection,
-  canBend: boolean
+  canBend: boolean,
 ) {
   const solver = new WordSearchSolver();
   solver.setDirections(direction);
@@ -82,19 +82,19 @@ function WordSearchOutput(props: Props) {
   // Process direction settings
   const direction = getWordSearchDirection(
     props.useCardinals,
-    props.useDiagonals
+    props.useDiagonals,
   );
 
   // Split on newlines, trim any whitespace, and filter out empty lines.
   const wordList = splitLines(props.wordListInputText).filter(
-    (word) => word.length > 0
+    (word) => word.length > 0,
   );
 
   const shouldHighlight = getGridHighlights(
     grid,
     wordList,
     direction,
-    props.canBend
+    props.canBend,
   );
 
   return (
@@ -105,7 +105,7 @@ function WordSearchOutput(props: Props) {
             {row.map((col, colIndex) => (
               <td
                 className={getColumnClassName(
-                  shouldHighlight[rowIndex][colIndex]
+                  shouldHighlight[rowIndex][colIndex],
                 )}
                 key={`${rowIndex},${colIndex}`}
               >

@@ -1,5 +1,5 @@
 import { CaesarString } from "puzzle-lib";
-import { ChangeEvent, ReactChild } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -23,10 +23,10 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props extends ConnectedProps<typeof connector> {
-  prompt: ReactChild | ReactChild[];
+  prompt: ReactNode;
 }
 
-function CaesarStream(props: Props) {
+function CaesarStreamInner(props: Props) {
   const inputRef = useFocusInput();
 
   function onClearClick() {
@@ -67,4 +67,5 @@ function CaesarStream(props: Props) {
   );
 }
 
-export default connector(CaesarStream);
+const CaesarStream = connector(CaesarStreamInner);
+export default CaesarStream;

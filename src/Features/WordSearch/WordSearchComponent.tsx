@@ -37,7 +37,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
-function WordSearchComponent(props: Props) {
+function WordSearchComponentInner(props: Props) {
   const inputRef = useFocusInput();
 
   function onGridTextChanged(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -150,4 +150,5 @@ function WordSearchComponent(props: Props) {
   );
 }
 
-export default connector(WordSearchComponent);
+const WordSearchComponent = connector(WordSearchComponentInner);
+export default WordSearchComponent;

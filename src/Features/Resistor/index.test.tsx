@@ -1,8 +1,9 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
+import { it } from "vitest";
 import configureStore from "../../Store/configureStore";
-import Resistors from ".";
+import Resistor from ".";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -12,8 +13,8 @@ it("renders without crashing", () => {
   root.render(
     <Provider store={store}>
       <HelmetProvider>
-        <Resistors />
+        <Resistor />
       </HelmetProvider>
-    </Provider>
+    </Provider>,
   );
 });

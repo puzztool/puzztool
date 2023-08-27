@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { it } from "vitest";
 import App from "./App";
 
 it("renders without crashing", () => {
@@ -8,6 +9,6 @@ it("renders without crashing", () => {
   root.render(
     <BrowserRouter>
       <App />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 });

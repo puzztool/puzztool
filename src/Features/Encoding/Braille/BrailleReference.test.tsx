@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { it } from "vitest";
 import BrailleReference from "./BrailleReference";
 
 it("renders without crashing", () => {

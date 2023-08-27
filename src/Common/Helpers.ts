@@ -1,4 +1,4 @@
-export function getContrastingColor(background: String) {
+export function getContrastingColor(background: string) {
   // Calculate Luma as per Rec. 709: https://en.wikipedia.org/wiki/Luma_(video)
   const hexCode = background.substring(1); // Remove the leading #
   const color = parseInt(hexCode, 16);

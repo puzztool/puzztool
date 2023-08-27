@@ -31,9 +31,7 @@ function App() {
   const Autokey = lazy(() => import("./Features/Cipher/Autokey"));
   const Caesar = lazy(() => import("./Features/Cipher/Caesar"));
   const Vigenere = lazy(() => import("./Features/Cipher/Vigenere"));
-  const AutoConvert = lazy(
-    () => import("./Features/Encoding/AutoConvert")
-  );
+  const AutoConvert = lazy(() => import("./Features/Encoding/AutoConvert"));
   const Braille = lazy(() => import("./Features/Encoding/Braille"));
   const Character = lazy(() => import("./Features/Encoding/Character"));
   const Morse = lazy(() => import("./Features/Encoding/Morse"));

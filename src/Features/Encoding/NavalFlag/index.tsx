@@ -13,7 +13,7 @@ function NavalFlag() {
             <img
               className={styles.flagImage}
               src={`data:image/svg+xml,${encodeURIComponent(
-                entry.image.render()
+                entry.image.render(),
               )}`}
               alt={entry.character}
             />

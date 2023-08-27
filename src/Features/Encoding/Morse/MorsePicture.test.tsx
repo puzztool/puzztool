@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { it } from "vitest";
 import MorsePicture from "./MorsePicture";
 
 it("renders without crashing", () => {

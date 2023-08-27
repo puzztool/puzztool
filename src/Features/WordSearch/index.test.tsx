@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
+import { it } from "vitest";
 import configureStore from "../../Store/configureStore";
 import WordSearch from ".";
 
@@ -14,6 +15,6 @@ it("renders without crashing", () => {
       <HelmetProvider>
         <WordSearch />
       </HelmetProvider>
-    </Provider>
+    </Provider>,
   );
 });

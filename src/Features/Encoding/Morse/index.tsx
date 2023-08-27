@@ -16,9 +16,9 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-interface Props extends ConnectedProps<typeof connector> {}
+type Props = ConnectedProps<typeof connector>;
 
-function Morse(props: Props) {
+function MorseInner(props: Props) {
   return (
     <PuzzToolPage title="Morse Code">
       <Tabs
@@ -37,4 +37,5 @@ function Morse(props: Props) {
   );
 }
 
-export default connector(Morse);
+const Morse = connector(MorseInner);
+export default Morse;

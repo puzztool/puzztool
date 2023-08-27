@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { it } from "vitest";
 import CaesarList from "./CaesarList";
 
 it("renders without crashing", () => {
