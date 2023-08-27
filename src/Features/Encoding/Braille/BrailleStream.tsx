@@ -37,7 +37,7 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector>
+type Props = ConnectedProps<typeof connector>;
 
 function BrailleStreamInner(props: Props) {
   useEffect(() => {

@@ -12,6 +12,6 @@ it("renders without crashing", () => {
     <SemaphoreCheckbox
       character={new Character()}
       direction={Direction.None}
-    />
+    />,
   );
 });

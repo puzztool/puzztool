@@ -5,7 +5,5 @@ import SemaphorePicture from "./SemaphorePicture";
 it("renders without crashing", () => {
   const div = document.createElement("div");
   const root = createRoot(div);
-  root.render(
-    <SemaphorePicture character={new Character()} width={100} />
-  );
+  root.render(<SemaphorePicture character={new Character()} width={100} />);
 });

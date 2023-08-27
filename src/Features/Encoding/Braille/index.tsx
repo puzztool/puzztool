@@ -16,7 +16,7 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector>
+type Props = ConnectedProps<typeof connector>;
 
 function BrailleInner(props: Props) {
   return (

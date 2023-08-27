@@ -37,7 +37,7 @@ const mapDispatchToProps = {
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector>
+type Props = ConnectedProps<typeof connector>;
 
 function SemaphoreStreamInner(props: Props) {
   useEffect(() => {
@@ -80,7 +80,7 @@ function SemaphoreStreamInner(props: Props) {
         const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
         onCharacterChange(
           !character.hasDirection(direction) ? "add" : "remove",
-          direction
+          direction,
         );
       }
 

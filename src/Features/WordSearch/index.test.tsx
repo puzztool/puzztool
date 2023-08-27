@@ -14,6 +14,6 @@ it("renders without crashing", () => {
       <HelmetProvider>
         <WordSearch />
       </HelmetProvider>
-    </Provider>
+    </Provider>,
   );
 });

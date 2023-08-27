@@ -11,6 +11,6 @@ it("renders without crashing", () => {
   root.render(
     <Provider store={store}>
       <AutokeyStream prompt="Type here" />
-    </Provider>
+    </Provider>,
   );
 });

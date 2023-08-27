@@ -8,6 +8,6 @@ it("renders without crashing", () => {
   root.render(
     <HelmetProvider>
       <PuzzToolPage title="Test Page">Hi!</PuzzToolPage>
-    </HelmetProvider>
+    </HelmetProvider>,
   );
 });

@@ -44,10 +44,10 @@ function ResistorInputInner(props: Props) {
 
   const bands = props.bands.map((value) => Resistor.colorTable[value]);
   const colorsWithValue = Resistor.colorTable.filter((color) =>
-    color.hasValue()
+    color.hasValue(),
   );
   const colorsWithTolerance = Resistor.colorTable.filter((color) =>
-    color.hasTolerance()
+    color.hasTolerance(),
   );
 
   return (

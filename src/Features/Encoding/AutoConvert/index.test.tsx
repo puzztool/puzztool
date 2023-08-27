@@ -14,6 +14,6 @@ it("renders without crashing", () => {
       <HelmetProvider>
         <AutoConvert />
       </HelmetProvider>
-    </Provider>
+    </Provider>,
   );
 });

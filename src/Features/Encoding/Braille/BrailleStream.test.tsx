@@ -11,6 +11,6 @@ it("renders without crashing", () => {
   root.render(
     <Provider store={store}>
       <BrailleStream />
-    </Provider>
+    </Provider>,
   );
 });

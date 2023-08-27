@@ -7,7 +7,11 @@ interface Props {
   title: string;
 }
 
-function PuzzToolPage({ children, description, title }: PropsWithChildren<Props>) {
+function PuzzToolPage({
+  children,
+  description,
+  title,
+}: PropsWithChildren<Props>) {
   function renderDescription() {
     if (description) {
       return <div>{description}</div>;

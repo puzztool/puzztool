@@ -2,7 +2,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import viteTsconfigPaths from "vite-tsconfig-paths";
-import eslint from 'vite-plugin-eslint'
+import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
 import svgrPlugin from "vite-plugin-svgr";
 
@@ -51,12 +51,10 @@ export default defineConfig({
   ],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
     coverage: {
-      reporter: ['text', 'html'],
-      exclude: [
-        'node_modules/',
-      ],
+      reporter: ["text", "html"],
+      exclude: ["node_modules/"],
     },
   },
 });

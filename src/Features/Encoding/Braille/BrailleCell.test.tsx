@@ -5,7 +5,5 @@ import BrailleCell from "./BrailleCell";
 it("renders without crashing", () => {
   const div = document.createElement("div");
   const root = createRoot(div);
-  root.render(
-    <BrailleCell character={new Character()} mask={Dot.None} />
-  );
+  root.render(<BrailleCell character={new Character()} mask={Dot.None} />);
 });

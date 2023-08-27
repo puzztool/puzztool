@@ -8,6 +8,6 @@ it("renders without crashing", () => {
   root.render(
     <HelmetProvider>
       <Settings />
-    </HelmetProvider>
+    </HelmetProvider>,
   );
 });

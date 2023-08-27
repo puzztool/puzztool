@@ -5,7 +5,5 @@ import BraillePicture from "./BraillePicture";
 it("renders without crashing", () => {
   const div = document.createElement("div");
   const root = createRoot(div);
-  root.render(
-    <BraillePicture character={new Character()} width={100} />
-  );
+  root.render(<BraillePicture character={new Character()} width={100} />);
 });
