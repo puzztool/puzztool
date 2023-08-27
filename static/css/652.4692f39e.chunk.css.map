@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/652.4692f39e.chunk.css","mappings":"AAAA,yBACE,aACA,YACA,SAGF,qBAGE,YADA,gBADA,cAEA","sources":["Features/Pigpen/index.module.scss"],"sourcesContent":[".container {\n  display: grid;\n  height: 100%;\n  margin: 0;\n}\n\n.image {\n  max-width: 100%;\n  max-height: 80vh;\n  margin: auto;\n}\n"],"names":[],"sourceRoot":""}
