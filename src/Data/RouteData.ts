@@ -28,7 +28,7 @@ export function getCategories(): RouteCategory[] {
     {
       children: [
         {
-          description: " A Vignere cipher which uses plaintext as the key",
+          description: " A Vigenere cipher which uses plaintext as the key",
           name: "Autokey",
           url: "/autokey",
         },
@@ -39,7 +39,7 @@ export function getCategories(): RouteCategory[] {
         },
         {
           description: "Letters are mapped based on a key word",
-          name: "Vignere",
+          name: "Vigenere",
           url: "/vigenere",
         },
       ],
