@@ -1,10 +1,8 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import { BrailleCharacter as Character } from "puzzle-lib";
-import { it } from "vitest";
+import { test } from "vitest";
 import BrailleCharacter from "./BrailleCharacter";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  const root = createRoot(div);
-  root.render(<BrailleCharacter character={new Character()} />);
+test("renders without crashing", () => {
+  render(<BrailleCharacter character={new Character()} />);
 });
