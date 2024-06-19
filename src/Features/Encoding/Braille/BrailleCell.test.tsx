@@ -1,10 +1,8 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import { BrailleCharacter as Character, BrailleDot as Dot } from "puzzle-lib";
-import { it } from "vitest";
+import { test } from "vitest";
 import BrailleCell from "./BrailleCell";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  const root = createRoot(div);
-  root.render(<BrailleCell character={new Character()} mask={Dot.None} />);
+test("renders without crashing", () => {
+  render(<BrailleCell character={new Character()} mask={Dot.None} />);
 });
