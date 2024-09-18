@@ -1,16 +1,14 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
 } from "puzzle-lib";
-import { it } from "vitest";
+import { test } from "vitest";
 import SemaphoreCharacter from "./SemaphoreCharacter";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
+test("renders without crashing", () => {
   const character = new Character();
   character.addDirection(Direction.North);
   character.addDirection(Direction.West);
-  const root = createRoot(div);
-  root.render(<SemaphoreCharacter character={character} />);
+  render(<SemaphoreCharacter character={character} />);
 });

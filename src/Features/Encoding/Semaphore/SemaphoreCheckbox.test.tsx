@@ -1,15 +1,13 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import {
   SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
 } from "puzzle-lib";
-import { it } from "vitest";
+import { test } from "vitest";
 import SemaphoreCheckbox from "./SemaphoreCheckbox";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  const root = createRoot(div);
-  root.render(
+test("renders without crashing", () => {
+  render(
     <SemaphoreCheckbox
       character={new Character()}
       direction={Direction.None}
