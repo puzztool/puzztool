@@ -7,7 +7,11 @@ it("renders without crashing", () => {
   const div = document.createElement("div");
   const root = createRoot(div);
   root.render(
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}>
       <App />
     </BrowserRouter>,
   );
