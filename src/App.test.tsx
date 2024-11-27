@@ -11,7 +11,8 @@ it("renders without crashing", () => {
       future={{
         v7_relativeSplatPath: true,
         v7_startTransition: true,
-      }}>
+      }}
+    >
       <App />
     </BrowserRouter>,
   );
