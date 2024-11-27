@@ -13,6 +13,22 @@ import styles from "./App.module.scss";
 const loadingDelay = 200;
 const loadingTimeout = 10000;
 
+const Autokey = lazy(() => import("./Features/Cipher/Autokey"));
+const Caesar = lazy(() => import("./Features/Cipher/Caesar"));
+const Vigenere = lazy(() => import("./Features/Cipher/Vigenere"));
+const AutoConvert = lazy(() => import("./Features/Encoding/AutoConvert"));
+const Braille = lazy(() => import("./Features/Encoding/Braille"));
+const Character = lazy(() => import("./Features/Encoding/Character"));
+const Morse = lazy(() => import("./Features/Encoding/Morse"));
+const Nato = lazy(() => import("./Features/Encoding/Nato"));
+const NavalFlag = lazy(() => import("./Features/Encoding/NavalFlag"));
+const Semaphore = lazy(() => import("./Features/Encoding/Semaphore"));
+const Home = lazy(() => import("./Features/Home"));
+const Pigpen = lazy(() => import("./Features/Pigpen"));
+const Resistor = lazy(() => import("./Features/Resistor"));
+const Settings = lazy(() => import("./Features/Settings"));
+const WordSearch = lazy(() => import("./Features/WordSearch"));
+
 function ErrorFallback(props: FallbackProps) {
   return (
     <div className={styles.loadError}>
@@ -27,22 +43,6 @@ function ErrorFallback(props: FallbackProps) {
 function App() {
   const [resetCount, setResetCount] = useState(0);
   const location = useLocation();
-
-  const Autokey = lazy(() => import("./Features/Cipher/Autokey"));
-  const Caesar = lazy(() => import("./Features/Cipher/Caesar"));
-  const Vigenere = lazy(() => import("./Features/Cipher/Vigenere"));
-  const AutoConvert = lazy(() => import("./Features/Encoding/AutoConvert"));
-  const Braille = lazy(() => import("./Features/Encoding/Braille"));
-  const Character = lazy(() => import("./Features/Encoding/Character"));
-  const Morse = lazy(() => import("./Features/Encoding/Morse"));
-  const Nato = lazy(() => import("./Features/Encoding/Nato"));
-  const NavalFlag = lazy(() => import("./Features/Encoding/NavalFlag"));
-  const Semaphore = lazy(() => import("./Features/Encoding/Semaphore"));
-  const Home = lazy(() => import("./Features/Home"));
-  const Pigpen = lazy(() => import("./Features/Pigpen"));
-  const Resistor = lazy(() => import("./Features/Resistor"));
-  const Settings = lazy(() => import("./Features/Settings"));
-  const WordSearch = lazy(() => import("./Features/WordSearch"));
 
   function onErrorBoundaryReset() {
     setResetCount(resetCount + 1);

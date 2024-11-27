@@ -16,7 +16,13 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter basename={baseUrl}>
+        <BrowserRouter
+          basename={baseUrl}
+          future={{
+            v7_relativeSplatPath: true,
+            v7_startTransition: true,
+          }}
+        >
           <App />
         </BrowserRouter>
       </PersistGate>

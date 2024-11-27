@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -23,12 +23,13 @@ const configurePuzzToolStore = () => {
 
   const store = configureStore({
     reducer: persistedReducer,
-    middleware: getDefaultMiddleware({
-      serializableCheck: {
-        // Ignore actions for "redux-persist"
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          // Ignore actions for "redux-persist"
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
   });
 
   const persistor = persistStore(store);
