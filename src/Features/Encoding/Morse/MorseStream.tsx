@@ -192,24 +192,6 @@ function MorseStreamInner(props: Props) {
           <pre>{plainText() || " "}</pre>
         </Card.Body>
       </Card>
-      <Card className={styles.output}>
-        <Card.Header>Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertText() || " "}</pre>
-        </Card.Body>
-      </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left</Card.Header>
-        <Card.Body>
-          <pre>{reverseText() || " "}</pre>
-        </Card.Body>
-      </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertReverseText() || " "}</pre>
-        </Card.Body>
-      </Card>
       <ButtonToolbar className={styles.inputCommands}>
         <ButtonGroup>
           <Button onClick={onDotClick} variant="primary">
@@ -235,6 +217,24 @@ function MorseStreamInner(props: Props) {
           </Button>
         </ButtonGroup>
       </ButtonToolbar>
+      <Card className={styles.output}>
+        <Card.Header>Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>{invertText() || " "}</pre>
+        </Card.Body>
+      </Card>
+      <Card className={styles.output}>
+        <Card.Header>Right to Left</Card.Header>
+        <Card.Body>
+          <pre>{reverseText() || " "}</pre>
+        </Card.Body>
+      </Card>
+      <Card className={styles.output}>
+        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>{invertReverseText() || " "}</pre>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
