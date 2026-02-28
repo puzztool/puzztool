@@ -34,9 +34,19 @@ function MorseStreamInner(props: Props) {
 
       // Chrome won't trigger keypress for any keys that can invoke browser
       // actions.
-      if (ev.key === "Backspace" || ev.keyCode === 8) {
-        // Backspace
-        props.backspace();
+      if (
+        ev.key === "Backspace" ||
+        ev.key === "Delete" ||
+        ev.keyCode === 8 ||
+        ev.keyCode === 46
+      ) {
+        const count = Math.max(
+          1,
+          window.getSelection()?.toString().length ?? 0,
+        );
+        for (let i = 0; i < count; i++) {
+          props.backspace();
+        }
         handled = true;
       }
 
@@ -152,6 +162,41 @@ function MorseStreamInner(props: Props) {
     props.append(Character.DASH);
   }
 
+  function partialMatchHint(): string | null {
+    // Extract the in-progress morse segment: everything after the last divider
+    const lastDiv = Math.max(
+      props.stream.lastIndexOf(MorseString.CHARACTER_DIVIDER),
+      props.stream.lastIndexOf(MorseString.WORD_DIVIDER),
+    );
+    const morse = lastDiv >= 0 ? props.stream.slice(lastDiv + 1) : props.stream;
+    if (!morse) {
+      return null;
+    }
+
+    const char = new Character(morse);
+    const exact = char.getExactMatches();
+    const potential = char.getPotentialMatches();
+    if (potential.length === 0) {
+      return null;
+    }
+
+    const exactSet = new Set(exact.map((e) => e.toString()));
+    const potentialOnly = potential.filter((e) => !exactSet.has(e.toString()));
+
+    const MAX_POTENTIAL = 6;
+    const shownPotential = potentialOnly.slice(0, MAX_POTENTIAL);
+    const hasMore = potentialOnly.length > MAX_POTENTIAL;
+
+    const displayMorse = morse.replace(/\./g, "\u00b7").replace(/-/g, "\uff0d");
+    const parts = [
+      ...exact.map((e) => e.toString()),
+      ...shownPotential.map((e) => e.toString() + "?"),
+      ...(hasMore ? ["\u2026"] : []),
+    ];
+
+    return `${displayMorse} \u2192 ${parts.join("  ")}`;
+  }
+
   function onNextClick() {
     if (props.stream.length > 0) {
       const lastCharacter = props.stream.slice(-1);
@@ -165,6 +210,8 @@ function MorseStreamInner(props: Props) {
     }
   }
 
+  const hint = partialMatchHint();
+
   return (
     <div className={styles.container}>
       <Card className={styles.morseOutput}>
@@ -174,30 +221,13 @@ function MorseStreamInner(props: Props) {
             {codeText()}
             <span className="blinking-cursor">|</span>
           </pre>
+          {hint !== null && <div className={styles.partialMatches}>{hint}</div>}
         </Card.Body>
       </Card>
       <Card className={styles.output}>
         <Card.Header>Plaintext</Card.Header>
         <Card.Body>
           <pre>{plainText() || " "}</pre>
-        </Card.Body>
-      </Card>
-      <Card className={styles.output}>
-        <Card.Header>Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertText() || " "}</pre>
-        </Card.Body>
-      </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left</Card.Header>
-        <Card.Body>
-          <pre>{reverseText() || " "}</pre>
-        </Card.Body>
-      </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertReverseText() || " "}</pre>
         </Card.Body>
       </Card>
       <ButtonToolbar className={styles.inputCommands}>
@@ -225,6 +255,24 @@ function MorseStreamInner(props: Props) {
           </Button>
         </ButtonGroup>
       </ButtonToolbar>
+      <Card className={styles.output}>
+        <Card.Header>Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>{invertText() || " "}</pre>
+        </Card.Body>
+      </Card>
+      <Card className={styles.output}>
+        <Card.Header>Right to Left</Card.Header>
+        <Card.Body>
+          <pre>{reverseText() || " "}</pre>
+        </Card.Body>
+      </Card>
+      <Card className={styles.output}>
+        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
+        <Card.Body>
+          <pre>{invertReverseText() || " "}</pre>
+        </Card.Body>
+      </Card>
     </div>
   );
 }
