@@ -68,7 +68,7 @@ function getColumnClassName(shouldHighlight: boolean) {
 }
 
 function WordSearchOutput(props: Props) {
-  const gridInputText = props.gridInputText.trim();
+  const gridInputText = props.gridInputText.trimEnd();
   if (!gridInputText) {
     return null;
   }
