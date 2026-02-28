@@ -1,16 +1,13 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
-import { it } from "vitest";
+import { test } from "vitest";
 import configureStore from "../../../Store/configureStore";
 import Caesar from ".";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
+test("renders without crashing", () => {
   const { store } = configureStore();
-
-  const root = createRoot(div);
-  root.render(
+  render(
     <Provider store={store}>
       <HelmetProvider>
         <Caesar />

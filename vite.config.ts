@@ -49,6 +49,7 @@ export default defineConfig({
   ],
   test: {
     environment: "jsdom",
+    setupFiles: ["./src/test-setup.ts"],
     coverage: {
       reporter: ["text", "html"],
       exclude: ["node_modules/"],

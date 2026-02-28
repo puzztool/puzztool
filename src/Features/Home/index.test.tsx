@@ -1,11 +1,10 @@
-import { createRoot } from "react-dom/client";
+import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { it } from "vitest";
+import { test } from "vitest";
 import Home from ".";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  const element = (
+test("renders without crashing", () => {
+  render(
     <BrowserRouter
       future={{
         v7_relativeSplatPath: true,
@@ -13,9 +12,6 @@ it("renders without crashing", () => {
       }}
     >
       <Home />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
-
-  const root = createRoot(div);
-  root.render(element);
 });
