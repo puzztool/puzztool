@@ -162,6 +162,41 @@ function MorseStreamInner(props: Props) {
     props.append(Character.DASH);
   }
 
+  function partialMatchHint(): string | null {
+    // Extract the in-progress morse segment: everything after the last divider
+    const lastDiv = Math.max(
+      props.stream.lastIndexOf(MorseString.CHARACTER_DIVIDER),
+      props.stream.lastIndexOf(MorseString.WORD_DIVIDER),
+    );
+    const morse = lastDiv >= 0 ? props.stream.slice(lastDiv + 1) : props.stream;
+    if (!morse) {
+      return null;
+    }
+
+    const char = new Character(morse);
+    const exact = char.getExactMatches();
+    const potential = char.getPotentialMatches();
+    if (potential.length === 0) {
+      return null;
+    }
+
+    const exactSet = new Set(exact.map((e) => e.toString()));
+    const potentialOnly = potential.filter((e) => !exactSet.has(e.toString()));
+
+    const MAX_POTENTIAL = 6;
+    const shownPotential = potentialOnly.slice(0, MAX_POTENTIAL);
+    const hasMore = potentialOnly.length > MAX_POTENTIAL;
+
+    const displayMorse = morse.replace(/\./g, "\u00b7").replace(/-/g, "\uff0d");
+    const parts = [
+      ...exact.map((e) => e.toString()),
+      ...shownPotential.map((e) => e.toString() + "?"),
+      ...(hasMore ? ["\u2026"] : []),
+    ];
+
+    return `${displayMorse} \u2192 ${parts.join("  ")}`;
+  }
+
   function onNextClick() {
     if (props.stream.length > 0) {
       const lastCharacter = props.stream.slice(-1);
@@ -175,6 +210,8 @@ function MorseStreamInner(props: Props) {
     }
   }
 
+  const hint = partialMatchHint();
+
   return (
     <div className={styles.container}>
       <Card className={styles.morseOutput}>
@@ -184,6 +221,9 @@ function MorseStreamInner(props: Props) {
             {codeText()}
             <span className="blinking-cursor">|</span>
           </pre>
+          {hint !== null && (
+            <div className={styles.partialMatches}>{hint}</div>
+          )}
         </Card.Body>
       </Card>
       <Card className={styles.output}>
