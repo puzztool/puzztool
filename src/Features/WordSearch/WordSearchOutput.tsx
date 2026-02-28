@@ -1,14 +1,15 @@
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import { WordSearchSolver, WordSearchDirection } from "puzzle-lib";
 import styles from "./WordSearchOutput.module.scss";
 
 interface Props {
+  canBend: boolean;
   gridInputText: string;
+  onToggleShowUnused: (value: boolean) => void;
+  showUnused: boolean;
   useCardinals: boolean;
   useDiagonals: boolean;
-  canBend: boolean;
   wordListInputText: string;
 }
 
@@ -69,8 +70,6 @@ function getColumnClassName(shouldHighlight: boolean) {
 }
 
 function WordSearchOutput(props: Props) {
-  const [showUnused, setShowUnused] = useState(false);
-
   const gridInputText = props.gridInputText.trimEnd();
   if (!gridInputText) {
     return null;
@@ -126,12 +125,12 @@ function WordSearchOutput(props: Props) {
       {results.length > 0 && (
         <div className={styles.unusedLettersSection}>
           <Button
-            onClick={() => setShowUnused((prev) => !prev)}
+            onClick={() => props.onToggleShowUnused(!props.showUnused)}
             variant="outline-secondary"
           >
-            {showUnused ? "Hide Unused Letters" : "Show Unused Letters"}
+            {props.showUnused ? "Hide Unused Letters" : "Show Unused Letters"}
           </Button>
-          {showUnused && (
+          {props.showUnused && (
             <div className={styles.unusedLetters}>
               {unusedLetters || "(none)"}
             </div>
