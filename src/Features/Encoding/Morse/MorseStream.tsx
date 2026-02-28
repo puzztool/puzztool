@@ -34,9 +34,19 @@ function MorseStreamInner(props: Props) {
 
       // Chrome won't trigger keypress for any keys that can invoke browser
       // actions.
-      if (ev.key === "Backspace" || ev.keyCode === 8) {
-        // Backspace
-        props.backspace();
+      if (
+        ev.key === "Backspace" ||
+        ev.key === "Delete" ||
+        ev.keyCode === 8 ||
+        ev.keyCode === 46
+      ) {
+        const count = Math.max(
+          1,
+          window.getSelection()?.toString().length ?? 0,
+        );
+        for (let i = 0; i < count; i++) {
+          props.backspace();
+        }
         handled = true;
       }
 
