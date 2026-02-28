@@ -221,9 +221,7 @@ function MorseStreamInner(props: Props) {
             {codeText()}
             <span className="blinking-cursor">|</span>
           </pre>
-          {hint !== null && (
-            <div className={styles.partialMatches}>{hint}</div>
-          )}
+          {hint !== null && <div className={styles.partialMatches}>{hint}</div>}
         </Card.Body>
       </Card>
       <Card className={styles.output}>
