@@ -1,7 +1,8 @@
 import {
-  BrailleCharacter as Character,
   BrailleDot as Dot,
-  BrailleStream as Stream,
+  decodeBrailleStream,
+  lookupBrailleEncoding,
+  toggleBrailleDot,
 } from "puzzle-lib";
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
@@ -109,9 +110,7 @@ function BrailleStreamInner(props: Props) {
   }
 
   function onCharacterClick(mask: Dot) {
-    const character = new Character(props.encoding);
-    character.toggle(mask);
-    props.setEncoding(character.encoding);
+    props.setEncoding(toggleBrailleDot(props.encoding, mask));
   }
 
   function onClearClick() {
@@ -119,15 +118,15 @@ function BrailleStreamInner(props: Props) {
   }
 
   function onNextClick() {
-    const character = new Character(props.encoding);
-    if (character.valid()) {
-      props.append(character.valueOf());
+    const lookup = lookupBrailleEncoding(props.encoding);
+    if (lookup.exactString) {
+      props.append(props.encoding);
     } else {
       props.space();
     }
   }
 
-  const character = new Character(props.encoding);
+  const displayStr = lookupBrailleEncoding(props.encoding).exactString;
 
   return (
     <div className={styles.container}>
@@ -138,11 +137,11 @@ function BrailleStreamInner(props: Props) {
             <Row>
               <Col xs="auto" sm="auto" md="auto">
                 <BrailleCharacter
-                  character={character}
+                  encoding={props.encoding}
                   onClick={onCharacterClick}
                 />
               </Col>
-              <Col className={styles.view}>{character.toString() || "?"}</Col>
+              <Col className={styles.view}>{displayStr || "?"}</Col>
             </Row>
             <Row>
               <Col>
@@ -168,7 +167,7 @@ function BrailleStreamInner(props: Props) {
         <Card.Header>Output</Card.Header>
         <Card.Body>
           <pre className={styles.output}>
-            {new Stream(props.stream).toString()}
+            {decodeBrailleStream(props.stream)}
             <span className="blinking-cursor">|</span>
           </pre>
         </Card.Body>

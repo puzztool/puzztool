@@ -1,4 +1,12 @@
-import { ResistorColorEntry as Color, Resistor } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib";
+import {
+  getResistorDisplayValue,
+  getResistorValue as computeResistorValue,
+  hasResistorTolerance,
+  hasResistorValue,
+  INVALID_RESISTOR,
+  RESISTOR_COLOR_TABLE,
+} from "puzzle-lib";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Card from "react-bootstrap/Card";
@@ -19,15 +27,15 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
-function getResistorValue(bands: (Color | undefined)[]) {
+function getResistorValueDisplay(bands: (Color | undefined)[]) {
   // The last band is a tolerance so we need to calculate the value without it.
   const colors = bands.slice(0, -1).filter((band) => !!band) as Color[];
 
-  const value = Resistor.getValue(colors);
-  if (value === Resistor.INVALID_RESISTOR) {
+  const value = computeResistorValue(colors);
+  if (value === INVALID_RESISTOR) {
     return "Invalid Resistor Colors";
   } else {
-    return `${Resistor.getDisplayValue(value)} \u2126 \u00b1 ${
+    return `${getResistorDisplayValue(value)} \u2126 \u00b1 ${
       bands[bands.length - 1]!.toleranceInPercent
     }%`;
   }
@@ -35,20 +43,26 @@ function getResistorValue(bands: (Color | undefined)[]) {
 
 function ResistorInputInner(props: Props) {
   function onColorChange(bandIndex: number, color?: Color) {
-    const colorIndex = color ? Resistor.colorTable.indexOf(color) : -1;
+    const colorIndex = color
+      ? RESISTOR_COLOR_TABLE.indexOf(
+          color as (typeof RESISTOR_COLOR_TABLE)[number],
+        )
+      : -1;
     props.setBand({
       bandIndex,
       colorIndex,
     });
   }
 
-  const bands = props.bands.map((value) => Resistor.colorTable[value]);
-  const colorsWithValue = Resistor.colorTable.filter((color) =>
-    color.hasValue(),
+  const bands = props.bands.map((value) => RESISTOR_COLOR_TABLE[value]);
+  const colorsWithValue = RESISTOR_COLOR_TABLE.filter((color) =>
+    hasResistorValue(color),
   );
-  const colorsWithTolerance = Resistor.colorTable.filter((color) =>
-    color.hasTolerance(),
+  const colorsWithTolerance = RESISTOR_COLOR_TABLE.filter((color) =>
+    hasResistorTolerance(color),
   );
+
+  const noneColor: Color = { name: "None", colorCode: "", multiplier: 0 };
 
   return (
     <div className={styles.container}>
@@ -64,7 +78,7 @@ function ResistorInputInner(props: Props) {
                 <ResistorColorSelector
                   index={0}
                   title="First Band"
-                  colors={colorsWithValue}
+                  colors={[...colorsWithValue]}
                   onChange={onColorChange}
                 />
               </ButtonGroup>
@@ -72,7 +86,7 @@ function ResistorInputInner(props: Props) {
                 <ResistorColorSelector
                   index={1}
                   title="Second Band"
-                  colors={colorsWithValue}
+                  colors={[...colorsWithValue]}
                   onChange={onColorChange}
                 />
               </ButtonGroup>
@@ -80,7 +94,7 @@ function ResistorInputInner(props: Props) {
                 <ResistorColorSelector
                   index={2}
                   title="Third Band"
-                  colors={Resistor.colorTable}
+                  colors={[...RESISTOR_COLOR_TABLE]}
                   onChange={onColorChange}
                 />
               </ButtonGroup>
@@ -88,7 +102,7 @@ function ResistorInputInner(props: Props) {
                 <ResistorColorSelector
                   index={3}
                   title="Fourth Band"
-                  colors={[new Color("None", "", 0), ...Resistor.colorTable]}
+                  colors={[noneColor, ...RESISTOR_COLOR_TABLE]}
                   onChange={onColorChange}
                 />
               </ButtonGroup>
@@ -96,7 +110,7 @@ function ResistorInputInner(props: Props) {
                 <ResistorColorSelector
                   index={4}
                   title="Tolerance Band"
-                  colors={colorsWithTolerance}
+                  colors={[...colorsWithTolerance]}
                   onChange={onColorChange}
                 />
               </ButtonGroup>
@@ -106,7 +120,7 @@ function ResistorInputInner(props: Props) {
       </Card>
       <Card className={styles.output}>
         <Card.Header>Output</Card.Header>
-        <Card.Body>{getResistorValue(bands)}</Card.Body>
+        <Card.Body>{getResistorValueDisplay(bands)}</Card.Body>
       </Card>
     </div>
   );

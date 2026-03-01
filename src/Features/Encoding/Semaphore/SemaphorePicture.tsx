@@ -1,17 +1,48 @@
-import { SemaphoreCharacter as Character } from "puzzle-lib";
+import {
+  SemaphoreDirection,
+  SemaphoreEncoding,
+  hasSemaphoreDirection,
+  semaphoreDirectionToDegrees,
+} from "puzzle-lib";
 
 interface Props {
   width: number;
-  character: Character;
+  encoding: SemaphoreEncoding;
 }
 
-function getFlagAngles(character: Character) {
+const ALL_DIRECTIONS = [
+  SemaphoreDirection.North,
+  SemaphoreDirection.NorthEast,
+  SemaphoreDirection.East,
+  SemaphoreDirection.SouthEast,
+  SemaphoreDirection.South,
+  SemaphoreDirection.SouthWest,
+  SemaphoreDirection.West,
+  SemaphoreDirection.NorthWest,
+];
+
+function getDegrees(
+  encoding: SemaphoreEncoding,
+): [number | undefined, number | undefined] {
+  const degrees: number[] = [];
+  for (const dir of ALL_DIRECTIONS) {
+    if (hasSemaphoreDirection(encoding, dir)) {
+      const deg = semaphoreDirectionToDegrees(dir);
+      if (deg !== undefined) {
+        degrees.push(deg);
+      }
+    }
+  }
+  return [degrees[0], degrees[1]];
+}
+
+function getFlagAngles(encoding: SemaphoreEncoding) {
   const angles = {
     left: -1,
     right: -1,
   };
 
-  const [first, second] = character.getDegrees();
+  const [first, second] = getDegrees(encoding);
 
   if (first !== undefined) {
     if (second === undefined) {
@@ -40,7 +71,7 @@ function getFlagAngles(character: Character) {
 }
 
 function SemaphorePicture(props: Props) {
-  const { left, right } = getFlagAngles(props.character);
+  const { left, right } = getFlagAngles(props.encoding);
 
   function getLeftFlag() {
     if (left >= 0) {

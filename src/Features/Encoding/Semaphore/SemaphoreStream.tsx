@@ -1,7 +1,10 @@
 import {
-  SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
-  SemaphoreDegrees as Degrees,
+  addSemaphoreDirection,
+  degreesToSemaphoreDirection,
+  hasSemaphoreDirection,
+  lookupSemaphoreEncoding,
+  removeSemaphoreDirection,
 } from "puzzle-lib";
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
@@ -18,20 +21,20 @@ import {
   append,
   backspace,
   clear,
-  setDirections,
+  setEncoding,
   space,
 } from "./semaphoreEncodingSlice";
 import styles from "./SemaphoreStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
-  directions: state.encoding.semaphore.directions,
+  encoding: state.encoding.semaphore.encoding,
   stream: state.encoding.semaphore.stream,
 });
 const mapDispatchToProps = {
   append,
   backspace,
   clear,
-  setDirections,
+  setEncoding,
   space,
 };
 
@@ -84,14 +87,12 @@ function SemaphoreStreamInner(props: Props) {
         handled = true;
       } else if (ev.charCode >= 49 && ev.charCode <= 56) {
         // '1' through '8'
-        const character = new Character();
-        character.directions = props.directions;
-
-        const direction = Degrees.FromDegrees((ev.charCode - 49) * 45);
+        const direction = degreesToSemaphoreDirection((ev.charCode - 49) * 45);
         onCharacterChange(
-          !character.hasDirection(direction) ? "add" : "remove",
+          !hasSemaphoreDirection(props.encoding, direction) ? "add" : "remove",
           direction,
         );
+        handled = true;
       }
 
       if (handled) {
@@ -113,23 +114,18 @@ function SemaphoreStreamInner(props: Props) {
   }
 
   function onCharacterChange(type: string, direction: Direction) {
-    const character = new Character();
-    character.directions = props.directions;
-
     switch (type) {
       case "add":
-        character.addDirection(direction);
+        props.setEncoding(addSemaphoreDirection(props.encoding, direction));
         break;
 
       case "remove":
-        character.removeDirection(direction);
+        props.setEncoding(removeSemaphoreDirection(props.encoding, direction));
         break;
 
       default:
         throw new Error("Invalid change type");
     }
-
-    props.setDirections(character.directions);
   }
 
   function onClearClick() {
@@ -137,19 +133,15 @@ function SemaphoreStreamInner(props: Props) {
   }
 
   function onNextClick() {
-    const character = new Character();
-    character.directions = props.directions;
-
-    const matches = character.getExactMatches();
-    if (matches.length > 0) {
-      props.append(matches[0].toString());
+    const result = lookupSemaphoreEncoding(props.encoding);
+    if (result.exact.length > 0) {
+      props.append(result.exact[0].toString());
     } else {
       props.space();
     }
   }
 
-  const character = new Character();
-  character.directions = props.directions;
+  const displayText = lookupSemaphoreEncoding(props.encoding).exactString;
 
   return (
     <div className={styles.container}>
@@ -160,12 +152,12 @@ function SemaphoreStreamInner(props: Props) {
             <Row>
               <Col xs="auto" sm="auto" md="auto">
                 <SemaphoreCharacter
-                  character={character}
+                  encoding={props.encoding}
                   onChange={onCharacterChange}
                 />
               </Col>
               <Col>
-                <div className={styles.view}>{character.toString() || "?"}</div>
+                <div className={styles.view}>{displayText || "?"}</div>
               </Col>
             </Row>
             <Row>

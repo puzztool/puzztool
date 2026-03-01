@@ -1,8 +1,8 @@
-import { BrailleCharacter as Character, BrailleDot as Dot } from "puzzle-lib";
+import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib";
 
 interface Props {
   width: number;
-  character: Character;
+  encoding: BrailleEncoding;
 }
 
 function BraillePicture(props: Props) {
@@ -10,7 +10,9 @@ function BraillePicture(props: Props) {
     return (
       <use
         transform={`translate(${x}, ${y})`}
-        xlinkHref={props.character.get(dot) ? "#FullDot" : "#EmptyDot"}
+        xlinkHref={
+          getBrailleDot(props.encoding, dot) ? "#FullDot" : "#EmptyDot"
+        }
       />
     );
   }

@@ -1,10 +1,10 @@
-import { NavalFlags } from "puzzle-lib";
+import { NAVAL_FLAGS } from "puzzle-lib";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import ReferenceList from "../../../Common/ReferenceList";
 import styles from "./index.module.scss";
 
 function NavalFlag() {
-  const characters = NavalFlags.instance.entries;
+  const characters = NAVAL_FLAGS;
   return (
     <PuzzToolPage title="Naval Flags">
       <ReferenceList>

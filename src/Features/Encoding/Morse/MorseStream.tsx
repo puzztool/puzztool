@@ -1,4 +1,15 @@
-import { MorseCharacter as Character, MorseString } from "puzzle-lib";
+import {
+  MORSE_DOT,
+  MORSE_DASH,
+  MORSE_CHARACTER_DIVIDER,
+  MORSE_WORD_DIVIDER,
+  decodeMorse,
+  invertMorse,
+  reverseMorse,
+  invertAndReverseMorse,
+  lookupMorseEncoding,
+  parseMorseString,
+} from "puzzle-lib";
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -128,22 +139,19 @@ function MorseStreamInner(props: Props) {
   }
 
   function plainText(): string {
-    return new MorseString(props.stream).toString();
+    return decodeMorse(props.stream);
   }
 
   function invertText(): string {
-    return new MorseString(props.stream).invertDotsAndDashes().toString();
+    return invertMorse(props.stream);
   }
 
   function reverseText(): string {
-    return new MorseString(props.stream).reverse().toString();
+    return reverseMorse(props.stream);
   }
 
   function invertReverseText(): string {
-    return new MorseString(props.stream)
-      .invertDotsAndDashes()
-      .reverse()
-      .toString();
+    return invertAndReverseMorse(props.stream);
   }
 
   function onBackspaceClick() {
@@ -155,33 +163,34 @@ function MorseStreamInner(props: Props) {
   }
 
   function onDotClick() {
-    props.append(Character.DOT);
+    props.append(MORSE_DOT);
   }
 
   function onDashClick() {
-    props.append(Character.DASH);
+    props.append(MORSE_DASH);
   }
 
   function partialMatchHint(): string | null {
     // Extract the in-progress morse segment: everything after the last divider
     const lastDiv = Math.max(
-      props.stream.lastIndexOf(MorseString.CHARACTER_DIVIDER),
-      props.stream.lastIndexOf(MorseString.WORD_DIVIDER),
+      props.stream.lastIndexOf(MORSE_CHARACTER_DIVIDER),
+      props.stream.lastIndexOf(MORSE_WORD_DIVIDER),
     );
     const morse = lastDiv >= 0 ? props.stream.slice(lastDiv + 1) : props.stream;
     if (!morse) {
       return null;
     }
 
-    const char = new Character(morse);
-    const exact = char.getExactMatches();
-    const potential = char.getPotentialMatches();
+    const encoding = parseMorseString(morse);
+    const result = lookupMorseEncoding(encoding);
+    const exact = result.exact;
+    const potential = result.partial;
     if (potential.length === 0) {
       return null;
     }
 
-    const exactSet = new Set(exact.map((e) => e.toString()));
-    const potentialOnly = potential.filter((e) => !exactSet.has(e.toString()));
+    const exactSet = new Set(exact.map((e) => e.display));
+    const potentialOnly = potential.filter((e) => !exactSet.has(e.display));
 
     const MAX_POTENTIAL = 6;
     const shownPotential = potentialOnly.slice(0, MAX_POTENTIAL);
@@ -189,8 +198,8 @@ function MorseStreamInner(props: Props) {
 
     const displayMorse = morse.replace(/\./g, "\u00b7").replace(/-/g, "\uff0d");
     const parts = [
-      ...exact.map((e) => e.toString()),
-      ...shownPotential.map((e) => e.toString() + "?"),
+      ...exact.map((e) => e.display),
+      ...shownPotential.map((e) => e.display + "?"),
       ...(hasMore ? ["\u2026"] : []),
     ];
 
@@ -200,12 +209,12 @@ function MorseStreamInner(props: Props) {
   function onNextClick() {
     if (props.stream.length > 0) {
       const lastCharacter = props.stream.slice(-1);
-      if (lastCharacter === MorseString.CHARACTER_DIVIDER) {
+      if (lastCharacter === MORSE_CHARACTER_DIVIDER) {
         // Pressing next twice starts a new word
         props.backspace();
-        props.append(MorseString.WORD_DIVIDER);
-      } else if (lastCharacter !== MorseString.WORD_DIVIDER) {
-        props.append(MorseString.CHARACTER_DIVIDER);
+        props.append(MORSE_WORD_DIVIDER);
+      } else if (lastCharacter !== MORSE_WORD_DIVIDER) {
+        props.append(MORSE_CHARACTER_DIVIDER);
       }
     }
   }

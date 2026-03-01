@@ -1,4 +1,3 @@
-import { KeyedCipherStringBase } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -12,7 +11,8 @@ import { Conversion } from "./Conversion";
 import styles from "./index.module.scss";
 
 interface Props {
-  cipher: KeyedCipherStringBase;
+  encryptFn: (text: string, key: string) => string;
+  decryptFn: (text: string, key: string) => string;
   conversion: Conversion;
   id: string;
   secret: string;
@@ -40,16 +40,12 @@ function KeyedCipherStream(props: Props) {
   }
 
   function calculateOutput() {
-    const cipher = props.cipher;
-    cipher.key = props.secret;
-    cipher.text = props.text;
-
     switch (props.conversion) {
       case Conversion.encrypt:
-        return cipher.encrypt();
+        return props.encryptFn(props.text, props.secret);
 
       case Conversion.decrypt:
-        return cipher.decrypt();
+        return props.decryptFn(props.text, props.secret);
 
       default:
         throw new Error("Invalid conversion type");

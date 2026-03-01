@@ -1,4 +1,4 @@
-import { StringAutoConvert } from "puzzle-lib";
+import { convertString } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -95,10 +95,7 @@ function AutoConvertStreamInner(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <pre>
-            {StringAutoConvert.convertString(props.text, props.homogeneous) ||
-              " "}
-          </pre>
+          <pre>{convertString(props.text, props.homogeneous) || " "}</pre>
         </Card.Body>
       </Card>
     </div>

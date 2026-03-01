@@ -1,8 +1,8 @@
-import { CharacterConversion } from "puzzle-lib";
+import { getAsciiTable } from "puzzle-lib";
 import CharacterTable from "./CharacterTable";
 
 function AsciiTable() {
-  return <CharacterTable data={CharacterConversion.getAsciiTable()} />;
+  return <CharacterTable data={getAsciiTable()} />;
 }
 
 export default AsciiTable;

@@ -1,13 +1,10 @@
 import SemaphoreCheckbox from "./SemaphoreCheckbox";
 import SemaphorePicture from "./SemaphorePicture";
-import {
-  SemaphoreCharacter as Character,
-  SemaphoreDirection as Direction,
-} from "puzzle-lib";
+import { SemaphoreDirection as Direction, SemaphoreEncoding } from "puzzle-lib";
 import styles from "./SemaphoreCharacter.module.scss";
 
 interface Props {
-  character: Character;
+  encoding: SemaphoreEncoding;
   onChange?: (type: string, direction: Direction) => void;
 }
 
@@ -22,54 +19,54 @@ function SemaphoreCharacter(props: Props) {
   return (
     <div className={styles.container}>
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.north}
         direction={Direction.North}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.northEast}
         direction={Direction.NorthEast}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.east}
         direction={Direction.East}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.southEast}
         direction={Direction.SouthEast}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.south}
         direction={Direction.South}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.southWest}
         direction={Direction.SouthWest}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.west}
         direction={Direction.West}
         onChange={onChange}
       />
       <SemaphoreCheckbox
-        character={props.character}
+        encoding={props.encoding}
         className={styles.northWest}
         direction={Direction.NorthWest}
         onChange={onChange}
       />
-      <SemaphorePicture width={240} character={props.character} />
+      <SemaphorePicture width={240} encoding={props.encoding} />
     </div>
   );
 }
