@@ -87,7 +87,7 @@ function WordSearchOutput(props: Props) {
     props.useDiagonals,
   );
 
-  // Split on newlines, trim any whitespace, and filter out empty lines.
+  // Split on newlines and filter out empty lines.
   const wordList = splitLines(props.wordListInputText).filter(
     (word) => word.length > 0,
   );
