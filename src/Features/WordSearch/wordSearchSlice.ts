@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface State {
   canBend: boolean;
   grid: string;
+  showUnused: boolean;
   useCardinals: boolean;
   useDiagonals: boolean;
   wordList: string;
@@ -11,6 +12,7 @@ interface State {
 const initialState: State = {
   canBend: false,
   grid: "",
+  showUnused: false,
   useCardinals: true,
   useDiagonals: true,
   wordList: "",
@@ -32,6 +34,9 @@ const wordSearchSlice = createSlice({
     setUseDiagonals(state, action: PayloadAction<boolean>) {
       state.useDiagonals = action.payload;
     },
+    setShowUnused(state, action: PayloadAction<boolean>) {
+      state.showUnused = action.payload;
+    },
     setWordList(state, action: PayloadAction<string>) {
       state.wordList = action.payload;
     },
@@ -41,6 +46,7 @@ const wordSearchSlice = createSlice({
 export const {
   setCanBend,
   setGrid,
+  setShowUnused,
   setUseCardinals,
   setUseDiagonals,
   setWordList,

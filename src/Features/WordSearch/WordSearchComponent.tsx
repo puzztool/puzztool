@@ -13,6 +13,7 @@ import WordSearchOutput from "./WordSearchOutput";
 import {
   setCanBend,
   setGrid,
+  setShowUnused,
   setUseCardinals,
   setUseDiagonals,
   setWordList,
@@ -22,6 +23,7 @@ import styles from "./WordSearchComponent.module.scss";
 const mapStateToProps = (state: RootState) => ({
   canBend: state.wordSearch.canBend,
   grid: state.wordSearch.grid,
+  showUnused: state.wordSearch.showUnused,
   useCardinals: state.wordSearch.useCardinals,
   useDiagonals: state.wordSearch.useDiagonals,
   wordList: state.wordSearch.wordList,
@@ -29,6 +31,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = {
   setCanBend,
   setGrid,
+  setShowUnused,
   setUseCardinals,
   setUseDiagonals,
   setWordList,
@@ -135,10 +138,12 @@ function WordSearchComponentInner(props: Props) {
               <Card.Header>Output</Card.Header>
               <Card.Body>
                 <WordSearchOutput
+                  canBend={props.canBend}
                   gridInputText={props.grid}
+                  onToggleShowUnused={(value) => props.setShowUnused(value)}
+                  showUnused={props.showUnused}
                   useCardinals={props.useCardinals}
                   useDiagonals={props.useDiagonals}
-                  canBend={props.canBend}
                   wordListInputText={props.wordList}
                 />
               </Card.Body>
