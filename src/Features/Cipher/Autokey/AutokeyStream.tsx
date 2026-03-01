@@ -1,4 +1,4 @@
-import { AutoKeyString } from "puzzle-lib";
+import { autokeyEncrypt, autokeyDecrypt } from "puzzle-lib";
 import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
@@ -26,7 +26,8 @@ interface Props extends ConnectedProps<typeof connector> {
 function AutokeyStreamInner(props: Props) {
   return (
     <KeyedCipherStream
-      cipher={new AutoKeyString()}
+      encryptFn={autokeyEncrypt}
+      decryptFn={autokeyDecrypt}
       conversion={props.conversion}
       id="AutokeyStream"
       secret={props.secret}

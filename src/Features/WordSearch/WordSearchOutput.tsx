@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import { WordSearchSolver, WordSearchDirection } from "puzzle-lib";
+import { findWords, WordSearchDirection } from "puzzle-lib";
 import styles from "./WordSearchOutput.module.scss";
 
 interface Props {
@@ -92,12 +92,12 @@ function WordSearchOutput(props: Props) {
     (word) => word.length > 0,
   );
 
-  const solver = new WordSearchSolver();
-  solver.setDirections(direction);
-  solver.setCanBend(props.canBend);
-  solver.setGrid(grid);
-  solver.setWords(wordList);
-  const results = solver.findWords();
+  const results = findWords({
+    grid,
+    words: wordList,
+    directions: direction,
+    canBend: props.canBend,
+  });
 
   const shouldHighlight = highlightArray(grid, results);
   const unusedLetters = getUnusedLetters(grid, shouldHighlight);

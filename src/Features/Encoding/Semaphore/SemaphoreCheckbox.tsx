@@ -1,13 +1,16 @@
 import { ChangeEvent } from "react";
 import {
-  SemaphoreCharacter as Character,
   SemaphoreDirection as Direction,
+  SemaphoreEncoding,
+  addSemaphoreDirection,
+  hasSemaphoreDirection,
+  lookupSemaphoreEncoding,
 } from "puzzle-lib";
 import classNames from "classnames";
 import styles from "./SemaphoreCheckbox.module.scss";
 
 interface Props {
-  character: Character;
+  encoding: SemaphoreEncoding;
   className?: string;
   direction: Direction;
   onChange?: (type: string, direction: Direction) => void;
@@ -15,9 +18,10 @@ interface Props {
 
 function SemaphoreCheckbox(props: Props) {
   function getPotentialMatch() {
-    const match = props.character.getPotentialMatch(props.direction);
-    if (match) {
-      return match.toString();
+    const potential = addSemaphoreDirection(props.encoding, props.direction);
+    const result = lookupSemaphoreEncoding(potential);
+    if (result.exact.length > 0) {
+      return result.exact[0].toString();
     }
 
     return "";
@@ -34,7 +38,7 @@ function SemaphoreCheckbox(props: Props) {
     <div className={classNames(styles.container, props.className)}>
       <input
         type="checkbox"
-        checked={props.character.hasDirection(props.direction)}
+        checked={hasSemaphoreDirection(props.encoding, props.direction)}
         onChange={onChange}
       />
       <label>{getPotentialMatch()}</label>

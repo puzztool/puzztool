@@ -1,5 +1,5 @@
 import Table from "react-bootstrap/Table";
-import { NatoData } from "puzzle-lib";
+import { NATO_ALPHABET } from "puzzle-lib";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import styles from "./index.module.scss";
 
@@ -15,7 +15,7 @@ function Nato() {
             </tr>
           </thead>
           <tbody>
-            {NatoData.instance.entries.map((value) => (
+            {NATO_ALPHABET.map((value) => (
               <tr key={value.character}>
                 <td>{value.character}</td>
                 <td>{value.word}</td>

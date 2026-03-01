@@ -1,4 +1,5 @@
-import { ResistorColorEntry as Color, Resistor } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib";
+import { RESISTOR_COLOR_TABLE } from "puzzle-lib";
 import Table from "react-bootstrap/Table";
 import { getContrastingColor } from "../../Common/Helpers";
 import styles from "./ResistorTable.module.scss";
@@ -23,12 +24,16 @@ function ResistorTable() {
           </tr>
         </thead>
         <tbody>
-          {Resistor.colorTable.map((value: Color) => (
+          {RESISTOR_COLOR_TABLE.map((value: Color) => (
             <tr key={value.name}>
               <td style={cellColorStyle(value)}>{value.name}</td>
-              <td>{value.getDisplayValue()}</td>
+              <td>{value.value !== undefined ? value.value : ""}</td>
               <td>{value.multiplier}</td>
-              <td>{value.toleranceInPercent}</td>
+              <td>
+                {value.toleranceInPercent !== undefined
+                  ? value.toleranceInPercent
+                  : ""}
+              </td>
             </tr>
           ))}
         </tbody>

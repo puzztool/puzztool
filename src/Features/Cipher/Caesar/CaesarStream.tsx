@@ -1,4 +1,4 @@
-import { CaesarString } from "puzzle-lib";
+import { caesarRotations } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -60,7 +60,7 @@ function CaesarStreamInner(props: Props) {
       <Card>
         <Card.Header>Output</Card.Header>
         <Card.Body>
-          <CaesarList list={new CaesarString(props.text).getRotations()} />
+          <CaesarList list={caesarRotations(props.text)} />
         </Card.Body>
       </Card>
     </div>

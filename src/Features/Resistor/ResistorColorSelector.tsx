@@ -1,4 +1,5 @@
-import { ResistorColorEntry as Color, Resistor } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib";
+import { RESISTOR_COLOR_TABLE } from "puzzle-lib";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
@@ -10,7 +11,7 @@ interface ColorSelectorProps {
 }
 
 function colorByName(name: string | null) {
-  for (const color of Resistor.colorTable) {
+  for (const color of RESISTOR_COLOR_TABLE) {
     if (name === color.name) {
       return color;
     }

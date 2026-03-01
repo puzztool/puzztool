@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SemaphoreDirection } from "puzzle-lib";
+import { SemaphoreEncoding } from "puzzle-lib";
 
 interface State {
-  directions: SemaphoreDirection[];
+  encoding: SemaphoreEncoding;
   selectedTab?: string;
   stream: string;
 }
 
 const initialState: State = {
-  directions: [],
+  encoding: SemaphoreEncoding.None,
   stream: "",
 };
 
@@ -17,7 +17,7 @@ const semaphoreEncodingSlice = createSlice({
   initialState,
   reducers: {
     append(state, action: PayloadAction<string>) {
-      state.directions.length = 0;
+      state.encoding = SemaphoreEncoding.None;
       state.stream += action.payload;
     },
     backspace(state) {
@@ -29,8 +29,8 @@ const semaphoreEncodingSlice = createSlice({
     selectTab(state, action: PayloadAction<string | null>) {
       state.selectedTab = action.payload ?? undefined;
     },
-    setDirections(state, action: PayloadAction<SemaphoreDirection[]>) {
-      state.directions = action.payload;
+    setEncoding(state, action: PayloadAction<SemaphoreEncoding>) {
+      state.encoding = action.payload;
     },
     space(state) {
       state.stream += " ";
@@ -38,7 +38,7 @@ const semaphoreEncodingSlice = createSlice({
   },
 });
 
-export const { append, backspace, clear, selectTab, setDirections, space } =
+export const { append, backspace, clear, selectTab, setEncoding, space } =
   semaphoreEncodingSlice.actions;
 
 export default semaphoreEncodingSlice.reducer;

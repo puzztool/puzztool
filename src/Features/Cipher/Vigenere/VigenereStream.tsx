@@ -1,4 +1,4 @@
-import { VigenereString } from "puzzle-lib";
+import { vigenereEncrypt, vigenereDecrypt } from "puzzle-lib";
 import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
@@ -31,7 +31,8 @@ interface Props extends ConnectedProps<typeof connector> {
 function VigenereStreamInner(props: Props) {
   return (
     <KeyedCipherStream
-      cipher={new VigenereString()}
+      encryptFn={vigenereEncrypt}
+      decryptFn={vigenereDecrypt}
       conversion={props.conversion}
       id="VigenereStream"
       secret={props.secret}

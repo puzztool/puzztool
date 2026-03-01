@@ -1,8 +1,8 @@
-import { CharacterConversion } from "puzzle-lib";
+import { getOrdinalTable } from "puzzle-lib";
 import CharacterTable from "./CharacterTable";
 
 function OrdinalTable() {
-  return <CharacterTable data={CharacterConversion.getOrdinalTable()} />;
+  return <CharacterTable data={getOrdinalTable()} />;
 }
 
 export default OrdinalTable;
