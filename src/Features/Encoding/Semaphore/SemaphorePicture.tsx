@@ -1,39 +1,8 @@
-import {
-  SemaphoreDirection,
-  SemaphoreEncoding,
-  hasSemaphoreDirection,
-  semaphoreDirectionToDegrees,
-} from "puzzle-lib";
+import { SemaphoreEncoding, getEncodingDegrees } from "puzzle-lib";
 
 interface Props {
   width: number;
   encoding: SemaphoreEncoding;
-}
-
-const ALL_DIRECTIONS = [
-  SemaphoreDirection.North,
-  SemaphoreDirection.NorthEast,
-  SemaphoreDirection.East,
-  SemaphoreDirection.SouthEast,
-  SemaphoreDirection.South,
-  SemaphoreDirection.SouthWest,
-  SemaphoreDirection.West,
-  SemaphoreDirection.NorthWest,
-];
-
-function getDegrees(
-  encoding: SemaphoreEncoding,
-): [number | undefined, number | undefined] {
-  const degrees: number[] = [];
-  for (const dir of ALL_DIRECTIONS) {
-    if (hasSemaphoreDirection(encoding, dir)) {
-      const deg = semaphoreDirectionToDegrees(dir);
-      if (deg !== undefined) {
-        degrees.push(deg);
-      }
-    }
-  }
-  return [degrees[0], degrees[1]];
 }
 
 function getFlagAngles(encoding: SemaphoreEncoding) {
@@ -42,7 +11,7 @@ function getFlagAngles(encoding: SemaphoreEncoding) {
     right: -1,
   };
 
-  const [first, second] = getDegrees(encoding);
+  const [first, second] = getEncodingDegrees(encoding);
 
   if (first !== undefined) {
     if (second === undefined) {
