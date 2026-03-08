@@ -36,8 +36,8 @@ function highlightArray(
   const shouldHighlight: boolean[][] = [];
 
   for (const line of inputGrid) {
-    const hightlightLine = Array.from({ length: line.length }, () => false);
-    shouldHighlight.push(hightlightLine);
+    const highlightLine = Array.from({ length: line.length }, () => false);
+    shouldHighlight.push(highlightLine);
   }
 
   for (const result of results) {
