@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib";
 import styles from "./BrailleCell.module.scss";
 
@@ -16,7 +16,7 @@ function BrailleCell(props: Props) {
     }
   }
 
-  const btnClass = classNames(styles.container, {
+  const btnClass = clsx(styles.container, {
     [styles.selected]: getBrailleDot(props.encoding, props.mask),
   });
 
