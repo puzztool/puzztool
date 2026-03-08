@@ -35,7 +35,29 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 function MorseStreamInner(props: Props) {
+  const { stream, append: appendFn, backspace: backspaceFn } = props;
+
   useEffect(() => {
+    function handleDot() {
+      appendFn(MORSE_DOT);
+    }
+
+    function handleDash() {
+      appendFn(MORSE_DASH);
+    }
+
+    function handleNext() {
+      if (stream.length > 0) {
+        const lastCharacter = stream.slice(-1);
+        if (lastCharacter === MORSE_CHARACTER_DIVIDER) {
+          backspaceFn();
+          appendFn(MORSE_WORD_DIVIDER);
+        } else if (lastCharacter !== MORSE_WORD_DIVIDER) {
+          appendFn(MORSE_CHARACTER_DIVIDER);
+        }
+      }
+    }
+
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
         return;
@@ -56,7 +78,7 @@ function MorseStreamInner(props: Props) {
           window.getSelection()?.toString().length ?? 0,
         );
         for (let i = 0; i < count; i++) {
-          props.backspace();
+          backspaceFn();
         }
         handled = true;
       }
@@ -76,19 +98,19 @@ function MorseStreamInner(props: Props) {
         switch (ev.key) {
           case "-":
           case "j":
-            onDashClick();
+            handleDash();
             break;
           case ".":
           case "k":
-            onDotClick();
+            handleDot();
             break;
           case "Enter":
           case " ":
           case "l":
-            onNextClick();
+            handleNext();
             break;
           case ";":
-            props.backspace();
+            backspaceFn();
             break;
           default:
             handled = false;
@@ -98,19 +120,19 @@ function MorseStreamInner(props: Props) {
         switch (ev.keyCode) {
           case 45: // '-'
           case 106: // 'J'
-            onDashClick();
+            handleDash();
             break;
           case 46: // '.'
           case 107: // 'K'
-            onDotClick();
+            handleDot();
             break;
           case 13: // Enter
           case 32: // Space
           case 108: // 'L'
-            onNextClick();
+            handleNext();
             break;
           case 59: // ';'
-            props.backspace();
+            backspaceFn();
             break;
           default:
             handled = false;
@@ -129,7 +151,7 @@ function MorseStreamInner(props: Props) {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("keypress", onKeyPress);
     };
-  });
+  }, [stream, appendFn, backspaceFn]);
 
   function codeText(): string {
     // Replace dot with interpunct for readability

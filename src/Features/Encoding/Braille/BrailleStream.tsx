@@ -41,6 +41,8 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 function BrailleStreamInner(props: Props) {
+  const { encoding, backspace: backspaceFn, append, space: spaceFn, setEncoding } = props;
+
   useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
@@ -62,7 +64,7 @@ function BrailleStreamInner(props: Props) {
           window.getSelection()?.toString().length ?? 0,
         );
         for (let i = 0; i < count; i++) {
-          props.backspace();
+          backspaceFn();
         }
         handled = true;
       }
@@ -81,14 +83,19 @@ function BrailleStreamInner(props: Props) {
 
       if (ev.keyCode === 13) {
         // Enter
-        onNextClick();
+        const lookup = lookupBrailleEncoding(encoding);
+        if (lookup.exactString) {
+          append(encoding);
+        } else {
+          spaceFn();
+        }
         handled = true;
       } else if (ev.charCode >= 49 && ev.charCode <= 54) {
         // '1' through '6'
         // The braille dots are bitfields, so calculate the value based on the key
         // pressed.
         // TODO: This should probably be in puzzle-lib.
-        onCharacterClick(Math.pow(2, ev.charCode - 49));
+        setEncoding(toggleBrailleDot(encoding, Math.pow(2, ev.charCode - 49)));
       }
 
       if (handled) {
@@ -103,7 +110,7 @@ function BrailleStreamInner(props: Props) {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("keypress", onKeyPress);
     };
-  });
+  }, [encoding, backspaceFn, append, spaceFn, setEncoding]);
 
   function onBackspaceClick() {
     props.backspace();
