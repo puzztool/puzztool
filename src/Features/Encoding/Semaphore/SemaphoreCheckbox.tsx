@@ -6,7 +6,7 @@ import {
   hasSemaphoreDirection,
   lookupSemaphoreEncoding,
 } from "puzzle-lib";
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "./SemaphoreCheckbox.module.scss";
 
 interface Props {
@@ -35,7 +35,7 @@ function SemaphoreCheckbox(props: Props) {
   }
 
   return (
-    <div className={classNames(styles.container, props.className)}>
+    <div className={clsx(styles.container, props.className)}>
       <input
         type="checkbox"
         checked={hasSemaphoreDirection(props.encoding, props.direction)}
