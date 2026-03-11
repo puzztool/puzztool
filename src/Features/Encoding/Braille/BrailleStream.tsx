@@ -41,7 +41,13 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 function BrailleStreamInner(props: Props) {
-  const { encoding, backspace: backspaceFn, append, space: spaceFn, setEncoding } = props;
+  const {
+    encoding,
+    backspace: backspaceFn,
+    append,
+    space: spaceFn,
+    setEncoding,
+  } = props;
 
   useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
