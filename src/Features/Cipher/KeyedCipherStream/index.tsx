@@ -1,6 +1,5 @@
 import { ChangeEvent, ReactNode } from "react";
 import {
-  Button,
   Card,
   Group,
   SegmentedControl,
@@ -8,6 +7,7 @@ import {
   TextInput,
   Text,
 } from "@mantine/core";
+import ClearButton from "../../../Common/ClearButton";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { Conversion } from "./Conversion";
 import styles from "./index.module.scss";
@@ -83,9 +83,7 @@ function KeyedCipherStream(props: Props) {
                 props.onConversionChange(Number(value) as Conversion)
               }
             />
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>
