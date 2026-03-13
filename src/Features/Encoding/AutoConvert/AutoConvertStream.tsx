@@ -15,6 +15,22 @@ import { RootState } from "../../../Store/rootReducer";
 import { clear, setHomogeneous, setText } from "./autoConvertSlice";
 import styles from "./AutoConvertStream.module.scss";
 
+// Auto-chunk continuous binary strings into 8-bit or 5-bit groups
+// so convertString can process them as individual characters.
+function preprocessInput(input: string): string {
+  return input
+    .split(/\s+/)
+    .map((token) => {
+      if (!/^[01]+$/.test(token) || token.length <= 8) {
+        return token;
+      }
+      const chunkSize =
+        token.length % 8 === 0 ? 8 : token.length % 5 === 0 ? 5 : 8;
+      return token.match(new RegExp(`.{1,${chunkSize}}`, "g"))!.join(" ");
+    })
+    .join(" ");
+}
+
 enum ConversionMode {
   consistent,
   mixed,
@@ -90,7 +106,9 @@ function AutoConvertStreamInner(props: Props) {
         <Card.Section withBorder inheritPadding py="xs">
           <Text fw={500}>Output</Text>
         </Card.Section>
-        <pre>{convertString(props.text, props.homogeneous) || " "}</pre>
+        <pre>
+          {convertString(preprocessInput(props.text), props.homogeneous) || " "}
+        </pre>
       </Card>
     </Stack>
   );
