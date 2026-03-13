@@ -36,9 +36,7 @@ function encodeStandard(text: string): string {
 
 function encodeUrlSafe(text: string): string {
   try {
-    return btoa(textToBytes(text))
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_");
+    return btoa(textToBytes(text)).replace(/\+/g, "-").replace(/\//g, "_");
   } catch {
     return "(invalid input)";
   }
