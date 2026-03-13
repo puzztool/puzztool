@@ -4,6 +4,8 @@ import {
   parseWordSearchGrid,
   WordSearchDirection,
 } from "puzzle-lib";
+import { getCellStyle } from "./WordSearchColors";
+import WordSearchLegend from "./WordSearchLegend";
 import styles from "./WordSearchOutput.module.scss";
 
 interface Props {
@@ -32,44 +34,52 @@ function splitLines(str: string) {
   return str.split(/\r?\n/);
 }
 
-function highlightArray(
+function buildCellWordIndices(
   inputGrid: string[][],
-  results: { points: { x: number; y: number }[] }[],
+  results: { word: string; points: { x: number; y: number }[] }[],
+  wordList: string[],
 ) {
-  const shouldHighlight: boolean[][] = [];
-
-  for (const line of inputGrid) {
-    const highlightLine = Array.from({ length: line.length }, () => false);
-    shouldHighlight.push(highlightLine);
-  }
-
-  for (const result of results) {
-    for (const point of result.points) {
-      shouldHighlight[point.y][point.x] = true;
+  // Map each word to its index in the user's word list
+  const wordToIndex = new Map<string, number>();
+  for (let i = 0; i < wordList.length; i++) {
+    const w = wordList[i].toLowerCase();
+    if (!wordToIndex.has(w)) {
+      wordToIndex.set(w, i);
     }
   }
 
-  return shouldHighlight;
+  const cellWordIndices: number[][][] = inputGrid.map((row) =>
+    row.map(() => []),
+  );
+
+  for (const result of results) {
+    const idx = wordToIndex.get(result.word.toLowerCase());
+    if (idx === undefined) continue;
+    for (const point of result.points) {
+      const cell = cellWordIndices[point.y][point.x];
+      if (!cell.includes(idx)) {
+        cell.push(idx);
+      }
+    }
+  }
+
+  return cellWordIndices;
 }
 
 function getUnusedLetters(
   grid: string[][],
-  shouldHighlight: boolean[][],
+  cellWordIndices: number[][][],
 ): string {
   const chars: string[] = [];
   for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
     for (let colIndex = 0; colIndex < grid[rowIndex].length; colIndex++) {
       const cell = grid[rowIndex][colIndex];
-      if (cell !== " " && !shouldHighlight[rowIndex][colIndex]) {
+      if (cell !== " " && cellWordIndices[rowIndex][colIndex].length === 0) {
         chars.push(cell);
       }
     }
   }
   return chars.join("");
-}
-
-function getColumnClassName(shouldHighlight: boolean) {
-  return shouldHighlight ? styles.highlightChar : "";
 }
 
 function WordSearchOutput(props: Props) {
@@ -98,8 +108,9 @@ function WordSearchOutput(props: Props) {
     canBend: props.canBend,
   });
 
-  const shouldHighlight = highlightArray(grid, results);
-  const unusedLetters = getUnusedLetters(grid, shouldHighlight);
+  const cellWordIndices = buildCellWordIndices(grid, results, wordList);
+  const unusedLetters = getUnusedLetters(grid, cellWordIndices);
+  const foundWords = new Set(results.map((r) => r.word));
 
   return (
     <>
@@ -109,9 +120,7 @@ function WordSearchOutput(props: Props) {
             <Table.Tr key={rowIndex}>
               {row.map((col, colIndex) => (
                 <Table.Td
-                  className={getColumnClassName(
-                    shouldHighlight[rowIndex][colIndex],
-                  )}
+                  style={getCellStyle(cellWordIndices[rowIndex][colIndex])}
                   key={`${rowIndex},${colIndex}`}
                 >
                   {col}
@@ -121,6 +130,7 @@ function WordSearchOutput(props: Props) {
           ))}
         </Table.Tbody>
       </Table>
+      <WordSearchLegend wordList={wordList} foundWords={foundWords} />
       {results.length > 0 && (
         <div className={styles.unusedLettersSection}>
           <Button

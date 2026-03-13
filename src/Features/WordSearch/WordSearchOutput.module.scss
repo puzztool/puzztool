@@ -7,11 +7,30 @@
 
   td {
     padding: 0.5rem;
-
-    &.highlightChar {
-      background-color: yellow;
-    }
   }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.legendItemNotFound {
+  display: flex;
+  align-items: center;
+  opacity: 0.55;
+}
+
+.legendWordNotFound {
+  text-decoration: line-through;
 }
 
 .unusedLettersSection {
