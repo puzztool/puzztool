@@ -10,11 +10,11 @@ import {
   lookupMorseEncoding,
   parseMorseString,
 } from "puzzle-lib";
-import { useEffect } from "react";
-import { Button, Card, Group, Stack, Text } from "@mantine/core";
+import { ChangeEvent } from "react";
+import { Button, Card, Group, Stack, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
-import { append, backspace, clear } from "./morseEncodingSlice";
+import { append, backspace, clear, setStream } from "./morseEncodingSlice";
 import { MorseDot, MorseDash } from "./MorsePicture";
 import styles from "./MorseStream.module.scss";
 
@@ -25,136 +25,23 @@ const mapDispatchToProps = {
   append,
   backspace,
   clear,
+  setStream,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
+function normalizeStream(text: string): string {
+  return text
+    .replace(/ *\/ */g, MORSE_WORD_DIVIDER)
+    .replace(/ {2,}/g, MORSE_CHARACTER_DIVIDER)
+    .replace(/[^.\- /]/g, "");
+}
+
 function MorseStreamInner(props: Props) {
-  const { stream, append: appendFn, backspace: backspaceFn } = props;
-
-  useEffect(() => {
-    function handleDot() {
-      appendFn(MORSE_DOT);
-    }
-
-    function handleDash() {
-      appendFn(MORSE_DASH);
-    }
-
-    function handleNext() {
-      if (stream.length > 0) {
-        const lastCharacter = stream.slice(-1);
-        if (lastCharacter === MORSE_CHARACTER_DIVIDER) {
-          backspaceFn();
-          appendFn(MORSE_WORD_DIVIDER);
-        } else if (lastCharacter !== MORSE_WORD_DIVIDER) {
-          appendFn(MORSE_CHARACTER_DIVIDER);
-        }
-      }
-    }
-
-    function onKeyDown(ev: KeyboardEvent) {
-      if (ev.defaultPrevented) {
-        return;
-      }
-
-      let handled = false;
-
-      // Chrome won't trigger keypress for any keys that can invoke browser
-      // actions.
-      if (
-        ev.key === "Backspace" ||
-        ev.key === "Delete" ||
-        ev.keyCode === 8 ||
-        ev.keyCode === 46
-      ) {
-        const count = Math.max(
-          1,
-          window.getSelection()?.toString().length ?? 0,
-        );
-        for (let i = 0; i < count; i++) {
-          backspaceFn();
-        }
-        handled = true;
-      }
-
-      if (handled) {
-        ev.preventDefault();
-      }
-    }
-
-    function onKeyPress(ev: KeyboardEvent) {
-      if (ev.defaultPrevented) {
-        return;
-      }
-
-      let handled = true;
-      if (ev.key) {
-        switch (ev.key) {
-          case "-":
-          case "j":
-            handleDash();
-            break;
-          case ".":
-          case "k":
-            handleDot();
-            break;
-          case "Enter":
-          case " ":
-          case "l":
-            handleNext();
-            break;
-          case ";":
-            backspaceFn();
-            break;
-          default:
-            handled = false;
-        }
-      } else {
-        // Older browsers such as Edge don't support ev.key
-        switch (ev.keyCode) {
-          case 45: // '-'
-          case 106: // 'J'
-            handleDash();
-            break;
-          case 46: // '.'
-          case 107: // 'K'
-            handleDot();
-            break;
-          case 13: // Enter
-          case 32: // Space
-          case 108: // 'L'
-            handleNext();
-            break;
-          case 59: // ';'
-            backspaceFn();
-            break;
-          default:
-            handled = false;
-        }
-      }
-
-      if (handled) {
-        ev.preventDefault();
-      }
-    }
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("keypress", onKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("keypress", onKeyPress);
-    };
-  }, [stream, appendFn, backspaceFn]);
-
-  function codeText(): string {
-    // Replace dot with interpunct for readability
-    // Replace dash with full width hyphen for readability.  Don't use emdash
-    // because multiple emdashes get combined with no space between them.
-    return props.stream.replace(/\./g, "\u00b7").replace(/-/g, "\uff0d");
+  function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
+    props.setStream(normalizeStream(event.currentTarget.value));
   }
 
   function plainText(): string {
@@ -246,11 +133,13 @@ function MorseStreamInner(props: Props) {
         <Card.Section withBorder inheritPadding py="xs">
           <Text fw={500}>Input</Text>
         </Card.Section>
-        <pre>
-          {codeText()}
-          <span className="blinking-cursor">|</span>
-        </pre>
-        {hint !== null && <div className={styles.partialMatches}>{hint}</div>}
+        <TextInput
+          onChange={onTextChanged}
+          placeholder="Paste or type raw morse (e.g. .... . .-.. .-.. ---)"
+          value={props.stream}
+          mt="xs"
+        />
+        <div className={styles.partialMatches}>{hint}</div>
       </Card>
       <Card className={styles.output} withBorder>
         <Card.Section withBorder inheritPadding py="xs">
