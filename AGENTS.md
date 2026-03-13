@@ -13,7 +13,7 @@ PuzzTool is a React-based Progressive Web App (PWA) for solving puzzles. It uses
 
 - `npm start` — Start the Vite dev server
 - `npm run build` — Type-check with `tsc` and build with Vite
-- `npm run test:no-watch` — Run all tests once (vitest)
+- `npm run test:no-watch` — Run all tests once (vitest, equivalent to `vitest run`)
 - `npm run lint` — Run ESLint
 - `npm run format` — Format all files with Prettier
 - `npm run format:check` — Check formatting without writing
@@ -36,7 +36,7 @@ CI runs both `lint` and `format:check` separately, so even if the build succeeds
 - `src/Features/` — Feature components organized by category (Encoding, Cipher, etc.)
 - `src/Data/RouteData.ts` — Route definitions for all tools
 - `src/Store/` — Redux store configuration
-- `src/Common/` — Shared components (PuzzToolPage, ClearButton, etc.)
+- `src/Common/` — Shared components (PuzzToolPage, ReferenceList, etc.)
 - `src/App.tsx` — Route registration (lazy-loaded components)
 
 ## Adding a New Tool
