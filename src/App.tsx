@@ -20,6 +20,7 @@ const Autokey = lazy(() => import("./Features/Cipher/Autokey"));
 const Caesar = lazy(() => import("./Features/Cipher/Caesar"));
 const Vigenere = lazy(() => import("./Features/Cipher/Vigenere"));
 const AutoConvert = lazy(() => import("./Features/Encoding/AutoConvert"));
+const Base64 = lazy(() => import("./Features/Encoding/Base64"));
 const Braille = lazy(() => import("./Features/Encoding/Braille"));
 const Character = lazy(() => import("./Features/Encoding/Character"));
 const Morse = lazy(() => import("./Features/Encoding/Morse"));
@@ -90,6 +91,7 @@ function App() {
                 <Route path="/cipher/caesar" element={<Caesar />} />
                 <Route path="/cipher/vigenere" element={<Vigenere />} />
                 <Route path="/encoding/autoconvert" element={<AutoConvert />} />
+                <Route path="/encoding/base64" element={<Base64 />} />
                 <Route path="/encoding/braille" element={<Braille />} />
                 <Route path="/encoding/morse" element={<Morse />} />
                 <Route path="/encoding/pigpen" element={<Pigpen />} />
