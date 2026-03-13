@@ -1,5 +1,9 @@
 import { Button, Table } from "@mantine/core";
-import { findWords, WordSearchDirection } from "puzzle-lib";
+import {
+  findWords,
+  parseWordSearchGrid,
+  WordSearchDirection,
+} from "puzzle-lib";
 import styles from "./WordSearchOutput.module.scss";
 
 interface Props {
@@ -74,11 +78,7 @@ function WordSearchOutput(props: Props) {
     return null;
   }
 
-  const lines = splitLines(gridInputText);
-  const grid: string[][] = [];
-  for (const line of lines) {
-    grid.push(line.split(""));
-  }
+  const grid = parseWordSearchGrid(gridInputText);
 
   // Process direction settings
   const direction = getWordSearchDirection(
