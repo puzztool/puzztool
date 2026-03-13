@@ -1,3 +1,4 @@
+import { type ChangeEvent } from "react";
 import { Checkbox } from "@mantine/core";
 import {
   SemaphoreDirection as Direction,
@@ -51,7 +52,7 @@ function SemaphoreCheckbox(props: Props) {
     return "";
   }
 
-  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function onChange(event: ChangeEvent<HTMLInputElement>) {
     const handler = props.onChange;
     if (handler) {
       handler(event.currentTarget.checked ? "add" : "remove", props.direction);
