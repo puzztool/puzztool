@@ -2,22 +2,23 @@
   background: transparent;
   border: none;
   padding: 0 2px;
+  cursor: pointer;
 
   svg {
     fill: transparent;
     height: 100%;
-    stroke: black;
+    stroke: var(--mantine-color-text);
     stroke-width: 2px;
     width: 100%;
   }
 
   &:active svg,
   &.selected:active svg {
-    fill: #888;
-    stroke: #888;
+    fill: var(--mantine-color-dimmed);
+    stroke: var(--mantine-color-dimmed);
   }
 
   &.selected svg {
-    fill: black;
+    fill: var(--mantine-color-text);
   }
 }

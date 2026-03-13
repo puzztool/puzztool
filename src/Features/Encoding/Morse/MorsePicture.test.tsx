@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "@/test-utils";
 import { test } from "vitest";
 import MorsePicture from "./MorsePicture";
 

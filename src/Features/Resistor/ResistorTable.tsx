@@ -1,6 +1,6 @@
 import type { ResistorColor as Color } from "puzzle-lib";
 import { RESISTOR_COLOR_TABLE } from "puzzle-lib";
-import Table from "react-bootstrap/Table";
+import { Table } from "@mantine/core";
 import { getContrastingColor } from "../../Common/Helpers";
 import styles from "./ResistorTable.module.scss";
 
@@ -14,29 +14,31 @@ function cellColorStyle(value: Color) {
 function ResistorTable() {
   return (
     <div className={styles.container}>
-      <Table striped={true} responsive={true}>
-        <thead>
-          <tr>
-            <th>Color</th>
-            <th>Value</th>
-            <th>Multiplier</th>
-            <th>Tolerance (%)</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table striped withTableBorder>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Color</Table.Th>
+            <Table.Th>Value</Table.Th>
+            <Table.Th>Multiplier</Table.Th>
+            <Table.Th>Tolerance (%)</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
           {RESISTOR_COLOR_TABLE.map((value: Color) => (
-            <tr key={value.name}>
-              <td style={cellColorStyle(value)}>{value.name}</td>
-              <td>{value.value !== undefined ? value.value : ""}</td>
-              <td>{value.multiplier}</td>
-              <td>
+            <Table.Tr key={value.name}>
+              <Table.Td style={cellColorStyle(value)}>{value.name}</Table.Td>
+              <Table.Td>
+                {value.value !== undefined ? value.value : ""}
+              </Table.Td>
+              <Table.Td>{value.multiplier}</Table.Td>
+              <Table.Td>
                 {value.toleranceInPercent !== undefined
                   ? value.toleranceInPercent
                   : ""}
-              </td>
-            </tr>
+              </Table.Td>
+            </Table.Tr>
           ))}
-        </tbody>
+        </Table.Tbody>
       </Table>
     </div>
   );

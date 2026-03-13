@@ -1,4 +1,4 @@
-import Table from "react-bootstrap/Table";
+import { Table } from "@mantine/core";
 import { CharacterTableEntry as Entry } from "puzzle-lib";
 import styles from "./CharacterTable.module.scss";
 
@@ -9,29 +9,29 @@ interface Props {
 function CharacterTable(props: Props) {
   return (
     <div className={styles.container}>
-      <Table striped={true} responsive={true}>
-        <thead>
-          <tr>
-            <th>Character</th>
-            <th>Binary</th>
-            <th>Ternary</th>
-            <th>Octal</th>
-            <th>Decimal</th>
-            <th>Hexadecimal</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table striped withTableBorder>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Character</Table.Th>
+            <Table.Th>Binary</Table.Th>
+            <Table.Th>Ternary</Table.Th>
+            <Table.Th>Octal</Table.Th>
+            <Table.Th>Decimal</Table.Th>
+            <Table.Th>Hexadecimal</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
           {props.data.map((value: Entry) => (
-            <tr key={value.character}>
-              <td>{value.character}</td>
-              <td>{value.binary}</td>
-              <td>{value.ternary}</td>
-              <td>{value.octal}</td>
-              <td>{value.decimal}</td>
-              <td>{value.hexadecimal.toUpperCase()}</td>
-            </tr>
+            <Table.Tr key={value.character}>
+              <Table.Td>{value.character}</Table.Td>
+              <Table.Td>{value.binary}</Table.Td>
+              <Table.Td>{value.ternary}</Table.Td>
+              <Table.Td>{value.octal}</Table.Td>
+              <Table.Td>{value.decimal}</Table.Td>
+              <Table.Td>{value.hexadecimal.toUpperCase()}</Table.Td>
+            </Table.Tr>
           ))}
-        </tbody>
+        </Table.Tbody>
       </Table>
     </div>
   );

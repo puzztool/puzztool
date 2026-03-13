@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactNode } from "react";
+import { Title, Text } from "@mantine/core";
 import PuzzToolDocumentTitle from "../PuzzToolDocumentTitle";
 import styles from "./index.module.scss";
 
@@ -12,20 +13,14 @@ function PuzzToolPage({
   description,
   title,
 }: PropsWithChildren<Props>) {
-  function renderDescription() {
-    if (description) {
-      return <div>{description}</div>;
-    }
-
-    return undefined;
-  }
-
   return (
     <>
       <PuzzToolDocumentTitle title={title} />
       <div className={styles.header}>
-        <h2 className={styles.title}>{title}</h2>
-        {renderDescription()}
+        <Title order={2} className={styles.title}>
+          {title}
+        </Title>
+        {description && <Text component="div">{description}</Text>}
       </div>
       {children}
     </>

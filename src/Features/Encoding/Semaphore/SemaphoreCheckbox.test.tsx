@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "@/test-utils";
 import { SemaphoreDirection as Direction, SemaphoreEncoding } from "puzzle-lib";
 import { test } from "vitest";
 import SemaphoreCheckbox from "./SemaphoreCheckbox";

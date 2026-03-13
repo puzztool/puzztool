@@ -20,6 +20,19 @@
     <link rel="apple-touch-icon" href="/icons-192-fill.png" />
     <title>PuzzTool</title>
 
+    <script>
+      // Mantine color scheme initialization (prevents flash)
+      try {
+        var cs = localStorage.getItem("mantine-color-scheme-value");
+        if (cs === "dark" || cs === "light") {
+          document.documentElement.setAttribute(
+            "data-mantine-color-scheme",
+            cs,
+          );
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages

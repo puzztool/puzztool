@@ -5,13 +5,7 @@ import {
   toggleBrailleDot,
 } from "puzzle-lib";
 import { useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import BrailleCharacter from "./BrailleCharacter";
@@ -142,50 +136,42 @@ function BrailleStreamInner(props: Props) {
   const displayStr = lookupBrailleEncoding(props.encoding).exactString;
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.input}>
-        <Card.Header>Input</Card.Header>
-        <Card.Body>
-          <Container fluid={true}>
-            <Row>
-              <Col xs="auto" sm="auto" md="auto">
-                <BrailleCharacter
-                  encoding={props.encoding}
-                  onClick={onCharacterClick}
-                />
-              </Col>
-              <Col className={styles.view}>{displayStr || "?"}</Col>
-            </Row>
-            <Row>
-              <Col>
-                <ButtonToolbar>
-                  <ButtonGroup>
-                    <Button onClick={onBackspaceClick}>&#x232b;</Button>
-                  </ButtonGroup>
-                  <ButtonGroup>
-                    <Button onClick={onNextClick}>Next</Button>
-                  </ButtonGroup>
-                  <ButtonGroup>
-                    <Button onClick={onClearClick} variant="danger">
-                      Clear
-                    </Button>
-                  </ButtonGroup>
-                </ButtonToolbar>
-              </Col>
-            </Row>
-          </Container>
-        </Card.Body>
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.input} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Input</Text>
+        </Card.Section>
+        <Stack gap="sm">
+          <Grid align="center">
+            <Grid.Col span="content">
+              <BrailleCharacter
+                encoding={props.encoding}
+                onClick={onCharacterClick}
+              />
+            </Grid.Col>
+            <Grid.Col span="auto">
+              <div className={styles.view}>{displayStr || "?"}</div>
+            </Grid.Col>
+          </Grid>
+          <Group gap="xs">
+            <Button onClick={onBackspaceClick}>&#x232b;</Button>
+            <Button onClick={onNextClick}>Next</Button>
+            <Button onClick={onClearClick} color="red">
+              Clear
+            </Button>
+          </Group>
+        </Stack>
       </Card>
-      <Card>
-        <Card.Header>Output</Card.Header>
-        <Card.Body>
-          <pre className={styles.output}>
-            {decodeBrailleStream(props.stream)}
-            <span className="blinking-cursor">|</span>
-          </pre>
-        </Card.Body>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Output</Text>
+        </Card.Section>
+        <pre className={styles.output}>
+          {decodeBrailleStream(props.stream)}
+          <span className="blinking-cursor">|</span>
+        </pre>
       </Card>
-    </div>
+    </Stack>
   );
 }
 

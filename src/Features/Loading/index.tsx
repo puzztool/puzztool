@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { Loader } from "@mantine/core";
 import ErrorIcon from "./ErrorIcon";
 import styles from "./index.module.scss";
 
@@ -49,10 +49,8 @@ function Loading(props: Props) {
       );
     } else if (pastDelay) {
       return (
-        <div className={styles.content}>
-          <Spinner animation="border" role="status">
-            <div className="visually-hidden">Loading...</div>
-          </Spinner>
+        <div className={styles.content} role="status" aria-live="polite">
+          <Loader size="md" />
           <div>Loading...</div>
         </div>
       );

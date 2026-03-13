@@ -1,12 +1,7 @@
-import { render } from "@testing-library/react";
-import { HelmetProvider } from "react-helmet-async";
+import { render } from "@/test-utils";
 import { test } from "vitest";
-import Settings from ".";
+import SettingsDrawer from ".";
 
 test("renders without crashing", () => {
-  render(
-    <HelmetProvider>
-      <Settings />
-    </HelmetProvider>,
-  );
+  render(<SettingsDrawer opened={true} onClose={() => {}} />);
 });

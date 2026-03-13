@@ -1,5 +1,5 @@
 .container {
-  margin: 0.5rem 1rem 0;
+  margin: 0.5rem 0 0;
 
   pre {
     font-size: 1.5rem;
@@ -7,7 +7,7 @@
 }
 
 .inputCommands {
-  :global(.btn) {
+  button {
     font-size: 2.5rem;
     height: 4.5rem;
     min-width: 7rem;
@@ -17,13 +17,13 @@
 .dot_button,
 .dash_button {
   display: block;
-  fill: white;
+  color: white;
   height: 1.5rem;
   margin: 0 auto;
 }
 
 .partialMatches {
-  color: #6c757d;
+  color: var(--mantine-color-dimmed);
   font-family: monospace;
   font-size: 1rem;
   margin-top: 0.25rem;

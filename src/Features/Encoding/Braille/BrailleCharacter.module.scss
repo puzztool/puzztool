@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid #999;
+  border: 1px solid var(--mantine-color-default-border);
   border-radius: 4px;
   display: grid;
   grid-template-columns: 1fr 1fr;

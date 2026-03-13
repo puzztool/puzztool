@@ -1,26 +1,5 @@
 .container {
-  margin: 0.5rem 1rem 0;
-
-  :global(.btn-toolbar) {
-    margin-bottom: -0.5rem;
-  }
-
-  :global(.container-fluid) {
-    margin-bottom: -0.5rem;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  :global(.row) {
-    margin-right: -0.25rem;
-    margin-left: -0.25rem;
-
-    > div {
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
-      margin-bottom: 0.5rem;
-    }
-  }
+  margin: 0.5rem 0 0;
 }
 
 .input {
@@ -30,6 +9,7 @@
 .view {
   font-size: 4.5rem;
   font-weight: bold;
+  text-align: left;
 }
 
 .output {

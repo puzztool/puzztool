@@ -1,11 +1,13 @@
 import { ChangeEvent } from "react";
-import Alert from "react-bootstrap/Alert";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import FormCheck from "react-bootstrap/FormCheck";
-import FormControl from "react-bootstrap/FormControl";
-import Row from "react-bootstrap/Row";
+import {
+  Alert,
+  Card,
+  Checkbox,
+  Grid,
+  Stack,
+  Textarea,
+  Text,
+} from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { useFocusInput } from "../../Hooks/FocusInput";
 import { RootState } from "../../Store/rootReducer";
@@ -66,7 +68,7 @@ function WordSearchComponentInner(props: Props) {
   function renderEmptyDirection() {
     if (!props.useCardinals && !props.useDiagonals) {
       return (
-        <Alert variant="warning">
+        <Alert color="yellow">
           No directions are selected. No results will be shown.
         </Alert>
       );
@@ -75,82 +77,76 @@ function WordSearchComponentInner(props: Props) {
 
   return (
     <div className={styles.container}>
-      <Container fluid={true}>
-        <Row className="g-0">
-          <Col md={4}>
-            <Card className={styles.listInput}>
-              <Card.Header>
+      <Grid gutter="md">
+        <Grid.Col span={{ base: 12, md: 4 }}>
+          <Card className={styles.listInput} withBorder>
+            <Card.Section withBorder inheritPadding py="xs">
+              <Text fw={500}>
                 Enter the list of words to find, one word per line
-              </Card.Header>
-              <Card.Body>
-                <FormControl
-                  as="textarea"
-                  onChange={onListTextChanged}
-                  placeholder="Word List To Find"
-                  value={props.wordList}
-                />
-                {renderEmptyDirection()}
-                <FormCheck
-                  checked={props.useDiagonals}
-                  id="WordSearchComponent-checkbox-diagonal"
-                  label="Use diagonal directions"
-                  onChange={onDiagonalCheckboxChange}
-                  type="checkbox"
-                />
-                <FormCheck
-                  checked={props.useCardinals}
-                  id="WordSearchComponent-checkbox-cardinal"
-                  label="Use cardinal directions"
-                  onChange={onCardinalCheckboxChange}
-                  type="checkbox"
-                />
-                <FormCheck
-                  checked={props.canBend}
-                  id="WordSearchComponent-checkbox-bend"
-                  label="Words can bend (may not be straight lines)"
-                  onChange={onSetCanBendChange}
-                  type="checkbox"
-                />
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={8}>
-            <Card className={styles.gridInput}>
-              <Card.Header>
+              </Text>
+            </Card.Section>
+            <Stack gap="sm">
+              <Textarea
+                onChange={onListTextChanged}
+                placeholder="Word List To Find"
+                value={props.wordList}
+              />
+              {renderEmptyDirection()}
+              <Checkbox
+                checked={props.useDiagonals}
+                id="WordSearchComponent-checkbox-diagonal"
+                label="Use diagonal directions"
+                onChange={onDiagonalCheckboxChange}
+              />
+              <Checkbox
+                checked={props.useCardinals}
+                id="WordSearchComponent-checkbox-cardinal"
+                label="Use cardinal directions"
+                onChange={onCardinalCheckboxChange}
+              />
+              <Checkbox
+                checked={props.canBend}
+                id="WordSearchComponent-checkbox-bend"
+                label="Words can bend (may not be straight lines)"
+                onChange={onSetCanBendChange}
+              />
+            </Stack>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 8 }}>
+          <Card className={styles.gridInput} withBorder>
+            <Card.Section withBorder inheritPadding py="xs">
+              <Text fw={500}>
                 Enter the word search grid, one row of letters per line
-              </Card.Header>
-              <Card.Body>
-                <FormControl
-                  as="textarea"
-                  onChange={onGridTextChanged}
-                  placeholder="Grid Text"
-                  ref={inputRef}
-                  spellCheck={false}
-                  value={props.grid}
-                />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Row className="g-0">
-          <Col md={12}>
-            <Card>
-              <Card.Header>Output</Card.Header>
-              <Card.Body>
-                <WordSearchOutput
-                  canBend={props.canBend}
-                  gridInputText={props.grid}
-                  onToggleShowUnused={(value) => props.setShowUnused(value)}
-                  showUnused={props.showUnused}
-                  useCardinals={props.useCardinals}
-                  useDiagonals={props.useDiagonals}
-                  wordListInputText={props.wordList}
-                />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+              </Text>
+            </Card.Section>
+            <Textarea
+              onChange={onGridTextChanged}
+              placeholder="Grid Text"
+              ref={inputRef}
+              spellCheck={false}
+              value={props.grid}
+              mt="md"
+            />
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Card withBorder>
+            <Card.Section withBorder inheritPadding py="xs">
+              <Text fw={500}>Output</Text>
+            </Card.Section>
+            <WordSearchOutput
+              canBend={props.canBend}
+              gridInputText={props.grid}
+              onToggleShowUnused={(value) => props.setShowUnused(value)}
+              showUnused={props.showUnused}
+              useCardinals={props.useCardinals}
+              useDiagonals={props.useDiagonals}
+              wordListInputText={props.wordList}
+            />
+          </Card>
+        </Grid.Col>
+      </Grid>
     </div>
   );
 }

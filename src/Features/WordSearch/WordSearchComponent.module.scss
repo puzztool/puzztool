@@ -3,17 +3,6 @@
     min-height: 12.5rem;
     resize: none;
   }
-
-  :global(.row) {
-    margin-right: -0.25rem;
-    margin-left: -0.25rem;
-
-    > div {
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
-      margin-bottom: 0.5rem;
-    }
-  }
 }
 
 .listInput {
@@ -23,20 +12,6 @@
     border-top: none;
     margin-bottom: 0.25rem;
     min-height: 12.5rem;
-  }
-
-  :global(.alert) {
-    margin-bottom: 0.25rem;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-  }
-
-  :global(.card-body) {
-    padding: 0;
-  }
-
-  :global(.form-check) {
-    margin: 0.25rem 0.5rem;
   }
 }
 
@@ -48,9 +23,5 @@
     font-family: monospace;
     height: 100%;
     letter-spacing: 0.5rem;
-  }
-
-  :global(.card-body) {
-    padding: 0;
   }
 }

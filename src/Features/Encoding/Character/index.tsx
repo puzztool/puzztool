@@ -1,5 +1,4 @@
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
+import { Tabs } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import { RootState } from "../../../Store/rootReducer";
@@ -21,17 +20,17 @@ type Props = ConnectedProps<typeof connector>;
 function CharacterEncodingsInner(props: Props) {
   return (
     <PuzzToolPage title="Character Encodings">
-      <Tabs
-        activeKey={props.selectedTab}
-        id="CharacterEncodings-tabs"
-        onSelect={props.selectTab}
-      >
-        <Tab eventKey="1" title="ASCII">
+      <Tabs value={props.selectedTab ?? "1"} onChange={props.selectTab}>
+        <Tabs.List>
+          <Tabs.Tab value="1">ASCII</Tabs.Tab>
+          <Tabs.Tab value="2">Ordinal</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="1">
           <AsciiTable />
-        </Tab>
-        <Tab eventKey="2" title="Ordinal">
+        </Tabs.Panel>
+        <Tabs.Panel value="2">
           <OrdinalTable />
-        </Tab>
+        </Tabs.Panel>
       </Tabs>
     </PuzzToolPage>
   );

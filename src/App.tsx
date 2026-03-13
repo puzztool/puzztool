@@ -1,13 +1,16 @@
 import { lazy, Suspense, useState } from "react";
-import { Button } from "react-bootstrap";
+import { AppShell, Button } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { Route, Routes, useLocation } from "react-router-dom";
 import PuzzToolDocumentTitle from "./Common/PuzzToolDocumentTitle";
+import UpdatePrompt from "./Common/UpdatePrompt";
 import AppNav from "./Features/AppNav";
 import NotFound from "./Features/Error/NotFound";
 import Loading from "./Features/Loading";
 import ErrorIcon from "./Features/Loading/ErrorIcon";
+import SettingsDrawer from "./Features/Settings";
 import styles from "./App.module.scss";
 
 const loadingDelay = 200;
@@ -26,16 +29,30 @@ const Semaphore = lazy(() => import("./Features/Encoding/Semaphore"));
 const Home = lazy(() => import("./Features/Home"));
 const Pigpen = lazy(() => import("./Features/Pigpen"));
 const Resistor = lazy(() => import("./Features/Resistor"));
-const Settings = lazy(() => import("./Features/Settings"));
 const WordSearch = lazy(() => import("./Features/WordSearch"));
 
+function isChunkLoadError(error: Error): boolean {
+  return (
+    error.name === "ChunkLoadError" ||
+    error.message.includes("Failed to fetch dynamically imported module") ||
+    error.message.includes("Loading chunk") ||
+    error.message.includes("Loading CSS chunk")
+  );
+}
+
 function ErrorFallback(props: FallbackProps) {
+  const chunkError = isChunkLoadError(props.error);
+
   return (
     <div className={styles.loadError}>
       <ErrorIcon />
-      <div>Failed to load content:</div>
-      <pre>{props.error.message}</pre>
-      <Button onClick={props.resetErrorBoundary}>Reload</Button>
+      <div>
+        {chunkError
+          ? "The app has been updated. Please refresh to load the latest version."
+          : "Failed to load content:"}
+      </div>
+      {!chunkError && <pre>{props.error.message}</pre>}
+      <Button onClick={() => window.location.reload()}>Refresh</Button>
     </div>
   );
 }
@@ -43,6 +60,8 @@ function ErrorFallback(props: FallbackProps) {
 function App() {
   const [resetCount, setResetCount] = useState(0);
   const location = useLocation();
+  const [settingsOpened, { open: openSettings, close: closeSettings }] =
+    useDisclosure();
 
   function onErrorBoundaryReset() {
     setResetCount(resetCount + 1);
@@ -51,9 +70,10 @@ function App() {
   return (
     <HelmetProvider>
       <PuzzToolDocumentTitle />
-      <div>
-        <AppNav />
-        <div className={styles.content}>
+      <AppShell header={{ height: 60 }} padding={{ base: "xs", sm: "md" }}>
+        <AppNav onSettingsOpen={openSettings} />
+        <AppShell.Main className={styles.content}>
+          <UpdatePrompt />
           <ErrorBoundary
             FallbackComponent={ErrorFallback}
             key={`${location.key}_${resetCount}`}
@@ -74,7 +94,6 @@ function App() {
                 <Route path="/encoding/morse" element={<Morse />} />
                 <Route path="/encoding/pigpen" element={<Pigpen />} />
                 <Route path="/encoding/semaphore" element={<Semaphore />} />
-                <Route path="/help/settings" element={<Settings />} />
                 <Route
                   path="/reference/characterencodings"
                   element={<Character />}
@@ -87,8 +106,9 @@ function App() {
               </Routes>
             </Suspense>
           </ErrorBoundary>
-        </div>
-      </div>
+        </AppShell.Main>
+      </AppShell>
+      <SettingsDrawer opened={settingsOpened} onClose={closeSettings} />
     </HelmetProvider>
   );
 }

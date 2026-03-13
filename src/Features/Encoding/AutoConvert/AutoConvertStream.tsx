@@ -1,12 +1,14 @@
 import { convertString } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
-import FormControl from "react-bootstrap/FormControl";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import {
+  Button,
+  Card,
+  Group,
+  SegmentedControl,
+  Stack,
+  TextInput,
+  Text,
+} from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
@@ -46,59 +48,51 @@ function AutoConvertStreamInner(props: Props) {
   }
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.input}>
-        <Card.Header>{props.prompt}</Card.Header>
-        <Card.Body>
-          <FormControl
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.input} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>{props.prompt}</Text>
+        </Card.Section>
+        <Stack gap="sm">
+          <TextInput
             onChange={onTextChanged}
             placeholder="Text"
             ref={inputRef}
             value={props.text}
           />
-          <ButtonToolbar>
-            <ToggleButtonGroup
-              name="AutoConvertStream-homogeneous"
-              onChange={(value) =>
-                props.setHomogeneous(value === ConversionMode.consistent)
-              }
-              type="radio"
-              value={
+          <Group gap="xs">
+            <SegmentedControl
+              data={[
+                {
+                  label: "Consistent",
+                  value: String(ConversionMode.consistent),
+                },
+                { label: "Mixed", value: String(ConversionMode.mixed) },
+              ]}
+              value={String(
                 props.homogeneous
                   ? ConversionMode.consistent
-                  : ConversionMode.mixed
+                  : ConversionMode.mixed,
+              )}
+              onChange={(value) =>
+                props.setHomogeneous(
+                  Number(value) === ConversionMode.consistent,
+                )
               }
-            >
-              <ToggleButton
-                id="AutoConvertStream-homogeneous-consistent"
-                value={ConversionMode.consistent}
-                variant="outline-primary"
-              >
-                Consistent
-              </ToggleButton>
-              <ToggleButton
-                id="AutoConvertStream-homogeneous-mixed"
-                value={ConversionMode.mixed}
-                variant="outline-primary"
-              >
-                Mixed
-              </ToggleButton>
-            </ToggleButtonGroup>
-            <ButtonGroup>
-              <Button onClick={onClearClick} variant="danger">
-                Clear
-              </Button>
-            </ButtonGroup>
-          </ButtonToolbar>
-        </Card.Body>
+            />
+            <Button onClick={onClearClick} color="red">
+              Clear
+            </Button>
+          </Group>
+        </Stack>
       </Card>
-      <Card>
-        <Card.Header>Output</Card.Header>
-        <Card.Body>
-          <pre>{convertString(props.text, props.homogeneous) || " "}</pre>
-        </Card.Body>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Output</Text>
+        </Card.Section>
+        <pre>{convertString(props.text, props.homogeneous) || " "}</pre>
       </Card>
-    </div>
+    </Stack>
   );
 }
 
