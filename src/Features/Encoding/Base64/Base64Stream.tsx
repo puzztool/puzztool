@@ -96,6 +96,12 @@ function Base64StreamInner(props: Props) {
       </Card>
       <Card withBorder>
         <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Decoded</Text>
+        </Card.Section>
+        <pre>{decode(props.text) || " "}</pre>
+      </Card>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
           <Text fw={500}>Encoded (Standard)</Text>
         </Card.Section>
         <pre>{encodeStandard(props.text) || " "}</pre>
@@ -111,12 +117,6 @@ function Base64StreamInner(props: Props) {
           <Text fw={500}>Encoded (Unpadded)</Text>
         </Card.Section>
         <pre>{encodeUnpadded(props.text) || " "}</pre>
-      </Card>
-      <Card withBorder>
-        <Card.Section withBorder inheritPadding py="xs">
-          <Text fw={500}>Decoded</Text>
-        </Card.Section>
-        <pre>{decode(props.text) || " "}</pre>
       </Card>
     </Stack>
   );
