@@ -34,6 +34,7 @@ type Props = ConnectedProps<typeof connector>;
 
 function normalizeStream(text: string): string {
   return text
+    .replace(/[\t\r\n]+/g, " ")
     .replace(/ *\/ */g, MORSE_WORD_DIVIDER)
     .replace(/ {2,}/g, MORSE_CHARACTER_DIVIDER)
     .replace(/[^.\- /]/g, "");
@@ -134,6 +135,7 @@ function MorseStreamInner(props: Props) {
           <Text fw={500}>Input</Text>
         </Card.Section>
         <TextInput
+          aria-label="Morse code input"
           onChange={onTextChanged}
           placeholder="Paste or type raw morse (e.g. .... . .-.. .-.. ---)"
           value={props.stream}
