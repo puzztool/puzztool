@@ -1,5 +1,4 @@
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
+import { Tabs } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import { RootState } from "../../../Store/rootReducer";
@@ -21,17 +20,17 @@ type Props = ConnectedProps<typeof connector>;
 function BrailleInner(props: Props) {
   return (
     <PuzzToolPage title="Braille">
-      <Tabs
-        activeKey={props.selectedTab}
-        id="Braille-tabs"
-        onSelect={props.selectTab}
-      >
-        <Tab eventKey="1" title="Value">
+      <Tabs value={props.selectedTab ?? "1"} onChange={props.selectTab}>
+        <Tabs.List>
+          <Tabs.Tab value="1">Value</Tabs.Tab>
+          <Tabs.Tab value="2">Reference</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="1">
           <BrailleStream />
-        </Tab>
-        <Tab eventKey="2" title="Reference">
+        </Tabs.Panel>
+        <Tabs.Panel value="2">
           <BrailleReference />
-        </Tab>
+        </Tabs.Panel>
       </Tabs>
     </PuzzToolPage>
   );

@@ -28,7 +28,7 @@ function ResistorPicture(props: Props) {
       <svg width="240" viewBox="0 0 136 40">
         <defs>
           <g id="Wire">
-            <rect y="20" height="1" width="8" fill="black" />
+            <rect y="20" height="1" width="8" fill="currentColor" />
           </g>
           <g id="Resistor">
             <rect
@@ -38,7 +38,7 @@ function ResistorPicture(props: Props) {
               height="24"
               rx="4"
               ry="4"
-              stroke="black"
+              stroke="currentColor"
               strokeWidth="0.5"
               fill="burlywood"
             />
@@ -50,7 +50,7 @@ function ResistorPicture(props: Props) {
               y="8"
               height="24"
               width="12"
-              stroke="black"
+              stroke="currentColor"
               strokeWidth="0.5"
             />
           </g>

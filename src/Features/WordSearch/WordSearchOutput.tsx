@@ -1,5 +1,4 @@
-import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
+import { Button, Table } from "@mantine/core";
 import { findWords, WordSearchDirection } from "puzzle-lib";
 import styles from "./WordSearchOutput.module.scss";
 
@@ -104,29 +103,29 @@ function WordSearchOutput(props: Props) {
 
   return (
     <>
-      <Table className={styles.container} borderless={true}>
-        <tbody>
+      <Table className={styles.container}>
+        <Table.Tbody>
           {grid.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+            <Table.Tr key={rowIndex}>
               {row.map((col, colIndex) => (
-                <td
+                <Table.Td
                   className={getColumnClassName(
                     shouldHighlight[rowIndex][colIndex],
                   )}
                   key={`${rowIndex},${colIndex}`}
                 >
                   {col}
-                </td>
+                </Table.Td>
               ))}
-            </tr>
+            </Table.Tr>
           ))}
-        </tbody>
+        </Table.Tbody>
       </Table>
       {results.length > 0 && (
         <div className={styles.unusedLettersSection}>
           <Button
             onClick={() => props.onToggleShowUnused(!props.showUnused)}
-            variant="outline-secondary"
+            variant="outline"
           >
             {props.showUnused ? "Hide Unused Letters" : "Show Unused Letters"}
           </Button>

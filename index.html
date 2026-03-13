@@ -20,6 +20,30 @@
     <link rel="apple-touch-icon" href="/icons-192-fill.png" />
     <title>PuzzTool</title>
 
+    <script>
+      // Mantine color scheme initialization (prevents flash)
+      // Prevent flash of wrong color scheme before Mantine JS initializes.
+      // Only sets the DOM attribute (no persistence); Mantine takes over after init
+      // and dynamically responds to OS theme changes via its own matchMedia listener.
+      try {
+        var cs = localStorage.getItem("mantine-color-scheme-value");
+        if (cs === "dark" || cs === "light") {
+          document.documentElement.setAttribute(
+            "data-mantine-color-scheme",
+            cs,
+          );
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          document.documentElement.setAttribute(
+            "data-mantine-color-scheme",
+            "dark",
+          );
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages

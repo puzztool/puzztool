@@ -1,8 +1,8 @@
 import { compareVersions } from "compare-versions";
-import { version } from "../version";
 
 const VERSION_STORAGE_KEY = "appVersion";
 const STORAGE_KEY_PREFIX = "puzztool";
+const version = __APP_VERSION__;
 let isSupported: boolean;
 
 function getKey(key: string) {

@@ -1,11 +1,13 @@
 import { ChangeEvent, ReactNode } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
-import FormControl from "react-bootstrap/FormControl";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import {
+  Button,
+  Card,
+  Group,
+  SegmentedControl,
+  Stack,
+  TextInput,
+  Text,
+} from "@mantine/core";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { Conversion } from "./Conversion";
 import styles from "./index.module.scss";
@@ -53,58 +55,47 @@ function KeyedCipherStream(props: Props) {
   }
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.input}>
-        <Card.Header>{props.prompt}</Card.Header>
-        <Card.Body>
-          <FormControl
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.input} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>{props.prompt}</Text>
+        </Card.Section>
+        <Stack gap="sm">
+          <TextInput
             onChange={onTextChange}
             placeholder="Text"
             ref={inputRef}
             value={props.text}
           />
-          <FormControl
+          <TextInput
             onChange={onKeyChange}
             placeholder="Key"
             value={props.secret}
           />
-          <ButtonToolbar>
-            <ToggleButtonGroup
-              name="KeyedCipherStream-conversion"
-              onChange={props.onConversionChange}
-              type="radio"
-              value={props.conversion}
-            >
-              <ToggleButton
-                id="KeyedCipherStream-conversion-encrypt"
-                value={Conversion.encrypt}
-                variant="outline-primary"
-              >
-                Encrypt
-              </ToggleButton>
-              <ToggleButton
-                id="KeyedCipherStream-conversion-decrypt"
-                value={Conversion.decrypt}
-                variant="outline-primary"
-              >
-                Decrypt
-              </ToggleButton>
-            </ToggleButtonGroup>
-            <ButtonGroup>
-              <Button onClick={onClearClick} variant="danger">
-                Clear
-              </Button>
-            </ButtonGroup>
-          </ButtonToolbar>
-        </Card.Body>
+          <Group gap="xs">
+            <SegmentedControl
+              data={[
+                { label: "Encrypt", value: String(Conversion.encrypt) },
+                { label: "Decrypt", value: String(Conversion.decrypt) },
+              ]}
+              value={String(props.conversion)}
+              onChange={(value) =>
+                props.onConversionChange(Number(value) as Conversion)
+              }
+            />
+            <Button onClick={onClearClick} color="red">
+              Clear
+            </Button>
+          </Group>
+        </Stack>
       </Card>
-      <Card>
-        <Card.Header>Output</Card.Header>
-        <Card.Body>
-          <pre>{calculateOutput() || " "}</pre>
-        </Card.Body>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Output</Text>
+        </Card.Section>
+        <pre>{calculateOutput() || " "}</pre>
       </Card>
-    </div>
+    </Stack>
   );
 }
 

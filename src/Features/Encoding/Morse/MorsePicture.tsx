@@ -10,7 +10,7 @@ interface CharacterProps {
 export function MorseDot(props: CharacterProps) {
   return (
     <svg className={props.className} viewBox="0 0 30 30">
-      <circle cx="15" cy="15" r="15" />
+      <circle cx="15" cy="15" r="15" fill="currentColor" />
       Sorry, your browser does not support inline SVG.
     </svg>
   );
@@ -19,7 +19,7 @@ export function MorseDot(props: CharacterProps) {
 export function MorseDash(props: CharacterProps) {
   return (
     <svg className={props.className} viewBox="0 0 90 30">
-      <rect width="90" height="30" />
+      <rect width="90" height="30" fill="currentColor" />
       Sorry, your browser does not support inline SVG.
     </svg>
   );

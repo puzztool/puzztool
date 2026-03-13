@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "@/test-utils";
 import { Provider } from "react-redux";
 import { test } from "vitest";
 import configureStore from "../../../Store/configureStore";

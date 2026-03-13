@@ -1,5 +1,5 @@
 .container {
-  margin: 0 1rem;
+  margin: 0;
 }
 
 .input {
@@ -7,9 +7,5 @@
 
   input {
     margin-bottom: 0.5rem;
-  }
-
-  :global(.btn-toolbar) {
-    margin-bottom: -0.5rem;
   }
 }

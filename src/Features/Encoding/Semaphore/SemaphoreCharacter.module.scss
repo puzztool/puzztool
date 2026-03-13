@@ -1,59 +1,64 @@
 @mixin checkbox {
   position: absolute;
+  white-space: nowrap;
+  z-index: 1;
 }
 
 .container {
   position: relative;
-
-  svg {
-    margin-right: 3px;
-  }
+  display: inline-block;
+  margin-left: 1.5rem;
+  min-width: 280px;
 }
+
+// SVG is 240px wide × ~202px tall (viewBox 76×64 at width=240).
+// Person center: ~(120, 85). Flag tips ~88px from center.
+// Mantine md checkbox box is ~24px.
 
 .north {
   @include checkbox;
-  top: 16px;
-  left: 112.5px;
+  top: 0;
+  left: 108px;
 }
 
 .northEast {
   @include checkbox;
-  top: 47px;
-  left: 192px;
+  top: 12px;
+  left: 194px;
 }
 
 .east {
   @include checkbox;
-  top: 103px;
-  left: 203px;
+  top: 74px;
+  left: 218px;
 }
 
 .southEast {
   @include checkbox;
-  top: 149px;
-  left: 169px;
+  top: 140px;
+  left: 194px;
 }
 
 .south {
   @include checkbox;
-  top: 161px;
-  left: 112.5px;
+  bottom: 0;
+  left: 108px;
 }
 
 .southWest {
   @include checkbox;
-  top: 149px;
-  left: 57px;
+  top: 140px;
+  left: 22px;
 }
 
 .west {
   @include checkbox;
-  top: 103px;
-  left: 25px;
+  top: 74px;
+  left: 0;
 }
 
 .northWest {
   @include checkbox;
-  top: 47px;
-  left: 35px;
+  top: 12px;
+  left: 22px;
 }

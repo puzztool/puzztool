@@ -7,9 +7,7 @@ import {
   INVALID_RESISTOR,
   RESISTOR_COLOR_TABLE,
 } from "puzzle-lib";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
+import { Card, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../Store/rootReducer";
 import ResistorColorSelector from "./ResistorColorSelector";
@@ -65,64 +63,56 @@ function ResistorInputInner(props: Props) {
   const noneColor: Color = { name: "None", colorCode: "", multiplier: 0 };
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.input}>
-        <Card.Header>Input</Card.Header>
-        <Card.Body>
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.input} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Input</Text>
+        </Card.Section>
+        <Stack gap="sm">
           <div className={styles.display}>
             <ResistorPicture bands={bands} />
           </div>
-          <div>
-            <ButtonToolbar>
-              <ButtonGroup>
-                <ResistorColorSelector
-                  index={0}
-                  title="First Band"
-                  colors={[...colorsWithValue]}
-                  onChange={onColorChange}
-                />
-              </ButtonGroup>
-              <ButtonGroup>
-                <ResistorColorSelector
-                  index={1}
-                  title="Second Band"
-                  colors={[...colorsWithValue]}
-                  onChange={onColorChange}
-                />
-              </ButtonGroup>
-              <ButtonGroup>
-                <ResistorColorSelector
-                  index={2}
-                  title="Third Band"
-                  colors={[...RESISTOR_COLOR_TABLE]}
-                  onChange={onColorChange}
-                />
-              </ButtonGroup>
-              <ButtonGroup>
-                <ResistorColorSelector
-                  index={3}
-                  title="Fourth Band"
-                  colors={[noneColor, ...RESISTOR_COLOR_TABLE]}
-                  onChange={onColorChange}
-                />
-              </ButtonGroup>
-              <ButtonGroup>
-                <ResistorColorSelector
-                  index={4}
-                  title="Tolerance Band"
-                  colors={[...colorsWithTolerance]}
-                  onChange={onColorChange}
-                />
-              </ButtonGroup>
-            </ButtonToolbar>
-          </div>
-        </Card.Body>
+          <Group gap="xs" wrap="wrap">
+            <ResistorColorSelector
+              index={0}
+              title="First Band"
+              colors={[...colorsWithValue]}
+              onChange={onColorChange}
+            />
+            <ResistorColorSelector
+              index={1}
+              title="Second Band"
+              colors={[...colorsWithValue]}
+              onChange={onColorChange}
+            />
+            <ResistorColorSelector
+              index={2}
+              title="Third Band"
+              colors={[...RESISTOR_COLOR_TABLE]}
+              onChange={onColorChange}
+            />
+            <ResistorColorSelector
+              index={3}
+              title="Fourth Band"
+              colors={[noneColor, ...RESISTOR_COLOR_TABLE]}
+              onChange={onColorChange}
+            />
+            <ResistorColorSelector
+              index={4}
+              title="Tolerance Band"
+              colors={[...colorsWithTolerance]}
+              onChange={onColorChange}
+            />
+          </Group>
+        </Stack>
       </Card>
-      <Card className={styles.output}>
-        <Card.Header>Output</Card.Header>
-        <Card.Body>{getResistorValueDisplay(bands)}</Card.Body>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Output</Text>
+        </Card.Section>
+        <Text className={styles.output}>{getResistorValueDisplay(bands)}</Text>
       </Card>
-    </div>
+    </Stack>
   );
 }
 

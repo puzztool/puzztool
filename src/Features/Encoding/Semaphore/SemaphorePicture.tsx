@@ -87,19 +87,41 @@ function SemaphorePicture(props: Props) {
   return (
     <svg width={props.width} viewBox="0 0 76 64">
       <defs>
-        <g id="Person" fill="black">
+        <g
+          id="Person"
+          fill="currentColor"
+          stroke="var(--mantine-color-body)"
+          strokeWidth="0.75"
+        >
           <circle r="3.5" cx="4" cy="4" />
           <rect y="8" width="8" height="16" rx="2" ry="2" />
         </g>
         <g id="Flag">
-          <polyline strokeWidth="1" stroke="black" points="0 0, 0 20" />
+          <polyline
+            strokeWidth="2"
+            stroke="var(--mantine-color-body)"
+            points="0 0, 0 20"
+          />
+          <polyline strokeWidth="1" stroke="currentColor" points="0 0, 0 20" />
+          <polyline
+            strokeWidth="3"
+            stroke="var(--mantine-color-body)"
+            strokeLinecap="round"
+            points="0 20, 0 28"
+          />
           <polyline
             strokeWidth="2"
             strokeLinecap="round"
-            stroke="black"
+            stroke="currentColor"
             points="0 20, 0 28"
           />
-          <rect stroke="black" height="10" width="10" />
+          <rect
+            stroke="currentColor"
+            strokeWidth="0.75"
+            height="10"
+            width="10"
+            fill="none"
+          />
           <polygon fill="red" points="0 0, 10 0, 0 10" />
           <polygon fill="yellow" points="10 0, 10 10, 0 10" />
         </g>

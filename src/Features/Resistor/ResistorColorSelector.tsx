@@ -1,7 +1,5 @@
 import type { ResistorColor as Color } from "puzzle-lib";
-import { RESISTOR_COLOR_TABLE } from "puzzle-lib";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import { Button, Menu } from "@mantine/core";
 
 interface ColorSelectorProps {
   colors: Color[];
@@ -10,42 +8,32 @@ interface ColorSelectorProps {
   onChange?: (index: number, color?: Color) => void;
 }
 
-function colorByName(name: string | null) {
-  for (const color of RESISTOR_COLOR_TABLE) {
-    if (name === color.name) {
-      return color;
-    }
-  }
-
-  return undefined;
-}
-
 function ResistorColorSelector(props: ColorSelectorProps) {
-  function onSelect(eventKey: string | null) {
+  function onSelect(color: Color) {
     const handler = props.onChange;
     if (handler) {
-      handler(props.index, colorByName(eventKey));
+      handler(props.index, color);
     }
   }
 
   return (
-    <DropdownButton
-      title={props.title}
-      key={props.index}
-      id={`color-select-${props.index}`}
-      onSelect={onSelect}
-    >
-      {props.colors.map((color: Color, itemIndex: number) => {
-        return (
-          <Dropdown.Item
-            key={`${props.index}-${itemIndex}`}
-            eventKey={color.name}
-          >
-            {color.name}
-          </Dropdown.Item>
-        );
-      })}
-    </DropdownButton>
+    <Menu>
+      <Menu.Target>
+        <Button>{props.title}</Button>
+      </Menu.Target>
+      <Menu.Dropdown>
+        {props.colors.map((color: Color, itemIndex: number) => {
+          return (
+            <Menu.Item
+              key={`${props.index}-${itemIndex}`}
+              onClick={() => onSelect(color)}
+            >
+              {color.name}
+            </Menu.Item>
+          );
+        })}
+      </Menu.Dropdown>
+    </Menu>
   );
 }
 

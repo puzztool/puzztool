@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render } from "@/test-utils";
 import { SemaphoreEncoding } from "puzzle-lib";
 import { test } from "vitest";
 import SemaphorePicture from "./SemaphorePicture";

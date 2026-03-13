@@ -1,65 +1,99 @@
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import PuzzToolPage from "../../Common/PuzzToolPage";
+import {
+  Anchor,
+  Button,
+  Divider,
+  Drawer,
+  SegmentedControl,
+  Stack,
+  Text,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { clearLocalStorage } from "../../Data/LocalStorage";
 import PuzztoolBannerDark from "../../Images/puzztool_banner_dark.svg";
-import { version } from "../../version";
+import PuzztoolBannerWhite from "../../Images/puzztool_banner_white.svg";
 import styles from "./index.module.scss";
 
-function Settings() {
+interface Props {
+  opened: boolean;
+  onClose: () => void;
+}
+
+function SettingsDrawer(props: Props) {
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light");
+
   function onClearClick() {
     clearLocalStorage();
   }
 
   return (
-    <PuzzToolPage title="Settings">
-      <div className={styles.container}>
-        <Container fluid={true}>
-          <Row className="gy-3">
-            <Col md={true}>
-              <Card className="h-100">
-                <Card.Header>Saved state</Card.Header>
-                <Card.Body>
-                  <p>
-                    The most recent inputs to each tool are stored in the
-                    browser's local storage. In the event that state becomes
-                    corrupted it can be cleared using the button below.
-                  </p>
-                  <Button onClick={onClearClick} variant="danger">
-                    Clear saved state
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={true}>
-              <Card className="h-100">
-                <Card.Header>About</Card.Header>
-                <Card.Body>
-                  <img
-                    className={styles.logo}
-                    src={PuzztoolBannerDark}
-                    alt="PuzzTool logo"
-                  />
-                  Version: {version}
-                  <br />
-                  <a
-                    href="https://github.com/puzztool/puzztool/"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Project page
-                  </a>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </PuzzToolPage>
+    <Drawer
+      opened={props.opened}
+      onClose={props.onClose}
+      title="Settings"
+      position="right"
+      size="sm"
+    >
+      <Stack gap="lg">
+        <Stack gap="xs">
+          <Text fw={500}>Appearance</Text>
+          <Text size="sm">Color scheme</Text>
+          <SegmentedControl
+            value={colorScheme}
+            onChange={(value) =>
+              setColorScheme(value as "light" | "dark" | "auto")
+            }
+            data={[
+              { label: "Light", value: "light" },
+              { label: "Dark", value: "dark" },
+              { label: "Auto", value: "auto" },
+            ]}
+          />
+        </Stack>
+
+        <Divider />
+
+        <Stack gap="xs">
+          <Text fw={500}>Saved state</Text>
+          <Text size="sm">
+            The most recent inputs to each tool are stored in the browser's
+            local storage. In the event that state becomes corrupted it can be
+            cleared using the button below.
+          </Text>
+          <Button onClick={onClearClick} color="red" size="sm">
+            Clear saved state
+          </Button>
+        </Stack>
+
+        <Divider />
+
+        <Stack gap="xs">
+          <Text fw={500}>About</Text>
+          <img
+            className={styles.logo}
+            src={
+              computedColorScheme === "dark"
+                ? PuzztoolBannerWhite
+                : PuzztoolBannerDark
+            }
+            alt="PuzzTool logo"
+          />
+          <Text size="sm">
+            Version: {__APP_VERSION__} ({__COMMIT_HASH__})
+          </Text>
+          <Anchor
+            href="https://github.com/puzztool/puzztool/"
+            rel="noreferrer"
+            target="_blank"
+            size="sm"
+          >
+            Project page
+          </Anchor>
+        </Stack>
+      </Stack>
+    </Drawer>
   );
 }
 
-export default Settings;
+export default SettingsDrawer;

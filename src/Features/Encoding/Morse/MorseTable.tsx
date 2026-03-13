@@ -3,7 +3,7 @@ import {
   morseEncodingToString,
   MorseEncoding,
 } from "puzzle-lib";
-import Table from "react-bootstrap/Table";
+import { Table } from "@mantine/core";
 import MorsePicture from "./MorsePicture";
 import styles from "./MorseTable.module.scss";
 
@@ -11,28 +11,28 @@ function MorseTable() {
   const characters = lookupMorseEncoding(MorseEncoding.None).partial;
   return (
     <div className={styles.container}>
-      <Table striped={true} responsive={true}>
-        <thead>
-          <tr>
-            <th>Character</th>
-            <th>Morse</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table striped withTableBorder>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Character</Table.Th>
+            <Table.Th>Morse</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
           {characters.map((entry) => (
-            <tr key={entry.display}>
-              <td>{entry.display}</td>
-              <td>
+            <Table.Tr key={entry.display}>
+              <Table.Td>{entry.display}</Table.Td>
+              <Table.Td>
                 <div className={styles.morseView}>
                   <MorsePicture
                     className={styles.morse_picture}
                     morseString={morseEncodingToString(entry.encoding)}
                   />
                 </div>
-              </td>
-            </tr>
+              </Table.Td>
+            </Table.Tr>
           ))}
-        </tbody>
+        </Table.Tbody>
       </Table>
     </div>
   );

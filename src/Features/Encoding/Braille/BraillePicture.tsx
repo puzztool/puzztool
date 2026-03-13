@@ -22,14 +22,14 @@ function BraillePicture(props: Props) {
     <svg width={props.width} viewBox="0 0 34 52">
       <defs>
         <g id="FullDot">
-          <circle r="6" fill="black" cx="0" cy="0" />
+          <circle r="6" fill="currentColor" cx="0" cy="0" />
         </g>
         <g id="EmptyDot">
           <circle
             r="6"
             fill="transparent"
             strokeWidth="1"
-            stroke="black"
+            stroke="currentColor"
             cx="0"
             cy="0"
           />

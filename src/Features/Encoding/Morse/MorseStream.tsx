@@ -11,10 +11,7 @@ import {
   parseMorseString,
 } from "puzzle-lib";
 import { useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
+import { Button, Card, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import { append, backspace, clear } from "./morseEncodingSlice";
@@ -244,67 +241,57 @@ function MorseStreamInner(props: Props) {
   const hint = partialMatchHint();
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.morseOutput}>
-        <Card.Header>Input</Card.Header>
-        <Card.Body>
-          <pre>
-            {codeText()}
-            <span className="blinking-cursor">|</span>
-          </pre>
-          {hint !== null && <div className={styles.partialMatches}>{hint}</div>}
-        </Card.Body>
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.morseOutput} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Input</Text>
+        </Card.Section>
+        <pre>
+          {codeText()}
+          <span className="blinking-cursor">|</span>
+        </pre>
+        {hint !== null && <div className={styles.partialMatches}>{hint}</div>}
       </Card>
-      <Card className={styles.output}>
-        <Card.Header>Plaintext</Card.Header>
-        <Card.Body>
-          <pre>{plainText() || " "}</pre>
-        </Card.Body>
+      <Card className={styles.output} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Plaintext</Text>
+        </Card.Section>
+        <pre>{plainText() || " "}</pre>
       </Card>
-      <ButtonToolbar className={styles.inputCommands}>
-        <ButtonGroup>
-          <Button onClick={onDotClick} variant="primary">
-            <MorseDot className={styles.dot_button} />
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button onClick={onDashClick} variant="primary">
-            <MorseDash className={styles.dash_button} />
-          </Button>
-        </ButtonGroup>
-      </ButtonToolbar>
-      <ButtonToolbar className={styles.commands}>
-        <ButtonGroup>
-          <Button onClick={onBackspaceClick}>&#x232b;</Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button onClick={onNextClick}>Next</Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button onClick={onClearClick} variant="danger">
-            Clear
-          </Button>
-        </ButtonGroup>
-      </ButtonToolbar>
-      <Card className={styles.output}>
-        <Card.Header>Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertText() || " "}</pre>
-        </Card.Body>
+      <Group className={styles.inputCommands} gap="xs">
+        <Button onClick={onDotClick}>
+          <MorseDot className={styles.dot_button} />
+        </Button>
+        <Button onClick={onDashClick}>
+          <MorseDash className={styles.dash_button} />
+        </Button>
+      </Group>
+      <Group className={styles.commands} gap="xs">
+        <Button onClick={onBackspaceClick}>&#x232b;</Button>
+        <Button onClick={onNextClick}>Next</Button>
+        <Button onClick={onClearClick} color="red">
+          Clear
+        </Button>
+      </Group>
+      <Card className={styles.output} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Swap Dots/Dashes</Text>
+        </Card.Section>
+        <pre>{invertText() || " "}</pre>
       </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left</Card.Header>
-        <Card.Body>
-          <pre>{reverseText() || " "}</pre>
-        </Card.Body>
+      <Card className={styles.output} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Right to Left</Text>
+        </Card.Section>
+        <pre>{reverseText() || " "}</pre>
       </Card>
-      <Card className={styles.output}>
-        <Card.Header>Right to Left + Swap Dots/Dashes</Card.Header>
-        <Card.Body>
-          <pre>{invertReverseText() || " "}</pre>
-        </Card.Body>
+      <Card className={styles.output} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Right to Left + Swap Dots/Dashes</Text>
+        </Card.Section>
+        <pre>{invertReverseText() || " "}</pre>
       </Card>
-    </div>
+    </Stack>
   );
 }
 

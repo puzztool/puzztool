@@ -1,15 +1,27 @@
 /// <reference types="vitest" />
 import { defineConfig } from "vite";
+import { execSync } from "child_process";
 import react from "@vitejs/plugin-react";
 import viteTsconfigPaths from "vite-tsconfig-paths";
 import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
+
+let commitHash: string;
+try {
+  commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+} catch {
+  commitHash = "unknown";
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     outDir: "build",
     emptyOutDir: true,
+  },
+  define: {
+    __COMMIT_HASH__: JSON.stringify(commitHash),
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? "0.0.0"),
   },
   plugins: [
     eslint(),
@@ -40,10 +52,11 @@ export default defineConfig({
         ],
         name: "PuzzTool",
         short_name: "PuzzTool",
+        theme_color: "#1a1b1e",
       },
-      registerType: "autoUpdate",
+      registerType: "prompt",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
       },
     }),
   ],

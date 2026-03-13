@@ -1,10 +1,6 @@
 import { caesarRotations } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Card from "react-bootstrap/Card";
-import FormControl from "react-bootstrap/FormControl";
+import { Button, Card, Group, Stack, TextInput, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
@@ -38,32 +34,32 @@ function CaesarStreamInner(props: Props) {
   }
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.input}>
-        <Card.Header>{props.prompt}</Card.Header>
-        <Card.Body>
-          <FormControl
+    <Stack className={styles.container} gap="sm">
+      <Card className={styles.input} withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>{props.prompt}</Text>
+        </Card.Section>
+        <Stack gap="sm">
+          <TextInput
             onChange={onTextChanged}
             placeholder="Text"
             ref={inputRef}
             value={props.text}
           />
-          <ButtonToolbar>
-            <ButtonGroup>
-              <Button onClick={onClearClick} variant="danger">
-                Clear
-              </Button>
-            </ButtonGroup>
-          </ButtonToolbar>
-        </Card.Body>
+          <Group gap="xs">
+            <Button onClick={onClearClick} color="red">
+              Clear
+            </Button>
+          </Group>
+        </Stack>
       </Card>
-      <Card>
-        <Card.Header>Output</Card.Header>
-        <Card.Body>
-          <CaesarList list={caesarRotations(props.text)} />
-        </Card.Body>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Output</Text>
+        </Card.Section>
+        <CaesarList list={caesarRotations(props.text)} />
       </Card>
-    </div>
+    </Stack>
   );
 }
 

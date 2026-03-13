@@ -1,6 +1,6 @@
 .content {
-  margin: 1rem env(safe-area-inset-right)
-    calc(env(safe-area-inset-bottom) + 1rem) env(safe-area-inset-left);
+  margin: 0 env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 }
 
 .loadError {
