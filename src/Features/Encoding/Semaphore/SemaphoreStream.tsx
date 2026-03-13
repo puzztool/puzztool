@@ -135,6 +135,10 @@ function SemaphoreStreamInner(props: Props) {
     }
   }
 
+  function onSpaceClick() {
+    props.space();
+  }
+
   const displayText = lookupSemaphoreEncoding(props.encoding).exactString;
 
   return (
@@ -158,6 +162,9 @@ function SemaphoreStreamInner(props: Props) {
           <Group gap="xs">
             <Button onClick={onBackspaceClick}>&#x232b;</Button>
             <Button onClick={onNextClick}>Next</Button>
+            <Button onClick={onSpaceClick} variant="default">
+              Space
+            </Button>
             <Button onClick={onClearClick} color="red">
               Clear
             </Button>
