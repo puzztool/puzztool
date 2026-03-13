@@ -6,7 +6,7 @@ PuzzTool is a React-based Progressive Web App (PWA) for solving puzzles. It uses
 
 ## Development Environment
 
-- **Runtime**: Node.js 22 LTS (available via `nix-shell` on NixOS)
+- **Runtime**: Node.js 22 LTS (a `shell.nix` is provided for NixOS users)
 - **Package Manager**: npm
 
 ## Commands
