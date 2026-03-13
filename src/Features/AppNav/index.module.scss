@@ -55,7 +55,9 @@
 }
 
 .mobileLink {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   width: 100%;
   color: rgba(255, 255, 255, 0.85);
   padding: 0.5rem;
