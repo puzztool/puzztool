@@ -11,6 +11,7 @@ Supported Ciphers and Encodings include:
 
 - Braille
 - Morse Code
+- Pigpen Cipher
 - Semaphore Flags
 - Caesar Ciphers
 - Vigenere Ciphers

@@ -1,19 +1,40 @@
+import { Tabs } from "@mantine/core";
+import { connect, ConnectedProps } from "react-redux";
 import PuzzToolPage from "../../Common/PuzzToolPage";
-import PigpenKey from "../../Images/pigpen_key.svg";
-import styles from "./index.module.scss";
+import { RootState } from "../../Store/rootReducer";
+import { selectTab } from "../Encoding/Pigpen/pigpenEncodingSlice";
+import PigpenStream from "../Encoding/Pigpen/PigpenStream";
+import PigpenReference from "../Encoding/Pigpen/PigpenReference";
 
-function Pigpen() {
+const mapStateToProps = (state: RootState) => ({
+  selectedTab: state.encoding.pigpen.selectedTab,
+});
+const mapDispatchToProps = {
+  selectTab,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+function PigpenInner(props: Props) {
   return (
     <PuzzToolPage title="Pigpen">
-      <div className={styles.container}>
-        <img
-          className={styles.image}
-          src={PigpenKey}
-          alt="Pigpen cipher reference chart"
-        />
-      </div>
+      <Tabs value={props.selectedTab ?? "1"} onChange={props.selectTab}>
+        <Tabs.List>
+          <Tabs.Tab value="1">Value</Tabs.Tab>
+          <Tabs.Tab value="2">Reference</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="1">
+          <PigpenStream />
+        </Tabs.Panel>
+        <Tabs.Panel value="2">
+          <PigpenReference />
+        </Tabs.Panel>
+      </Tabs>
     </PuzzToolPage>
   );
 }
 
+const Pigpen = connector(PigpenInner);
 export default Pigpen;
