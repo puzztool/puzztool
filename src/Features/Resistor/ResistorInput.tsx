@@ -1,4 +1,4 @@
-import type { ResistorColor as Color } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib/resistor";
 import {
   getResistorDisplayValue,
   getResistorValue as computeResistorValue,
@@ -6,7 +6,7 @@ import {
   hasResistorValue,
   INVALID_RESISTOR,
   RESISTOR_COLOR_TABLE,
-} from "puzzle-lib";
+} from "puzzle-lib/resistor";
 import { Card, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../Store/rootReducer";

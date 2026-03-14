@@ -1,4 +1,4 @@
-import { vigenereEncrypt, vigenereDecrypt } from "puzzle-lib";
+import { vigenereEncrypt, vigenereDecrypt } from "puzzle-lib/cipher";
 import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";

@@ -1,4 +1,4 @@
-import { BrailleEncoding, lookupBrailleEncoding } from "puzzle-lib";
+import { BrailleEncoding, lookupBrailleEncoding } from "puzzle-lib/braille";
 import ReferenceList from "../../../Common/ReferenceList";
 import BraillePicture from "./BraillePicture";
 

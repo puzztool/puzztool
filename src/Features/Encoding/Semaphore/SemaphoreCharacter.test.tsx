@@ -3,7 +3,7 @@ import {
   SemaphoreDirection as Direction,
   SemaphoreEncoding,
   addSemaphoreDirection,
-} from "puzzle-lib";
+} from "puzzle-lib/semaphore";
 import { test } from "vitest";
 import SemaphoreCharacter from "./SemaphoreCharacter";
 

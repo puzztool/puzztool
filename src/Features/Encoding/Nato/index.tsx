@@ -1,5 +1,5 @@
 import { Table } from "@mantine/core";
-import { NATO_ALPHABET } from "puzzle-lib";
+import { NATO_ALPHABET } from "puzzle-lib/nato";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import styles from "./index.module.scss";
 

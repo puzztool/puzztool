@@ -1,4 +1,4 @@
-import { caesarRotations } from "puzzle-lib";
+import { caesarRotations } from "puzzle-lib/cipher";
 import { ChangeEvent, ReactNode } from "react";
 import { Card, Group, Stack, TextInput, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";

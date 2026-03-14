@@ -1,5 +1,5 @@
 import { Table } from "@mantine/core";
-import { CharacterTableEntry as Entry } from "puzzle-lib";
+import { CharacterTableEntry as Entry } from "puzzle-lib/conversion";
 import styles from "./CharacterTable.module.scss";
 
 interface Props {
