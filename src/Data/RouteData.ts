@@ -98,6 +98,11 @@ export function getCategories(): RouteCategory[] {
           url: "/morse",
         },
         {
+          description: "Suggest words from telephone keypad digits",
+          name: "Phone to Text",
+          url: "/phone",
+        },
+        {
           description: "Parts of a tic-tac-toe grid or X, some with dot",
           icon: IconPuzzle,
           name: "Pigpen",
