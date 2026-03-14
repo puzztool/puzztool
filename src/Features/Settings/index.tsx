@@ -91,6 +91,25 @@ function SettingsDrawer(props: Props) {
             Project page
           </Anchor>
         </Stack>
+
+        <Divider />
+
+        <Stack gap="xs">
+          <Text fw={500}>Credits</Text>
+          <Text size="sm">
+            Phone to Text bigram frequency data derived from Peter Norvig's
+            analysis of the{" "}
+            <Anchor
+              href="http://norvig.com/ngrams/"
+              rel="noreferrer"
+              target="_blank"
+              size="sm"
+            >
+              Google Web Trillion Word Corpus
+            </Anchor>{" "}
+            (public domain).
+          </Text>
+        </Stack>
       </Stack>
     </Drawer>
   );

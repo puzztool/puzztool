@@ -1,0 +1,23 @@
+.container {
+  margin: 0.5rem 0 0;
+}
+
+.keypad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.topPhrase {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0;
+}
+
+.resultText {
+  font-family: monospace;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
