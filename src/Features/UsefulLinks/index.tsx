@@ -24,7 +24,7 @@ const linkCategories: LinkCategory[] = [
           "Large collection of cipher and encoding tools including Vigenère, substitution, transposition, and many more.",
       },
       {
-        name: "QuipQuid",
+        name: "quipqiup",
         url: "https://quipqiup.com/",
         description:
           "Automated cryptogram solver. Paste in a substitution cipher and it finds likely solutions.",
