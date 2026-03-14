@@ -3,6 +3,7 @@ import autoConvertReducer from "./AutoConvert/autoConvertSlice";
 import brailleEncodingReducer from "./Braille/brailleEncodingSlice";
 import characterEncodingReducer from "./Character/characterEncodingSlice";
 import morseEncodingReducer from "./Morse/morseEncodingSlice";
+import pigpenEncodingReducer from "./Pigpen/pigpenEncodingSlice";
 import semaphoreEncodingReducer from "./Semaphore/semaphoreEncodingSlice";
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   braille: brailleEncodingReducer,
   character: characterEncodingReducer,
   morse: morseEncodingReducer,
+  pigpen: pigpenEncodingReducer,
   semaphore: semaphoreEncodingReducer,
 });
