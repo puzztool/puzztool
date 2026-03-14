@@ -29,6 +29,7 @@ const Semaphore = lazy(() => import("./Features/Encoding/Semaphore"));
 const Home = lazy(() => import("./Features/Home"));
 const Pigpen = lazy(() => import("./Features/Pigpen"));
 const Resistor = lazy(() => import("./Features/Resistor"));
+const UsefulLinks = lazy(() => import("./Features/UsefulLinks"));
 const WordSearch = lazy(() => import("./Features/WordSearch"));
 
 function isChunkLoadError(error: Error): boolean {
@@ -101,6 +102,7 @@ function App() {
                 <Route path="/reference/nato" element={<Nato />} />
                 <Route path="/reference/navalflags" element={<NavalFlag />} />
                 <Route path="/reference/resistors" element={<Resistor />} />
+                <Route path="/reference/links" element={<UsefulLinks />} />
                 <Route path="/solvers/wordsearch" element={<WordSearch />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
