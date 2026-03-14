@@ -1,4 +1,4 @@
-import { SemaphoreEncoding, getEncodingDegrees } from "puzzle-lib";
+import { SemaphoreEncoding, getEncodingDegrees } from "puzzle-lib/semaphore";
 
 interface Props {
   width: number;

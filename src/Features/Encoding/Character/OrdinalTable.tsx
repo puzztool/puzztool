@@ -1,4 +1,4 @@
-import { getOrdinalTable } from "puzzle-lib";
+import { getOrdinalTable } from "puzzle-lib/conversion";
 import CharacterTable from "./CharacterTable";
 
 function OrdinalTable() {

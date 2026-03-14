@@ -1,4 +1,4 @@
-import { SemaphoreEncoding, lookupSemaphoreEncoding } from "puzzle-lib";
+import { SemaphoreEncoding, lookupSemaphoreEncoding } from "puzzle-lib/semaphore";
 import ReferenceList from "../../../Common/ReferenceList";
 import SemaphorePicture from "./SemaphorePicture";
 

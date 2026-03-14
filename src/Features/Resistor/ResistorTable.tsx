@@ -1,5 +1,5 @@
-import type { ResistorColor as Color } from "puzzle-lib";
-import { RESISTOR_COLOR_TABLE } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib/resistor";
+import { RESISTOR_COLOR_TABLE } from "puzzle-lib/resistor";
 import { Table } from "@mantine/core";
 import { getContrastingColor } from "../../Common/Helpers";
 import styles from "./ResistorTable.module.scss";

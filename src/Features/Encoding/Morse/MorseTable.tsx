@@ -2,7 +2,7 @@ import {
   lookupMorseEncoding,
   morseEncodingToString,
   MorseEncoding,
-} from "puzzle-lib";
+} from "puzzle-lib/morse";
 import { Table } from "@mantine/core";
 import MorsePicture from "./MorsePicture";
 import styles from "./MorseTable.module.scss";

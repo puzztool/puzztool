@@ -1,5 +1,5 @@
 import BrailleCell from "./BrailleCell";
-import { BrailleDot as Dot, BrailleEncoding } from "puzzle-lib";
+import { BrailleDot as Dot, BrailleEncoding } from "puzzle-lib/braille";
 import styles from "./BrailleCharacter.module.scss";
 
 interface Props {

@@ -9,7 +9,7 @@ import {
   invertAndReverseMorse,
   lookupMorseEncoding,
   parseMorseString,
-} from "puzzle-lib";
+} from "puzzle-lib/morse";
 import { ChangeEvent } from "react";
 import { Button, Card, Group, Stack, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";

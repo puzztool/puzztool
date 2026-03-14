@@ -3,7 +3,7 @@ import {
   decodeBrailleStream,
   lookupBrailleEncoding,
   toggleBrailleDot,
-} from "puzzle-lib";
+} from "puzzle-lib/braille";
 import { useEffect } from "react";
 import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";

@@ -3,7 +3,7 @@ import {
   findWords,
   parseWordSearchGrid,
   WordSearchDirection,
-} from "puzzle-lib";
+} from "puzzle-lib/word-search";
 import { getCellStyle } from "./WordSearchColors";
 import WordSearchLegend from "./WordSearchLegend";
 import styles from "./WordSearchOutput.module.scss";
