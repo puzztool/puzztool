@@ -114,7 +114,7 @@ function WordSearchOutput(props: Props) {
 
   return (
     <>
-      <Table className={styles.container}>
+      <Table className={styles.container} withRowBorders={false}>
         <Table.Tbody>
           {grid.map((row, rowIndex) => (
             <Table.Tr key={rowIndex}>
