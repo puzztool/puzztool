@@ -10,7 +10,7 @@
     "@tabler/icons-react": "^3.40.0",
     "clsx": "^2.0.0",
     "compare-versions": "^6.1.0",
-    "puzzle-lib": "2.0.0-alpha.2",
+    "puzzle-lib": "^2.0.0-beta.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-error-boundary": "^5.0.0",

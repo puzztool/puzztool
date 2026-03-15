@@ -25,10 +25,13 @@ const morseEncodingSlice = createSlice({
     selectTab(state, action: PayloadAction<string | null>) {
       state.selectedTab = action.payload ?? undefined;
     },
+    setStream(state, action: PayloadAction<string>) {
+      state.stream = action.payload;
+    },
   },
 });
 
-export const { append, backspace, clear, selectTab } =
+export const { append, backspace, clear, selectTab, setStream } =
   morseEncodingSlice.actions;
 
 export default morseEncodingSlice.reducer;
