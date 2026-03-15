@@ -1,4 +1,4 @@
-import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib";
+import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib/braille";
 
 interface Props {
   width: number;

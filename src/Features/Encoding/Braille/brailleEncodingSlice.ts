@@ -1,4 +1,4 @@
-import { BrailleEncoding } from "puzzle-lib";
+import { BrailleEncoding } from "puzzle-lib/braille";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {

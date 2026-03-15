@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib";
+import { BrailleDot as Dot, BrailleEncoding, getBrailleDot } from "puzzle-lib/braille";
 import styles from "./BrailleCell.module.scss";
 
 interface Props {

@@ -1,4 +1,4 @@
-import type { ResistorColor as Color } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib/resistor";
 
 interface Props {
   bands: (Color | undefined)[];

@@ -6,7 +6,7 @@ import {
   addSemaphoreDirection,
   hasSemaphoreDirection,
   lookupSemaphoreEncoding,
-} from "puzzle-lib";
+} from "puzzle-lib/semaphore";
 import clsx from "clsx";
 import styles from "./SemaphoreCheckbox.module.scss";
 

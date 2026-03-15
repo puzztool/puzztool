@@ -1,4 +1,4 @@
-import type { ResistorColor as Color } from "puzzle-lib";
+import type { ResistorColor as Color } from "puzzle-lib/resistor";
 import { Button, Menu } from "@mantine/core";
 
 interface ColorSelectorProps {
