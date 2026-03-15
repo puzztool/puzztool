@@ -106,6 +106,11 @@ export function getCategories(): RouteCategory[] {
           name: "Resistors",
           url: "/resistors",
         },
+        {
+          description: "External tools and resources for puzzle solving",
+          name: "Useful Links",
+          url: "/links",
+        },
       ],
       description: "Miscellaneous information",
       name: "Reference",
