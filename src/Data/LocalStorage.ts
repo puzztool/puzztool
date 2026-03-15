@@ -85,6 +85,13 @@ function setLocalStorageItem(key: string, value: string) {
 
 export function clearLocalStorage() {
   if (isLocalStorageSupported()) {
-    window.localStorage.clear();
+    const keysToRemove = [];
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i);
+      if (key && key.startsWith(STORAGE_KEY_PREFIX)) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => window.localStorage.removeItem(key));
   }
 }

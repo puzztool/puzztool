@@ -55,6 +55,11 @@ export function getCategories(): RouteCategory[] {
           url: "/autoconvert",
         },
         {
+          description: "Text to Base64 and Base64 to text conversion",
+          name: "Base64",
+          url: "/base64",
+        },
+        {
           description: "Six dots in a two-by-three grid",
           name: "Braille",
           url: "/braille",

@@ -1,7 +1,8 @@
 import { caesarRotations } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
-import { Button, Card, Group, Stack, TextInput, Text } from "@mantine/core";
+import { Card, Group, Stack, TextInput, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
+import ClearButton from "../../../Common/ClearButton";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
 import { clear, setText } from "./caesarCipherSlice";
@@ -47,9 +48,7 @@ function CaesarStreamInner(props: Props) {
             value={props.text}
           />
           <Group gap="xs">
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>
