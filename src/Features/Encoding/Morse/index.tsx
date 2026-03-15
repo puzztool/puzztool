@@ -5,6 +5,7 @@ import { RootState } from "../../../Store/rootReducer";
 import { selectTab } from "./morseEncodingSlice";
 import MorseStream from "./MorseStream";
 import MorseTable from "./MorseTable";
+import MorseTree from "./MorseTree";
 
 const mapStateToProps = (state: RootState) => ({
   selectedTab: state.encoding.morse.selectedTab,
@@ -24,12 +25,16 @@ function MorseInner(props: Props) {
         <Tabs.List>
           <Tabs.Tab value="1">Value</Tabs.Tab>
           <Tabs.Tab value="2">Reference</Tabs.Tab>
+          <Tabs.Tab value="3">Tree</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="1">
           <MorseStream />
         </Tabs.Panel>
         <Tabs.Panel value="2">
           <MorseTable />
+        </Tabs.Panel>
+        <Tabs.Panel value="3">
+          <MorseTree />
         </Tabs.Panel>
       </Tabs>
     </PuzzToolPage>
