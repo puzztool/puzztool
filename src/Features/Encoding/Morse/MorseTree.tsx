@@ -1,4 +1,3 @@
-import { useMantineColorScheme } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import styles from "./MorseTree.module.scss";
 
@@ -356,9 +355,7 @@ function getHorizontalBounds(
 }
 
 function MorseTree() {
-  const { colorScheme } = useMantineColorScheme();
-  const isDark = colorScheme === "dark";
-  const lineColor = isDark ? "#555" : "#aaa";
+  const lineColor = "var(--mantine-color-dimmed)";
   const isNarrow = useMediaQuery("(max-width: 700px)");
 
   const maxDepth = 4;
