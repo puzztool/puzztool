@@ -6,7 +6,21 @@ import {
   isIntercardinal,
   togglePigpenSegment,
 } from "puzzle-lib";
+import type { KeyboardEvent } from "react";
 import styles from "./PigpenCharacter.module.scss";
+
+const SEGMENT_LABELS: Record<PigpenSegment, string> = {
+  [PigpenSegment.North]: "North",
+  [PigpenSegment.East]: "East",
+  [PigpenSegment.South]: "South",
+  [PigpenSegment.West]: "West",
+  [PigpenSegment.NorthWest]: "North-West",
+  [PigpenSegment.NorthEast]: "North-East",
+  [PigpenSegment.SouthEast]: "South-East",
+  [PigpenSegment.SouthWest]: "South-West",
+  [PigpenSegment.Dot]: "Dot",
+  [PigpenSegment.None]: "None",
+};
 
 interface Props {
   encoding: PigpenEncoding;
@@ -57,6 +71,15 @@ function PigpenCharacter({ encoding, onClick }: Props) {
     }
   }
 
+  function handleKeyDown(callback: () => void) {
+    return (ev: KeyboardEvent) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        callback();
+      }
+    };
+  }
+
   function renderSegment(
     segment: PigpenSegment,
     x1: number,
@@ -95,7 +118,12 @@ function PigpenCharacter({ encoding, onClick }: Props) {
             strokeWidth={14}
             strokeLinecap="round"
             className={styles.hitArea}
+            role="button"
+            tabIndex={0}
+            aria-label={`${SEGMENT_LABELS[segment]} segment`}
+            aria-pressed={active}
             onClick={() => onSegmentClick(segment)}
+            onKeyDown={handleKeyDown(() => onSegmentClick(segment))}
           />
         )}
       </g>
@@ -123,7 +151,12 @@ function PigpenCharacter({ encoding, onClick }: Props) {
           cy={50}
           r={7}
           className={hasDot ? styles.dotActive : styles.dot}
+          role="button"
+          tabIndex={0}
+          aria-label="Dot"
+          aria-pressed={hasDot}
           onClick={onDotClick}
+          onKeyDown={handleKeyDown(onDotClick)}
         />
       </svg>
     </div>
