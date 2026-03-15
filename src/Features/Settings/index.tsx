@@ -1,6 +1,5 @@
 import {
   Anchor,
-  Button,
   Divider,
   Drawer,
   SegmentedControl,
@@ -9,6 +8,7 @@ import {
   useComputedColorScheme,
   useMantineColorScheme,
 } from "@mantine/core";
+import ClearButton from "../../Common/ClearButton";
 import { clearLocalStorage } from "../../Data/LocalStorage";
 import PuzztoolBannerDark from "../../Images/puzztool_banner_dark.svg";
 import PuzztoolBannerWhite from "../../Images/puzztool_banner_white.svg";
@@ -61,9 +61,12 @@ function SettingsDrawer(props: Props) {
             local storage. In the event that state becomes corrupted it can be
             cleared using the button below.
           </Text>
-          <Button onClick={onClearClick} color="red" size="sm">
-            Clear saved state
-          </Button>
+          <ClearButton
+            onClear={onClearClick}
+            label="Clear saved state"
+            confirmMessage="This will clear all saved tool inputs from your browser. This action cannot be undone."
+            buttonProps={{ size: "sm" }}
+          />
         </Stack>
 
         <Divider />

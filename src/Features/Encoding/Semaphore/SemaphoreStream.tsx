@@ -9,6 +9,7 @@ import {
 import { useEffect } from "react";
 import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
+import ClearButton from "../../../Common/ClearButton";
 import { RootState } from "../../../Store/rootReducer";
 import SemaphoreCharacter from "./SemaphoreCharacter";
 import {
@@ -165,9 +166,7 @@ function SemaphoreStreamInner(props: Props) {
             <Button onClick={onSpaceClick} variant="default">
               Space
             </Button>
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>

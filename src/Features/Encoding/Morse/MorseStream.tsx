@@ -13,6 +13,7 @@ import {
 import { ChangeEvent } from "react";
 import { Button, Card, Group, Stack, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
+import ClearButton from "../../../Common/ClearButton";
 import { RootState } from "../../../Store/rootReducer";
 import { append, backspace, clear, setStream } from "./morseEncodingSlice";
 import { MorseDot, MorseDash } from "./MorsePicture";
@@ -160,9 +161,7 @@ function MorseStreamInner(props: Props) {
       <Group className={styles.commands} gap="xs">
         <Button onClick={onBackspaceClick}>&#x232b;</Button>
         <Button onClick={onNextClick}>Next</Button>
-        <Button onClick={onClearClick} color="red">
-          Clear
-        </Button>
+        <ClearButton onClear={onClearClick} />
       </Group>
       <Card className={styles.output} withBorder>
         <Card.Section withBorder inheritPadding py="xs">
