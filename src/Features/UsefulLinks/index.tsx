@@ -64,12 +64,6 @@ const linkCategories: LinkCategory[] = [
     name: "General Puzzle Resources",
     links: [
       {
-        name: "Geocaching Toolbox",
-        url: "https://www.geocachingtoolbox.com/",
-        description:
-          "Collection of tools for geocaching puzzles including coordinate converters, cipher tools, and more.",
-      },
-      {
         name: "Solver Tools (MIT)",
         url: "https://tools.qhex.org/",
         description:
