@@ -1,4 +1,4 @@
-import { autokeyEncrypt, autokeyDecrypt } from "puzzle-lib";
+import { autokeyEncrypt, autokeyDecrypt } from "puzzle-lib/cipher";
 import { ReactNode } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";

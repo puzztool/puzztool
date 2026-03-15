@@ -1,5 +1,8 @@
 import { render } from "@/test-utils";
-import { SemaphoreDirection as Direction, SemaphoreEncoding } from "puzzle-lib";
+import {
+  SemaphoreDirection as Direction,
+  SemaphoreEncoding,
+} from "puzzle-lib/semaphore";
 import { test } from "vitest";
 import SemaphoreCheckbox from "./SemaphoreCheckbox";
 

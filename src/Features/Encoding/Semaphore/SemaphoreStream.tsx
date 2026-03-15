@@ -5,7 +5,7 @@ import {
   hasSemaphoreDirection,
   lookupSemaphoreEncoding,
   removeSemaphoreDirection,
-} from "puzzle-lib";
+} from "puzzle-lib/semaphore";
 import { useEffect } from "react";
 import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";

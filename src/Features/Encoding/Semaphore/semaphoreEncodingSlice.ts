@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SemaphoreEncoding } from "puzzle-lib";
+import { SemaphoreEncoding } from "puzzle-lib/semaphore";
 
 interface State {
   encoding: SemaphoreEncoding;

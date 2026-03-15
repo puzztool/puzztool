@@ -1,4 +1,4 @@
-import { convertString } from "puzzle-lib";
+import { convertString } from "puzzle-lib/conversion";
 import { ChangeEvent, ReactNode } from "react";
 import {
   Card,

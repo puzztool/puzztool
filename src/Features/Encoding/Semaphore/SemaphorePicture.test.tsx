@@ -1,5 +1,5 @@
 import { render } from "@/test-utils";
-import { SemaphoreEncoding } from "puzzle-lib";
+import { SemaphoreEncoding } from "puzzle-lib/semaphore";
 import { test } from "vitest";
 import SemaphorePicture from "./SemaphorePicture";
 

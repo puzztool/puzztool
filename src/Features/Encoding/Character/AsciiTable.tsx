@@ -1,4 +1,4 @@
-import { getAsciiTable } from "puzzle-lib";
+import { getAsciiTable } from "puzzle-lib/conversion";
 import CharacterTable from "./CharacterTable";
 
 function AsciiTable() {

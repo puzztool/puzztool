@@ -1,6 +1,9 @@
 import SemaphoreCheckbox from "./SemaphoreCheckbox";
 import SemaphorePicture from "./SemaphorePicture";
-import { SemaphoreDirection as Direction, SemaphoreEncoding } from "puzzle-lib";
+import {
+  SemaphoreDirection as Direction,
+  SemaphoreEncoding,
+} from "puzzle-lib/semaphore";
 import styles from "./SemaphoreCharacter.module.scss";
 
 interface Props {

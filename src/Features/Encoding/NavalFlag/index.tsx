@@ -1,4 +1,4 @@
-import { NAVAL_FLAGS } from "puzzle-lib";
+import { NAVAL_FLAGS } from "puzzle-lib/naval-flags";
 import PuzzToolPage from "../../../Common/PuzzToolPage";
 import ReferenceList from "../../../Common/ReferenceList";
 import styles from "./index.module.scss";
