@@ -6,6 +6,7 @@ import {
 } from "puzzle-lib";
 import { useEffect } from "react";
 import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
+import ClearButton from "../../../Common/ClearButton";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import BrailleCharacter from "./BrailleCharacter";
@@ -156,9 +157,7 @@ function BrailleStreamInner(props: Props) {
           <Group gap="xs">
             <Button onClick={onBackspaceClick}>&#x232b;</Button>
             <Button onClick={onNextClick}>Next</Button>
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>

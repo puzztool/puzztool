@@ -1,7 +1,6 @@
 import { convertString } from "puzzle-lib";
 import { ChangeEvent, ReactNode } from "react";
 import {
-  Button,
   Card,
   Group,
   SegmentedControl,
@@ -10,6 +9,7 @@ import {
   Text,
 } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
+import ClearButton from "../../../Common/ClearButton";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
 import { clear, setHomogeneous, setText } from "./autoConvertSlice";
@@ -80,9 +80,7 @@ function AutoConvertStreamInner(props: Props) {
                 )
               }
             />
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>
