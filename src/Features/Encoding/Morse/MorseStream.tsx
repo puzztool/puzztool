@@ -34,7 +34,7 @@ type Props = ConnectedProps<typeof connector>;
 
 function normalizeStream(text: string): string {
   return text
-    .replace(/[\t\r\n]+/g, " ")
+    .replace(/[\t\r\n/]+/g, " / ")
     .replace(/ *\/ */g, MORSE_WORD_DIVIDER)
     .replace(/ {2,}/g, MORSE_CHARACTER_DIVIDER)
     .replace(/[^.\- /]/g, "");
