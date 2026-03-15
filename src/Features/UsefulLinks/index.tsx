@@ -18,6 +18,12 @@ const linkCategories: LinkCategory[] = [
     name: "Ciphers & Codes",
     links: [
       {
+        name: "CyberChef",
+        url: "https://gchq.github.io/CyberChef/",
+        description:
+          "Pipelineable transform/analysis tools, image analysis/transformation, frequency analysis, etc.",
+      },
+      {
         name: "dCode",
         url: "https://www.dcode.fr/en",
         description:
@@ -41,10 +47,15 @@ const linkCategories: LinkCategory[] = [
     name: "Word Tools",
     links: [
       {
-        name: "OneAcross",
-        url: "https://www.oneacross.com/",
+        name: "Anagram Solver",
+        url: "https://www.wordplays.com/anagram-solver/",
         description:
-          "Crossword clue solver and pattern matcher. Search by clue text or letter pattern.",
+          "Find anagrams of words and phrases. Useful for unscrambling letters.",
+      },
+      {
+        name: "Mystery Hunter's Word Search",
+        url: "http://thewordsword.com/",
+        description: "Regex/Anagram tool with support for letter banks",
       },
       {
         name: "Nutrimatic",
@@ -53,10 +64,31 @@ const linkCategories: LinkCategory[] = [
           "Regex-like word search that finds English words and phrases matching a pattern. Great for partial fills.",
       },
       {
-        name: "Anagram Solver",
-        url: "https://www.wordplays.com/anagram-solver/",
+        name: "OneAcross",
+        url: "https://www.oneacross.com/",
         description:
-          "Find anagrams of words and phrases. Useful for unscrambling letters.",
+          "Crossword clue solver and pattern matcher. Search by clue text or letter pattern.",
+      },
+      {
+        name: "OneLook",
+        url: "https://www.onelook.com/",
+        description: "Regex-like word search with semantic query capabilities",
+      },
+      {
+        name: "Qat",
+        url: "https://quinapalus.com/qat.html",
+        description: "Regex-like word search with extensive query language",
+      },
+      {
+        name: "Snap",
+        url: "https://util.in/solver",
+        description:
+          "Heavy-duty anagram solver for long phrases. Supports character sequence reordering.",
+      },
+      {
+        name: "XWord",
+        url: "https://xword.group/",
+        description: "Create crossword grids in Google Sheets for easy sharin",
       },
     ],
   },
@@ -64,10 +96,32 @@ const linkCategories: LinkCategory[] = [
     name: "General Puzzle Resources",
     links: [
       {
-        name: "Solver Tools (MIT)",
+        name: "Crossword Parser",
+        url: "https://www.npinsker.me/puzzles/crossword/",
+        description: "Paste an image, receive a spreadsheet",
+      },
+      {
+        name: "Google Sheets Puzzle Tricks",
+        url: "https://docs.google.com/spreadsheets/d/1mTVD0KtjbU6-wp1mvYU_abrjdCmnP9focRa1qp36rrY/edit?gid=547492841#gid=547492841",
+        description:
+          "A gallery of things you can do in Google Sheets that are helpful for puzzle hunts.",
+      },
+      {
+        name: "Puzzle Hunt Calendar",
+        url: "https://puzzlehuntcalendar.com/",
+        description: "A calendar of upcoming puzzle events",
+      },
+      {
+        name: "Qhex Solver Tools (MIT)",
         url: "https://tools.qhex.org/",
         description:
-          "Tools from MIT puzzle hunt teams including logic puzzle solvers and word search utilities.",
+          "Tools from MIT puzzle hunt teams including extraction analysis, logic puzzle solvers and word search utilities.",
+      },
+      {
+        name: "Z3 Puzzle Solvers",
+        url: "https://github.com/mrwright/z3-puzzle-solvers",
+        description:
+          "Z3/Python solvers for classic puzzle categories such as slitherlink, etc.",
       },
     ],
   },
