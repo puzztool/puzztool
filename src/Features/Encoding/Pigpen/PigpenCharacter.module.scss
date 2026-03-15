@@ -25,6 +25,11 @@
 
 .hitArea {
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
 }
 
 .dot {
@@ -33,10 +38,20 @@
   stroke-width: 1.5;
   opacity: 0.3;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
 }
 
 .dotActive {
   fill: var(--mantine-color-text);
   stroke: none;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--mantine-primary-color-filled);
+    outline-offset: 2px;
+  }
 }
