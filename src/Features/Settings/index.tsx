@@ -65,6 +65,7 @@ function SettingsDrawer(props: Props) {
             onClear={onClearClick}
             label="Clear saved state"
             confirmMessage="This will clear all saved tool inputs from your browser. This action cannot be undone."
+            buttonProps={{ size: "sm" }}
           />
         </Stack>
 

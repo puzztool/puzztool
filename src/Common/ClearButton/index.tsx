@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { Button, Group, Modal, Text } from "@mantine/core";
+import { Button, type ButtonProps, Group, Modal, Text } from "@mantine/core";
 
 interface Props {
   onClear: () => void;
   label?: string;
   confirmMessage?: string;
+  buttonProps?: Omit<ButtonProps, "onClick" | "color">;
 }
 
 function ClearButton({
   onClear,
   label = "Clear",
   confirmMessage = "This will clear your current inputs. This action cannot be undone.",
+  buttonProps,
 }: Props) {
   const [opened, setOpened] = useState(false);
 
@@ -21,7 +23,7 @@ function ClearButton({
 
   return (
     <>
-      <Button onClick={() => setOpened(true)} color="red">
+      <Button onClick={() => setOpened(true)} color="red" {...buttonProps}>
         {label}
       </Button>
       <Modal
