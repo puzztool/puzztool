@@ -1,0 +1,1 @@
+var B;(function(i){i[i.None=0]="None",i[i.Latin=1]="Latin",i[i.Ordinal=2]="Ordinal",i[i.FiveBitBinary=3]="FiveBitBinary",i[i.EightBitBinary=4]="EightBitBinary",i[i.Ascii=5]="Ascii",i[i.Ternary=6]="Ternary",i[i.Hexadecimal=7]="Hexadecimal"})(B||(B={}));export{B as C};
