@@ -32,6 +32,7 @@ function NavCategoryMenu({ category }: { category: RouteCategory }) {
             key={child.name}
             component={Link}
             to={category.rootUrl + child.url}
+            leftSection={child.icon && <child.icon size={16} />}
           >
             {child.name}
           </Menu.Item>
@@ -64,6 +65,7 @@ function MobileNavCategory({
             to={to}
             onClick={onClose}
           >
+            {child.icon && <child.icon size={16} />}
             {child.name}
           </UnstyledButton>
         );

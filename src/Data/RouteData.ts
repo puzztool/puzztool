@@ -1,5 +1,23 @@
+import {
+  type Icon,
+  IconAntenna,
+  IconArrowsShuffle,
+  IconBraille,
+  IconCode,
+  IconColorSwatch,
+  IconFlag,
+  IconFlagFilled,
+  IconKey,
+  IconLetterCase,
+  IconLock,
+  IconPuzzle,
+  IconSearch,
+  IconSpeakerphone,
+} from "@tabler/icons-react";
+
 export interface RouteChild {
   description: string;
+  icon?: Icon;
   name: string;
   url: string;
 }
@@ -17,6 +35,7 @@ export function getCategories(): RouteCategory[] {
       children: [
         {
           description: "Word Search Solver",
+          icon: IconSearch,
           name: "Word Search",
           url: "/wordsearch",
         },
@@ -28,17 +47,20 @@ export function getCategories(): RouteCategory[] {
     {
       children: [
         {
-          description: " A Vigenere cipher which uses plaintext as the key",
+          description: "A Vigenere cipher which uses plaintext as the key",
+          icon: IconKey,
           name: "Autokey",
           url: "/autokey",
         },
         {
           description: "Letters are shifted by a fixed value",
+          icon: IconArrowsShuffle,
           name: "Caesar",
           url: "/caesar",
         },
         {
           description: "Letters are mapped based on a key word",
+          icon: IconLock,
           name: "Vigenere",
           url: "/vigenere",
         },
@@ -51,26 +73,31 @@ export function getCategories(): RouteCategory[] {
       children: [
         {
           description: "Mapping numbers to letters (ASCII, Binary, Ordinal)",
+          icon: IconCode,
           name: "AutoConvert",
           url: "/autoconvert",
         },
         {
           description: "Six dots in a two-by-three grid",
+          icon: IconBraille,
           name: "Braille",
           url: "/braille",
         },
         {
           description: "Dots and dashes with separations",
+          icon: IconAntenna,
           name: "Morse Code",
           url: "/morse",
         },
         {
           description: "Parts of a tic-tac-toe grid or X, some with dot",
+          icon: IconPuzzle,
           name: "Pigpen",
           url: "/pigpen",
         },
         {
-          description: " Positions of two different flags",
+          description: "Positions of two different flags",
+          icon: IconFlag,
           name: "Semaphore",
           url: "/semaphore",
         },
@@ -83,21 +110,25 @@ export function getCategories(): RouteCategory[] {
       children: [
         {
           description: "Static display of number to letter mapping",
+          icon: IconLetterCase,
           name: "Character Encodings",
           url: "/characterencodings",
         },
         {
           description: "Words used to clearly identify a letter",
+          icon: IconSpeakerphone,
           name: "NATO Alphabet",
           url: "/nato",
         },
         {
           description: "Different simple flags which convey a letter",
+          icon: IconFlagFilled,
           name: "Naval Flags",
           url: "/navalflags",
         },
         {
           description: "Find a resistor value using different colored bands",
+          icon: IconColorSwatch,
           name: "Resistors",
           url: "/resistors",
         },
