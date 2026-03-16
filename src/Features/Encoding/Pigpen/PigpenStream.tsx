@@ -3,10 +3,11 @@ import {
   decodePigpenStream,
   lookupPigpenEncoding,
 } from "puzzle-lib/pigpen";
-import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
+import { Card, Grid, Group, Stack, Text, Button } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import PigpenCharacter from "./PigpenCharacter";
+import ClearButton from "../../../Common/ClearButton";
 import {
   append,
   backspace,
@@ -81,9 +82,7 @@ function PigpenStreamInner({
           <Group gap="xs">
             <Button onClick={() => backspaceFn()}>&#x232b;</Button>
             <Button onClick={onNextClick}>Next</Button>
-            <Button onClick={() => clearFn()} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={() => clearFn()} />
           </Group>
         </Stack>
       </Card>
