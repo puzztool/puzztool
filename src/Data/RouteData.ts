@@ -12,6 +12,7 @@ import {
   IconKey,
   IconLetterCase,
   IconLock,
+  IconPhone,
   IconPuzzle,
   IconSearch,
   IconSpeakerphone,
@@ -96,6 +97,12 @@ export function getCategories(): RouteCategory[] {
           icon: IconAntenna,
           name: "Morse Code",
           url: "/morse",
+        },
+        {
+          description: "Convert between telephone keypad digits and text",
+          icon: IconPhone,
+          name: "Phone Keypad",
+          url: "/phone",
         },
         {
           description: "Parts of a tic-tac-toe grid or X, some with dot",

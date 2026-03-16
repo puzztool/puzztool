@@ -26,6 +26,7 @@ const Character = lazy(() => import("./Features/Encoding/Character"));
 const Morse = lazy(() => import("./Features/Encoding/Morse"));
 const Nato = lazy(() => import("./Features/Encoding/Nato"));
 const NavalFlag = lazy(() => import("./Features/Encoding/NavalFlag"));
+const Phone = lazy(() => import("./Features/Encoding/Phone"));
 const Semaphore = lazy(() => import("./Features/Encoding/Semaphore"));
 const Home = lazy(() => import("./Features/Home"));
 const Pigpen = lazy(() => import("./Features/Pigpen"));
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/encoding/base64" element={<Base64 />} />
                 <Route path="/encoding/braille" element={<Braille />} />
                 <Route path="/encoding/morse" element={<Morse />} />
+                <Route path="/encoding/phone" element={<Phone />} />
                 <Route path="/encoding/pigpen" element={<Pigpen />} />
                 <Route path="/encoding/semaphore" element={<Semaphore />} />
                 <Route

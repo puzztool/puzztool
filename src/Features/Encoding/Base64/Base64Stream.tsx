@@ -1,9 +1,10 @@
 import { ChangeEvent } from "react";
-import { Button, Card, Group, Stack, TextInput, Text } from "@mantine/core";
+import { Card, Group, Stack, TextInput, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { useFocusInput } from "../../../Hooks/FocusInput";
 import { RootState } from "../../../Store/rootReducer";
 import { clear, setText } from "./base64Slice";
+import ClearButton from "../../../Common/ClearButton";
 import styles from "./Base64Stream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
@@ -88,9 +89,7 @@ function Base64StreamInner(props: Props) {
             value={props.text}
           />
           <Group gap="xs">
-            <Button onClick={onClearClick} color="red">
-              Clear
-            </Button>
+            <ClearButton onClear={onClearClick} />
           </Group>
         </Stack>
       </Card>
