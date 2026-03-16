@@ -108,7 +108,7 @@ function PigpenCharacter({ encoding, onClick }: Props) {
           strokeLinecap="round"
         />
         {/* Wide invisible hit area */}
-        {!disabled && (
+        {onClick && !disabled && (
           <line
             x1={x1}
             y1={y1}
@@ -151,12 +151,14 @@ function PigpenCharacter({ encoding, onClick }: Props) {
           cy={50}
           r={7}
           className={hasDot ? styles.dotActive : styles.dot}
-          role="button"
-          tabIndex={0}
-          aria-label="Dot"
-          aria-pressed={hasDot}
-          onClick={onDotClick}
-          onKeyDown={handleKeyDown(onDotClick)}
+          {...(onClick && {
+            role: "button" as const,
+            tabIndex: 0,
+            "aria-label": "Dot",
+            "aria-pressed": hasDot,
+            onClick: onDotClick,
+            onKeyDown: handleKeyDown(onDotClick),
+          })}
         />
       </svg>
     </div>

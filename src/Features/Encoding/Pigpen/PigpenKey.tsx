@@ -128,7 +128,6 @@ function GridLabels({
 }
 
 function XLines({ ox, oy }: { ox: number; oy: number }) {
-  const mid = GRID_SIZE / 2;
   return (
     <g>
       <line
@@ -146,14 +145,6 @@ function XLines({ ox, oy }: { ox: number; oy: number }) {
         y2={oy + GRID_SIZE}
         stroke={STROKE_COLOR}
         strokeWidth={STROKE_WIDTH}
-      />
-      {/* Short center stub to close the middle */}
-      <circle
-        cx={ox + mid}
-        cy={oy + mid}
-        r={0.5}
-        fill={STROKE_COLOR}
-        opacity={0}
       />
     </g>
   );
