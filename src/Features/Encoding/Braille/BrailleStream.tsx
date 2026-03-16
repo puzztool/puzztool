@@ -153,7 +153,7 @@ function BrailleStreamInner(props: Props) {
             </Grid.Col>
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
-              {partialStr && (
+              {partialStr && props.encoding !== 0 && (
                 <Text size="sm" c="dimmed">
                   {partialStr}
                 </Text>
