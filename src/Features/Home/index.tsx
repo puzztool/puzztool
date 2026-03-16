@@ -1,4 +1,4 @@
-import { Card, SimpleGrid, Stack, Text, Title } from "@mantine/core";
+import { Card, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { type RouteChild, getCategories } from "../../Data/RouteData";
 import styles from "./index.module.scss";
@@ -12,14 +12,14 @@ function ToolCard({ tool, baseUrl }: { tool: RouteChild; baseUrl: string }) {
       to={baseUrl + tool.url}
       className={styles.card}
       shadow="sm"
-      padding="lg"
+      padding="md"
       radius="md"
       withBorder
     >
-      {Icon && <Icon size={32} />}
-      <Text fw={500} mt="sm">
-        {tool.name}
-      </Text>
+      <Group gap="sm">
+        {Icon && <Icon size={32} />}
+        <Text fw={500}>{tool.name}</Text>
+      </Group>
       <Text size="sm" c="dimmed" mt={4}>
         {tool.description}
       </Text>
