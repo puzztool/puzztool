@@ -71,7 +71,7 @@ function PigpenStreamInner({
             </Grid.Col>
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
-              {partialStr && (
+              {partialStr && encoding !== PigpenEncoding.None && (
                 <Text size="sm" c="dimmed">
                   {partialStr}
                 </Text>
