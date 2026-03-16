@@ -3,13 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface State {
   digits: string;
   letters: string;
-  selectedTab: string | null;
+  selectedTab?: string;
 }
 
 const initialState: State = {
   digits: "",
   letters: "",
-  selectedTab: null,
 };
 
 const phoneSlice = createSlice({
@@ -23,16 +22,18 @@ const phoneSlice = createSlice({
       state.letters = action.payload;
     },
     selectTab(state, action: PayloadAction<string | null>) {
-      state.selectedTab = action.payload;
+      state.selectedTab = action.payload ?? undefined;
     },
-    clear(state) {
-      const tab = state.selectedTab;
-      Object.assign(state, initialState);
-      state.selectedTab = tab;
+    clearDigits(state) {
+      state.digits = "";
+    },
+    clearLetters(state) {
+      state.letters = "";
     },
   },
 });
 
-export const { setDigits, setLetters, selectTab, clear } = phoneSlice.actions;
+export const { setDigits, setLetters, selectTab, clearDigits, clearLetters } =
+  phoneSlice.actions;
 
 export default phoneSlice.reducer;

@@ -19,7 +19,7 @@ type Props = ConnectedProps<typeof connector>;
 
 function PhoneInner(props: Props) {
   return (
-    <PuzzToolPage title="Phone">
+    <PuzzToolPage title="Phone Keypad">
       <Tabs value={props.selectedTab ?? "1"} onChange={props.selectTab}>
         <Tabs.List>
           <Tabs.Tab value="1">Digits → Text</Tabs.Tab>

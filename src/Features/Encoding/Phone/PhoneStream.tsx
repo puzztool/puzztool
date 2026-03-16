@@ -1,16 +1,10 @@
-import { phoneToText, PHONE_MAPPING, PhoneResult } from "puzzle-lib";
-import {
-  Button,
-  Card,
-  Group,
-  Stack,
-  Table,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { phoneToText, phoneToLetters, PhoneResult } from "puzzle-lib/phone";
+import { Card, Group, Stack, Table, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
-import { setDigits, clear } from "./phoneSlice";
+import { setDigits, clearDigits } from "./phoneSlice";
+import { splitWords, filterDigitInput } from "./phoneUtils";
+import ClearButton from "../../../Common/ClearButton";
 import styles from "./PhoneStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
@@ -18,7 +12,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 const mapDispatchToProps = {
   setDigits,
-  clear,
+  clearDigits,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -30,18 +24,9 @@ interface WordResult {
   results: PhoneResult[];
 }
 
-/** Split digit string into words on spaces, 0s, and 1s. */
-function splitWords(digits: string): string[] {
-  return digits
-    .split(/[\s01-]+/)
-    .filter((w) => w.length > 0 && /[2-9]/.test(w));
-}
-
-function PhoneStreamInner({ digits, setDigits, clear: clearFn }: Props) {
+function PhoneStreamInner({ digits, setDigits, clearDigits }: Props) {
   function onDigitsChange(value: string) {
-    // Allow only digits, spaces, and dashes for readability
-    const filtered = value.replace(/[^0-9 -]/g, "");
-    setDigits(filtered);
+    setDigits(filterDigitInput(value));
   }
 
   const words = splitWords(digits);
@@ -57,12 +42,16 @@ function PhoneStreamInner({ digits, setDigits, clear: clearFn }: Props) {
     .toUpperCase();
 
   // Build the keypad legend
-  const keypadEntries = Object.entries(PHONE_MAPPING).map(
-    ([digit, letters]) => ({
-      digit,
-      letters: letters.map((l) => l.toUpperCase()).join(" "),
-    }),
-  );
+  const keypadEntries: { digit: string; letters: string }[] = [];
+  for (let d = 0; d <= 9; d++) {
+    const letters = phoneToLetters(String(d));
+    if (letters.length > 0) {
+      keypadEntries.push({
+        digit: String(d),
+        letters: letters.map((l) => l.toUpperCase()).join(" "),
+      });
+    }
+  }
 
   return (
     <Stack className={styles.container} gap="sm">
@@ -78,9 +67,7 @@ function PhoneStreamInner({ digits, setDigits, clear: clearFn }: Props) {
             onChange={(e) => onDigitsChange(e.currentTarget.value)}
           />
           <Group gap="xs">
-            <Button onClick={() => clearFn()} color="red" size="sm">
-              Clear
-            </Button>
+            <ClearButton onClear={() => clearDigits()} />
           </Group>
           <div className={styles.keypad}>
             {keypadEntries.map(({ digit, letters }) => (

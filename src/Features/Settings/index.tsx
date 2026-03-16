@@ -100,10 +100,10 @@ function SettingsDrawer(props: Props) {
         <Stack gap="xs">
           <Text fw={500}>Credits</Text>
           <Text size="sm">
-            Phone to Text bigram frequency data derived from Peter Norvig's
+            Phone to Text n-gram frequency data derived from Peter Norvig's
             analysis of the{" "}
             <Anchor
-              href="http://norvig.com/ngrams/"
+              href="https://norvig.com/ngrams/"
               rel="noreferrer"
               target="_blank"
               size="sm"

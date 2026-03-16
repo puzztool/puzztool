@@ -12,6 +12,7 @@ import {
   IconKey,
   IconLetterCase,
   IconLock,
+  IconPhone,
   IconPuzzle,
   IconSearch,
   IconSpeakerphone,
@@ -98,8 +99,9 @@ export function getCategories(): RouteCategory[] {
           url: "/morse",
         },
         {
-          description: "Suggest words from telephone keypad digits",
-          name: "Phone to Text",
+          description: "Convert between telephone keypad digits and text",
+          icon: IconPhone,
+          name: "Phone Keypad",
           url: "/phone",
         },
         {

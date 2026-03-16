@@ -44,8 +44,15 @@ CI runs both `lint` and `format:check` separately, so even if the build succeeds
 1. Create a directory under the appropriate category in `src/Features/`
 2. Add a Redux slice (`*Slice.ts`), stream component, page wrapper (`index.tsx`), and tests
 3. Register the reducer in the category's `*Reducer.ts` (e.g., `encodingReducer.ts`)
-4. Add the route entry in `src/Data/RouteData.ts`
+4. Add the route entry in `src/Data/RouteData.ts` — include an `icon` (from `@tabler/icons-react`)
 5. Add the lazy import and `<Route>` in `src/App.tsx`
+
+### Conventions for new tool UIs
+
+- **Clear buttons**: Use `Common/ClearButton` (confirmation modal) instead of a plain `<Button>`. This prevents accidental data loss and keeps UX consistent across all tools.
+- **Tabbed tools**: Model `selectedTab` as `selectedTab?: string` (optional). Normalize Mantine's `null` to `undefined` in the reducer (`action.payload ?? undefined`). See `morseEncodingSlice.ts` for the pattern.
+- **Imports from puzzle-lib**: Use subpath imports (e.g., `puzzle-lib/morse`, `puzzle-lib/phone`) instead of the root barrel export.
+- **External links**: Always use `https://` URLs. Add `rel="noreferrer"` and `target="_blank"`.
 
 ## Testing
 

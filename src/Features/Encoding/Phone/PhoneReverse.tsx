@@ -1,8 +1,9 @@
-import { lettersToPhone } from "puzzle-lib";
-import { Button, Card, Group, Stack, Text, TextInput } from "@mantine/core";
+import { lettersToPhone } from "puzzle-lib/phone";
+import { Card, Group, Stack, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
-import { setLetters, clear } from "./phoneSlice";
+import { setLetters, clearLetters } from "./phoneSlice";
+import ClearButton from "../../../Common/ClearButton";
 import styles from "./PhoneStream.module.scss";
 
 const mapStateToProps = (state: RootState) => ({
@@ -10,14 +11,14 @@ const mapStateToProps = (state: RootState) => ({
 });
 const mapDispatchToProps = {
   setLetters,
-  clear,
+  clearLetters,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-function PhoneReverseInner({ letters, setLetters, clear: clearFn }: Props) {
+function PhoneReverseInner({ letters, setLetters, clearLetters }: Props) {
   const digits = letters ? lettersToPhone(letters) : "";
 
   return (
@@ -34,9 +35,7 @@ function PhoneReverseInner({ letters, setLetters, clear: clearFn }: Props) {
             onChange={(e) => setLetters(e.currentTarget.value)}
           />
           <Group gap="xs">
-            <Button onClick={() => clearFn()} color="red" size="sm">
-              Clear
-            </Button>
+            <ClearButton onClear={() => clearLetters()} />
           </Group>
         </Stack>
       </Card>
