@@ -1,0 +1,1 @@
+import{j as e,P as s}from"./index-Rz1N6w0e.js";const i="/assets/pigpen_key-g4MP79nY.svg",t="_container_u6gzx_1",a="_image_u6gzx_7",n={container:t,image:a};function r(){return e.jsx(s,{title:"Pigpen",children:e.jsx("div",{className:n.container,children:e.jsx("img",{className:n.image,src:i,alt:"Pigpen cipher reference chart"})})})}export{r as default};
