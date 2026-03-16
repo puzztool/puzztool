@@ -46,18 +46,17 @@ function PigpenStreamInner({
     setEncoding(newEncoding);
   }
 
+  const lookup = lookupPigpenEncoding(encoding);
+  const displayStr = lookup.exactString;
+  const partialStr = lookup.partial.map((e) => e.display).join(" ");
+
   function onNextClick() {
-    const lookup = lookupPigpenEncoding(encoding);
-    if (lookup.exactString) {
+    if (displayStr) {
       append(encoding);
     } else {
       spaceFn();
     }
   }
-
-  const displayStr = lookupPigpenEncoding(encoding).exactString;
-  const lookup = lookupPigpenEncoding(encoding);
-  const partialStr = lookup.partial.map((e) => e.display).join(" ");
 
   return (
     <Stack className={styles.container} gap="sm">
