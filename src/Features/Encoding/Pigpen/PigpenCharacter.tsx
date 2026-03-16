@@ -24,7 +24,7 @@ const SEGMENT_LABELS: Record<PigpenSegment, string> = {
 
 interface Props {
   encoding: PigpenEncoding;
-  onClick?: (encoding: PigpenEncoding) => void;
+  onClick: (encoding: PigpenEncoding) => void;
 }
 
 // SVG viewBox is 100x100
@@ -60,15 +60,11 @@ function PigpenCharacter({ encoding, onClick }: Props) {
   const hasDot = hasPigpenSegment(encoding, PigpenSegment.Dot);
 
   function onSegmentClick(segment: PigpenSegment) {
-    if (onClick) {
-      onClick(togglePigpenSegment(encoding, segment));
-    }
+    onClick(togglePigpenSegment(encoding, segment));
   }
 
   function onDotClick() {
-    if (onClick) {
-      onClick(togglePigpenSegment(encoding, PigpenSegment.Dot));
-    }
+    onClick(togglePigpenSegment(encoding, PigpenSegment.Dot));
   }
 
   function handleKeyDown(callback: () => void) {
@@ -108,7 +104,7 @@ function PigpenCharacter({ encoding, onClick }: Props) {
           strokeLinecap="round"
         />
         {/* Wide invisible hit area */}
-        {onClick && !disabled && (
+        {!disabled && (
           <line
             x1={x1}
             y1={y1}
@@ -151,14 +147,12 @@ function PigpenCharacter({ encoding, onClick }: Props) {
           cy={50}
           r={7}
           className={hasDot ? styles.dotActive : styles.dot}
-          {...(onClick && {
-            role: "button" as const,
-            tabIndex: 0,
-            "aria-label": "Dot",
-            "aria-pressed": hasDot,
-            onClick: onDotClick,
-            onKeyDown: handleKeyDown(onDotClick),
-          })}
+          role="button"
+          tabIndex={0}
+          aria-label="Dot"
+          aria-pressed={hasDot}
+          onClick={onDotClick}
+          onKeyDown={handleKeyDown(onDotClick)}
         />
       </svg>
     </div>

@@ -48,7 +48,10 @@ function PigpenStreamInner({
 
   const lookup = lookupPigpenEncoding(encoding);
   const displayStr = lookup.exactString;
-  const partialStr = lookup.partial.map((e) => e.display).join(" ");
+  const hasInput = encoding !== PigpenEncoding.None;
+  const partialStr = hasInput
+    ? lookup.partial.map((e) => e.display).join(" ")
+    : "";
 
   function onNextClick() {
     if (displayStr) {
@@ -71,7 +74,7 @@ function PigpenStreamInner({
             </Grid.Col>
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
-              {partialStr && encoding !== PigpenEncoding.None && (
+              {partialStr && (
                 <Text size="sm" c="dimmed">
                   {partialStr}
                 </Text>
