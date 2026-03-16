@@ -1,5 +1,5 @@
 import { render } from "@/test-utils";
-import { PigpenEncoding } from "puzzle-lib";
+import { PigpenEncoding } from "puzzle-lib/pigpen";
 import { test } from "vitest";
 import PigpenPicture from "./PigpenPicture";
 

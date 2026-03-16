@@ -1,4 +1,4 @@
-import { PigpenEncoding, lookupPigpenEncoding } from "puzzle-lib";
+import { PigpenEncoding, lookupPigpenEncoding } from "puzzle-lib/pigpen";
 import ReferenceList from "../../../Common/ReferenceList";
 import PigpenPicture from "./PigpenPicture";
 

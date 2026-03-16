@@ -5,7 +5,7 @@ import {
   isCardinal,
   isIntercardinal,
   togglePigpenSegment,
-} from "puzzle-lib";
+} from "puzzle-lib/pigpen";
 import type { KeyboardEvent } from "react";
 import styles from "./PigpenCharacter.module.scss";
 

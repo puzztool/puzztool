@@ -4,7 +4,7 @@ import {
   hasPigpenSegment,
   isCardinal,
   isIntercardinal,
-} from "puzzle-lib";
+} from "puzzle-lib/pigpen";
 
 interface Props {
   width: number;

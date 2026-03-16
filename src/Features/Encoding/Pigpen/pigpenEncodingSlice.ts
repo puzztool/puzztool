@@ -1,4 +1,4 @@
-import { PigpenEncoding } from "puzzle-lib";
+import { PigpenEncoding } from "puzzle-lib/pigpen";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface State {

@@ -2,7 +2,7 @@ import {
   PigpenEncoding,
   decodePigpenStream,
   lookupPigpenEncoding,
-} from "puzzle-lib";
+} from "puzzle-lib/pigpen";
 import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
