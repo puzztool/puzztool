@@ -32,10 +32,8 @@ describe("partial match display", () => {
 
   test("shows partial matches after toggling a dot", () => {
     renderBrailleStream();
-    // The braille dot buttons are rendered inside a container div;
-    // select them by scoping to that container (first child with buttons).
-    const buttons = screen.getAllByRole("button");
     // First 6 buttons are braille dots, then action buttons follow
+    const buttons = screen.getAllByRole("button");
     fireEvent.click(buttons[0]);
 
     const encoding = toggleBrailleDot(
