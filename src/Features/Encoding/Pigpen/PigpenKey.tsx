@@ -86,7 +86,9 @@ function GridLabels({
         const row = Math.floor(i / 3);
         const cx = ox + col * CELL + CELL / 2;
         const cy = oy + row * CELL + CELL / 2;
-        // Dot moves toward grid center, stopping at DOT_MARGIN from lines
+        // Dot moves toward grid center, stopping at DOT_MARGIN from lines.
+        // Exception: N (col=1, row=1) places its dot near the bottom line
+        // so it sits just across from Q's dot below the same line.
         const gridCenter = CELL * 1.5;
         const dotX =
           col === 0
