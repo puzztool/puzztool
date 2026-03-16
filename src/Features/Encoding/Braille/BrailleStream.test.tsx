@@ -38,7 +38,10 @@ describe("partial match display", () => {
     // First 6 buttons are braille dots, then action buttons follow
     fireEvent.click(buttons[0]);
 
-    const encoding = toggleBrailleDot(BrailleEncoding.None, BrailleDot.UpperLeft);
+    const encoding = toggleBrailleDot(
+      BrailleEncoding.None,
+      BrailleDot.UpperLeft,
+    );
     const expected = lookupBrailleEncoding(encoding)
       .partial.map((e) => e.display)
       .join(" ");
