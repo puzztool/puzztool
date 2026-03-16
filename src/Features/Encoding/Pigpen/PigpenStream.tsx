@@ -81,6 +81,9 @@ function PigpenStreamInner({
           <Group gap="xs">
             <Button onClick={() => backspaceFn()}>&#x232b;</Button>
             <Button onClick={onNextClick}>Next</Button>
+            <Button onClick={() => spaceFn()} variant="default">
+              Space
+            </Button>
             <ClearButton onClear={() => clearFn()} />
           </Group>
         </Stack>
