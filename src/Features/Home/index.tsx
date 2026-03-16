@@ -39,7 +39,7 @@ function Home() {
             <Text c="dimmed" mb="md">
               {category.description}
             </Text>
-            <SimpleGrid cols={{ base: 1, xs: 2, sm: 3 }}>
+            <SimpleGrid cols={{ base: 1, xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }}>
               {category.children.map((child) => (
                 <ToolCard
                   key={child.name}
