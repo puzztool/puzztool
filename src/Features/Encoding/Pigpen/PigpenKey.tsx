@@ -9,7 +9,8 @@
 const STROKE_COLOR = "currentColor";
 const STROKE_WIDTH = 1.5;
 const FONT_SIZE = 16;
-const DOT_RADIUS = 2.5;
+const DOT_RADIUS = 2;
+const DOT_MARGIN = 5; // distance from grid lines
 
 // Cell size for the 3×3 grid
 const CELL = 30;
@@ -85,6 +86,22 @@ function GridLabels({
         const row = Math.floor(i / 3);
         const cx = ox + col * CELL + CELL / 2;
         const cy = oy + row * CELL + CELL / 2;
+        // Dot moves toward grid center, stopping at DOT_MARGIN from lines
+        const gridCenter = CELL * 1.5;
+        const dotX =
+          col === 0
+            ? ox + CELL - DOT_MARGIN
+            : col === 2
+              ? ox + CELL * 2 + DOT_MARGIN
+              : ox + gridCenter;
+        const dotY =
+          row === 0
+            ? oy + CELL - DOT_MARGIN
+            : row === 2
+              ? oy + CELL * 2 + DOT_MARGIN
+              : col === 1
+                ? oy + CELL * 2 - DOT_MARGIN // N: near bottom line
+                : oy + gridCenter;
         return (
           <g key={letter}>
             <text
@@ -99,12 +116,7 @@ function GridLabels({
               {letter}
             </text>
             {dots && (
-              <circle
-                cx={cx + 10}
-                cy={cy - 8}
-                r={DOT_RADIUS}
-                fill={STROKE_COLOR}
-              />
+              <circle cx={dotX} cy={dotY} r={DOT_RADIUS} fill={STROKE_COLOR} />
             )}
           </g>
         );
@@ -157,12 +169,22 @@ function XLabels({
   dots: boolean;
 }) {
   const mid = GRID_SIZE / 2;
-  // Positions: top, left, right, bottom
+  // Positions: top, left, right, bottom (letter centers)
   const positions = [
     { x: ox + mid, y: oy + mid * 0.4 },
     { x: ox + mid * 0.4, y: oy + mid + 5 },
     { x: ox + mid * 1.6, y: oy + mid + 5 },
     { x: ox + mid, y: oy + mid + mid * 0.65 },
+  ];
+
+  // Dot positions: offset from center toward each triangle's tip,
+  // stopping at DOT_MARGIN perpendicular distance from diagonal lines.
+  const dotOffset = Math.round(DOT_MARGIN * Math.SQRT2);
+  const dotPositions = [
+    { x: ox + mid, y: oy + mid - dotOffset }, // top
+    { x: ox + mid - dotOffset, y: oy + mid }, // left
+    { x: ox + mid + dotOffset, y: oy + mid }, // right
+    { x: ox + mid, y: oy + mid + dotOffset }, // bottom
   ];
 
   return (
@@ -184,8 +206,8 @@ function XLabels({
             </text>
             {dots && (
               <circle
-                cx={x + 10}
-                cy={y - 5}
+                cx={dotPositions[i].x}
+                cy={dotPositions[i].y}
                 r={DOT_RADIUS}
                 fill={STROKE_COLOR}
               />
@@ -201,8 +223,12 @@ function PigpenKey() {
   return (
     <svg
       viewBox="0 0 230 230"
-      width="100%"
-      style={{ maxWidth: 400 }}
+      style={{
+        width: "min(600px, 100%, 70vh)",
+        minWidth: 230,
+        height: "auto",
+        display: "block",
+      }}
       role="img"
       aria-label="Pigpen cipher reference key"
     >
