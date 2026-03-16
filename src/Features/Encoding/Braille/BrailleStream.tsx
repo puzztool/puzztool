@@ -158,7 +158,7 @@ function BrailleStreamInner(props: Props) {
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
               {partialStr && (
-                <Text size="sm" c="dimmed">
+                <Text size="sm" c="dimmed" data-testid="partial-matches">
                   {partialStr}
                 </Text>
               )}
