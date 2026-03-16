@@ -1,5 +1,6 @@
 import {
   BrailleDot as Dot,
+  BrailleEncoding,
   decodeBrailleStream,
   lookupBrailleEncoding,
   toggleBrailleDot,
@@ -127,7 +128,10 @@ function BrailleStreamInner(props: Props) {
 
   const lookup = lookupBrailleEncoding(props.encoding);
   const displayStr = lookup.exactString;
-  const partialStr = lookup.partial.map((e) => e.display).join(" ");
+  const hasInput = props.encoding !== BrailleEncoding.None;
+  const partialStr = hasInput
+    ? lookup.partial.map((e) => e.display).join(" ")
+    : "";
 
   function onNextClick() {
     if (displayStr) {
@@ -153,7 +157,7 @@ function BrailleStreamInner(props: Props) {
             </Grid.Col>
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
-              {partialStr && props.encoding !== 0 && (
+              {partialStr && (
                 <Text size="sm" c="dimmed">
                   {partialStr}
                 </Text>
