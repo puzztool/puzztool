@@ -1,5 +1,6 @@
 import {
   BrailleDot as Dot,
+  BrailleEncoding,
   decodeBrailleStream,
   lookupBrailleEncoding,
   toggleBrailleDot,
@@ -125,16 +126,20 @@ function BrailleStreamInner(props: Props) {
     props.clear();
   }
 
+  const lookup = lookupBrailleEncoding(props.encoding);
+  const displayStr = lookup.exactString;
+  const hasInput = props.encoding !== BrailleEncoding.None;
+  const partialStr = hasInput
+    ? lookup.partial.map((e) => e.display).join(" ")
+    : "";
+
   function onNextClick() {
-    const lookup = lookupBrailleEncoding(props.encoding);
-    if (lookup.exactString) {
+    if (displayStr) {
       props.append(props.encoding);
     } else {
       props.space();
     }
   }
-
-  const displayStr = lookupBrailleEncoding(props.encoding).exactString;
 
   return (
     <Stack className={styles.container} gap="sm">
@@ -152,6 +157,11 @@ function BrailleStreamInner(props: Props) {
             </Grid.Col>
             <Grid.Col span="auto">
               <div className={styles.view}>{displayStr || "?"}</div>
+              {partialStr && (
+                <Text size="sm" c="dimmed" data-testid="partial-matches">
+                  {partialStr}
+                </Text>
+              )}
             </Grid.Col>
           </Grid>
           <Group gap="xs">
