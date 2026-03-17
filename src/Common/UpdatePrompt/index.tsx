@@ -37,7 +37,12 @@ function UpdatePrompt() {
   }
 
   return (
-    <Alert color="blue" title="Update available" withCloseButton={false}>
+    <Alert
+      color="blue"
+      title="Update available"
+      withCloseButton={false}
+      mb="sm"
+    >
       <Group gap="sm" mt="xs">
         A new version of PuzzTool is available.
         <Button size="xs" onClick={() => updateServiceWorker(true)}>
