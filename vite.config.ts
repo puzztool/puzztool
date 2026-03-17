@@ -24,7 +24,7 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? "0.0.0"),
   },
   plugins: [
-    eslint(),
+    eslint({ include: ["src/**/*.{ts,tsx}"] }),
     react(),
     viteTsconfigPaths(),
     VitePWA({
