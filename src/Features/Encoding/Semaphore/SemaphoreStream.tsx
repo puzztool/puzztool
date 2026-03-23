@@ -9,7 +9,15 @@ import {
   removeSemaphoreDirection,
 } from "puzzle-lib/semaphore";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card, Grid, Group, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Grid,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import SemaphorePicture from "./SemaphorePicture";
 import { connect, ConnectedProps } from "react-redux";
 import ClearButton from "../../../Common/ClearButton";

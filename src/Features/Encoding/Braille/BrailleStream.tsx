@@ -7,7 +7,15 @@ import {
   toggleBrailleDot,
 } from "puzzle-lib/braille";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card, Grid, Group, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Grid,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import BraillePicture from "./BraillePicture";
 import ClearButton from "../../../Common/ClearButton";
 import { connect, ConnectedProps } from "react-redux";

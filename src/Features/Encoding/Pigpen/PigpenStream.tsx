@@ -5,7 +5,15 @@ import {
   lookupPigpenEncoding,
 } from "puzzle-lib/pigpen";
 import { ChangeEvent, useState } from "react";
-import { Card, Grid, Group, Stack, Text, Button, TextInput } from "@mantine/core";
+import {
+  Card,
+  Grid,
+  Group,
+  Stack,
+  Text,
+  Button,
+  TextInput,
+} from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
 import PigpenCharacter from "./PigpenCharacter";
@@ -129,8 +137,20 @@ function PigpenStreamInner({
               <div key={i} style={{ width: 48 }} />
             ) : (
               <Stack key={i} gap={2} align="center">
-                <div style={{ width: 96, height: 96, overflow: "hidden", pointerEvents: "none" }}>
-                  <div style={{ transform: "scale(0.6)", transformOrigin: "top left" }}>
+                <div
+                  style={{
+                    width: 96,
+                    height: 96,
+                    overflow: "hidden",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      transform: "scale(0.6)",
+                      transformOrigin: "top left",
+                    }}
+                  >
                     <PigpenCharacter encoding={enc} onClick={() => {}} />
                   </div>
                 </div>
