@@ -1,12 +1,22 @@
 import {
-  BrailleDot as Dot,
   BrailleEncoding,
+  BrailleDot as Dot,
   decodeBrailleStream,
+  encodeBrailleStream,
   lookupBrailleEncoding,
   toggleBrailleDot,
 } from "puzzle-lib/braille";
-import { useEffect } from "react";
-import { Button, Card, Grid, Group, Stack, Text } from "@mantine/core";
+import { ChangeEvent, useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Grid,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import BraillePicture from "./BraillePicture";
 import ClearButton from "../../../Common/ClearButton";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../Store/rootReducer";
@@ -51,6 +61,10 @@ function BrailleStreamInner(props: Props) {
         return;
       }
 
+      if (ev.target instanceof HTMLInputElement) {
+        return;
+      }
+
       let handled = false;
 
       // Chrome won't trigger keypress for any keys that can invoke browser
@@ -78,6 +92,10 @@ function BrailleStreamInner(props: Props) {
 
     function onKeyPress(ev: KeyboardEvent) {
       if (ev.defaultPrevented) {
+        return;
+      }
+
+      if (ev.target instanceof HTMLInputElement) {
         return;
       }
 
@@ -141,6 +159,14 @@ function BrailleStreamInner(props: Props) {
     }
   }
 
+  const [encodeInput, setEncodeInput] = useState("");
+
+  function onEncodeInputChanged(event: ChangeEvent<HTMLInputElement>) {
+    setEncodeInput(event.currentTarget.value);
+  }
+
+  const encodedStream = encodeInput ? encodeBrailleStream(encodeInput) : [];
+  const encodeChars = encodeInput.toUpperCase().split("");
   return (
     <Stack className={styles.container} gap="sm">
       <Card className={styles.input} withBorder>
@@ -179,6 +205,31 @@ function BrailleStreamInner(props: Props) {
           {decodeBrailleStream(props.stream)}
           <span className="blinking-cursor">|</span>
         </pre>
+      </Card>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Encode</Text>
+        </Card.Section>
+        <TextInput
+          aria-label="Text to encode as braille"
+          onChange={onEncodeInputChanged}
+          placeholder="Type plaintext to encode as braille"
+          value={encodeInput}
+          mt="xs"
+          mb="xs"
+        />
+        <Group wrap="wrap" gap="xs">
+          {encodedStream.map((enc: BrailleEncoding, i: number) =>
+            enc === BrailleEncoding.None ? (
+              <div key={i} style={{ width: 20 }} />
+            ) : (
+              <Stack key={i} gap={2} align="center">
+                <BraillePicture encoding={enc} width={40} />
+                <Text size="xs">{encodeChars[i]}</Text>
+              </Stack>
+            ),
+          )}
+        </Group>
       </Card>
     </Stack>
   );

@@ -4,13 +4,14 @@ import {
   MORSE_CHARACTER_DIVIDER,
   MORSE_WORD_DIVIDER,
   decodeMorse,
+  encodeMorse,
   invertMorse,
   reverseMorse,
   invertAndReverseMorse,
   lookupMorseEncoding,
   parseMorseString,
 } from "puzzle-lib/morse";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, Card, Group, Stack, Text, TextInput } from "@mantine/core";
 import { connect, ConnectedProps } from "react-redux";
 import ClearButton from "../../../Common/ClearButton";
@@ -42,6 +43,12 @@ function normalizeStream(text: string): string {
 }
 
 function MorseStreamInner(props: Props) {
+  const [encodeInput, setEncodeInput] = useState("");
+
+  function onEncodeInputChanged(event: ChangeEvent<HTMLInputElement>) {
+    setEncodeInput(event.currentTarget.value);
+  }
+
   function onTextChanged(event: ChangeEvent<HTMLInputElement>) {
     props.setStream(normalizeStream(event.currentTarget.value));
   }
@@ -180,6 +187,19 @@ function MorseStreamInner(props: Props) {
           <Text fw={500}>Right to Left + Swap Dots/Dashes</Text>
         </Card.Section>
         <pre>{invertReverseText() || " "}</pre>
+      </Card>
+      <Card withBorder>
+        <Card.Section withBorder inheritPadding py="xs">
+          <Text fw={500}>Encode</Text>
+        </Card.Section>
+        <TextInput
+          aria-label="Text to encode as morse"
+          onChange={onEncodeInputChanged}
+          placeholder="Type plaintext to encode as morse"
+          value={encodeInput}
+          mt="xs"
+        />
+        <pre>{encodeInput ? encodeMorse(encodeInput) : " "}</pre>
       </Card>
     </Stack>
   );
