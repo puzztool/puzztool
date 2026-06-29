@@ -1,1 +1,0 @@
-import{F as e,b as t,d as n,z as r}from"./Title-CzC_OSif.js";import{t as i}from"./InputBase-DMB-OdtG.js";var a=e();r();var o=n((e,n)=>(0,a.jsx)(i,{component:`input`,ref:n,...t(`TextInput`,null,e),__staticSelector:`TextInput`}));o.classes=i.classes,o.displayName=`@mantine/core/TextInput`;export{o as t};
