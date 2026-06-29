@@ -1,1 +1,0 @@
-import{an as a,ao as p,j as r}from"./index-Cohur202.js";import{I as t}from"./InputBase-qATnL_Es.js";const s=a((e,n)=>{const o=p("TextInput",null,e);return r.jsx(t,{component:"input",ref:n,...o,__staticSelector:"TextInput"})});s.classes=t.classes;s.displayName="@mantine/core/TextInput";export{s as T};
