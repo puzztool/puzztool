@@ -1,1 +1,0 @@
-import{V as e,z as t}from"./Title-CzC_OSif.js";var n=e(t(),1);function r(){return(0,n.useCallback)(e=>{e&&e.focus()},[])}export{r as t};
