@@ -34,17 +34,20 @@ const Resistor = lazy(() => import("./Features/Resistor"));
 const UsefulLinks = lazy(() => import("./Features/UsefulLinks"));
 const WordSearch = lazy(() => import("./Features/WordSearch"));
 
-function isChunkLoadError(error: Error): boolean {
+function isChunkLoadError(error: unknown): boolean {
   return (
-    error.name === "ChunkLoadError" ||
-    error.message.includes("Failed to fetch dynamically imported module") ||
-    error.message.includes("Loading chunk") ||
-    error.message.includes("Loading CSS chunk")
+    error instanceof Error &&
+    (error.name === "ChunkLoadError" ||
+      error.message.includes("Failed to fetch dynamically imported module") ||
+      error.message.includes("Loading chunk") ||
+      error.message.includes("Loading CSS chunk"))
   );
 }
 
 function ErrorFallback(props: FallbackProps) {
   const chunkError = isChunkLoadError(props.error);
+  const errorMessage =
+    props.error instanceof Error ? props.error.message : String(props.error);
 
   return (
     <div className={styles.loadError}>
@@ -54,7 +57,7 @@ function ErrorFallback(props: FallbackProps) {
           ? "The app has been updated. Please refresh to load the latest version."
           : "Failed to load content:"}
       </div>
-      {!chunkError && <pre>{props.error.message}</pre>}
+      {!chunkError && <pre>{errorMessage}</pre>}
       <Button onClick={() => window.location.reload()}>Refresh</Button>
     </div>
   );
