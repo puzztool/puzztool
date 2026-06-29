@@ -50,13 +50,7 @@ root.render(
     <MantineProvider theme={theme} defaultColorScheme="auto">
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <BrowserRouter
-            basename={baseUrl}
-            future={{
-              v7_relativeSplatPath: true,
-              v7_startTransition: true,
-            }}
-          >
+          <BrowserRouter basename={baseUrl}>
             <App />
           </BrowserRouter>
         </PersistGate>

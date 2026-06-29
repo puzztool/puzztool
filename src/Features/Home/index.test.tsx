@@ -5,12 +5,7 @@ import Home from ".";
 
 function renderHome() {
   return render(
-    <BrowserRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <BrowserRouter>
       <Home />
     </BrowserRouter>,
   );
