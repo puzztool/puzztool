@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@mantine/core": "^8.3.16",
-    "@mantine/hooks": "^8.3.16",
+    "@mantine/core": "^9.4.1",
+    "@mantine/hooks": "^9.4.1",
     "@reduxjs/toolkit": "^2.3.0",
     "@tabler/icons-react": "^3.40.0",
     "clsx": "^2.0.0",

@@ -77,7 +77,7 @@ function WordSearchComponentInner(props: Props) {
 
   return (
     <div className={styles.container}>
-      <Grid gutter="md">
+      <Grid gap="md">
         <Grid.Col span={{ base: 12, md: 4 }}>
           <Card className={styles.listInput} withBorder>
             <Card.Section withBorder inheritPadding py="xs">
