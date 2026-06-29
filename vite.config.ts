@@ -2,8 +2,6 @@
 import { defineConfig } from "vite";
 import { execSync } from "child_process";
 import react from "@vitejs/plugin-react";
-import viteTsconfigPaths from "vite-tsconfig-paths";
-import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
 
 let commitHash: string;
@@ -15,6 +13,9 @@ try {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   build: {
     outDir: "build",
     emptyOutDir: true,
@@ -24,9 +25,7 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? "0.0.0"),
   },
   plugins: [
-    eslint({ include: ["src/**/*.{ts,tsx}"] }),
     react(),
-    viteTsconfigPaths(),
     VitePWA({
       filename: "service-worker.js",
       manifest: {
