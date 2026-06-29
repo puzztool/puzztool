@@ -1,0 +1,1 @@
+import{F as e}from"./Title-CzC_OSif.js";var t={list:`_list_t7ajt_1`},n=e(),r=e=>(0,n.jsx)(`div`,{className:t.list,children:e.children});export{r as t};

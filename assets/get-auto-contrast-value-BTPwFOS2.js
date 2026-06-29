@@ -1,0 +1,1 @@
+function e(e,t){return typeof e==`boolean`?e:t.autoContrast}export{e as t};

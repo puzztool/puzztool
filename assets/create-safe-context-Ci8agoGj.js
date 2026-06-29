@@ -1,0 +1,1 @@
+import{F as e,V as t,z as n}from"./Title-CzC_OSif.js";var r=e(),i=t(n(),1);function a(e){let t=(0,i.createContext)(null);return[({children:e,value:n})=>(0,r.jsx)(t.Provider,{value:n,children:e}),()=>{let n=(0,i.useContext)(t);if(n===null)throw Error(e);return n}]}export{a as t};
