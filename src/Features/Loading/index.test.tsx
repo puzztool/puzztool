@@ -1,13 +1,10 @@
 import { act } from "@testing-library/react";
 import { render, screen } from "@/test-utils";
-import { afterEach, beforeEach, expect, test, vi } from "vitest";
+import { afterEach, expect, test, vi } from "vitest";
 import Loading from ".";
 
-beforeEach(() => {
-  vi.useFakeTimers();
-});
-
 afterEach(() => {
+  vi.clearAllTimers();
   vi.useRealTimers();
 });
 
@@ -21,11 +18,13 @@ test("shows loader immediately when no delay is set", () => {
 });
 
 test("hides loader initially when delay is set", () => {
+  vi.useFakeTimers();
   render(<Loading delay={200} />);
   expect(screen.queryByRole("status")).toBeNull();
 });
 
 test("shows loader after delay elapses", () => {
+  vi.useFakeTimers();
   render(<Loading delay={200} />);
   act(() => vi.advanceTimersByTime(200));
   expect(screen.getByRole("status")).toBeDefined();
