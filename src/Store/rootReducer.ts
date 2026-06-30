@@ -9,7 +9,7 @@ import wordSearchReducer from "../Features/WordSearch/wordSearchSlice";
 // Vite 7+ (Rolldown) CJS interop: module.exports is the default, so we may
 // need to unwrap the .default property to get the actual storage engine.
 type StorageWithDefault = typeof storageModule & {
-  default: typeof storageModule;
+  default?: typeof storageModule;
 };
 const storage = (storageModule as StorageWithDefault).default ?? storageModule;
 
