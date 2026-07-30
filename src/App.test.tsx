@@ -5,12 +5,7 @@ import App from "./App";
 
 test("renders without crashing", () => {
   render(
-    <BrowserRouter
-      future={{
-        v7_relativeSplatPath: true,
-        v7_startTransition: true,
-      }}
-    >
+    <BrowserRouter>
       <App />
     </BrowserRouter>,
   );

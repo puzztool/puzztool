@@ -3,7 +3,9 @@ import { Alert, Button, Group } from "@mantine/core";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
 function UpdatePrompt() {
-  const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(
+    undefined,
+  );
   const {
     needRefresh: [needRefresh],
     updateServiceWorker,
