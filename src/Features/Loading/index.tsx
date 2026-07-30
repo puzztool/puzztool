@@ -9,7 +9,7 @@ interface Props {
 }
 
 function Loading(props: Props) {
-  const [pastDelay, setPastDelay] = useState(false);
+  const [pastDelay, setPastDelay] = useState(!props.delay || props.delay <= 0);
   const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {
@@ -20,8 +20,6 @@ function Loading(props: Props) {
 
     if (delay && delay > 0) {
       delayTimer = window.setTimeout(() => setPastDelay(true), delay);
-    } else {
-      setPastDelay(true);
     }
 
     if (timeout && timeout > 0) {
